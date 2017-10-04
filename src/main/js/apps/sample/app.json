@@ -1,0 +1,297 @@
+{
+    "load": {
+        "allowedBundles": [
+            "console",
+            "system",
+            "toolset",
+            "templatelayout",
+            "template-seasons",
+            "theme-everlasting",
+            "map-init",
+            "dn_vuetoc"
+        ]
+    },
+    "bundles": {
+        "map-init": {
+            "Config": {
+                "basemaps": [
+                    {
+                        "id": "streets",
+                        "title": "Straßenkarte",
+                        "basemap": "streets"
+                    },
+                    {
+                        "id": "topo",
+                        "title": "Topographische Karte",
+                        "basemap": "topo",
+                        "icon": "filter_hdr"
+                    },
+                    {
+                        "id": "gray",
+                        "title": "Graue Karte",
+                        "basemap": "gray",
+                        "icon": "gradient"
+                    },
+                    {
+                        "id": "satellite",
+                        "title": "Luftbild",
+                        "basemap": "satellite",
+                        "icon": "photo_camera"
+                    },
+                    {
+                        "id": "Hybrid",
+                        "title": "Hybrid Karte",
+                        "basemap": "hybrid"
+                    }
+                ],
+                "map": {
+                    "layers": [
+                        {
+                            "type": "GROUP",
+                            "title": "Schulen MapServer",
+                            "visible": false,
+                            "layers": [
+                                {
+                                    "id": "borken_5",
+                                    "title": "Grundschulen",
+                                    "url": "https://maps.kreis-borken.de/arcgis/rest/services/Geobasisdaten/Geobasisdaten_Typo3AdressDB/FeatureServer",
+                                    "type": "AGS_FEATURE",
+                                    "layerId": 5,
+                                    "elevationInfo": {
+                                        "mode": "on-the-ground"
+                                    },
+                                    "visible": true
+                                },
+                                {
+                                    "id": "borken_6",
+                                    "title": "Hauptschulen",
+                                    "url": "https://maps.kreis-borken.de/arcgis/rest/services/Geobasisdaten/Geobasisdaten_Typo3AdressDB/FeatureServer",
+                                    "type": "AGS_FEATURE",
+                                    "elevationInfo": {
+                                        "mode": "on-the-ground"
+                                    },
+                                    "layerId": 6,
+                                    "visible": false
+                                },
+                                {
+                                    "id": "borken_7",
+                                    "title": "Realschulen",
+                                    "url": "https://maps.kreis-borken.de/arcgis/rest/services/Geobasisdaten/Geobasisdaten_Typo3AdressDB/FeatureServer",
+                                    "type": "AGS_FEATURE",
+                                    "elevationInfo": {
+                                        "mode": "on-the-ground"
+                                    },
+                                    "layerId": 7,
+                                    "visible": false
+                                },
+                                {
+                                    "id": "borken_8",
+                                    "title": "Gymnasien",
+                                    "url": "https://maps.kreis-borken.de/arcgis/rest/services/Geobasisdaten/Geobasisdaten_Typo3AdressDB/FeatureServer",
+                                    "type": "AGS_FEATURE",
+                                    "elevationInfo": {
+                                        "mode": "on-the-ground"
+                                    },
+                                    "layerId": 8,
+                                    "visible": false
+                                },
+                                {
+                                    "id": "borken_9",
+                                    "title": "Förderschulen",
+                                    "url": "https://maps.kreis-borken.de/arcgis/rest/services/Geobasisdaten/Geobasisdaten_Typo3AdressDB/FeatureServer",
+                                    "type": "AGS_FEATURE",
+                                    "elevationInfo": {
+                                        "mode": "on-the-ground"
+                                    },
+                                    "layerId": 9,
+                                    "visible": false
+                                },
+                                {
+                                    "id": "borken_12",
+                                    "title": "Gesamtschulen",
+                                    "url": "https://maps.kreis-borken.de/arcgis/rest/services/Geobasisdaten/Geobasisdaten_Typo3AdressDB/FeatureServer",
+                                    "type": "AGS_FEATURE",
+                                    "elevationInfo": {
+                                        "mode": "on-the-ground"
+                                    },
+                                    "layerId": 12,
+                                    "visible": false
+                                },
+                                {
+                                    "id": "borken_14",
+                                    "title": "Berufskolleg",
+                                    "url": "https://maps.kreis-borken.de/arcgis/rest/services/Geobasisdaten/Geobasisdaten_Typo3AdressDB/FeatureServer",
+                                    "type": "AGS_FEATURE",
+                                    "elevationInfo": {
+                                        "mode": "on-the-ground"
+                                    },
+                                    "layerId": 14,
+                                    "visible": false
+                                }
+                            ]
+                        },
+                        {
+                            "type": "GROUP",
+                            "title": "Schulen FeatureServer",
+                            "visible": false,
+                            "layers": [
+                                {
+                                    "id": "borken_5",
+                                    "title": "Grundschulen",
+                                    "url": "https://maps.kreis-borken.de/arcgis/rest/services/Geobasisdaten/Geobasisdaten_Typo3AdressDB/FeatureServer",
+                                    "type": "AGS_FEATURE",
+                                    "layerId": 5,
+                                    "elevationInfo": {
+                                        "mode": "on-the-ground"
+                                    },
+                                    "visible": false
+                                },
+                                {
+                                    "id": "borken_6",
+                                    "title": "Hauptschulen",
+                                    "url": "https://maps.kreis-borken.de/arcgis/rest/services/Geobasisdaten/Geobasisdaten_Typo3AdressDB/FeatureServer",
+                                    "type": "AGS_FEATURE",
+                                    "elevationInfo": {
+                                        "mode": "on-the-ground"
+                                    },
+                                    "layerId": 6,
+                                    "visible": false
+                                },
+                                {
+                                    "id": "borken_7",
+                                    "title": "Realschulen",
+                                    "url": "https://maps.kreis-borken.de/arcgis/rest/services/Geobasisdaten/Geobasisdaten_Typo3AdressDB/FeatureServer",
+                                    "type": "AGS_FEATURE",
+                                    "elevationInfo": {
+                                        "mode": "on-the-ground"
+                                    },
+                                    "layerId": 7,
+                                    "visible": false
+                                },
+                                {
+                                    "id": "borken_8",
+                                    "title": "Gymnasien",
+                                    "url": "https://maps.kreis-borken.de/arcgis/rest/services/Geobasisdaten/Geobasisdaten_Typo3AdressDB/FeatureServer",
+                                    "type": "AGS_FEATURE",
+                                    "elevationInfo": {
+                                        "mode": "on-the-ground"
+                                    },
+                                    "layerId": 8,
+                                    "visible": false
+                                },
+                                {
+                                    "id": "borken_9",
+                                    "title": "Förderschulen",
+                                    "url": "https://maps.kreis-borken.de/arcgis/rest/services/Geobasisdaten/Geobasisdaten_Typo3AdressDB/FeatureServer",
+                                    "type": "AGS_FEATURE",
+                                    "elevationInfo": {
+                                        "mode": "on-the-ground"
+                                    },
+                                    "layerId": 9,
+                                    "visible": false
+                                },
+                                {
+                                    "id": "borken_12",
+                                    "title": "Gesamtschulen",
+                                    "url": "https://maps.kreis-borken.de/arcgis/rest/services/Geobasisdaten/Geobasisdaten_Typo3AdressDB/FeatureServer",
+                                    "type": "AGS_FEATURE",
+                                    "elevationInfo": {
+                                        "mode": "on-the-ground"
+                                    },
+                                    "layerId": 12,
+                                    "visible": false
+                                },
+                                {
+                                    "id": "borken_14",
+                                    "title": "Berufskolleg",
+                                    "url": "https://maps.kreis-borken.de/arcgis/rest/services/Geobasisdaten/Geobasisdaten_Typo3AdressDB/FeatureServer",
+                                    "type": "AGS_FEATURE",
+                                    "elevationInfo": {
+                                        "mode": "on-the-ground"
+                                    },
+                                    "layerId": 14,
+                                    "visible": false
+                                }
+                            ]
+                        },
+                        {
+                            "id": "borken",
+                            "title": "Borken",
+                            "url": "https://maps.kreis-borken.de/arcgis/rest/services/Geobasisdaten/Geobasisdaten_Typo3AdressDB/MapServer",
+                            "type": "AGS_DYNAMIC",
+                            "visible": false,
+                            "sublayers": [
+                                {
+                                    "id": 5,
+                                    "title": "Grundschulen",
+                                    "visible": false
+                                },
+                                {
+                                    "id": 6,
+                                    "title": "Hauptschulen",
+                                    "visible": true
+                                },
+                                {
+                                    "id": 7,
+                                    "title": "Realschulen",
+                                    "visible": false
+                                },
+                                {
+                                    "id": 8,
+                                    "title": "Gymnasien",
+                                    "visible": false
+                                },
+                                {
+                                    "id": 9,
+                                    "title": "Förderschulen",
+                                    "visible": false
+                                },
+                                {
+                                    "id": 12,
+                                    "title": "Gesamtschulen",
+                                    "visible": false
+                                },
+                                {
+                                    "id": 14,
+                                    "title": "Berufskolleg",
+                                    "visible": false
+                                }
+                            ]
+                        },
+                        {
+                            "id": "sample",
+                            "title": "Sample",
+                            "url": "https://fortress.wa.gov/agr/gis/wsdagis/rest/services/SampleWorldCities/MapServer",
+                            "type": "AGS_DYNAMIC",
+                            "visible": false,
+                            "sublayers": [
+                                {
+                                    "id": 0,
+                                    "visible": false
+                                },
+                                {
+                                    "id": 1,
+                                    "visible": false
+                                },
+                                {
+                                    "id": 2,
+                                    "visible": false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "view": {
+                    "viewmode": "2D",
+                    "extent": {
+                        "xmin": 728425.1970998652,
+                        "xmax": 744476.9730397316,
+                        "ymin": 6766700.691694516,
+                        "ymax": 6775213.865719766,
+                        "spatialReference": 3857
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,30 @@
+.ctAppRoot .vue-toc-window .vue-base,
+.ctAppRoot .vue-toc {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.ctAppRoot .vue-toc {
+    overflow: hidden;
+}
+
+.ctAppRoot .vue-toc .center {
+    overflow: auto;
+}
+
+.ctAppRoot .vue-toc .vue-toc__bottom-nav .btn .btn__content {
+    flex-direction: column;
+}
+
+.ctAppRoot .vue-toc .list--group .list__tile {
+    padding-left: 40px;
+}
+
+.ctAppRoot .vue-toc .center {
+    flex: 1 1 auto;
+}
+
+.ctAppRoot .vue-toc .bottom {
+    flex: 0 0 auto;
+}

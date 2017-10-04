@@ -1,0 +1,118 @@
+{
+  "name": "dn_vuetoc",
+  "version": "1.0.0-SNAPSHOT",
+  "title": "${bundleName}",
+  "description": "${bundleDescription}",
+  "vendor": "con terra GmbH",
+  "productName": "devnet-mapapps-vuetoc",
+  "dependencies": {
+    "apprt-vue": "^4.2.0",
+    "apprt-binding": "^4.2.0",
+    "apprt-vuetify": "^4.2.0"
+  },
+  "CSS-Themes-Extension": [
+    {
+      "name": "*",
+      "files": [
+        "./css/styles.css"
+      ]
+    }
+  ],
+  "layout-widgets": [
+    {
+      "widgetRole": "mapContent",
+      "template": "seasons",
+      "sublayout": [
+        "desktop",
+        "tablet_landscape",
+        "tablet_portrait"
+      ],
+      "window": {
+        "autofocus": false,
+        "dockTool": "vueTocToggleTool",
+        "dockable": true,
+        "dockingBar": "${id}-dockingBarBottomLeft",
+        "minimizeOnClose": true,
+        "marginBox": {
+          "t": 40,
+          "b": 40,
+          "w": 400,
+          "r": 0
+        },
+        "minSize": {
+          "t": 40,
+          "b": 40,
+          "w": 400,
+          "r": 0
+        },
+        "windowClass": "noTitleBarAndWindowTools noPadding vue-toc-window"
+      }
+    },
+    {
+      "widgetRole": "mapContent",
+      "template": "seasons",
+      "sublayout": [
+        "mobile_landscape",
+        "mobile_portrait"
+      ],
+      "window": {
+        "autofocus": false,
+        "dockable": true,
+        "dockingBar": "${id}-dockingBarBottomLeft",
+        "dockTool": "vueTocToggleTool",
+        "minimizeOnClose": true,
+        "marginBox": {
+          "w": "100%",
+          "h": "100%",
+          "b": 40,
+          "l": 0
+        },
+        "windowClass": "mobileWindow noTitleBarAndWindowTools noPadding vue-toc-window"
+      }
+    }
+  ],
+  "components": [
+    {
+      "name": "MapContentWidgetFactory",
+      "provides": "dijit.Widget",
+      "instanceFactory": true,
+      "properties": {
+        "widgetRole": "mapContent"
+      },
+      "references": [
+        {
+          "name": "_mapWidgetModel",
+          "providing": "map-widget.MapWidgetModel"
+        },
+        {
+          "name": "_basemapModel",
+          "providing": "map-basemaps-api.BasemapsModel"
+        },
+        {
+          "name": "_tool",
+          "providing": "ct.tools.Tool",
+          "filter": "(id=vueTocToggleTool)"
+        }
+      ]
+    },
+    {
+      "name": "VueTocToggleTool",
+      "impl": "ct/tools/Tool",
+      "provides": [
+        "ct.tools.Tool"
+      ],
+      "propertiesConstructor": true,
+      "properties": {
+        "id": "vueTocToggleTool",
+        "title": "${tool.title}",
+        "tooltip": "${tool.tooltip}",
+        "iconClass": "icon-layer-settings",
+        "toolRole": "toolset",
+        "togglable": true,
+        "rules": {
+          "noGroup": true
+        }
+      }
+    }
+  ]
+}
