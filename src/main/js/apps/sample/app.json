@@ -81,7 +81,7 @@
           },
           {
             "id": "topo",
-            "title": "${map.basemaps.topo",
+            "title": "${map.basemaps.topo}",
             "basemap": "topo",
             "icon": "filter_hdr"
           },
