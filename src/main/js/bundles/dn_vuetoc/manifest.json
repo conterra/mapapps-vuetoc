@@ -10,6 +10,7 @@
     "apprt-binding": "^4.2.0",
     "apprt-vuetify": "^4.2.0"
   },
+  "main": "",
   "CSS-Themes-Extension": [
     {
       "name": "*",
