@@ -13,20 +13,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-module.exports = {
-    root: ({
-        bundleName: "Vue TOC",
-        bundleDescription: "The Vue TOC is a new Widget that allows you to control the map content.",
-        ui: {
-            basemaps: "Basemaps",
-            layers: "Operational Layer",
-            close: "Close",
-            reset: "Reset"
-        },
-        tool: {
-            title: "Map Content",
-            tooltip: "Map Content"
-        }
-    }),
-    "de": true
-};
+import i18n from "dojo/i18n!./nls/bundle";
