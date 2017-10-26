@@ -1,6 +1,9 @@
 # Vue TOC Bundle
 The Vue TOC is a new Widget that allows you to control the map content.
 
+![Screenshot App](https://github.com/conterra/mapapps-vuetoc/blob/master/Vue.JPG)
+
+
 Sample App
 ------------------
 https://demos.conterra.de/mapapps/resources/apps/downloads_vuetoc/index.html
