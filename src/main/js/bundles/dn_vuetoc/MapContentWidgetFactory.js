@@ -25,11 +25,12 @@ class MapContentWidgetFactory {
         this._initComponent({
             mapWidgetModel: this._mapWidgetModel,
             basemapModel: this._basemapModel,
-            tool: this._tool
+            tool: this._tool,
+            properties: this._properties
         });
     }
 
-    _initComponent({basemapModel, mapWidgetModel, tool}) {
+    _initComponent({basemapModel, mapWidgetModel, tool, properties}) {
         const vm = this.mapContentComponent = new Vue(MapContentWidget);
         vm.i18n = this._i18n.get().ui;
         vm.basemaps = basemapModel.basemaps;
@@ -45,6 +46,9 @@ class MapContentWidgetFactory {
 
             vm.layers = layers.items;
             vm.switchArray = switchArray;
+            vm.showBasemaps = properties.showBasemaps;
+            vm.showOperationalLayer = properties.showOperationalLayer;
+
 
             // listen to view model methods
             vm.$on('close', () => tool.set("active", false));

@@ -79,7 +79,9 @@
       "provides": "dijit.Widget",
       "instanceFactory": true,
       "properties": {
-        "widgetRole": "mapContent"
+        "widgetRole": "mapContent",
+        "showBasemaps": true,
+        "showOperationalLayer": true
       },
       "references": [
         {

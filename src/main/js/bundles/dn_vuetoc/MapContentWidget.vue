@@ -3,7 +3,7 @@
         <div class="center">
             <v-container grid-list-sm>
                 <v-layout row wrap>
-                    <v-flex xs12>
+                    <v-flex xs12 v-if="showBasemaps">
                         <v-card class="elevation-6">
                             <v-card-title class="primary title">{{i18n.basemaps}}</v-card-title>
                             <v-list>
@@ -30,7 +30,7 @@
                             </v-list>
                         </v-card>
                     </v-flex>
-                    <v-flex xs12>
+                    <v-flex xs12 v-if="showOperationalLayer">
                         <v-card class="elevation-6">
                             <v-card-title class="primary title">{{i18n.layers}}</v-card-title>
                             <v-list>
@@ -125,6 +125,8 @@
                 switchArray: [],
                 basemaps: [],
                 selectedId: "",
+                showBasemaps: true,
+                showOperationalLayer: true,
                 i18n: {
                     type: Object,
                     default: function () {

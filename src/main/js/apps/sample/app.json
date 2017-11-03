@@ -33,6 +33,12 @@
     ]
   },
   "bundles": {
+    "dn_vuetoc": {
+      "MapContentWidgetFactory": {
+        "showBasemaps": true,
+        "showOperationalLayer": true
+      }
+    },
     "banner": {
       "BannerWidget": {
         "label": "Developer Network",
