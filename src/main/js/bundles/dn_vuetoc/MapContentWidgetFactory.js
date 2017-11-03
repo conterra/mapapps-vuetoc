@@ -49,12 +49,20 @@ class MapContentWidgetFactory {
             vm.showBasemaps = properties.showBasemaps;
             vm.showOperationalLayer = properties.showOperationalLayer;
 
-
             // listen to view model methods
             vm.$on('close', () => tool.set("active", false));
             vm.$on('reset', () => {
                 vm.switchArray = this.defaultSwitchArray;
                 vm.selectedId = this.defaultSelectedId;
+            });
+            vm.$on('zoomToExtent', (layer) => {
+                let extent = layer.fullExtent || layer.layer.fullExtent;
+                let view = mapWidgetModel.get('view');
+                view.goTo({target: extent}, {
+                    "animate": true,
+                    "duration": 1000,
+                    "easing": "ease-in-out"
+                });
             });
 
             let that = this;

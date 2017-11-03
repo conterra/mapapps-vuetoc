@@ -9,11 +9,12 @@
                             <v-list>
                                 <v-list-tile v-for="basemap in basemaps"
                                              v-bind:key="basemap.id"
-                                             @click.native.stop="selectedId = basemap.id">
+                                             @click.prevent.stop="selectedId = basemap.id">
                                     <v-list-tile-action v-if="basemap.icon">
                                         <v-icon v-if="basemap.id === selectedId" primary medium>{{basemap.icon}}
                                         </v-icon>
-                                        <v-icon v-else="basemap.id === selectedId">{{basemap.icon}}</v-icon>
+                                        <v-icon v-else="basemap.id === selectedId">{{basemap.icon}}
+                                        </v-icon>
                                     </v-list-tile-action>
                                     <v-list-tile-action v-else>
                                         <v-icon v-if="basemap.id === selectedId" primary medium>video_label</v-icon>
@@ -37,15 +38,29 @@
                                 <v-list-group v-for="layer in reverseArray(layers)" v-bind:key="layer.id">
                                     <v-list-tile slot="item"
                                                  @click="">
-                                        <v-list-tile-action>
+                                        <v-list-tile-action @click.prevent.stop>
                                             <v-switch
                                                     color="primary"
-                                                    v-model=switchArray[layer.switchCount]
-                                                    @click.native.stop=""></v-switch>
+                                                    v-model=switchArray[layer.switchCount]></v-switch>
                                         </v-list-tile-action>
                                         <v-list-tile-content>
                                             <v-list-tile-title v-text="layer.title"></v-list-tile-title>
                                         </v-list-tile-content>
+                                        <v-list-tile-action @click.prevent.stop>
+                                            <v-menu bottom left>
+                                                <v-btn icon slot="activator" dark>
+                                                    <v-icon>more_vert</v-icon>
+                                                </v-btn>
+                                                <v-list>
+                                                    <v-list-tile @click="zoomToExtent(layer)">
+                                                        <v-list-tile-action>
+                                                            <v-icon primary>search</v-icon>
+                                                        </v-list-tile-action>
+                                                        <v-list-tile-title>{{i18n.zoomToExtent}}</v-list-tile-title>
+                                                    </v-list-tile>
+                                                </v-list>
+                                            </v-menu>
+                                        </v-list-tile-action>
                                         <v-list-tile-action
                                                 v-if="(layer.sublayers && layer.sublayers.items) || (layer.layers && layer.layers.items)">
                                             <v-icon>keyboard_arrow_down</v-icon>
@@ -54,8 +69,8 @@
                                     <div v-if="layer.sublayers && layer.sublayers.items">
                                         <v-list-tile v-for="subLayer in reverseArray(layer.sublayers.items)"
                                                      v-bind:key="subLayer.id"
-                                                     @click.native.stop="">
-                                            <v-list-tile-action>
+                                                     @click.prevent.stop>
+                                            <v-list-tile-action @click.prevent.stop>
                                                 <v-switch
                                                         color="primary"
                                                         v-model=switchArray[subLayer.switchCount]></v-switch>
@@ -63,13 +78,28 @@
                                             <v-list-tile-content>
                                                 <v-list-tile-title v-text="subLayer.title"></v-list-tile-title>
                                             </v-list-tile-content>
+                                            <v-list-tile-action @click.prevent.stop>
+                                                <v-menu bottom left>
+                                                    <v-btn icon slot="activator" dark>
+                                                        <v-icon>more_vert</v-icon>
+                                                    </v-btn>
+                                                    <v-list>
+                                                        <v-list-tile @click="zoomToExtent(subLayer)">
+                                                            <v-list-tile-action>
+                                                                <v-icon primary>search</v-icon>
+                                                            </v-list-tile-action>
+                                                            <v-list-tile-title>{{i18n.zoomToExtent}}</v-list-tile-title>
+                                                        </v-list-tile>
+                                                    </v-list>
+                                                </v-menu>
+                                            </v-list-tile-action>
                                         </v-list-tile>
                                     </div>
                                     <div v-if="layer.layers && layer.layers.items">
                                         <v-list-tile v-for="subLayer in reverseArray(layer.layers.items)"
                                                      v-bind:key="subLayer.id"
-                                                     @click.native.stop="">
-                                            <v-list-tile-action>
+                                                     @click.prevent.stop>
+                                            <v-list-tile-action @click.prevent.stop>
                                                 <v-switch
                                                         color="primary"
                                                         v-model=switchArray[subLayer.switchCount]></v-switch>
@@ -77,6 +107,21 @@
                                             <v-list-tile-content>
                                                 <v-list-tile-title v-text="subLayer.title"></v-list-tile-title>
                                             </v-list-tile-content>
+                                            <v-list-tile-action @click.prevent.stop>
+                                                <v-menu bottom left>
+                                                    <v-btn icon slot="activator" dark>
+                                                        <v-icon>more_vert</v-icon>
+                                                    </v-btn>
+                                                    <v-list>
+                                                        <v-list-tile @click="zoomToExtent(subLayer)">
+                                                            <v-list-tile-action>
+                                                                <v-icon primary>search</v-icon>
+                                                            </v-list-tile-action>
+                                                            <v-list-tile-title>{{i18n.zoomToExtent}}</v-list-tile-title>
+                                                        </v-list-tile>
+                                                    </v-list>
+                                                </v-menu>
+                                            </v-list-tile-action>
                                         </v-list-tile>
                                     </div>
                                 </v-list-group>
@@ -193,6 +238,9 @@
             },
             reset: function () {
                 this.$emit('reset', {});
+            },
+            zoomToExtent: function (layer) {
+                this.$emit('zoomToExtent', layer);
             }
         }
     };

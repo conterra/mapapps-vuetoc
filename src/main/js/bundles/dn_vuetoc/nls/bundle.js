@@ -21,7 +21,8 @@ module.exports = {
             basemaps: "Basemaps",
             layers: "Operational Layer",
             close: "Close",
-            reset: "Reset"
+            reset: "Reset",
+            zoomToExtent: "Zoom to extent"
         },
         tool: {
             title: "Map Content",
