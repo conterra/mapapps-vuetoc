@@ -34,17 +34,17 @@
         "dockable": true,
         "dockingBar": "${id}-dockingBarBottomLeft",
         "minimizeOnClose": true,
+        "resizable": false,
         "marginBox": {
           "t": 40,
           "b": 40,
           "w": 400,
           "r": 0
         },
-        "minSize": {
-          "t": 40,
-          "b": 40,
-          "w": 400,
-          "r": 0
+        "fixEdgesInViewPort": {
+          "r": true,
+          "b": true,
+          "t": true
         },
         "windowClass": "noTitleBarAndWindowTools noPadding vue-toc-window"
       }
@@ -62,6 +62,7 @@
         "dockingBar": "${id}-dockingBarBottomLeft",
         "dockTool": "vueTocToggleTool",
         "minimizeOnClose": true,
+        "resizable": false,
         "marginBox": {
           "w": "100%",
           "h": "100%",
