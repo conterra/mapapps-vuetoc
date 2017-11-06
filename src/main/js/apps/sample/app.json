@@ -36,7 +36,8 @@
     "dn_vuetoc": {
       "MapContentWidgetFactory": {
         "showBasemaps": true,
-        "showOperationalLayer": true
+        "showOperationalLayer": true,
+        "showLegend": true
       }
     },
     "banner": {
@@ -103,6 +104,7 @@
             {
               "id": "koeln1",
               "title": "${map.koeln1.title}",
+              "description": "Basisdaten der Stadt Köln",
               "url": "https://services.conterra.de/arcgis/rest/services/common/koeln/MapServer",
               "type": "AGS_DYNAMIC",
               "visible": false,

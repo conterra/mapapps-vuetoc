@@ -21,7 +21,9 @@ module.exports = {
         layers: "Karteninhalte",
         close: "Schließen",
         reset: "Zurücksetzen",
-        zoomToExtent: "Auf Ausdehnung zoomen"
+        zoomToExtent: "Auf Ausdehnung zoomen",
+        description: "Beschreibung:",
+        copyright: "Copyright:"
     },
     tool: {
         title: "Karteninhalt",

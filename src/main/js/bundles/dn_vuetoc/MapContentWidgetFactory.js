@@ -18,6 +18,8 @@ import Vue from "apprt-vue/Vue";
 import VueDijit from "apprt-vue/VueDijit";
 import Binding from "apprt-binding/Binding";
 import Promise from "apprt-core/Promise";
+import apprt_request from "apprt-request";
+import ct_when from "ct/_when";
 
 class MapContentWidgetFactory {
 
@@ -39,15 +41,18 @@ class MapContentWidgetFactory {
         let layers = map.get("layers");
         this.waitForLayers(layers).then(function () {
             let switchArray = this.createSwitchesArray(layers);
+            let menuArray = this.createMenuArray(switchArray.length);
+            this.createLegendArray(layers, vm);
 
             // save default values to allow reset of map content
             this.defaultSwitchArray = switchArray.slice(0);
             this.defaultSelectedId = basemapModel.selectedId;
 
-            vm.layers = layers.items;
             vm.switchArray = switchArray;
+            vm.menuArray = menuArray;
             vm.showBasemaps = properties.showBasemaps;
             vm.showOperationalLayer = properties.showOperationalLayer;
+            vm.showLegend = properties.showLegend;
 
             // listen to view model methods
             vm.$on('close', () => tool.set("active", false));
@@ -83,12 +88,14 @@ class MapContentWidgetFactory {
                 layer.watch("visible", (event) => {
                     vm.switchArray = that.createSwitchesArray(layers)
                 });
+                layer.menu = false;
             });
+            vm.layers = layers.items;
 
             Binding
                 .create()
                 .bindTo(vm, basemapModel)
-                .syncAll("selectedId", "switchArray")
+                .syncAll("selectedId", "switchArray", "legendArray", "menuArray")
                 .enable();
         }.bind(this));
     }
@@ -131,6 +138,32 @@ class MapContentWidgetFactory {
             }
         });
         return switches;
+    }
+
+    createMenuArray(count) {
+        let result = [];
+        for (let i = 0; i < count; i++) {
+            result.push({visible: false});
+        }
+        return result;
+    }
+
+    createLegendArray(layers, vm) {
+        layers.forEach(function (layer) {
+            let legendUrl = layer.url + "/legend?f=pjson&dynamicLayers=[1]";
+            ct_when(apprt_request(legendUrl, {
+                handleAs: "json"
+            }), function (results) {
+                results.layers.forEach((results) => {
+                    vm.legendArray.push({
+                        url: layer.url + "/" + results.layerId,
+                        title: results.layerName,
+                        imageUrl: results.legend[0].url
+                    })
+                });
+            }, function (e) {
+            }, this);
+        });
     }
 }
 

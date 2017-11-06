@@ -47,18 +47,49 @@
                                             <v-list-tile-title v-text="layer.title"></v-list-tile-title>
                                         </v-list-tile-content>
                                         <v-list-tile-action @click.prevent.stop>
-                                            <v-menu bottom left>
-                                                <v-btn icon slot="activator" dark>
+                                            <v-menu bottom left max-width="400" transition="slide-y-transition"
+                                                    :close-on-content-click="false" :close-on-click="false"
+                                                    v-model="menuArray[layer.switchCount].visible">
+                                                <v-btn icon slot="activator" @click="closeAllMenus">
                                                     <v-icon>more_vert</v-icon>
                                                 </v-btn>
-                                                <v-list>
-                                                    <v-list-tile @click="zoomToExtent(layer)">
-                                                        <v-list-tile-action>
-                                                            <v-icon primary>search</v-icon>
-                                                        </v-list-tile-action>
-                                                        <v-list-tile-title>{{i18n.zoomToExtent}}</v-list-tile-title>
-                                                    </v-list-tile>
-                                                </v-list>
+                                                <v-card>
+                                                    <v-toolbar light dense>
+                                                        <v-toolbar-title>{{layer.title}}</v-toolbar-title>
+                                                        <v-spacer></v-spacer>
+                                                        <v-btn icon @click="menuArray[layer.switchCount].visible=false">
+                                                            <v-icon>close</v-icon>
+                                                        </v-btn>
+                                                    </v-toolbar>
+                                                    <v-card-title v-if="layer.description">
+                                                        <div>
+                                                            <div class="mb-1 title">{{i18n.description}}</div>
+                                                            <span class="regular">{{layer.description}}</span>
+                                                        </div>
+                                                    </v-card-title>
+                                                    <v-divider></v-divider>
+                                                    <v-list>
+                                                        <v-list-tile @click="zoomToExtent(layer)">
+                                                            <v-list-tile-action>
+                                                                <v-icon primary>search</v-icon>
+                                                            </v-list-tile-action>
+                                                            <v-list-tile-title>{{i18n.zoomToExtent}}</v-list-tile-title>
+                                                        </v-list-tile>
+                                                    </v-list>
+                                                    <v-divider></v-divider>
+                                                    <v-card-title v-if="layer.copyright">
+                                                        <div>
+                                                            <div class="mb-1 grey--text caption">{{i18n.copyright}}
+                                                            </div>
+                                                            <span class="grey--text caption">{{layer.copyright}}</span>
+                                                        </div>
+                                                    </v-card-title>
+                                                    <!--<v-card-text>
+                                                        Transparenz einstellen:
+                                                        <v-slider v-model="layer.opacity" thumb-label v-bind:min="0"
+                                                                  v-bind:max="1"></v-slider>
+                                                    </v-card-text>-->
+                                                </v-card>
                                             </v-menu>
                                         </v-list-tile-action>
                                         <v-list-tile-action
@@ -75,22 +106,58 @@
                                                         color="primary"
                                                         v-model=switchArray[subLayer.switchCount]></v-switch>
                                             </v-list-tile-action>
+                                            <v-list-tile-action v-if="showLegend">
+                                                <img v-bind:src="getLegend(subLayer.url, subLayer.id)"/>
+                                            </v-list-tile-action>
                                             <v-list-tile-content>
                                                 <v-list-tile-title v-text="subLayer.title"></v-list-tile-title>
                                             </v-list-tile-content>
                                             <v-list-tile-action @click.prevent.stop>
-                                                <v-menu bottom left>
-                                                    <v-btn icon slot="activator" dark>
+                                                <v-menu bottom left max-width="400" transition="slide-y-transition"
+                                                        :close-on-content-click="false" :close-on-click="false"
+                                                        v-model="menuArray[subLayer.switchCount].visible">
+                                                    <v-btn icon slot="activator" @click="closeAllMenus">
                                                         <v-icon>more_vert</v-icon>
                                                     </v-btn>
-                                                    <v-list>
-                                                        <v-list-tile @click="zoomToExtent(subLayer)">
-                                                            <v-list-tile-action>
-                                                                <v-icon primary>search</v-icon>
-                                                            </v-list-tile-action>
-                                                            <v-list-tile-title>{{i18n.zoomToExtent}}</v-list-tile-title>
-                                                        </v-list-tile>
-                                                    </v-list>
+                                                    <v-card>
+                                                        <v-toolbar light dense>
+                                                            <v-toolbar-title>{{layer.title}}</v-toolbar-title>
+                                                            <v-spacer></v-spacer>
+                                                            <v-btn icon
+                                                                   @click="menuArray[subLayer.switchCount].visible=false">
+                                                                <v-icon>close</v-icon>
+                                                            </v-btn>
+                                                        </v-toolbar>
+                                                        <v-card-title v-if="layer.description">
+                                                            <div>
+                                                                <div class="mb-1 title">{{i18n.description}}</div>
+                                                                <span class="regular">{{layer.description}}</span>
+                                                            </div>
+                                                        </v-card-title>
+                                                        <v-divider></v-divider>
+                                                        <v-list>
+                                                            <v-list-tile @click="zoomToExtent(layer)">
+                                                                <v-list-tile-action>
+                                                                    <v-icon primary>search</v-icon>
+                                                                </v-list-tile-action>
+                                                                <v-list-tile-title>{{i18n.zoomToExtent}}
+                                                                </v-list-tile-title>
+                                                            </v-list-tile>
+                                                        </v-list>
+                                                        <v-divider></v-divider>
+                                                        <v-card-title v-if="layer.copyright">
+                                                            <div>
+                                                                <div class="mb-1 grey--text caption">{{i18n.copyright}}
+                                                                </div>
+                                                                <span class="grey--text caption">{{layer.copyright}}</span>
+                                                            </div>
+                                                        </v-card-title>
+                                                        <!--<v-card-text>
+                                                            Transparenz einstellen:
+                                                            <v-slider v-model="layer.opacity" thumb-label v-bind:min="0"
+                                                                      v-bind:max="1"></v-slider>
+                                                        </v-card-text>-->
+                                                    </v-card>
                                                 </v-menu>
                                             </v-list-tile-action>
                                         </v-list-tile>
@@ -104,22 +171,58 @@
                                                         color="primary"
                                                         v-model=switchArray[subLayer.switchCount]></v-switch>
                                             </v-list-tile-action>
+                                            <v-list-tile-action>
+                                                <img v-bind:src="getLegend(subLayer.url, subLayer.id)"/>
+                                            </v-list-tile-action>
                                             <v-list-tile-content>
                                                 <v-list-tile-title v-text="subLayer.title"></v-list-tile-title>
                                             </v-list-tile-content>
                                             <v-list-tile-action @click.prevent.stop>
-                                                <v-menu bottom left>
-                                                    <v-btn icon slot="activator" dark>
+                                                <v-menu bottom left max-width="400" transition="slide-y-transition"
+                                                        :close-on-content-click="false" :close-on-click="false"
+                                                        v-model="menuArray[subLayer.switchCount].visible">
+                                                    <v-btn icon slot="activator" @click="closeAllMenus">
                                                         <v-icon>more_vert</v-icon>
                                                     </v-btn>
-                                                    <v-list>
-                                                        <v-list-tile @click="zoomToExtent(subLayer)">
-                                                            <v-list-tile-action>
-                                                                <v-icon primary>search</v-icon>
-                                                            </v-list-tile-action>
-                                                            <v-list-tile-title>{{i18n.zoomToExtent}}</v-list-tile-title>
-                                                        </v-list-tile>
-                                                    </v-list>
+                                                    <v-card>
+                                                        <v-toolbar light dense>
+                                                            <v-toolbar-title>{{layer.title}}</v-toolbar-title>
+                                                            <v-spacer></v-spacer>
+                                                            <v-btn icon
+                                                                   @click="menuArray[subLayer.switchCount].visible=false">
+                                                                <v-icon>close</v-icon>
+                                                            </v-btn>
+                                                        </v-toolbar>
+                                                        <v-card-title v-if="layer.description">
+                                                            <div>
+                                                                <div class="mb-1 title">{{i18n.description}}</div>
+                                                                <span class="regular">{{layer.description}}</span>
+                                                            </div>
+                                                        </v-card-title>
+                                                        <v-divider></v-divider>
+                                                        <v-list>
+                                                            <v-list-tile @click="zoomToExtent(layer)">
+                                                                <v-list-tile-action>
+                                                                    <v-icon primary>search</v-icon>
+                                                                </v-list-tile-action>
+                                                                <v-list-tile-title>{{i18n.zoomToExtent}}
+                                                                </v-list-tile-title>
+                                                            </v-list-tile>
+                                                        </v-list>
+                                                        <v-divider></v-divider>
+                                                        <v-card-title v-if="layer.copyright">
+                                                            <div>
+                                                                <div class="mb-1 grey--text caption">{{i18n.copyright}}
+                                                                </div>
+                                                                <span class="grey--text caption">{{layer.copyright}}</span>
+                                                            </div>
+                                                        </v-card-title>
+                                                        <!--<v-card-text>
+                                                            Transparenz einstellen:
+                                                            <v-slider v-model="layer.opacity" thumb-label v-bind:min="0"
+                                                                      v-bind:max="1"></v-slider>
+                                                        </v-card-text>-->
+                                                    </v-card>
                                                 </v-menu>
                                             </v-list-tile-action>
                                         </v-list-tile>
@@ -168,10 +271,13 @@
             return {
                 layers: [],
                 switchArray: [],
+                legendArray: [],
+                menuArray: [],
                 basemaps: [],
                 selectedId: "",
                 showBasemaps: true,
                 showOperationalLayer: true,
+                showLegend: true,
                 i18n: {
                     type: Object,
                     default: function () {
@@ -241,6 +347,20 @@
             },
             zoomToExtent: function (layer) {
                 this.$emit('zoomToExtent', layer);
+            },
+            getLegend: function (url) {
+                let imageUrl = "";
+                this.legendArray.forEach((legend) => {
+                    if (url === legend.url) {
+                        imageUrl = (' ' + legend.imageUrl).slice(1) || "";
+                    }
+                });
+                return imageUrl;
+            },
+            closeAllMenus: function () {
+                this.menuArray.forEach((entry) => {
+                    entry.visible = false;
+                })
             }
         }
     };

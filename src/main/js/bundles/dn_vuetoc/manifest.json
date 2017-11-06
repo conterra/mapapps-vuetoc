@@ -81,7 +81,8 @@
       "properties": {
         "widgetRole": "mapContent",
         "showBasemaps": true,
-        "showOperationalLayer": true
+        "showOperationalLayer": true,
+        "showLegend": true
       },
       "references": [
         {

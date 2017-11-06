@@ -22,7 +22,9 @@ module.exports = {
             layers: "Operational Layer",
             close: "Close",
             reset: "Reset",
-            zoomToExtent: "Zoom to extent"
+            zoomToExtent: "Zoom to extent",
+            description: "Description:",
+            copyright: "Copyright:"
         },
         tool: {
             title: "Map Content",
