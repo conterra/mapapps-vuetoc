@@ -20,6 +20,7 @@ module.exports = {
         basemaps: "Hintergrundkarten",
         layers: "Karteninhalte",
         close: "Schließen",
+        backToMap: "Zur Karte",
         reset: "Zurücksetzen",
         zoomToExtent: "Auf Ausdehnung zoomen",
         description: "Beschreibung:",

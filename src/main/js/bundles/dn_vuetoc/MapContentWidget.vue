@@ -266,7 +266,13 @@
                 <v-layout row wrap>
                     <v-flex xs6>
                         <v-card class="elevation-6">
-                            <v-btn block
+                            <v-btn v-if="isMobile" block
+                                   @click.native="close"
+                                   class="btn btn--block btn--raised theme--light">
+                                <v-icon left>arrow_back</v-icon>
+                                {{i18n.backToMap}}
+                            </v-btn>
+                            <v-btn v-else block
                                    @click.native="close"
                                    class="btn btn--block btn--raised theme--light">
                                 <v-icon left>arrow_back</v-icon>

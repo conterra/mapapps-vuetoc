@@ -24,15 +24,20 @@ import ct_when from "ct/_when";
 class MapContentWidgetFactory {
 
     activate() {
+        let envs = this._componentContext.getBundleContext().getCurrentExecutionEnvironment();
+        let isMobile = this.isMobile = envs.some((env) => {
+            return env.name === "Mobile"
+        });
         this._initComponent({
             mapWidgetModel: this._mapWidgetModel,
             basemapModel: this._basemapModel,
             tool: this._tool,
-            properties: this._properties
+            properties: this._properties,
+            isMobile: isMobile
         });
     }
 
-    _initComponent({basemapModel, mapWidgetModel, tool, properties}) {
+    _initComponent({basemapModel, mapWidgetModel, tool, properties, isMobile}) {
         const vm = this.mapContentComponent = new Vue(MapContentWidget);
         vm.i18n = this._i18n.get().ui;
         vm.basemaps = basemapModel.basemaps;
@@ -51,6 +56,7 @@ class MapContentWidgetFactory {
             vm.showBasemaps = properties.showBasemaps;
             vm.showOperationalLayer = properties.showOperationalLayer;
             vm.showLegend = properties.showLegend;
+            vm.isMobile = isMobile;
 
             // listen to view model methods
             vm.$on('close', () => tool.set("active", false));
