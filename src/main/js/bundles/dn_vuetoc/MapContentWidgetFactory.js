@@ -40,16 +40,14 @@ class MapContentWidgetFactory {
         let map = mapWidgetModel.get("map");
         let layers = map.get("layers");
         this.waitForLayers(layers).then(function () {
-            let switchArray = this.createSwitchesArray(layers);
-            let menuArray = this.createMenuArray(switchArray.length);
+            let layerArray = this.createLayerArray(layers);
             this.createLegendArray(layers, vm);
 
             // save default values to allow reset of map content
-            this.defaultSwitchArray = switchArray.slice(0);
+            this.defaultLayerArray = layerArray.slice(0);
             this.defaultSelectedId = basemapModel.selectedId;
 
-            vm.switchArray = switchArray;
-            vm.menuArray = menuArray;
+            vm.layerArray = layerArray;
             vm.showBasemaps = properties.showBasemaps;
             vm.showOperationalLayer = properties.showOperationalLayer;
             vm.showLegend = properties.showLegend;
@@ -57,7 +55,7 @@ class MapContentWidgetFactory {
             // listen to view model methods
             vm.$on('close', () => tool.set("active", false));
             vm.$on('reset', () => {
-                vm.switchArray = this.defaultSwitchArray;
+                vm.layerArray = this.defaultLayerArray;
                 vm.selectedId = this.defaultSelectedId;
             });
             vm.$on('zoomToExtent', (layer) => {
@@ -75,18 +73,18 @@ class MapContentWidgetFactory {
                 if (layer.sublayers && layer.sublayers.items) {
                     layer.sublayers.forEach(function (sublayer) {
                         sublayer.watch("visible", (event) => {
-                            vm.switchArray = that.createSwitchesArray(layers)
+                            vm.layerArray = that.createLayerArray(layers)
                         });
                     });
                 } else if (layer.layers && layer.layers.items) {
                     layer.layers.forEach(function (sublayer) {
                         sublayer.watch("visible", (event) => {
-                            vm.switchArray = that.createSwitchesArray(layers)
+                            vm.layerArray = that.createLayerArray(layers)
                         });
                     });
                 }
                 layer.watch("visible", (event) => {
-                    vm.switchArray = that.createSwitchesArray(layers)
+                    vm.layerArray = that.createLayerArray(layers)
                 });
                 layer.menu = false;
             });
@@ -95,7 +93,7 @@ class MapContentWidgetFactory {
             Binding
                 .create()
                 .bindTo(vm, basemapModel)
-                .syncAll("selectedId", "switchArray", "legendArray", "menuArray")
+                .syncAll("selectedId", "layerArray", "legendArray")
                 .enable();
         }.bind(this));
     }
@@ -116,36 +114,37 @@ class MapContentWidgetFactory {
         return VueDijit(this.mapContentComponent);
     }
 
-    createSwitchesArray(layers) {
-        let switchCount = 0;
-        let switches = [];
+    createLayerArray(layers) {
+        let layerCount = 0;
+        let layerArray = [];
         layers.forEach(function (layer) {
-            switches[switchCount] = layer.visible;
-            layer.switchCount = switchCount;
-            switchCount++;
+            layerArray[layerCount] = {
+                visible: layer.visible,
+                menuVisibility: false
+            };
+            layer.layerCount = layerCount;
+            layerCount++;
             if (layer.sublayers && layer.sublayers.items) {
                 layer.sublayers.forEach(function (sublayer) {
-                    switches[switchCount] = sublayer.visible;
-                    sublayer.switchCount = switchCount;
-                    switchCount++;
+                    layerArray[layerCount] = {
+                        visible: sublayer.visible,
+                        menuVisibility: false
+                    };
+                    sublayer.layerCount = layerCount;
+                    layerCount++;
                 });
             } else if (layer.layers && layer.layers.items) {
                 layer.layers.forEach(function (sublayer) {
-                    switches[switchCount] = sublayer.visible;
-                    sublayer.switchCount = switchCount;
-                    switchCount++;
+                    layerArray[layerCount] = {
+                        visible: sublayer.visible,
+                        menuVisibility: false
+                    };
+                    sublayer.layerCount = layerCount;
+                    layerCount++;
                 });
             }
         });
-        return switches;
-    }
-
-    createMenuArray(count) {
-        let result = [];
-        for (let i = 0; i < count; i++) {
-            result.push({visible: false});
-        }
-        return result;
+        return layerArray;
     }
 
     createLegendArray(layers, vm) {

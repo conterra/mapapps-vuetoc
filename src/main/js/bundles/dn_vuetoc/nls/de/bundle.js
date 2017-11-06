@@ -23,7 +23,9 @@ module.exports = {
         reset: "Zurücksetzen",
         zoomToExtent: "Auf Ausdehnung zoomen",
         description: "Beschreibung:",
-        copyright: "Copyright:"
+        copyright: "Copyright:",
+        activateAllLayer: "Alle Layer aktivieren",
+        deactivateAllLayer: "Alle Layer deaktivieren"
     },
     tool: {
         title: "Karteninhalt",

@@ -24,7 +24,9 @@ module.exports = {
             reset: "Reset",
             zoomToExtent: "Zoom to extent",
             description: "Description:",
-            copyright: "Copyright:"
+            copyright: "Copyright:",
+            activateAllLayer: "Activate all layer",
+            deactivateAllLayer: "Deactivate all layer"
         },
         tool: {
             title: "Map Content",

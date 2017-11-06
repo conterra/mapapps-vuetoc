@@ -5,7 +5,9 @@
                 <v-layout row wrap>
                     <v-flex xs12 v-if="showBasemaps">
                         <v-card class="elevation-6">
-                            <v-card-title class="primary title">{{i18n.basemaps}}</v-card-title>
+                            <v-toolbar class="primary title" light dense>
+                                <v-toolbar-title>{{i18n.basemaps}}</v-toolbar-title>
+                            </v-toolbar>
                             <v-list>
                                 <v-list-tile v-for="basemap in basemaps"
                                              v-bind:key="basemap.id"
@@ -33,7 +35,31 @@
                     </v-flex>
                     <v-flex xs12 v-if="showOperationalLayer">
                         <v-card class="elevation-6">
-                            <v-card-title class="primary title">{{i18n.layers}}</v-card-title>
+                            <v-toolbar class="primary title" light dense>
+                                <v-toolbar-title>{{i18n.layers}}</v-toolbar-title>
+                                <v-spacer></v-spacer>
+                                <v-menu bottom left max-width="400" transition="slide-y-transition">
+                                    <v-btn icon slot="activator" @click="closeAllMenus">
+                                        <v-icon>more_vert</v-icon>
+                                    </v-btn>
+                                    <v-list>
+                                        <v-list-tile @click="setLayerVisibility(true)">
+                                            <v-list-tile-action>
+                                                <v-icon primary>visibility</v-icon>
+                                            </v-list-tile-action>
+                                            <v-list-tile-title>{{i18n.activateAllLayer}}
+                                            </v-list-tile-title>
+                                        </v-list-tile>
+                                        <v-list-tile @click="setLayerVisibility(false)">
+                                            <v-list-tile-action>
+                                                <v-icon primary>visibility_off</v-icon>
+                                            </v-list-tile-action>
+                                            <v-list-tile-title>{{i18n.deactivateAllLayer}}
+                                            </v-list-tile-title>
+                                        </v-list-tile>
+                                    </v-list>
+                                </v-menu>
+                            </v-toolbar>
                             <v-list>
                                 <v-list-group v-for="layer in reverseArray(layers)" v-bind:key="layer.id">
                                     <v-list-tile slot="item"
@@ -41,7 +67,7 @@
                                         <v-list-tile-action @click.prevent.stop>
                                             <v-switch
                                                     color="primary"
-                                                    v-model=switchArray[layer.switchCount]></v-switch>
+                                                    v-model=layerArray[layer.layerCount].visible></v-switch>
                                         </v-list-tile-action>
                                         <v-list-tile-content>
                                             <v-list-tile-title v-text="layer.title"></v-list-tile-title>
@@ -49,7 +75,7 @@
                                         <v-list-tile-action @click.prevent.stop>
                                             <v-menu bottom left max-width="400" transition="slide-y-transition"
                                                     :close-on-content-click="false" :close-on-click="false"
-                                                    v-model="menuArray[layer.switchCount].visible">
+                                                    v-model="layerArray[layer.layerCount].menuVisibility">
                                                 <v-btn icon slot="activator" @click="closeAllMenus">
                                                     <v-icon>more_vert</v-icon>
                                                 </v-btn>
@@ -57,7 +83,8 @@
                                                     <v-toolbar light dense>
                                                         <v-toolbar-title>{{layer.title}}</v-toolbar-title>
                                                         <v-spacer></v-spacer>
-                                                        <v-btn icon @click="menuArray[layer.switchCount].visible=false">
+                                                        <v-btn icon
+                                                               @click="layerArray[layer.layerCount].menuVisibility=false">
                                                             <v-icon>close</v-icon>
                                                         </v-btn>
                                                     </v-toolbar>
@@ -104,7 +131,7 @@
                                             <v-list-tile-action @click.prevent.stop>
                                                 <v-switch
                                                         color="primary"
-                                                        v-model=switchArray[subLayer.switchCount]></v-switch>
+                                                        v-model=layerArray[subLayer.layerCount].visible></v-switch>
                                             </v-list-tile-action>
                                             <v-list-tile-action v-if="showLegend">
                                                 <img v-bind:src="getLegend(subLayer.url, subLayer.id)"/>
@@ -115,7 +142,7 @@
                                             <v-list-tile-action @click.prevent.stop>
                                                 <v-menu bottom left max-width="400" transition="slide-y-transition"
                                                         :close-on-content-click="false" :close-on-click="false"
-                                                        v-model="menuArray[subLayer.switchCount].visible">
+                                                        v-model="layerArray[subLayer.layerCount].menuVisibility">
                                                     <v-btn icon slot="activator" @click="closeAllMenus">
                                                         <v-icon>more_vert</v-icon>
                                                     </v-btn>
@@ -124,7 +151,7 @@
                                                             <v-toolbar-title>{{layer.title}}</v-toolbar-title>
                                                             <v-spacer></v-spacer>
                                                             <v-btn icon
-                                                                   @click="menuArray[subLayer.switchCount].visible=false">
+                                                                   @click="layerArray[subLayer.layerCount].menuVisibility=false">
                                                                 <v-icon>close</v-icon>
                                                             </v-btn>
                                                         </v-toolbar>
@@ -169,7 +196,7 @@
                                             <v-list-tile-action @click.prevent.stop>
                                                 <v-switch
                                                         color="primary"
-                                                        v-model=switchArray[subLayer.switchCount]></v-switch>
+                                                        v-model=layerArray[subLayer.layerCount].visible></v-switch>
                                             </v-list-tile-action>
                                             <v-list-tile-action>
                                                 <img v-bind:src="getLegend(subLayer.url, subLayer.id)"/>
@@ -180,7 +207,7 @@
                                             <v-list-tile-action @click.prevent.stop>
                                                 <v-menu bottom left max-width="400" transition="slide-y-transition"
                                                         :close-on-content-click="false" :close-on-click="false"
-                                                        v-model="menuArray[subLayer.switchCount].visible">
+                                                        v-model="layerArray[subLayer.layerCount].menuVisibility">
                                                     <v-btn icon slot="activator" @click="closeAllMenus">
                                                         <v-icon>more_vert</v-icon>
                                                     </v-btn>
@@ -189,7 +216,7 @@
                                                             <v-toolbar-title>{{layer.title}}</v-toolbar-title>
                                                             <v-spacer></v-spacer>
                                                             <v-btn icon
-                                                                   @click="menuArray[subLayer.switchCount].visible=false">
+                                                                   @click="layerArray[subLayer.layerCount].menuVisibility=false">
                                                                 <v-icon>close</v-icon>
                                                             </v-btn>
                                                         </v-toolbar>
@@ -270,9 +297,8 @@
         data: function () {
             return {
                 layers: [],
-                switchArray: [],
+                layerArray: [],
                 legendArray: [],
-                menuArray: [],
                 basemaps: [],
                 selectedId: "",
                 showBasemaps: true,
@@ -290,49 +316,52 @@
             };
         },
         watch: {
-            switchArray: function (val, oldVal) {
-                let layers = this.$data.layers;
-                for (let id in val) {
-                    let visible = val[id];
-                    let oldVisible = this.oldSwitchArray && this.oldSwitchArray[id];
-                    if (visible !== oldVisible && this.oldSwitchArray) {
-                        layers.forEach((layer) => {
-                                if (layer.switchCount === parseInt(id)) {
-                                    layer.visible = visible;
-                                    /*if (layer.sublayers && layer.sublayers.items) {
-                                        layer.sublayers.forEach(function (sublayer) {
-                                            sublayer.visible = true;
+            layerArray: {
+                handler(val, oldVal) {
+                    let layers = this.$data.layers;
+                    for (let id in val) {
+                        let visible = val[id].visible;
+                        let oldVisible = this.oldLayerArray && this.oldLayerArray[id].visible;
+                        if (visible !== oldVisible && this.oldLayerArray) {
+                            layers.forEach((layer) => {
+                                    if (layer.layerCount === parseInt(id)) {
+                                        layer.visible = visible;
+                                        /*if (layer.sublayers && layer.sublayers.items) {
+                                            layer.sublayers.forEach(function (sublayer) {
+                                                sublayer.visible = true;
+                                            });
+                                        } else if (layer.layers && layer.layers.items) {
+                                            layer.layers.forEach(function (sublayer) {
+                                                sublayer.visible = true;
+                                            });
+                                        }*/
+                                    }
+                                    if (layer.sublayers && layer.sublayers.items) {
+                                        layer.sublayers.forEach((sublayer) => {
+                                            if (sublayer.layerCount === parseInt(id)) {
+                                                sublayer.visible = visible;
+                                                if (visible) {
+                                                    sublayer.parent.visible = true;
+                                                }
+                                            }
                                         });
                                     } else if (layer.layers && layer.layers.items) {
-                                        layer.layers.forEach(function (sublayer) {
-                                            sublayer.visible = true;
+                                        layer.layers.forEach((sublayer) => {
+                                            if (sublayer.layerCount === parseInt(id)) {
+                                                sublayer.visible = visible;
+                                                if (visible) {
+                                                    sublayer.parent.visible = true;
+                                                }
+                                            }
                                         });
-                                    }*/
+                                    }
                                 }
-                                if (layer.sublayers && layer.sublayers.items) {
-                                    layer.sublayers.forEach((sublayer) => {
-                                        if (sublayer.switchCount === parseInt(id)) {
-                                            sublayer.visible = visible;
-                                            if (visible) {
-                                                sublayer.parent.visible = true;
-                                            }
-                                        }
-                                    });
-                                } else if (layer.layers && layer.layers.items) {
-                                    layer.layers.forEach((sublayer) => {
-                                        if (sublayer.switchCount === parseInt(id)) {
-                                            sublayer.visible = visible;
-                                            if (visible) {
-                                                sublayer.parent.visible = true;
-                                            }
-                                        }
-                                    });
-                                }
-                            }
-                        );
+                            );
+                        }
                     }
-                }
-                this.oldSwitchArray = val.slice(0);
+                    this.oldLayerArray = JSON.parse(JSON.stringify(val));
+                },
+                deep: true
             }
         },
         methods: {
@@ -358,8 +387,13 @@
                 return imageUrl;
             },
             closeAllMenus: function () {
-                this.menuArray.forEach((entry) => {
-                    entry.visible = false;
+                this.layerArray.forEach((layer) => {
+                    layer.menuVisibility = false;
+                })
+            },
+            setLayerVisibility: function (status) {
+                this.layerArray.forEach((layer) => {
+                    layer.visible = status;
                 })
             }
         }
