@@ -14,6 +14,17 @@ Installation Guide
 
 Simply add the bundle "dn_vuetoc" to your map.apps 4 app.
 
+#### Configurable Components of dn_querybuilder:
+
+##### QueryBuilderProperties:
+```
+"MapContentWidgetFactory": {
+    "showBasemaps": true,
+    "showOperationalLayer": true,
+    "showLegend": true
+}
+```
+
 Development Guide
 ------------------
 ### Define the mapapps remote base
