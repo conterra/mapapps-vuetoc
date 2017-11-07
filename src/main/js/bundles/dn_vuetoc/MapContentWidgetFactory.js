@@ -49,7 +49,7 @@ class MapContentWidgetFactory {
             this.createLegendArray(layers, vm);
 
             // save default values to allow reset of map content
-            this.defaultLayerArray = layerArray.slice(0);
+            this.defaultLayerArray = JSON.parse(JSON.stringify(layerArray));
             this.defaultSelectedId = basemapModel.selectedId;
 
             vm.layerArray = layerArray;
