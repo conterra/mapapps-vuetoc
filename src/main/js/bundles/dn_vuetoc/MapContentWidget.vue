@@ -74,7 +74,7 @@
                                         </v-list-tile-content>
                                         <v-list-tile-action @click.prevent.stop>
                                             <v-menu bottom left max-width="400" transition="slide-y-transition"
-                                                    :close-on-content-click="false" :close-on-click="false"
+                                                    :close-on-content-click="false" :close-on-click="true"
                                                     v-model="layerArray[layer.layerCount].menuVisibility">
                                                 <v-btn icon slot="activator" @click="closeAllMenus">
                                                     <v-icon>more_vert</v-icon>
@@ -90,7 +90,6 @@
                                                     </v-toolbar>
                                                     <v-card-title v-if="layer.description">
                                                         <div>
-                                                            <div class="mb-1 title">{{i18n.description}}</div>
                                                             <span class="regular">{{layer.description}}</span>
                                                         </div>
                                                     </v-card-title>
@@ -141,24 +140,23 @@
                                             </v-list-tile-content>
                                             <v-list-tile-action @click.prevent.stop>
                                                 <v-menu bottom left max-width="400" transition="slide-y-transition"
-                                                        :close-on-content-click="false" :close-on-click="false"
+                                                        :close-on-content-click="false" :close-on-click="true"
                                                         v-model="layerArray[subLayer.layerCount].menuVisibility">
                                                     <v-btn icon slot="activator" @click="closeAllMenus">
                                                         <v-icon>more_vert</v-icon>
                                                     </v-btn>
                                                     <v-card>
                                                         <v-toolbar light dense>
-                                                            <v-toolbar-title>{{layer.title}}</v-toolbar-title>
+                                                            <v-toolbar-title>{{subLayer.title}}</v-toolbar-title>
                                                             <v-spacer></v-spacer>
                                                             <v-btn icon
                                                                    @click="layerArray[subLayer.layerCount].menuVisibility=false">
                                                                 <v-icon>close</v-icon>
                                                             </v-btn>
                                                         </v-toolbar>
-                                                        <v-card-title v-if="layer.description">
+                                                        <v-card-title v-if="subLayer.description">
                                                             <div>
-                                                                <div class="mb-1 title">{{i18n.description}}</div>
-                                                                <span class="regular">{{layer.description}}</span>
+                                                                <span class="regular">{{subLayer.description}}</span>
                                                             </div>
                                                         </v-card-title>
                                                         <v-divider></v-divider>
@@ -172,11 +170,11 @@
                                                             </v-list-tile>
                                                         </v-list>
                                                         <v-divider></v-divider>
-                                                        <v-card-title v-if="layer.copyright">
+                                                        <v-card-title v-if="subLayer.copyright">
                                                             <div>
                                                                 <div class="mb-1 grey--text caption">{{i18n.copyright}}
                                                                 </div>
-                                                                <span class="grey--text caption">{{layer.copyright}}</span>
+                                                                <span class="grey--text caption">{{subLayer.copyright}}</span>
                                                             </div>
                                                         </v-card-title>
                                                         <!--<v-card-text>
@@ -206,24 +204,23 @@
                                             </v-list-tile-content>
                                             <v-list-tile-action @click.prevent.stop>
                                                 <v-menu bottom left max-width="400" transition="slide-y-transition"
-                                                        :close-on-content-click="false" :close-on-click="false"
+                                                        :close-on-content-click="false" :close-on-click="true"
                                                         v-model="layerArray[subLayer.layerCount].menuVisibility">
                                                     <v-btn icon slot="activator" @click="closeAllMenus">
                                                         <v-icon>more_vert</v-icon>
                                                     </v-btn>
                                                     <v-card>
                                                         <v-toolbar light dense>
-                                                            <v-toolbar-title>{{layer.title}}</v-toolbar-title>
+                                                            <v-toolbar-title>{{subLayer.title}}</v-toolbar-title>
                                                             <v-spacer></v-spacer>
                                                             <v-btn icon
                                                                    @click="layerArray[subLayer.layerCount].menuVisibility=false">
                                                                 <v-icon>close</v-icon>
                                                             </v-btn>
                                                         </v-toolbar>
-                                                        <v-card-title v-if="layer.description">
+                                                        <v-card-title v-if="subLayer.description">
                                                             <div>
-                                                                <div class="mb-1 title">{{i18n.description}}</div>
-                                                                <span class="regular">{{layer.description}}</span>
+                                                                <span class="regular">{{subLayer.description}}</span>
                                                             </div>
                                                         </v-card-title>
                                                         <v-divider></v-divider>
@@ -237,11 +234,11 @@
                                                             </v-list-tile>
                                                         </v-list>
                                                         <v-divider></v-divider>
-                                                        <v-card-title v-if="layer.copyright">
+                                                        <v-card-title v-if="subLayer.copyright">
                                                             <div>
                                                                 <div class="mb-1 grey--text caption">{{i18n.copyright}}
                                                                 </div>
-                                                                <span class="grey--text caption">{{layer.copyright}}</span>
+                                                                <span class="grey--text caption">{{subLayer.copyright}}</span>
                                                             </div>
                                                         </v-card-title>
                                                         <!--<v-card-text>
