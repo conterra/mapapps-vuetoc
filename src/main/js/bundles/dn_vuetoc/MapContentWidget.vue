@@ -63,8 +63,7 @@
                             <v-list>
                                 <v-list-group v-for="layer in reverseArray(layers)" v-bind:key="layer.id"
                                               v-bind:value=layerArray[layer.layerCount].visible>
-                                    <v-list-tile slot="item"
-                                                 @click="">
+                                    <v-list-tile slot="item" @click="">
                                         <v-list-tile-action @click.prevent.stop>
                                             <v-switch
                                                     color="primary"
@@ -133,10 +132,12 @@
                                                         color="primary"
                                                         v-model=layerArray[subLayer.layerCount].visible></v-switch>
                                             </v-list-tile-action>
-                                            <v-list-tile-action v-if="showLegend">
+                                            <v-list-tile-action v-if="showLegend"
+                                                                @click="layerArray[subLayer.layerCount].visible = !layerArray[subLayer.layerCount].visible">
                                                 <img v-bind:src="getLegend(subLayer.url, subLayer.id)"/>
                                             </v-list-tile-action>
-                                            <v-list-tile-content>
+                                            <v-list-tile-content
+                                                    @click="layerArray[subLayer.layerCount].visible = !layerArray[subLayer.layerCount].visible">
                                                 <v-list-tile-title v-text="subLayer.title"></v-list-tile-title>
                                             </v-list-tile-content>
                                             <v-list-tile-action @click.prevent.stop>
@@ -197,10 +198,12 @@
                                                         color="primary"
                                                         v-model=layerArray[subLayer.layerCount].visible></v-switch>
                                             </v-list-tile-action>
-                                            <v-list-tile-action>
+                                            <v-list-tile-action v-if="showLegend"
+                                                                @click="layerArray[subLayer.layerCount].visible = !layerArray[subLayer.layerCount].visible">
                                                 <img v-bind:src="getLegend(subLayer.url, subLayer.id)"/>
                                             </v-list-tile-action>
-                                            <v-list-tile-content>
+                                            <v-list-tile-content
+                                                    @click="layerArray[subLayer.layerCount].visible = !layerArray[subLayer.layerCount].visible">
                                                 <v-list-tile-title v-text="subLayer.title"></v-list-tile-title>
                                             </v-list-tile-content>
                                             <v-list-tile-action @click.prevent.stop>
