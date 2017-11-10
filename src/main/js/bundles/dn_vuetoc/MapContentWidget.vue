@@ -123,8 +123,8 @@
                                             <v-icon>keyboard_arrow_down</v-icon>
                                         </v-list-tile-action>
                                     </v-list-tile>
-                                    <div v-if="layer.sublayers && layer.sublayers.items">
-                                        <v-list-tile v-for="subLayer in reverseArray(layer.sublayers.items)"
+                                    <div v-if="(layer.sublayers && layer.sublayers.items) || (layer.layers && layer.layers.items)">
+                                        <v-list-tile v-for="subLayer in reverseArray((layer.sublayers && layer.sublayers.items) || (layer.layers && layer.layers.items))"
                                                      v-bind:key="subLayer.id"
                                                      @click.prevent.stop>
                                             <v-list-tile-action @click.prevent.stop>
@@ -132,73 +132,7 @@
                                                         color="primary"
                                                         v-model=layerArray[subLayer.layerCount].visible></v-switch>
                                             </v-list-tile-action>
-                                            <v-list-tile-action v-if="showLegend"
-                                                                @click="layerArray[subLayer.layerCount].visible = !layerArray[subLayer.layerCount].visible">
-                                                <img v-bind:src="getLegend(subLayer.url, subLayer.id)"/>
-                                            </v-list-tile-action>
-                                            <v-list-tile-content
-                                                    @click="layerArray[subLayer.layerCount].visible = !layerArray[subLayer.layerCount].visible">
-                                                <v-list-tile-title v-text="subLayer.title"></v-list-tile-title>
-                                            </v-list-tile-content>
-                                            <v-list-tile-action @click.prevent.stop>
-                                                <v-menu bottom left max-width="400" transition="slide-y-transition"
-                                                        :close-on-content-click="false" :close-on-click="true"
-                                                        v-model="layerArray[subLayer.layerCount].menuVisibility">
-                                                    <v-btn icon slot="activator" @click="closeAllMenus">
-                                                        <v-icon>more_vert</v-icon>
-                                                    </v-btn>
-                                                    <v-card>
-                                                        <v-toolbar light dense>
-                                                            <v-toolbar-title>{{subLayer.title}}</v-toolbar-title>
-                                                            <v-spacer></v-spacer>
-                                                            <v-btn icon
-                                                                   @click="layerArray[subLayer.layerCount].menuVisibility=false">
-                                                                <v-icon>close</v-icon>
-                                                            </v-btn>
-                                                        </v-toolbar>
-                                                        <v-card-title v-if="subLayer.description">
-                                                            <div>
-                                                                <span class="regular">{{subLayer.description}}</span>
-                                                            </div>
-                                                        </v-card-title>
-                                                        <v-divider></v-divider>
-                                                        <v-list>
-                                                            <v-list-tile @click="zoomToExtent(layer)">
-                                                                <v-list-tile-action>
-                                                                    <v-icon primary>search</v-icon>
-                                                                </v-list-tile-action>
-                                                                <v-list-tile-title>{{i18n.zoomToExtent}}
-                                                                </v-list-tile-title>
-                                                            </v-list-tile>
-                                                        </v-list>
-                                                        <v-divider></v-divider>
-                                                        <v-card-title v-if="subLayer.copyright">
-                                                            <div>
-                                                                <div class="mb-1 grey--text caption">{{i18n.copyright}}
-                                                                </div>
-                                                                <span class="grey--text caption">{{subLayer.copyright}}</span>
-                                                            </div>
-                                                        </v-card-title>
-                                                        <!--<v-card-text>
-                                                            Transparenz einstellen:
-                                                            <v-slider v-model="layer.opacity" thumb-label v-bind:min="0"
-                                                                      v-bind:max="1"></v-slider>
-                                                        </v-card-text>-->
-                                                    </v-card>
-                                                </v-menu>
-                                            </v-list-tile-action>
-                                        </v-list-tile>
-                                    </div>
-                                    <div v-if="layer.layers && layer.layers.items">
-                                        <v-list-tile v-for="subLayer in reverseArray(layer.layers.items)"
-                                                     v-bind:key="subLayer.id"
-                                                     @click.prevent.stop>
-                                            <v-list-tile-action @click.prevent.stop>
-                                                <v-switch
-                                                        color="primary"
-                                                        v-model=layerArray[subLayer.layerCount].visible></v-switch>
-                                            </v-list-tile-action>
-                                            <v-list-tile-action v-if="showLegend"
+                                            <v-list-tile-action v-if="showLegend && layer.legendEnabled"
                                                                 @click="layerArray[subLayer.layerCount].visible = !layerArray[subLayer.layerCount].visible">
                                                 <img v-bind:src="getLegend(subLayer.url, subLayer.id)"/>
                                             </v-list-tile-action>
