@@ -61,7 +61,8 @@
                                 </v-menu>
                             </v-toolbar>
                             <v-list>
-                                <v-list-group v-for="layer in reverseArray(layers)" v-bind:key="layer.id">
+                                <v-list-group v-for="layer in reverseArray(layers)" v-bind:key="layer.id"
+                                              v-bind:value=layerArray[layer.layerCount].visible>
                                     <v-list-tile slot="item"
                                                  @click="">
                                         <v-list-tile-action @click.prevent.stop>
