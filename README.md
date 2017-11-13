@@ -16,7 +16,7 @@ Simply add the bundle "dn_vuetoc" to your map.apps 4 app.
 
 #### Configurable Components of dn_querybuilder:
 
-##### QueryBuilderProperties:
+##### MapContentWidgetFactory:
 ```
 "MapContentWidgetFactory": {
     "showBasemaps": true,
