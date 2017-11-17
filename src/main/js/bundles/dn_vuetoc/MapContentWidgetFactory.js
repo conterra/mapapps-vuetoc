@@ -90,9 +90,7 @@ class MapContentWidgetFactory {
                 .bindTo(vm, basemapModel)
                 .syncAll("selectedId", "layerArray", "legendArray")
                 .enable();
-        }.bind(this)
-    )
-        ;
+        });
     }
 
     waitForLayers(layers) {
