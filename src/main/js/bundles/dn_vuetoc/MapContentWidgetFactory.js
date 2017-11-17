@@ -45,13 +45,14 @@ class MapContentWidgetFactory {
         let map = mapWidgetModel.get("map");
         let layers = map.get("layers");
         this.waitForLayers(layers).then(() => {
-            let layerArray = MapContentWidgetFactory.createLayerArray(layers);
+            let layerArray = this.createLayerArray(layers);
             this.createLegendArray(layers, vm);
 
             // save default values to allow reset of map content
             this.defaultLayerArray = JSON.parse(JSON.stringify(layerArray));
             this.defaultSelectedId = basemapModel.selectedId;
 
+            vm.layers = layers.items;
             vm.layerArray = layerArray;
             vm.showBasemaps = properties.showBasemaps;
             vm.showOperationalLayer = properties.showOperationalLayer;
@@ -73,17 +74,6 @@ class MapContentWidgetFactory {
                     "easing": "ease-in-out"
                 });
             });
-
-            let flattenLayers = layers.flatten((item) => {
-                return item.layers || item.sublayers;
-            });
-            flattenLayers.forEach((layer) => {
-                layer.watch("visible", () => {
-                    vm.layerArray = MapContentWidgetFactory.createLayerArray(layers)
-                });
-                layer.menu = false;
-            });
-            vm.layers = layers.items;
 
             Binding
                 .create()
@@ -109,7 +99,7 @@ class MapContentWidgetFactory {
         return VueDijit(this.mapContentComponent);
     }
 
-    static createLayerArray(layers) {
+    createLayerArray(layers) {
         let flattenLayers = layers.flatten((item) => {
             return item.layers || item.sublayers;
         });
