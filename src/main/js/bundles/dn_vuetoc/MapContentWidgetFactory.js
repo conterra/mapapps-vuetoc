@@ -44,8 +44,8 @@ class MapContentWidgetFactory {
         vm.selectedId = basemapModel.selectedId;
         let map = mapWidgetModel.get("map");
         let layers = map.get("layers");
-        this.waitForLayers(layers).then(function () {
-            let layerArray = this.createLayerArray(layers);
+        this.waitForLayers(layers).then(() => {
+            let layerArray = MapContentWidgetFactory.createLayerArray(layers);
             this.createLegendArray(layers, vm);
 
             // save default values to allow reset of map content
@@ -74,23 +74,12 @@ class MapContentWidgetFactory {
                 });
             });
 
-            let that = this;
-            layers.forEach(function (layer) {
-                if (layer.sublayers && layer.sublayers.items) {
-                    layer.sublayers.forEach(function (sublayer) {
-                        sublayer.watch("visible", (event) => {
-                            vm.layerArray = that.createLayerArray(layers)
-                        });
-                    });
-                } else if (layer.layers && layer.layers.items) {
-                    layer.layers.forEach(function (sublayer) {
-                        sublayer.watch("visible", (event) => {
-                            vm.layerArray = that.createLayerArray(layers)
-                        });
-                    });
-                }
-                layer.watch("visible", (event) => {
-                    vm.layerArray = that.createLayerArray(layers)
+            let flattenLayers = layers.flatten((item) => {
+                return item.layers || item.sublayers;
+            });
+            flattenLayers.forEach((layer) => {
+                layer.watch("visible", () => {
+                    vm.layerArray = MapContentWidgetFactory.createLayerArray(layers)
                 });
                 layer.menu = false;
             });
@@ -101,12 +90,14 @@ class MapContentWidgetFactory {
                 .bindTo(vm, basemapModel)
                 .syncAll("selectedId", "layerArray", "legendArray")
                 .enable();
-        }.bind(this));
+        }.bind(this)
+    )
+        ;
     }
 
     waitForLayers(layers) {
         let promises = [];
-        layers.forEach(function (layer) {
+        layers.forEach((layer) => {
             promises.push(new Promise(resolve => {
                 layer.watch("loaded", () => {
                     resolve(this);
@@ -120,45 +111,28 @@ class MapContentWidgetFactory {
         return VueDijit(this.mapContentComponent);
     }
 
-    createLayerArray(layers) {
-        let layerCount = 0;
-        let layerArray = [];
-        layers.forEach(function (layer) {
-            layerArray[layerCount] = {
-                visible: layer.visible,
+    static createLayerArray(layers) {
+        let flattenLayers = layers.flatten((item) => {
+            return item.layers || item.sublayers;
+        });
+        let layerArray = flattenLayers.map((item) => {
+            return {
+                visible: item.visible,
                 menuVisibility: false
             };
-            layer.layerCount = layerCount;
-            layerCount++;
-            if (layer.sublayers && layer.sublayers.items) {
-                layer.sublayers.forEach(function (sublayer) {
-                    layerArray[layerCount] = {
-                        visible: sublayer.visible,
-                        menuVisibility: false
-                    };
-                    sublayer.layerCount = layerCount;
-                    layerCount++;
-                });
-            } else if (layer.layers && layer.layers.items) {
-                layer.layers.forEach(function (sublayer) {
-                    layerArray[layerCount] = {
-                        visible: sublayer.visible,
-                        menuVisibility: false
-                    };
-                    sublayer.layerCount = layerCount;
-                    layerCount++;
-                });
-            }
         });
-        return layerArray;
+        flattenLayers.forEach((layer, i) => {
+            layer.layerCount = i;
+        });
+        return layerArray.items;
     }
 
     createLegendArray(layers, vm) {
-        layers.forEach(function (layer) {
+        layers.forEach((layer) => {
             let legendUrl = layer.url + "/legend?f=pjson&dynamicLayers=[1]";
             ct_when(apprt_request(legendUrl, {
                 handleAs: "json"
-            }), function (results) {
+            }), (results) => {
                 results.layers.forEach((results) => {
                     vm.legendArray.push({
                         url: layer.url + "/" + results.layerId,
@@ -166,7 +140,7 @@ class MapContentWidgetFactory {
                         imageUrl: results.legend[0].url
                     })
                 });
-            }, function (e) {
+            }, (e) => {
             }, this);
         });
     }
