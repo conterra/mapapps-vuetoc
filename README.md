@@ -14,7 +14,7 @@ Installation Guide
 
 Simply add the bundle "dn_vuetoc" to your map.apps 4 app.
 
-#### Configurable Components of dn_querybuilder:
+#### Configurable Components of dn_vuetoc:
 
 ##### MapContentWidgetFactory:
 ```
