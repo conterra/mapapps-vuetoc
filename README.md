@@ -25,7 +25,7 @@ Simply add the bundle "dn_vuetoc" to your map.apps 4 app.
 }
 ```
 
-###### Configuration options
+###### Properties
 | Property                       | Type    | Possible Values                 | Default    | Description                       |
 |--------------------------------|---------|---------------------------------|------------|---------------------------------- |
 | showBasemaps                   | boolean | ```true``` &#124; ```false```   | ```true``` | Show basemaps in vuetoc           |
