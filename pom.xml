@@ -314,9 +314,7 @@
                                     <version>${mapapps.version}</version>
                                     <classifier>src</classifier>
                                     <outputDirectory>${project.build.directory}/unpacked</outputDirectory>
-                                    <includes>
-                                        bundles/base/themes/themes/winter/**,bundles/base/themes/themes/common/**,bundles/base/templates/templates/common/**
-                                    </includes>
+                                    <includes>layout/theme-everlasting/**,layout/theme-common/**</includes>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
