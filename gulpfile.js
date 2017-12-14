@@ -18,7 +18,7 @@ const run_sequence = require('run-sequence');
 const mapapps = require('ct-mapapps-gulp-js');
 
 mapapps.registerTasks({
-    themes: ["sample_theme"],
+    themes: [],
     hasBaseThemes: true,
     forceTranspile: true
 });
