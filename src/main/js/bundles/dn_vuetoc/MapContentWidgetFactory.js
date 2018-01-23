@@ -62,7 +62,7 @@ class MapContentWidgetFactory {
             // listen to view model methods
             vm.$on('close', () => tool.set("active", false));
             vm.$on('reset', () => {
-                vm.layerArray = this.defaultLayerArray;
+                vm.layerArray = JSON.parse(JSON.stringify(this.defaultLayerArray));
                 vm.selectedId = this.defaultSelectedId;
             });
             vm.$on('zoomToExtent', (layer) => {
