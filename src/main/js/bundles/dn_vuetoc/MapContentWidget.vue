@@ -200,12 +200,14 @@
                     <v-flex xs6>
                         <v-card class="elevation-6">
                             <v-btn v-if="isMobile" block
+                                   color="primary"
                                    @click.native="close"
                                    class="btn btn--block btn--raised theme--light">
                                 <v-icon left>arrow_back</v-icon>
                                 {{i18n.backToMap}}
                             </v-btn>
                             <v-btn v-else block
+                                   color="primary"
                                    @click.native="close"
                                    class="btn btn--block btn--raised theme--light">
                                 <v-icon left>arrow_back</v-icon>
@@ -216,6 +218,7 @@
                     <v-flex xs6>
                         <v-card class="elevation-6">
                             <v-btn block
+                                   color="primary"
                                    @click.native="reset"
                                    class="btn btn--block btn--raised theme--light">
                                 <v-icon left>settings_backup_restore</v-icon>
