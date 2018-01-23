@@ -28,3 +28,9 @@
 .ctAppRoot .vue-toc .bottom {
     flex: 0 0 auto;
 }
+
+
+.ctAppRoot .vue-toc .vue-toc__basemaps .list__tile:not(.list__tile--active),
+.ctAppRoot .vue-toc .vue-toc__basemaps .list__tile .icon{
+    color: inherit;
+}

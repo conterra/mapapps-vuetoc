@@ -27,7 +27,8 @@ module.exports = {
             description: "Description:",
             copyright: "Copyright:",
             activateAllLayer: "Activate all layer",
-            deactivateAllLayer: "Deactivate all layer"
+            deactivateAllLayer: "Deactivate all layer",
+            opacity: "Opacity"
         },
         tool: {
             title: "Map Content",

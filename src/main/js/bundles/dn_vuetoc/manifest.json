@@ -33,8 +33,6 @@
         "dockTool": "vueTocToggleTool",
         "dockable": true,
         "dockingBar": "${id}-dockingBarBottomLeft",
-        "minimizeOnClose": true,
-        "resizable": false,
         "marginBox": {
           "t": 40,
           "b": 40,
@@ -45,6 +43,15 @@
           "r": true,
           "b": true,
           "t": true
+        },
+        "minimizeOnClose": true,
+        "resizable": false,
+        "collapsable": true,
+        "collapseAxis": {
+          "l": true,
+          "r": false,
+          "t": false,
+          "b": false
         },
         "windowClass": "noTitleBarAndWindowTools noPadding vue-toc-window"
       }

@@ -106,6 +106,7 @@ class MapContentWidgetFactory {
         let layerArray = flattenLayers.map((item) => {
             return {
                 visible: item.visible,
+                opacity: item.opacity * 100,
                 menuVisibility: false
             };
         });
