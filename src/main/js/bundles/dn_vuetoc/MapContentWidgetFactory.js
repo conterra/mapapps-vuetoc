@@ -104,9 +104,10 @@ class MapContentWidgetFactory {
             return item.layers || item.sublayers;
         });
         let layerArray = flattenLayers.map((item) => {
+            let opacity = item.opacity ? item.opacity : 1;
             return {
                 visible: item.visible,
-                opacity: item.opacity * 100,
+                opacity: opacity,
                 menuVisibility: false
             };
         });

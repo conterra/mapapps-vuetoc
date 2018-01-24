@@ -44,45 +44,7 @@
                             <v-btn icon slot="activator" @click="$root.closeAllMenus">
                                 <v-icon>more_vert</v-icon>
                             </v-btn>
-                            <v-card>
-                                <v-toolbar dense>
-                                    <v-toolbar-title>{{layer.title}}</v-toolbar-title>
-                                    <v-spacer></v-spacer>
-                                    <v-btn icon
-                                           @click="$root.layerArray[layer.layerCount].menuVisibility=false">
-                                        <v-icon>close</v-icon>
-                                    </v-btn>
-                                </v-toolbar>
-                                <v-card-title v-if="layer.description">
-                                    <div>
-                                        <span class="regular">{{layer.description}}</span>
-                                    </div>
-                                </v-card-title>
-                                <v-divider></v-divider>
-                                <v-list>
-                                    <v-list-tile @click="$root.zoomToExtent(layer)">
-                                        <v-list-tile-action>
-                                            <v-icon primary>search</v-icon>
-                                        </v-list-tile-action>
-                                        <v-list-tile-title>{{i18n.zoomToExtent}}</v-list-tile-title>
-                                    </v-list-tile>
-                                </v-list>
-                                <v-divider></v-divider>
-                                <v-card-text>{{i18n.opacity}}
-                                    <v-slider v-model="$root.layerArray[layer.layerCount].opacity"
-                                              prepend-icon="opacity"
-                                              thumb-label v-bind:min="0" v-bind:max="1"
-                                              v-bind:step="0.01"></v-slider>
-                                </v-card-text>
-                                <v-divider></v-divider>
-                                <v-card-title v-if="layer.copyright">
-                                    <div>
-                                        <div class="mb-1 grey--text caption">{{i18n.copyright}}
-                                        </div>
-                                        <span class="grey--text caption">{{layer.copyright}}</span>
-                                    </div>
-                                </v-card-title>
-                            </v-card>
+                            <layer-menu v-bind:i18n="i18n" v-bind:layer="layer"/>
                         </v-menu>
                     </v-list-tile-action>
                     <v-list-tile-action
@@ -115,39 +77,7 @@
                                 <v-btn icon slot="activator" @click="$root.closeAllMenus">
                                     <v-icon>more_vert</v-icon>
                                 </v-btn>
-                                <v-card>
-                                    <v-toolbar dense>
-                                        <v-toolbar-title>{{subLayer.title}}</v-toolbar-title>
-                                        <v-spacer></v-spacer>
-                                        <v-btn icon
-                                               @click="$root.layerArray[subLayer.layerCount].menuVisibility=false">
-                                            <v-icon>close</v-icon>
-                                        </v-btn>
-                                    </v-toolbar>
-                                    <v-card-title v-if="subLayer.description">
-                                        <div>
-                                            <span class="regular">{{subLayer.description}}</span>
-                                        </div>
-                                    </v-card-title>
-                                    <v-divider></v-divider>
-                                    <v-list>
-                                        <v-list-tile @click="$root.zoomToExtent(layer)">
-                                            <v-list-tile-action>
-                                                <v-icon primary>search</v-icon>
-                                            </v-list-tile-action>
-                                            <v-list-tile-title>{{i18n.zoomToExtent}}
-                                            </v-list-tile-title>
-                                        </v-list-tile>
-                                    </v-list>
-                                    <v-divider></v-divider>
-                                    <v-card-title v-if="subLayer.copyright">
-                                        <div>
-                                            <div class="mb-1 grey--text caption">{{i18n.copyright}}
-                                            </div>
-                                            <span class="grey--text caption">{{subLayer.copyright}}</span>
-                                        </div>
-                                    </v-card-title>
-                                </v-card>
+                                <layer-menu v-bind:i18n="i18n" v-bind:layer="subLayer"/>
                             </v-menu>
                         </v-list-tile-action>
                     </v-list-tile>
@@ -158,7 +88,12 @@
 </template>
 
 <script>
+    import LayerMenu from "./LayerMenu.vue";
+
     export default {
+        components: {
+            "layer-menu": LayerMenu
+        },
         props: [
             "i18n"
         ]
