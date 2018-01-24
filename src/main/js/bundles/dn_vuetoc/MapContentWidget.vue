@@ -98,7 +98,6 @@
                             layers.forEach((layer) => {
                                     if (layer.layerCount === parseInt(id)) {
                                         layer.visible = visible;
-                                        layer.opacity = opacity;
                                         /*if (layer.sublayers && layer.sublayers.items) {
                                             layer.sublayers.forEach(function (sublayer) {
                                                 sublayer.visible = true;
@@ -113,7 +112,6 @@
                                         layer.sublayers.forEach((sublayer) => {
                                             if (sublayer.layerCount === parseInt(id)) {
                                                 sublayer.visible = visible;
-                                                sublayer.opacity = opacity;
                                                 if (visible) {
                                                     sublayer.parent.visible = true;
                                                 }
@@ -123,7 +121,6 @@
                                         layer.layers.forEach((sublayer) => {
                                             if (sublayer.layerCount === parseInt(id)) {
                                                 sublayer.visible = visible;
-                                                sublayer.opacity = opacity;
                                                 if (visible) {
                                                     sublayer.parent.visible = true;
                                                 }
@@ -132,7 +129,8 @@
                                     }
                                 }
                             );
-                        } else if (opacity !== oldOpacity && this.oldLayerArray) {
+                        }
+                        if (opacity !== oldOpacity && this.oldLayerArray) {
                             layers.forEach((layer) => {
                                     if (layer.layerCount === parseInt(id)) {
                                         layer.opacity = opacity;
