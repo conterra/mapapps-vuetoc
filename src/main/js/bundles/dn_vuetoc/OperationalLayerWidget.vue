@@ -25,16 +25,17 @@
                 </v-list>
             </v-menu>
         </v-toolbar>
-        <v-list>
-            <v-list-group v-for="layer in $root.reverseArray($root.layers)" v-bind:key="layer.id"
-                          v-bind:value=$root.layerArray[layer.layerCount].visible>
-                <v-list-tile slot="item" @click="">
+        <v-list v-for="layer in $root.reverseArray($root.layers)" v-bind:key="layer.id" class="pa-0">
+            <v-list-group v-bind:value=$root.layerArray[layer.layerCount].visible>
+                <v-list-tile slot="item">
                     <v-list-tile-action @click.prevent.stop>
                         <v-switch
                                 color="primary"
                                 v-model=$root.layerArray[layer.layerCount].visible></v-switch>
                     </v-list-tile-action>
-                    <v-list-tile-content>
+                    <v-list-tile-content
+                            @click.prevent.stop
+                            @click="$root.layerArray[layer.layerCount].visible = !$root.layerArray[layer.layerCount].visible">
                         <v-list-tile-title v-text="layer.title"></v-list-tile-title>
                     </v-list-tile-content>
                     <v-list-tile-action @click.prevent.stop>
