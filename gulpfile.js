@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 con terra GmbH (info@conterra.de)
+ * Copyright (C) 2018 con terra GmbH (info@conterra.de)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,15 @@ const run_sequence = require('run-sequence');
 const mapapps = require('ct-mapapps-gulp-js');
 
 mapapps.registerTasks({
-    themes: [],
+    themes: [/*sample_theme*/],
+    hasVuetify: true,
     hasBaseThemes: true,
-    forceTranspile: true
+    forceTranspile: true/*,
+    themeChangeTargets:{
+        "vuetify":[
+            "sample_theme"
+        ]
+    }*/
 });
 
 gulp.task("default", function(callback) {
