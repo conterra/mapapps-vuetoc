@@ -23,6 +23,7 @@
       "theme-autumn",
       "map-init",
       "toolset",
+      "mapnavigation",
       "dn_vuetoc"
     ],
     "require": [
@@ -483,7 +484,10 @@
           {
             "id": "mapview_tools",
             "tools": [
-              "*"
+              "zoomInTool",
+              "zoomOutTool",
+              "compassTool",
+              "restoreInitialViewTool"
             ],
             "registerWidget": {
               "widgetRole": "mapview_tools"
