@@ -85,7 +85,8 @@
           {
             "id": "streets",
             "title": "${map.basemaps.streets}",
-            "basemap": "streets"
+            "basemap": "streets",
+            "selected": true
           },
           {
             "id": "topo",
