@@ -92,64 +92,67 @@
                     for (let id in val) {
                         let visible = val[id].visible;
                         let opacity = val[id].opacity;
-                        let oldVisible = this.oldLayerArray && this.oldLayerArray[id].visible;
-                        let oldOpacity = this.oldLayerArray && this.oldLayerArray[id].opacity;
-                        if (visible !== oldVisible && this.oldLayerArray) {
-                            layers.forEach((layer) => {
-                                    if (layer.layerCount === parseInt(id)) {
-                                        layer.visible = visible;
-                                        /*if (layer.sublayers && layer.sublayers.items) {
-                                            layer.sublayers.forEach(function (sublayer) {
-                                                sublayer.visible = true;
+                        let oldVisible, oldOpacity;
+                        if (this.oldLayerArray && this.oldLayerArray[id]) {
+                            oldVisible = this.oldLayerArray[id].visible;
+                            oldOpacity = this.oldLayerArray[id].opacity;
+                            if (visible !== oldVisible) {
+                                layers.forEach((layer) => {
+                                        if (layer.layerCount === parseInt(id)) {
+                                            layer.visible = visible;
+                                            /*if (layer.sublayers && layer.sublayers.items) {
+                                                layer.sublayers.forEach(function (sublayer) {
+                                                    sublayer.visible = true;
+                                                });
+                                            } else if (layer.layers && layer.layers.items) {
+                                                layer.layers.forEach(function (sublayer) {
+                                                    sublayer.visible = true;
+                                                });
+                                            }*/
+                                        }
+                                        if (layer.sublayers && layer.sublayers.items) {
+                                            layer.sublayers.forEach((sublayer) => {
+                                                if (sublayer.layerCount === parseInt(id)) {
+                                                    sublayer.visible = visible;
+                                                    if (visible) {
+                                                        sublayer.parent.visible = true;
+                                                    }
+                                                }
                                             });
                                         } else if (layer.layers && layer.layers.items) {
-                                            layer.layers.forEach(function (sublayer) {
-                                                sublayer.visible = true;
+                                            layer.layers.forEach((sublayer) => {
+                                                if (sublayer.layerCount === parseInt(id)) {
+                                                    sublayer.visible = visible;
+                                                    if (visible) {
+                                                        sublayer.parent.visible = true;
+                                                    }
+                                                }
                                             });
-                                        }*/
+                                        }
                                     }
-                                    if (layer.sublayers && layer.sublayers.items) {
-                                        layer.sublayers.forEach((sublayer) => {
-                                            if (sublayer.layerCount === parseInt(id)) {
-                                                sublayer.visible = visible;
-                                                if (visible) {
-                                                    sublayer.parent.visible = true;
+                                );
+                            }
+                            if (opacity !== oldOpacity) {
+                                layers.forEach((layer) => {
+                                        if (layer.layerCount === parseInt(id)) {
+                                            layer.opacity = opacity;
+                                        }
+                                        if (layer.sublayers && layer.sublayers.items) {
+                                            layer.sublayers.forEach((sublayer) => {
+                                                if (sublayer.layerCount === parseInt(id)) {
+                                                    sublayer.opacity = opacity;
                                                 }
-                                            }
-                                        });
-                                    } else if (layer.layers && layer.layers.items) {
-                                        layer.layers.forEach((sublayer) => {
-                                            if (sublayer.layerCount === parseInt(id)) {
-                                                sublayer.visible = visible;
-                                                if (visible) {
-                                                    sublayer.parent.visible = true;
+                                            });
+                                        } else if (layer.layers && layer.layers.items) {
+                                            layer.layers.forEach((sublayer) => {
+                                                if (sublayer.layerCount === parseInt(id)) {
+                                                    sublayer.opacity = opacity;
                                                 }
-                                            }
-                                        });
+                                            });
+                                        }
                                     }
-                                }
-                            );
-                        }
-                        if (opacity !== oldOpacity && this.oldLayerArray) {
-                            layers.forEach((layer) => {
-                                    if (layer.layerCount === parseInt(id)) {
-                                        layer.opacity = opacity;
-                                    }
-                                    if (layer.sublayers && layer.sublayers.items) {
-                                        layer.sublayers.forEach((sublayer) => {
-                                            if (sublayer.layerCount === parseInt(id)) {
-                                                sublayer.opacity = opacity;
-                                            }
-                                        });
-                                    } else if (layer.layers && layer.layers.items) {
-                                        layer.layers.forEach((sublayer) => {
-                                            if (sublayer.layerCount === parseInt(id)) {
-                                                sublayer.opacity = opacity;
-                                            }
-                                        });
-                                    }
-                                }
-                            );
+                                );
+                            }
                         }
                     }
                     this.oldLayerArray = JSON.parse(JSON.stringify(val));

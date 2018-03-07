@@ -44,6 +44,45 @@ class MapContentWidgetFactory {
         vm.selectedId = basemapModel.selectedId;
         let map = mapWidgetModel.get("map");
         let layers = map.get("layers");
+
+        vm.showBasemaps = properties.showBasemaps;
+        vm.showOperationalLayer = properties.showOperationalLayer;
+        vm.showLegend = properties.showLegend;
+        vm.isMobile = isMobile;
+
+        // listen to view model methods
+        vm.$on('close', () => tool.set("active", false));
+        vm.$on('reset', () => {
+            vm.layerArray = JSON.parse(JSON.stringify(this.defaultLayerArray));
+            vm.selectedId = this.defaultSelectedId;
+        });
+        vm.$on('zoomToExtent', (layer) => {
+            let extent = layer.fullExtent || layer.layer.fullExtent;
+            let view = mapWidgetModel.get('view');
+            view.goTo({target: extent}, {
+                "animate": true,
+                "duration": 1000,
+                "easing": "ease-in-out"
+            });
+        });
+
+        Binding
+            .create()
+            .bindTo(vm, basemapModel)
+            .syncAll("selectedId", "layerArray", "legendArray")
+            .enable();
+
+        map.layers.on("change", (event) => {
+            let layerArray = this.createLayerArray(layers);
+            this.createLegendArray(layers, vm);
+
+            // save default values to allow reset of map content
+            this.defaultLayerArray = JSON.parse(JSON.stringify(layerArray));
+            this.defaultSelectedId = basemapModel.selectedId;
+
+            vm.layers = layers.items;
+            vm.layerArray = layerArray;
+        });
         this.waitForLayers(layers).then(() => {
             let layerArray = this.createLayerArray(layers);
             this.createLegendArray(layers, vm);
@@ -54,32 +93,6 @@ class MapContentWidgetFactory {
 
             vm.layers = layers.items;
             vm.layerArray = layerArray;
-            vm.showBasemaps = properties.showBasemaps;
-            vm.showOperationalLayer = properties.showOperationalLayer;
-            vm.showLegend = properties.showLegend;
-            vm.isMobile = isMobile;
-
-            // listen to view model methods
-            vm.$on('close', () => tool.set("active", false));
-            vm.$on('reset', () => {
-                vm.layerArray = JSON.parse(JSON.stringify(this.defaultLayerArray));
-                vm.selectedId = this.defaultSelectedId;
-            });
-            vm.$on('zoomToExtent', (layer) => {
-                let extent = layer.fullExtent || layer.layer.fullExtent;
-                let view = mapWidgetModel.get('view');
-                view.goTo({target: extent}, {
-                    "animate": true,
-                    "duration": 1000,
-                    "easing": "ease-in-out"
-                });
-            });
-
-            Binding
-                .create()
-                .bindTo(vm, basemapModel)
-                .syncAll("selectedId", "layerArray", "legendArray")
-                .enable();
         });
     }
 
@@ -123,13 +136,15 @@ class MapContentWidgetFactory {
             ct_when(apprt_request(legendUrl, {
                 handleAs: "json"
             }), (results) => {
-                results.layers.forEach((results) => {
-                    vm.legendArray.push({
-                        url: layer.url + "/" + results.layerId,
-                        title: results.layerName,
-                        imageUrl: results.legend[0].url
-                    })
-                });
+                if (results && results.layers) {
+                    results.layers.forEach((results) => {
+                        vm.legendArray.push({
+                            url: layer.url + "/" + results.layerId,
+                            title: results.layerName,
+                            imageUrl: results.legend[0].url
+                        })
+                    });
+                }
             }, (e) => {
             }, this);
         });

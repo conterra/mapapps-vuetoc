@@ -1,0 +1,129 @@
+{
+  "load": {
+    "bundleLocations": [
+      "localbundles",
+      "bundles"
+    ],
+    "allowedBundles": [
+      "system",
+      "splashscreen",
+      "templatelayout",
+      "template-seasons",
+      "theme-everlasting",
+      "toolset",
+      "map-init",
+      "banner",
+      "dn_vuetoc"
+    ]
+  },
+  "bundles": {
+    "banner": {
+      "BannerWidget": {
+        "label": "Developer Network",
+        "image": "https://www.conterra.de/~/media/conterra/images/site_logos/conterra-logo.ashx",
+        "imagePosition": "above",
+        "link": "http://developernetwork.conterra.de"
+      }
+    },
+    "map-init": {
+      "Config": {
+        "map": {
+          "basemap": "streets",
+          "layers": [
+            {
+              "id": "0",
+              "title": "0_USA",
+              "url": "https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer",
+              "visible": false,
+              "sublayers": [
+                {
+                  "id": 0,
+                  "definitionExpression": "pop2000 > 4000000"
+                },
+                {
+                  "id": 1
+                },
+                {
+                  "id": 2,
+                  "legendEnabled": false
+                },
+                {
+                  "id": 3,
+                  "visible": false
+                }
+              ],
+              "type": "AGS_DYNAMIC"
+            },
+            {
+              "id": "1_0",
+              "title": "1_0_CENSUS",
+              "url": "https://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer",
+              "type": "AGS_DYNAMIC",
+              "description": "This is a test description"
+            },
+            {
+              "id": "2",
+              "title": "2_GROUP",
+              "type": "GROUP",
+              "layers": [
+                {
+                  "id": "2_0",
+                  "title": "2_0_CITIES",
+                  "url": "https://sampleserver6.arcgisonline.com/arcgis/rest/services/SampleWorldCities/MapServer",
+                  "visible": false,
+                  "type": "AGS_DYNAMIC"
+                },
+                {
+                  "id": "2_1",
+                  "title": "2_1_GROUP",
+                  "type": "GROUP",
+                  "layers": [
+                    {
+                      "id": "2_1_2",
+                      "title": "2_1_2_DAMAGE",
+                      "url": "https://sampleserver6.arcgisonline.com/arcgis/rest/services/CommercialDamageAssessment/MapServer",
+                      "type": "AGS_DYNAMIC"
+                    }
+                  ]
+                },
+                {
+                  "id": "1_1",
+                  "title": "1_1_MILITARY",
+                  "url": "https://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/MapServer",
+                  "legendEnabled": false,
+                  "type": "AGS_DYNAMIC"
+                }
+              ]
+            },
+            {
+              "title": "Plants",
+              "type": "AGS_DYNAMIC",
+              "description": "Pflanzen",
+              "coverImage": "resource('${app}:/images/plants.png')",
+              "opacity": 0.5,
+              "url": "http://vsdev1477.esri-de.com:6080/arcgis/rest/services/platform_dev/grouplayer_plants/MapServer"
+            }
+          ]
+        },
+        "view": {
+          "viewmode": "2D",
+          "extent": {
+            "xmin": -9276006.978871629,
+            "xmax": -9257662.092083212,
+            "ymin": 5245403.351733481,
+            "ymax": 5255072.635811542,
+            "spatialReference": 3857
+          }
+        }
+      }
+    },
+    "themes": {
+      "ThemeModel": {
+        "_selectedTheme": "everlasting"
+      },
+      "ThemeSelector": {
+        "componentEnabled": true
+      }
+    }
+  }
+}
