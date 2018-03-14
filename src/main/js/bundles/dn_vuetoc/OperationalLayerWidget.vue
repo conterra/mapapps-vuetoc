@@ -26,7 +26,7 @@
             </v-menu>
         </v-toolbar>
         <v-list v-for="layer in $root.reverseArray($root.layers)" v-bind:key="layer.id" class="pa-0">
-            <v-list-group v-bind:value=$root.layerArray[layer.layerCount].visible>
+            <v-list-group v-if="$root.layerArray[layer.layerCount]" v-bind:value=$root.layerArray[layer.layerCount].visible>
                 <v-list-tile slot="item">
                     <v-list-tile-action @click.prevent.stop>
                         <v-switch

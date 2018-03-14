@@ -43,7 +43,6 @@ class MapContentWidgetFactory {
         vm.basemaps = basemapModel.basemaps;
         vm.selectedId = basemapModel.selectedId;
         let map = mapWidgetModel.get("map");
-        let layers = map.get("layers");
 
         vm.showBasemaps = properties.showBasemaps;
         vm.showOperationalLayer = properties.showOperationalLayer;
@@ -72,38 +71,32 @@ class MapContentWidgetFactory {
             .syncAll("selectedId", "layerArray", "legendArray")
             .enable();
 
-        map.layers.on("change", (event) => {
-            let layerArray = this.createLayerArray(layers);
-            this.createLegendArray(layers, vm);
+        map.allLayers.on("change", (event) => {
+            let layers = map.get("layers");
+            this.waitForLayers(layers).then(() => {
+                let layerArray = this.createLayerArray(layers);
+                this.createLegendArray(layers, vm);
 
-            // save default values to allow reset of map content
-            this.defaultLayerArray = JSON.parse(JSON.stringify(layerArray));
-            this.defaultSelectedId = basemapModel.selectedId;
+                // save default values to allow reset of map content
+                this.defaultLayerArray = JSON.parse(JSON.stringify(layerArray));
+                this.defaultSelectedId = basemapModel.selectedId;
 
-            vm.layers = layers.items;
-            vm.layerArray = layerArray;
-        });
-        this.waitForLayers(layers).then(() => {
-            let layerArray = this.createLayerArray(layers);
-            this.createLegendArray(layers, vm);
-
-            // save default values to allow reset of map content
-            this.defaultLayerArray = JSON.parse(JSON.stringify(layerArray));
-            this.defaultSelectedId = basemapModel.selectedId;
-
-            vm.layers = layers.items;
-            vm.layerArray = layerArray;
+                vm.layers = layers.items;
+                vm.layerArray = layerArray;
+            });
         });
     }
 
     waitForLayers(layers) {
         let promises = [];
         layers.forEach((layer) => {
-            promises.push(new Promise(resolve => {
-                layer.watch("loaded", () => {
-                    resolve(this);
-                });
-            }));
+            if (layer.loaded === false) {
+                promises.push(new Promise(resolve => {
+                    layer.watch("loaded", () => {
+                        resolve(this);
+                    });
+                }));
+            }
         });
         return Promise.all(promises);
     }
@@ -125,6 +118,9 @@ class MapContentWidgetFactory {
             };
         });
         flattenLayers.forEach((layer, i) => {
+            layer.watch("visible", () => {
+                this.mapContentComponent.layerArray = this.createLayerArray(layers);
+            });
             layer.layerCount = i;
         });
         return layerArray.items;
