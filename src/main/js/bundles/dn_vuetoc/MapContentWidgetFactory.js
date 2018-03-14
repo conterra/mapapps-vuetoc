@@ -28,6 +28,7 @@ class MapContentWidgetFactory {
         let isMobile = this.isMobile = envs.some((env) => {
             return env.name === "Mobile"
         });
+        this.saveDefaultValues = true;
         this._initComponent({
             mapWidgetModel: this._mapWidgetModel,
             basemapModel: this._basemapModel,
@@ -71,19 +72,29 @@ class MapContentWidgetFactory {
             .syncAll("selectedId", "layerArray", "legendArray")
             .enable();
 
+        this.initialize();
         map.allLayers.on("change", (event) => {
-            let layers = map.get("layers");
-            this.waitForLayers(layers).then(() => {
-                let layerArray = this.createLayerArray(layers);
-                this.createLegendArray(layers, vm);
+            this.initialize();
+        });
+    }
 
+    initialize(saveDefaultValues) {
+        let vm = this.mapContentComponent;
+        let map = this._mapWidgetModel.get("map");
+        let layers = map.get("layers");
+        this.waitForLayers(layers).then(() => {
+            let layerArray = this.createLayerArray(layers);
+            this.createLegendArray(layers, vm);
+
+            if (this.saveDefaultValues) {
                 // save default values to allow reset of map content
                 this.defaultLayerArray = JSON.parse(JSON.stringify(layerArray));
-                this.defaultSelectedId = basemapModel.selectedId;
+                this.defaultSelectedId = this._basemapModel.selectedId;
+                this.saveDefaultValues = false;
+            }
 
-                vm.layers = layers.items;
-                vm.layerArray = layerArray;
-            });
+            vm.layers = layers.items;
+            vm.layerArray = layerArray;
         });
     }
 
