@@ -17,10 +17,6 @@
     flex-direction: column;
 }
 
-.ctAppRoot .vue-toc .list--group .list__tile {
-    padding-left: 40px;
-}
-
 .ctAppRoot .vue-toc .center {
     flex: 1 1 auto;
 }
