@@ -25,19 +25,19 @@
                 </v-list>
             </v-menu>
         </v-toolbar>
-        <v-list v-for="layer in $root.reverseArray($root.layers)" v-if="$root.layerArray[layer.layerCount]"
+        <v-list v-for="layer in $root.reverseArray($root.layers)"
                 v-bind:key="layer.id" class="pa-0">
             <v-list-group v-if="(layer.sublayers && layer.sublayers.items) || (layer.layers && layer.layers.items)"
-                          no-action v-bind:value=$root.layerArray[layer.layerCount].visible>
+                          no-action v-bind:value=layer.visible>
                 <v-list-tile slot="activator">
                     <v-list-tile-action @click.prevent.stop>
                         <v-switch
                                 color="primary"
-                                v-model=$root.layerArray[layer.layerCount].visible></v-switch>
+                                v-model=layer.visible></v-switch>
                     </v-list-tile-action>
                     <v-list-tile-content
                             @click.prevent.stop
-                            @click="$root.layerArray[layer.layerCount].visible = !$root.layerArray[layer.layerCount].visible">
+                            @click="layer.visible = !layer.visible">
                         <v-list-tile-title v-text="layer.title"></v-list-tile-title>
                     </v-list-tile-content>
                     <v-list-tile-action @click.prevent.stop>
@@ -58,14 +58,14 @@
                     <v-list-tile-action @click.prevent.stop>
                         <v-switch
                                 color="primary"
-                                v-model=$root.layerArray[subLayer.layerCount].visible></v-switch>
+                                v-model=subLayer.visible></v-switch>
                     </v-list-tile-action>
                     <v-list-tile-action v-if="$root.showLegend && layer.legendEnabled"
-                                        @click="$root.layerArray[subLayer.layerCount].visible = !$root.layerArray[subLayer.layerCount].visible">
+                                        @click="subLayer.visible = !subLayer.visible">
                         <img v-bind:src="$root.getLegend(subLayer.url, subLayer.id)"/>
                     </v-list-tile-action>
                     <v-list-tile-content
-                            @click="$root.layerArray[subLayer.layerCount].visible = !$root.layerArray[subLayer.layerCount].visible">
+                            @click="subLayer.visible = !subLayer.visible">
                         <v-list-tile-title v-text="subLayer.title"></v-list-tile-title>
                     </v-list-tile-content>
                     <v-list-tile-action @click.prevent.stop>
@@ -80,16 +80,16 @@
                     </v-list-tile-action>
                 </v-list-tile>
             </v-list-group>
-            <v-list-group v-else no-action append-icon="" v-bind:value=$root.layerArray[layer.layerCount].visible>
+            <v-list-group v-else no-action append-icon="" v-bind:value=layer.visible>
                 <v-list-tile slot="activator">
                     <v-list-tile-action @click.prevent.stop>
                         <v-switch
                                 color="primary"
-                                v-model=$root.layerArray[layer.layerCount].visible></v-switch>
+                                v-model=layer.visible></v-switch>
                     </v-list-tile-action>
                     <v-list-tile-content
                             @click.prevent.stop
-                            @click="$root.layerArray[layer.layerCount].visible = !$root.layerArray[layer.layerCount].visible">
+                            @click="layer.visible = !layer.visible">
                         <v-list-tile-title v-text="layer.title"></v-list-tile-title>
                     </v-list-tile-content>
                     <v-list-tile-action @click.prevent.stop>
@@ -107,7 +107,6 @@
         </v-list>
     </v-card>
 </template>
-
 <script>
     import LayerMenu from "./LayerMenu.vue";
 

@@ -53,8 +53,13 @@ class MapContentWidgetFactory {
         // listen to view model methods
         vm.$on('close', () => tool.set("active", false));
         vm.$on('reset', () => {
-            vm.layerArray = JSON.parse(JSON.stringify(this.defaultLayerArray));
+            let defaultLayerArray = this.defaultLayerArray;
+            vm.layerArray = JSON.parse(JSON.stringify(defaultLayerArray));
             vm.selectedId = this.defaultSelectedId;
+
+            vm.layers.forEach((layer) => {
+                layer.visible = defaultLayerArray[layer.layerCount].visible;
+            });
         });
         vm.$on('zoomToExtent', (layer) => {
             let extent = layer.fullExtent || layer.layer.fullExtent;
@@ -78,7 +83,7 @@ class MapContentWidgetFactory {
         });
     }
 
-    initialize(saveDefaultValues) {
+    initialize() {
         let vm = this.mapContentComponent;
         let map = this._mapWidgetModel.get("map");
         let layers = map.get("layers");
@@ -93,7 +98,7 @@ class MapContentWidgetFactory {
                 this.saveDefaultValues = false;
             }
 
-            vm.layers = layers.items;
+            vm.layers = layers.toArray();
             vm.layerArray = layerArray;
         });
     }
@@ -121,20 +126,22 @@ class MapContentWidgetFactory {
             return item.layers || item.sublayers;
         });
         let layerArray = flattenLayers.map((item) => {
-            let opacity = item.opacity ? item.opacity : 1;
             return {
                 visible: item.visible,
-                opacity: opacity,
+                opacity: item.opacity ? item.opacity : 1,
                 menuVisibility: false
             };
         });
         flattenLayers.forEach((layer, i) => {
             layer.watch("visible", () => {
-                this.mapContentComponent.layerArray = this.createLayerArray(layers);
+                this.mapContentComponent.layers = layers.toArray();
             });
+            /*layer.watch("opacity", (value) => {
+                this.mapContentComponent.layers = layers.toArray();
+            });*/
             layer.layerCount = i;
         });
-        return layerArray.items;
+        return layerArray.toArray();
     }
 
     createLegendArray(layers, vm) {
