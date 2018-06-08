@@ -24,8 +24,8 @@
         <v-card-text>{{i18n.opacity}}
             <v-slider v-model="$root.layerArray[layer.layerCount].opacity"
                       prepend-icon="opacity"
-                      thumb-label v-bind:min="0" v-bind:max="1"
-                      v-bind:step="0.01"></v-slider>
+                      thumb-label min="0" :max="1"
+                      step="0.01"></v-slider>
         </v-card-text>
         <v-divider></v-divider>
         <v-card-title v-if="layer.copyright">
