@@ -82,6 +82,7 @@ class MapContentWidgetFactory {
         let vm = this.mapContentComponent;
         let map = this._mapWidgetModel.get("map");
         let layers = map.get("layers");
+
         this.waitForLayers(layers).then(() => {
             let layerArray = this.createLayerArray(layers);
             this.createLegendArray(layers, vm);
@@ -103,7 +104,7 @@ class MapContentWidgetFactory {
         layers.forEach((layer) => {
             if (layer.loaded === false) {
                 promises.push(new Promise(resolve => {
-                    layer.watch("loaded", () => {
+                    layer.when(() => {
                         resolve(this);
                     });
                 }));
