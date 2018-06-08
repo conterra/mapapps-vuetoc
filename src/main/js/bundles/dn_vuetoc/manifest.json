@@ -21,7 +21,6 @@
   "layout-widgets": [
     {
       "widgetRole": "mapContent",
-      "template": "seasons",
       "sublayout": [
         "desktop",
         "tablet_landscape",
@@ -50,7 +49,6 @@
     },
     {
       "widgetRole": "mapContent",
-      "template": "seasons",
       "sublayout": [
         "mobile_landscape",
         "mobile_portrait"
