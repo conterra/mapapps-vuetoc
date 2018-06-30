@@ -1,32 +1,12 @@
-.ctAppRoot .vue-toc-window .vue-base,
-.ctAppRoot .vue-toc {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+.ctAppRoot .vue-toc-window .vue-base {
+    height: 100%
 }
 
-.ctAppRoot .vue-toc {
-    overflow: hidden;
-}
-
-.ctAppRoot .vue-toc .center {
+.ctAppRoot .vue-toc-window .overflowAuto {
     overflow: auto;
 }
 
-.ctAppRoot .vue-toc .vue-toc__bottom-nav .btn .btn__content {
-    flex-direction: column;
-}
-
-.ctAppRoot .vue-toc .center {
-    flex: 1 1 auto;
-}
-
-.ctAppRoot .vue-toc .bottom {
-    flex: 0 0 auto;
-}
-
-
-.ctAppRoot .vue-toc .vue-toc__basemaps .list__tile:not(.list__tile--active),
-.ctAppRoot .vue-toc .vue-toc__basemaps .list__tile .icon{
+.ctAppRoot .vue-toc-window .vue-toc__basemaps .list__tile:not(.list__tile--active),
+.ctAppRoot .vue-toc-window .vue-toc__basemaps .list__tile .icon {
     color: inherit;
 }
