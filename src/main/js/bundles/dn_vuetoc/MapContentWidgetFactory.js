@@ -131,9 +131,11 @@ class MapContentWidgetFactory {
         flattenLayers.forEach((layer, i) => {
             layer.watch("visible", () => {
                 this.mapContentComponent.layers = layers.toArray();
+                this.mapContentComponent.layerArray = this.createLayerArray(layers);
             });
             layer.watch("opacity", (value) => {
                 this.mapContentComponent.layers = layers.toArray();
+                this.mapContentComponent.layerArray = this.createLayerArray(layers);
             });
             layer.layerCount = i;
         });
