@@ -21,7 +21,7 @@ import Promise from "apprt-core/Promise";
 import apprt_request from "apprt-request";
 import ct_when from "ct/_when";
 
-class MapContentWidgetFactory {
+export default class MapContentWidgetFactory {
 
     activate() {
         let envs = this._componentContext.getBundleContext().getCurrentExecutionEnvironment();
@@ -153,7 +153,7 @@ class MapContentWidgetFactory {
                         vm.legendArray.push({
                             url: layer.url + "/" + results.layerId,
                             title: results.layerName,
-                            imageUrl: results.legend[0].url
+                            imageUrl: results.legend && results.legend[0].url
                         })
                     });
                 }
@@ -162,5 +162,3 @@ class MapContentWidgetFactory {
         });
     }
 }
-
-module.exports = MapContentWidgetFactory;
