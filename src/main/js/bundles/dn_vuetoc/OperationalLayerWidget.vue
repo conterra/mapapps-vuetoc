@@ -52,6 +52,7 @@
                     </v-list-tile-action>
                 </v-list-tile>
                 <v-list-tile
+                    v-if="$root.layerArray[subLayer.layerCount]"
                     v-for="subLayer in $root.reverseArray((layer.sublayers && layer.sublayers.items) || (layer.layers && layer.layers.items))"
                     v-bind:key="subLayer.id"
                     @click.prevent.stop>

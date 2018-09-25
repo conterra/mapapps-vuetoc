@@ -29,6 +29,7 @@ export default class MapContentWidgetFactory {
             return env.name === "Mobile"
         });
         this.saveDefaultValues = true;
+        this._layerWatchers = [];
         this._initComponent({
             mapWidgetModel: this._mapWidgetModel,
             basemapModel: this._basemapModel,
@@ -39,7 +40,7 @@ export default class MapContentWidgetFactory {
     }
 
     _initComponent({basemapModel, mapWidgetModel, tool, properties, isMobile}) {
-        const vm = this.mapContentComponent = new Vue(MapContentWidget);
+        const vm = this.vm = new Vue(MapContentWidget);
         vm.i18n = this._i18n.get().ui;
         vm.basemaps = basemapModel.basemaps;
         vm.selectedId = basemapModel.selectedId;
@@ -69,7 +70,7 @@ export default class MapContentWidgetFactory {
         Binding
             .create()
             .bindTo(vm, basemapModel)
-            .syncAll("selectedId", "layerArray", "legendArray")
+            //.syncAll("selectedId", "layerArray", "legendArray")
             .enable();
 
         this.initialize();
@@ -79,42 +80,41 @@ export default class MapContentWidgetFactory {
     }
 
     initialize() {
-        let vm = this.mapContentComponent;
+        this.waitForLayers();
+        let vm = this.vm;
         let map = this._mapWidgetModel.get("map");
         let layers = map.get("layers");
 
-        this.waitForLayers(layers).then(() => {
-            let layerArray = this.createLayerArray(layers);
-            this.createLegendArray(layers, vm);
+        let layerArray = this.createLayerArray(layers);
+        this.createLegendArray(layers, vm);
 
-            if (this.saveDefaultValues) {
-                // save default values to allow reset of map content
-                this.defaultLayerArray = JSON.parse(JSON.stringify(layerArray));
-                this.defaultSelectedId = this._basemapModel.selectedId;
-                this.saveDefaultValues = false;
-            }
+        if (this.saveDefaultValues) {
+            // save default values to allow reset of map content
+            this.defaultLayerArray = JSON.parse(JSON.stringify(layerArray));
+            this.defaultSelectedId = this._basemapModel.selectedId;
+            this.saveDefaultValues = false;
+        }
 
-            vm.layers = layers.toArray();
-            vm.layerArray = layerArray;
-        });
+        vm.layers = layers.toArray();
+        vm.layerArray = layerArray;
     }
 
-    waitForLayers(layers) {
-        let promises = [];
+    waitForLayers() {
+        let map = this._mapWidgetModel.get("map");
+        let layers = map.get("layers");
         layers.forEach((layer) => {
             if (layer.loaded === false) {
-                promises.push(new Promise(resolve => {
-                    layer.when(() => {
-                        resolve(this);
-                    });
-                }));
+                layer.when((layer) => {
+                    this.initialize();
+                }, (error) => {
+                    this.initialize();
+                });
             }
         });
-        return Promise.all(promises);
     }
 
     createInstance() {
-        return VueDijit(this.mapContentComponent);
+        return VueDijit(this.vm);
     }
 
     createLayerArray(layers) {
@@ -123,20 +123,24 @@ export default class MapContentWidgetFactory {
         });
         let layerArray = flattenLayers.map((item) => {
             return {
-                visible: item.visible,
+                visible: item.visible === undefined ? false : item.visible,
                 opacity: item.opacity ? item.opacity : 1,
                 menuVisibility: false
             };
         });
+        this._layerWatchers.forEach((watcher) => {
+            watcher.remove();
+        });
+        this._layerWatchers = [];
         flattenLayers.forEach((layer, i) => {
-            layer.watch("visible", () => {
-                this.mapContentComponent.layers = layers.toArray();
-                this.mapContentComponent.layerArray = this.createLayerArray(layers);
-            });
-            layer.watch("opacity", (value) => {
-                this.mapContentComponent.layers = layers.toArray();
-                this.mapContentComponent.layerArray = this.createLayerArray(layers);
-            });
+            this._layerWatchers.push(layer.watch("visible", () => {
+                this.vm.layers = layers.toArray();
+                this.vm.layerArray = this.createLayerArray(layers);
+            }));
+            this._layerWatchers.push(layer.watch("opacity", () => {
+                this.vm.layers = layers.toArray();
+                this.vm.layerArray = this.createLayerArray(layers);
+            }));
             layer.layerCount = i;
         });
         return layerArray.toArray();
