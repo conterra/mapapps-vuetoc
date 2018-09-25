@@ -139,7 +139,7 @@ export default class MapContentWidgetFactory {
             }));
             this._layerWatchers.push(layer.watch("opacity", () => {
                 this.vm.layers = layers.toArray();
-                this.vm.layerArray = this.createLayerArray(layers);
+                //this.vm.layerArray = this.createLayerArray(layers);
             }));
             layer.layerCount = i;
         });
