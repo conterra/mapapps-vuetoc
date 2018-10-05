@@ -17,7 +17,6 @@ import MapContentWidget from "./MapContentWidget.vue";
 import Vue from "apprt-vue/Vue";
 import VueDijit from "apprt-vue/VueDijit";
 import Binding from "apprt-binding/Binding";
-import Promise from "apprt-core/Promise";
 import apprt_request from "apprt-request";
 import ct_when from "ct/_when";
 
@@ -70,7 +69,7 @@ export default class MapContentWidgetFactory {
         Binding
             .create()
             .bindTo(vm, basemapModel)
-            //.syncAll("selectedId", "layerArray", "legendArray")
+            .syncAll("selectedId", "layerArray", "legendArray")
             .enable();
 
         this.initialize();
