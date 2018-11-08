@@ -61,8 +61,9 @@
                             color="primary"
                             v-model=$root.layerArray[subLayer.layerCount].visible></v-switch>
                     </v-list-tile-action>
-                    <v-list-tile-action v-if="$root.showLegend && layer.legendEnabled"
-                                        @click="$root.layerArray[subLayer.layerCount].visible = !$root.layerArray[subLayer.layerCount].visible">
+                    <v-list-tile-action
+                        v-if="$root.showLegend && layer.legendEnabled && $root.getLegend(subLayer.url, subLayer.id)"
+                        @click="$root.layerArray[subLayer.layerCount].visible = !$root.layerArray[subLayer.layerCount].visible">
                         <img v-bind:src="$root.getLegend(subLayer.url, subLayer.id)"/>
                     </v-list-tile-action>
                     <v-list-tile-content

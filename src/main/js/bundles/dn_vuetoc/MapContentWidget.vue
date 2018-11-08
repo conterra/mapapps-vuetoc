@@ -114,7 +114,7 @@
                                             layer.sublayers.forEach((sublayer) => {
                                                 if (sublayer.layerCount === parseInt(id)) {
                                                     sublayer.visible = visible;
-                                                    if (visible) {
+                                                    if (visible && sublayer.parent) {
                                                         sublayer.parent.visible = true;
                                                     }
                                                 }
@@ -123,7 +123,7 @@
                                             layer.layers.forEach((sublayer) => {
                                                 if (sublayer.layerCount === parseInt(id)) {
                                                     sublayer.visible = visible;
-                                                    if (visible) {
+                                                    if (visible && sublayer.parent) {
                                                         sublayer.parent.visible = true;
                                                     }
                                                 }
