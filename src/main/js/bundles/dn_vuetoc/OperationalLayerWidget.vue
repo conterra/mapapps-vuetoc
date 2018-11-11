@@ -10,14 +10,14 @@
                 <v-list>
                     <v-list-tile @click="$root.enableAllLayers(true)">
                         <v-list-tile-action>
-                            <v-icon primary>visibility</v-icon>
+                            <v-icon primary>{{visibleIconClass}}</v-icon>
                         </v-list-tile-action>
                         <v-list-tile-title>{{i18n.activateAllLayer}}
                         </v-list-tile-title>
                     </v-list-tile>
                     <v-list-tile @click="$root.enableAllLayers(false)">
                         <v-list-tile-action>
-                            <v-icon primary>visibility_off</v-icon>
+                            <v-icon primary>{{invisibleIconClass}}</v-icon>
                         </v-list-tile-action>
                         <v-list-tile-title>{{i18n.deactivateAllLayer}}
                         </v-list-tile-title>
@@ -35,9 +35,9 @@
                     <v-list-tile slot="activator" :key="item.uid" :disabled="!item.visibleAtCurrentScale">
                         <v-list-tile-action @click.prevent.stop>
                             <v-btn icon @click="item.visible = !item.visible; $root.rerender()">
-                                <v-icon v-if="!item.visibleAtCurrentScale">visibility_off</v-icon>
-                                <v-icon v-else-if="item.visible">visibility</v-icon>
-                                <v-icon v-else="item.visible">visibility_off</v-icon>
+                                <v-icon v-if="!item.visibleAtCurrentScale">{{invisibleIconClass}}</v-icon>
+                                <v-icon v-else-if="item.visible">{{visibleIconClass}}</v-icon>
+                                <v-icon v-else="item.visible">{{invisibleIconClass}}</v-icon>
                             </v-btn>
                         </v-list-tile-action>
                         <v-list-tile-content
@@ -62,9 +62,9 @@
                         @click.prevent.stop>
                         <v-list-tile-action @click.prevent.stop>
                             <v-btn icon @click="children.visible = !children.visible; $root.rerender()">
-                                <v-icon v-if="!children.visibleAtCurrentScale">visibility_off</v-icon>
-                                <v-icon v-else-if="children.visible">visibility</v-icon>
-                                <v-icon v-else="children.visible">visibility_off</v-icon>
+                                <v-icon v-if="!children.visibleAtCurrentScale">{{invisibleIconClass}}</v-icon>
+                                <v-icon v-else-if="children.visible">{{visibleIconClass}}</v-icon>
+                                <v-icon v-else="children.visible">{{invisibleIconClass}}</v-icon>
                             </v-btn>
                         </v-list-tile-action>
                         <v-list-tile-action
@@ -92,9 +92,9 @@
                                  :disabled="!item.visibleAtCurrentScale">
                         <v-list-tile-action @click.prevent.stop>
                             <v-btn icon @click="item.visible = !item.visible; $root.rerender()">
-                                <v-icon v-if="!item.visibleAtCurrentScale">visibility_off</v-icon>
-                                <v-icon v-else-if="item.visible">visibility</v-icon>
-                                <v-icon v-else="item.visible">visibility_off</v-icon>
+                                <v-icon v-if="!item.visibleAtCurrentScale">{{invisibleIconClass}}</v-icon>
+                                <v-icon v-else-if="item.visible">{{visibleIconClass}}</v-icon>
+                                <v-icon v-else="item.visible">{{invisibleIconClass}}</v-icon>
                             </v-btn>
                         </v-list-tile-action>
                         <v-list-tile-content
@@ -125,7 +125,9 @@
             "layer-menu": LayerMenu
         },
         props: [
-            "i18n"
+            "i18n",
+            "visibleIconClass",
+            "invisibleIconClass"
         ]
     }
 </script>

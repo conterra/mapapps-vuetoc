@@ -19,17 +19,55 @@ Simply add the bundle "dn_vuetoc" to your map.apps 4 app.
     "showBasemaps": true,
     "showOperationalLayer": true,
     "showLegend": true,
-    "showLoadingStatus": true
+    "showLoadingStatus": true,
+    "visibleIconClass": "visibility",
+    "invisibleIconClass": "visibility_off"
 }
 ```
 
 ##### Properties
-| Property                       | Type    | Possible Values                 | Default    | Description                          |
-|--------------------------------|---------|---------------------------------|------------|--------------------------------------|
-| showBasemaps                   | boolean | ```true``` &#124; ```false```   | ```true``` | Show basemaps in vuetoc              |
-| showOperationalLayer           | boolean | ```true``` &#124; ```false```   | ```true``` | Show operational layers in vuetoc    |
-| showLegend                     | boolean | ```true``` &#124; ```false```   | ```true``` | Show legend in vuetoc                |
-| showLoadingStatus              | boolean | ```true``` &#124; ```false```   | ```true``` | Show current loading status of layer |
+| Property                       | Type    | Possible Values                 | Default                | Description                          |
+|--------------------------------|---------|---------------------------------|------------------------|--------------------------------------|
+| showBasemaps                   | boolean | ```true``` &#124; ```false```   | ```true```             | Show basemaps in vuetoc              |
+| showOperationalLayer           | boolean | ```true``` &#124; ```false```   | ```true```             | Show operational layers in vuetoc    |
+| showLegend                     | boolean | ```true``` &#124; ```false```   | ```true```             | Show legend in vuetoc                |
+| showLoadingStatus              | boolean | ```true``` &#124; ```false```   | ```true```             | Show current loading status of layer |
+| visibleIconClass               | String  |                                 | ```"visibility"```     | Visible icon class                   |
+| invisibleIconClass             | String  |                                 | ```"visibility_off"``` | Invisible icon class                 |
+
+##### Icon class samples
+Any material design icon class is possible: https://material.io/tools/icons/?icon=check_box_outline_blank&style=baseline
+
+```
+"MapContentWidgetFactory": {
+    "visibleIconClass": "visibility",
+    "invisibleIconClass": "visibility_off"
+}
+```
+```
+"MapContentWidgetFactory": {
+    "visibleIconClass": "check",
+    "invisibleIconClass": "close"
+}
+```
+```
+"MapContentWidgetFactory": {
+    "visibleIconClass": "check_box",
+    "invisibleIconClass": "check_box_outline_blank"
+}
+```
+```
+"MapContentWidgetFactory": {
+    "visibleIconClass": "radio_button_checked",
+    "invisibleIconClass": "radio_button_unchecked"
+}
+```
+```
+"MapContentWidgetFactory": {
+    "visibleIconClass": "thumb_up",
+    "invisibleIconClass": "thumb_down"
+}
+```
 
 ## Development Guide
 ### Define the mapapps remote base

@@ -42,6 +42,8 @@ export default class MapContentWidgetFactory {
         vm.showOperationalLayer = properties.showOperationalLayer;
         vm.showLegend = properties.showLegend;
         vm.showLoadingStatus = properties.showLoadingStatus;
+        vm.visibleIconClass = properties.visibleIconClass;
+        vm.invisibleIconClass = properties.invisibleIconClass;
         vm.isMobile = isMobile;
 
         // listen to view model methods

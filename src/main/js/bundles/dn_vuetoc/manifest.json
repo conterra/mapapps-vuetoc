@@ -80,7 +80,9 @@
                 "showBasemaps": true,
                 "showOperationalLayer": true,
                 "showLegend": true,
-                "showLoadingStatus": true
+                "showLoadingStatus": true,
+                "visibleIconClass": "visibility",
+                "invisibleIconClass": "visibility_off"
             },
             "references": [
                 {

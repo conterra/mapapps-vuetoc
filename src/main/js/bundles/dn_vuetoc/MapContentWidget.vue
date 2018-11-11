@@ -3,7 +3,9 @@
         <div class="ct-flex-item overflowAuto">
             <v-container grid-list-sm>
                 <baselayer-widget class="vue-toc__basemaps" :i18n="i18n" v-if="showBasemaps"/>
-                <operationallayer-widget class="vue-toc__layers" :i18n="i18n" v-if="showOperationalLayer"/>
+                <operationallayer-widget class="vue-toc__layers" :i18n="i18n" :visibleIconClass="visibleIconClass"
+                                         :invisibleIconClass="invisibleIconClass"
+                                         v-if="showOperationalLayer"/>
             </v-container>
         </div>
         <div class="ct-flex-item ct-flex-item--no-grow ct-flex-item--no-shrink">
@@ -67,6 +69,8 @@
                 showOperationalLayer: true,
                 showLegend: true,
                 showLoadingStatus: true,
+                visibleIconClass: "visibility",
+                invisibleIconClass: "visibility_off",
                 i18n: {
                     type: Object,
                     default: function () {
