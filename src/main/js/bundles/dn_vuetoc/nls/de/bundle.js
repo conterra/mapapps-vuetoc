@@ -25,8 +25,8 @@ module.exports = {
         zoomToExtent: "Auf Ausdehnung zoomen",
         description: "Beschreibung:",
         copyright: "Copyright:",
-        activateAllLayer: "Alle Layer aktivieren",
-        deactivateAllLayer: "Alle Layer deaktivieren",
+        activateAllLayer: "Alle Inhalte aktivieren",
+        deactivateAllLayer: "Alle Inhalte deaktivieren",
         opacity: "Transparenz"
     },
     tool: {

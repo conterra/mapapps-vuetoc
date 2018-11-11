@@ -57,8 +57,9 @@
         },
         data: function () {
             return {
-                layers: [],
-                layerArray: [],
+                renderComponent: true,
+                operationalItems: null,
+                opacityArray: [],
                 legendArray: [],
                 basemaps: [],
                 selectedId: "",
@@ -85,84 +86,23 @@
                 }
             };
         },
-        watch: {
-            layerArray: {
-                handler(val, oldVal) {
-                    let layers = this.$data.layers;
-                    for (let id in val) {
-                        let visible = val[id].visible;
-                        let opacity = val[id].opacity;
-                        let oldVisible, oldOpacity;
-                        if (this.oldLayerArray && this.oldLayerArray[id]) {
-                            oldVisible = this.oldLayerArray[id].visible;
-                            oldOpacity = this.oldLayerArray[id].opacity;
-                            if (visible !== oldVisible) {
-                                layers.forEach((layer) => {
-                                        if (layer.layerCount === parseInt(id)) {
-                                            layer.visible = visible;
-                                            /*if (layer.sublayers && layer.sublayers.items) {
-                                                layer.sublayers.forEach(function (sublayer) {
-                                                    sublayer.visible = true;
-                                                });
-                                            } else if (layer.layers && layer.layers.items) {
-                                                layer.layers.forEach(function (sublayer) {
-                                                    sublayer.visible = true;
-                                                });
-                                            }*/
-                                        }
-                                        if (layer.sublayers && layer.sublayers.items) {
-                                            layer.sublayers.forEach((sublayer) => {
-                                                if (sublayer.layerCount === parseInt(id)) {
-                                                    sublayer.visible = visible;
-                                                    if (visible && sublayer.parent) {
-                                                        sublayer.parent.visible = true;
-                                                    }
-                                                }
-                                            });
-                                        } else if (layer.layers && layer.layers.items) {
-                                            layer.layers.forEach((sublayer) => {
-                                                if (sublayer.layerCount === parseInt(id)) {
-                                                    sublayer.visible = visible;
-                                                    if (visible && sublayer.parent) {
-                                                        sublayer.parent.visible = true;
-                                                    }
-                                                }
-                                            });
-                                        }
-                                    }
-                                );
-                            }
-                            if (opacity !== oldOpacity) {
-                                layers.forEach((layer) => {
-                                        if (layer.layerCount === parseInt(id)) {
-                                            layer.opacity = opacity;
-                                        }
-                                        if (layer.sublayers && layer.sublayers.items) {
-                                            layer.sublayers.forEach((sublayer) => {
-                                                if (sublayer.layerCount === parseInt(id)) {
-                                                    sublayer.opacity = opacity;
-                                                }
-                                            });
-                                        } else if (layer.layers && layer.layers.items) {
-                                            layer.layers.forEach((sublayer) => {
-                                                if (sublayer.layerCount === parseInt(id)) {
-                                                    sublayer.opacity = opacity;
-                                                }
-                                            });
-                                        }
-                                    }
-                                );
-                            }
-                        }
-                    }
-                    this.oldLayerArray = JSON.parse(JSON.stringify(val));
-                },
-                deep: true
-            }
-        },
         methods: {
+            rerender: function () {
+                this.renderComponent = false;
+                this.$nextTick(() => {
+                    this.renderComponent = true;
+                });
+            },
             reverseArray: function (items) {
                 return items.slice().reverse();
+            },
+            onOpacitySliderChange: function (item, value) {
+                item.layer.set("opacity", value);
+            },
+            getOpacityValue: function (item) {
+                return this.opacityArray.find((opacity) => {
+                    return opacity.uid === item.uid;
+                });
             },
             close: function () {
                 this.$emit('close', {});
@@ -170,8 +110,11 @@
             reset: function () {
                 this.$emit('reset', {});
             },
-            zoomToExtent: function (layer) {
-                this.$emit('zoomToExtent', layer);
+            zoomToExtent: function (item) {
+                this.$emit('zoomToExtent', item);
+            },
+            enableAllLayers: function (value) {
+                this.$emit('enableAllLayers', value);
             },
             getLegend: function (url) {
                 let imageUrl = "";
@@ -181,16 +124,6 @@
                     }
                 });
                 return imageUrl;
-            },
-            closeAllMenus: function () {
-                this.layerArray.forEach((layer) => {
-                    layer.menuVisibility = false;
-                })
-            },
-            setLayerVisibility: function (status) {
-                this.layerArray.forEach((layer) => {
-                    layer.visible = status;
-                })
             }
         }
     };

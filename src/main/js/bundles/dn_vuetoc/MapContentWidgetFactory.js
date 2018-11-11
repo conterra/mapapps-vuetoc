@@ -18,7 +18,7 @@ import Vue from "apprt-vue/Vue";
 import VueDijit from "apprt-vue/VueDijit";
 import Binding from "apprt-binding/Binding";
 import apprt_request from "apprt-request";
-import ct_when from "ct/_when";
+import LayerListViewModel from "esri/widgets/LayerList/LayerListViewModel";
 
 export default class MapContentWidgetFactory {
 
@@ -27,24 +27,17 @@ export default class MapContentWidgetFactory {
         let isMobile = this.isMobile = envs.some((env) => {
             return env.name === "Mobile"
         });
-        this.saveDefaultValues = true;
-        this._layerWatchers = [];
-        this._initComponent({
-            mapWidgetModel: this._mapWidgetModel,
-            basemapModel: this._basemapModel,
-            tool: this._tool,
-            properties: this._properties,
-            isMobile: isMobile
-        });
-    }
+        let mapWidgetModel = this._mapWidgetModel;
+        let basemapModel = this._basemapModel;
+        let tool = this._tool;
+        let properties = this._properties;
 
-    _initComponent({basemapModel, mapWidgetModel, tool, properties, isMobile}) {
+
+        const defaultSelectedId = this._basemapModel.selectedId;
         const vm = this.vm = new Vue(MapContentWidget);
         vm.i18n = this._i18n.get().ui;
         vm.basemaps = basemapModel.basemaps;
         vm.selectedId = basemapModel.selectedId;
-        let map = mapWidgetModel.get("map");
-
         vm.showBasemaps = properties.showBasemaps;
         vm.showOperationalLayer = properties.showOperationalLayer;
         vm.showLegend = properties.showLegend;
@@ -53,10 +46,11 @@ export default class MapContentWidgetFactory {
         // listen to view model methods
         vm.$on('close', () => tool.set("active", false));
         vm.$on('reset', () => {
-            vm.layerArray = JSON.parse(JSON.stringify(this.defaultLayerArray));
-            vm.selectedId = this.defaultSelectedId;
+            this._resetLayerVisibility();
+            vm.selectedId = defaultSelectedId;
         });
-        vm.$on('zoomToExtent', (layer) => {
+        vm.$on('zoomToExtent', (item) => {
+            let layer = item.layer;
             let extent = layer.fullExtent || layer.layer.fullExtent;
             let view = mapWidgetModel.get('view');
             view.goTo({target: extent}, {
@@ -65,50 +59,25 @@ export default class MapContentWidgetFactory {
                 "easing": "ease-in-out"
             });
         });
+        vm.$on('enableAllLayers', (value) => {
+            this._enableAllLayers(value);
+        });
 
         Binding
             .create()
             .bindTo(vm, basemapModel)
-            .syncAll("selectedId", "layerArray", "legendArray")
+            .syncAll("selectedId", "operationalItems", "opacityArray", "legendArray")
             .enable();
 
-        this.initialize();
-        map.allLayers.on("change", (event) => {
-            this.initialize();
+        mapWidgetModel.watch("view", () => {
+            this._createLayerListViewModel(vm);
+            this._waitForLayers(vm);
         });
-    }
 
-    initialize() {
-        this.waitForLayers();
-        let vm = this.vm;
-        let map = this._mapWidgetModel.get("map");
-        let layers = map.get("layers");
-
-        let layerArray = this.createLayerArray(layers);
-        this.createLegendArray(layers, vm);
-
-        if (this.saveDefaultValues) {
-            // save default values to allow reset of map content
-            this.defaultLayerArray = JSON.parse(JSON.stringify(layerArray));
-            this.defaultSelectedId = this._basemapModel.selectedId;
-            this.saveDefaultValues = false;
-        }
-
-        vm.layers = layers.toArray();
-        vm.layerArray = layerArray;
-    }
-
-    waitForLayers() {
-        let map = this._mapWidgetModel.get("map");
-        let layers = map.get("layers");
-        layers.forEach((layer) => {
-            if (layer.loaded === false) {
-                layer.when((layer) => {
-                    this.initialize();
-                }, (error) => {
-                    this.initialize();
-                });
-            }
+        let map = mapWidgetModel.get("map");
+        map.allLayers.on("change", (event) => {
+            this._createLayerListViewModel(vm);
+            this._waitForLayers(vm);
         });
     }
 
@@ -116,41 +85,52 @@ export default class MapContentWidgetFactory {
         return VueDijit(this.vm);
     }
 
-    createLayerArray(layers) {
-        let flattenLayers = layers.flatten((item) => {
-            return item.layers || item.sublayers;
+    _createLayerListViewModel(vm) {
+        let view = this._mapWidgetModel.get("view");
+        let layerListViewModel = new LayerListViewModel({
+            view: view
         });
-        let layerArray = flattenLayers.map((item) => {
-            return {
-                visible: item.visible === undefined ? false : item.visible,
-                opacity: item.opacity ? item.opacity : 1,
-                menuVisibility: false
-            };
-        });
-        this._layerWatchers.forEach((watcher) => {
-            watcher.remove();
-        });
-        this._layerWatchers = [];
-        flattenLayers.forEach((layer, i) => {
-            this._layerWatchers.push(layer.watch("visible", () => {
-                this.vm.layers = layers.toArray();
-                this.vm.layerArray = this.createLayerArray(layers);
-            }));
-            this._layerWatchers.push(layer.watch("opacity", () => {
-                this.vm.layers = layers.toArray();
-                //this.vm.layerArray = this.createLayerArray(layers);
-            }));
-            layer.layerCount = i;
-        });
-        return layerArray.toArray();
+        layerListViewModel.listItemCreatedFunction = (event) => {
+            let item = event.item;
+            item.initialVisible = !!item.visible;
+            item.menuVisibility = false;
+        };
+        if (layerListViewModel.state === "ready") {
+            vm.operationalItems = layerListViewModel.operationalItems;
+            vm.rerender();
+        } else {
+            let watch = layerListViewModel.watch("state", (state) => {
+                watch.remove();
+                vm.operationalItems = layerListViewModel.operationalItems;
+                vm.rerender();
+            });
+        }
     }
 
-    createLegendArray(layers, vm) {
+    _createOpacityArray(vm) {
+        let opacityArray = [];
+        let operationalItems = vm.operationalItems;
+        let items = operationalItems.flatten((item) => {
+            return item.children;
+        });
+        items.forEach((item) => {
+            item.set("visible", item.initialVisible);
+            opacityArray.push({
+                uid: item.uid,
+                opacity: item.layer.opacity || 1
+            });
+        });
+        vm.opacityArray = opacityArray;
+    }
+
+    _createLegendArray(vm) {
+        let map = this._mapWidgetModel.get("map");
+        let layers = map.get("layers");
         layers.forEach((layer) => {
             let legendUrl = layer.url + "/legend?f=pjson&dynamicLayers=[1]";
-            ct_when(apprt_request(legendUrl, {
+            apprt_request(legendUrl, {
                 handleAs: "json"
-            }), (results) => {
+            }).then((results) => {
                 if (results && results.layers) {
                     results.layers.forEach((results) => {
                         vm.legendArray.push({
@@ -161,7 +141,46 @@ export default class MapContentWidgetFactory {
                     });
                 }
             }, (e) => {
-            }, this);
+                // push nothing
+            });
         });
+    }
+
+    _waitForLayers(vm) {
+        let map = this._mapWidgetModel.get("map");
+        let layers = map.get("layers");
+        layers.forEach((layer) => {
+            if (layer.loaded === false) {
+                layer.when((layer) => {
+                    this._createOpacityArray(vm);
+                    this._createLegendArray(vm);
+                }, (error) => {
+                    this._createOpacityArray(vm);
+                    this._createLegendArray(vm);
+                });
+            }
+        });
+    }
+
+    _resetLayerVisibility() {
+        let operationalItems = this.vm.operationalItems;
+        let items = operationalItems.flatten((item) => {
+            return item.children;
+        });
+        items.forEach((item) => {
+            item.set("visible", item.initialVisible);
+        });
+        this.vm.rerender();
+    }
+
+    _enableAllLayers(value) {
+        let operationalItems = this.vm.operationalItems;
+        let items = operationalItems.flatten((item) => {
+            return item.children;
+        });
+        items.forEach((item) => {
+            item.set("visible", value);
+        });
+        this.vm.rerender();
     }
 }
