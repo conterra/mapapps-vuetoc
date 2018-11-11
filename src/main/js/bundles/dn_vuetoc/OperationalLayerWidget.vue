@@ -4,7 +4,7 @@
             <v-toolbar-title>{{i18n.layers}}</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-menu bottom left max-width="300" offset-y="10" transition="slide-y-transition">
-                <v-btn icon slot="activator" @click="$root.closeAllMenus">
+                <v-btn icon slot="activator">
                     <v-icon>more_vert</v-icon>
                 </v-btn>
                 <v-list>
@@ -48,7 +48,7 @@
                         <v-list-tile-action @click.prevent.stop>
                             <v-menu bottom left max-width="300" offset-y="10" transition="slide-y-transition"
                                     :close-on-content-click="false" :close-on-click="true">
-                                <v-btn icon slot="activator" @click="$root.closeAllMenus">
+                                <v-btn icon slot="activator">
                                     <v-icon>more_vert</v-icon>
                                 </v-btn>
                                 <layer-menu :i18n="i18n" :item="item"/>
@@ -79,7 +79,7 @@
                         <v-list-tile-action @click.prevent.stop>
                             <v-menu bottom left max-width="300" offset-y="10" transition="slide-y-transition"
                                     :close-on-content-click="false" :close-on-click="true">
-                                <v-btn icon slot="activator" @click="$root.closeAllMenus">
+                                <v-btn icon slot="activator">
                                     <v-icon>more_vert</v-icon>
                                 </v-btn>
                                 <layer-menu :i18n="i18n" :item="children"/>
@@ -105,7 +105,7 @@
                         <v-list-tile-action @click.prevent.stop>
                             <v-menu bottom left max-width="300" offset-y="10" transition="slide-y-transition"
                                     :close-on-content-click="false" :close-on-click="true">
-                                <v-btn icon slot="activator" @click="$root.closeAllMenus">
+                                <v-btn icon slot="activator">
                                     <v-icon>more_vert</v-icon>
                                 </v-btn>
                                 <layer-menu :i18n="i18n" :item="item"/>
