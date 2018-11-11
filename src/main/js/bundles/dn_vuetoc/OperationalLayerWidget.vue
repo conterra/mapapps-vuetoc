@@ -1,6 +1,6 @@
 <template>
     <v-card class="elevation-6" v-if="$root.renderComponent">
-        <v-toolbar class="primary title" dense>
+        <v-toolbar class="primary title mb-1" dense>
             <v-toolbar-title>{{i18n.layers}}</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-menu bottom left max-width="300" offset-y="10" transition="slide-y-transition">
@@ -27,13 +27,16 @@
         </v-toolbar>
         <div v-if="$root.operationalItems">
             <v-list v-for="item in $root.reverseArray($root.operationalItems.toArray())"
-                    v-bind:key="item.uid" class="pa-0">
+                    :key="item.uid" class="pa-0">
+                <v-progress-linear v-if="$root.showLoadingStatus" :active="item.updating" :indeterminate="item.updating"
+                                   :height="1" class="ma-0"></v-progress-linear>
                 <v-list-group v-if="item.children.length"
                               no-action v-model=item.open>
-                    <v-list-tile slot="activator" v-bind:key="item.uid">
+                    <v-list-tile slot="activator" :key="item.uid" :disabled="!item.visibleAtCurrentScale">
                         <v-list-tile-action @click.prevent.stop>
                             <v-btn icon @click="item.visible = !item.visible; $root.rerender()">
-                                <v-icon v-if="item.visible">visibility</v-icon>
+                                <v-icon v-if="!item.visibleAtCurrentScale">visibility_off</v-icon>
+                                <v-icon v-else-if="item.visible">visibility</v-icon>
                                 <v-icon v-else="item.visible">visibility_off</v-icon>
                             </v-btn>
                         </v-list-tile-action>
@@ -48,24 +51,26 @@
                                 <v-btn icon slot="activator" @click="$root.closeAllMenus">
                                     <v-icon>more_vert</v-icon>
                                 </v-btn>
-                                <layer-menu v-bind:i18n="i18n" v-bind:item="item"/>
+                                <layer-menu :i18n="i18n" :item="item"/>
                             </v-menu>
                         </v-list-tile-action>
                     </v-list-tile>
                     <v-list-tile
                         v-for="children in $root.reverseArray(item.children.toArray())"
-                        v-bind:key="children.uid"
+                        :disabled="!children.visibleAtCurrentScale"
+                        :key="children.uid"
                         @click.prevent.stop>
                         <v-list-tile-action @click.prevent.stop>
                             <v-btn icon @click="children.visible = !children.visible; $root.rerender()">
-                                <v-icon v-if="children.visible">visibility</v-icon>
+                                <v-icon v-if="!children.visibleAtCurrentScale">visibility_off</v-icon>
+                                <v-icon v-else-if="children.visible">visibility</v-icon>
                                 <v-icon v-else="children.visible">visibility_off</v-icon>
                             </v-btn>
                         </v-list-tile-action>
                         <v-list-tile-action
                             v-if="$root.showLegend && $root.getLegend(children.layer.url, children.layer.id)"
                             @click="children.visible = !children.visible; $root.rerender()">
-                            <img v-bind:src="$root.getLegend(children.layer.url, children.layer.id)"/>
+                            <img :src="$root.getLegend(children.layer.url, children.layer.id)"/>
                         </v-list-tile-action>
                         <v-list-tile-content
                             @click="children.visible = !children.visible; $root.rerender()">
@@ -77,16 +82,18 @@
                                 <v-btn icon slot="activator" @click="$root.closeAllMenus">
                                     <v-icon>more_vert</v-icon>
                                 </v-btn>
-                                <layer-menu v-bind:i18n="i18n" v-bind:item="children"/>
+                                <layer-menu :i18n="i18n" :item="children"/>
                             </v-menu>
                         </v-list-tile-action>
                     </v-list-tile>
                 </v-list-group>
                 <v-list-group v-else no-action append-icon="">
-                    <v-list-tile slot="activator">
+                    <v-list-tile slot="activator"
+                                 :disabled="!item.visibleAtCurrentScale">
                         <v-list-tile-action @click.prevent.stop>
                             <v-btn icon @click="item.visible = !item.visible; $root.rerender()">
-                                <v-icon v-if="item.visible">visibility</v-icon>
+                                <v-icon v-if="!item.visibleAtCurrentScale">visibility_off</v-icon>
+                                <v-icon v-else-if="item.visible">visibility</v-icon>
                                 <v-icon v-else="item.visible">visibility_off</v-icon>
                             </v-btn>
                         </v-list-tile-action>
@@ -101,7 +108,7 @@
                                 <v-btn icon slot="activator" @click="$root.closeAllMenus">
                                     <v-icon>more_vert</v-icon>
                                 </v-btn>
-                                <layer-menu v-bind:i18n="i18n" v-bind:item="item"/>
+                                <layer-menu :i18n="i18n" :item="item"/>
                             </v-menu>
                         </v-list-tile-action>
                     </v-list-tile>

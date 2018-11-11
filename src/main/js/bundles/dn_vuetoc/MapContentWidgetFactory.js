@@ -31,7 +31,7 @@ export default class MapContentWidgetFactory {
         let basemapModel = this._basemapModel;
         let tool = this._tool;
         let properties = this._properties;
-
+        this._layerWatchers = [];
 
         const defaultSelectedId = this._basemapModel.selectedId;
         const vm = this.vm = new Vue(MapContentWidget);
@@ -41,6 +41,7 @@ export default class MapContentWidgetFactory {
         vm.showBasemaps = properties.showBasemaps;
         vm.showOperationalLayer = properties.showOperationalLayer;
         vm.showLegend = properties.showLegend;
+        vm.showLoadingStatus = properties.showLoadingStatus;
         vm.isMobile = isMobile;
 
         // listen to view model methods
@@ -69,9 +70,15 @@ export default class MapContentWidgetFactory {
             .syncAll("selectedId", "operationalItems", "opacityArray", "legendArray")
             .enable();
 
-        mapWidgetModel.watch("view", () => {
+        mapWidgetModel.watch("view", ({value}) => {
             this._createLayerListViewModel(vm);
             this._waitForLayers(vm);
+
+            value.watch("stationary", (response) => {
+                if (response) {
+                    vm.rerender();
+                }
+            });
         });
 
         let map = mapWidgetModel.get("map");
@@ -90,10 +97,17 @@ export default class MapContentWidgetFactory {
         let layerListViewModel = new LayerListViewModel({
             view: view
         });
+        this._layerWatchers.forEach((watcher) => {
+            watcher.remove();
+        });
+        this._layerWatchers = [];
         layerListViewModel.listItemCreatedFunction = (event) => {
             let item = event.item;
             item.initialVisible = !!item.visible;
             item.menuVisibility = false;
+            this._layerWatchers.push(item.watch("updating", () => {
+                vm.rerender();
+            }));
         };
         if (layerListViewModel.state === "ready") {
             vm.operationalItems = layerListViewModel.operationalItems;

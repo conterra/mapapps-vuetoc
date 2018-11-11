@@ -2,8 +2,8 @@
     <div class="ct-flex-container ct-flex-container--column fullHeight">
         <div class="ct-flex-item overflowAuto">
             <v-container grid-list-sm>
-                <baselayer-widget class="vue-toc__basemaps" v-bind:i18n="i18n" v-if="showBasemaps"/>
-                <operationallayer-widget class="vue-toc__layers" v-bind:i18n="i18n" v-if="showOperationalLayer"/>
+                <baselayer-widget class="vue-toc__basemaps" :i18n="i18n" v-if="showBasemaps"/>
+                <operationallayer-widget class="vue-toc__layers" :i18n="i18n" v-if="showOperationalLayer"/>
             </v-container>
         </div>
         <div class="ct-flex-item ct-flex-item--no-grow ct-flex-item--no-shrink">
@@ -66,6 +66,7 @@
                 showBasemaps: true,
                 showOperationalLayer: true,
                 showLegend: true,
+                showLoadingStatus: true,
                 i18n: {
                     type: Object,
                     default: function () {

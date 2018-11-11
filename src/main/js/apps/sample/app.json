@@ -39,7 +39,8 @@
             "MapContentWidgetFactory": {
                 "showBasemaps": true,
                 "showOperationalLayer": true,
-                "showLegend": true
+                "showLegend": true,
+                "showLoadingStatus": true
             }
         },
         "banner": {
@@ -111,11 +112,15 @@
                             "url": "https://services.conterra.de/arcgis/rest/services/common/koeln/MapServer",
                             "type": "AGS_DYNAMIC",
                             "visible": false,
+                            "minScale": 500000,
+                            "maxScale": 250000,
                             "sublayers": [
                                 {
                                     "title": "${map.koeln1.districts.title}",
                                     "id": 11,
                                     "opacity": 0.5,
+                                    "minScale": 500000,
+                                    "maxScale": 250000,
                                     "popupTemplate": {
                                         "title": "{STV_NAME}",
                                         "content": [
@@ -139,6 +144,8 @@
                                     "title": "${map.koeln1.boroughs.title}",
                                     "id": 10,
                                     "opacity": 0.5,
+                                    "minScale": 500000,
+                                    "maxScale": 250000,
                                     "popupTemplate": {
                                         "title": "{NAME}",
                                         "content": [
@@ -188,6 +195,8 @@
                                     "title": "${map.koeln1.precints.title}",
                                     "id": 9,
                                     "opacity": 0.5,
+                                    "minScale": 500000,
+                                    "maxScale": 250000,
                                     "popupTemplate": {
                                         "title": "{NAME}",
                                         "content": [

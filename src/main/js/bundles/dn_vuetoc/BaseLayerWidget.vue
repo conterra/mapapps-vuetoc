@@ -5,9 +5,9 @@
         </v-toolbar>
         <v-list>
             <v-list-tile v-for="basemap in $root.basemaps"
-                         v-bind:key="basemap.id"
+                         :key="basemap.id"
                          @click.prevent.stop="$root.selectedId = basemap.id"
-                         v-bind:class="{'primary--text': basemap.id === $root.selectedId}">
+                         :class="{'primary--text': basemap.id === $root.selectedId}">
                 <v-list-tile-action v-if="basemap.icon">
                     <v-icon v-if="basemap.id === $root.selectedId" primary medium>{{basemap.icon}}
                     </v-icon>

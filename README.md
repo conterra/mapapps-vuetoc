@@ -18,16 +18,18 @@ Simply add the bundle "dn_vuetoc" to your map.apps 4 app.
 "MapContentWidgetFactory": {
     "showBasemaps": true,
     "showOperationalLayer": true,
-    "showLegend": true
+    "showLegend": true,
+    "showLoadingStatus": true
 }
 ```
 
 ##### Properties
-| Property                       | Type    | Possible Values                 | Default    | Description                       |
-|--------------------------------|---------|---------------------------------|------------|---------------------------------- |
-| showBasemaps                   | boolean | ```true``` &#124; ```false```   | ```true``` | Show basemaps in vuetoc           |
-| showOperationalLayer           | boolean | ```true``` &#124; ```false```   | ```true``` | Show operational layers in vuetoc |
-| showLegend                     | boolean | ```true``` &#124; ```false```   | ```true``` | Show legend in vuetoc             |
+| Property                       | Type    | Possible Values                 | Default    | Description                          |
+|--------------------------------|---------|---------------------------------|------------|--------------------------------------|
+| showBasemaps                   | boolean | ```true``` &#124; ```false```   | ```true``` | Show basemaps in vuetoc              |
+| showOperationalLayer           | boolean | ```true``` &#124; ```false```   | ```true``` | Show operational layers in vuetoc    |
+| showLegend                     | boolean | ```true``` &#124; ```false```   | ```true``` | Show legend in vuetoc                |
+| showLoadingStatus              | boolean | ```true``` &#124; ```false```   | ```true``` | Show current loading status of layer |
 
 ## Development Guide
 ### Define the mapapps remote base
