@@ -10,3 +10,21 @@
 .ctAppRoot .vue-toc-window .vue-toc__basemaps .list__tile .icon {
     color: inherit;
 }
+
+.ctAppRoot .vue-toc__layer-menu .list {
+    padding: 0;
+}
+
+.ctAppRoot .vue-toc__layer-menu .vue-toc__opacity .list__tile {
+    padding-left: 16px;
+}
+
+.ctAppRoot .vue-toc__layer-menu .vue-toc__opacity .list__tile .input-group--slider {
+    padding-top: 6px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.ctAppRoot .vue-toc__layer-menu .list__group--active:after {
+    content: none;
+}

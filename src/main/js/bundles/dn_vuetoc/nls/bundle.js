@@ -28,7 +28,9 @@ module.exports = {
             copyright: "Copyright:",
             activateAllLayer: "Activate all layer",
             deactivateAllLayer: "Deactivate all layer",
-            opacity: "Opacity"
+            opacity: "Opacity",
+            visible: "visible",
+            invisible: "invisible"
         },
         tool: {
             title: "Map Content",

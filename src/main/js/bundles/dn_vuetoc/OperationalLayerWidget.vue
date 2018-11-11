@@ -26,7 +26,7 @@
             </v-menu>
         </v-toolbar>
         <div v-if="$root.operationalItems">
-            <v-list v-for="item in $root.reverseArray($root.operationalItems.toArray())"
+            <v-list v-for="item in $root.operationalItems.toArray()"
                     :key="item.uid" class="pa-0">
                 <v-progress-linear v-if="$root.showLoadingStatus" :active="item.updating" :indeterminate="item.updating"
                                    :height="1" class="ma-0"></v-progress-linear>
@@ -56,7 +56,7 @@
                         </v-list-tile-action>
                     </v-list-tile>
                     <v-list-tile
-                        v-for="children in $root.reverseArray(item.children.toArray())"
+                        v-for="children in item.children.toArray()"
                         :disabled="!children.visibleAtCurrentScale"
                         :key="children.uid"
                         @click.prevent.stop>
@@ -82,7 +82,7 @@
                                 <v-btn icon slot="activator">
                                     <v-icon>more_vert</v-icon>
                                 </v-btn>
-                                <layer-menu :i18n="i18n" :item="children"/>
+                                <layer-menu :i18n="i18n" :item="item"/>
                             </v-menu>
                         </v-list-tile-action>
                     </v-list-tile>
