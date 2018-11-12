@@ -28,7 +28,7 @@
         <div v-if="$root.operationalItems">
             <v-list v-for="item in $root.operationalItems.toArray()"
                     :key="item.uid" class="pa-0">
-                <v-progress-linear v-if="$root.showLoadingStatus" :active="item.updating" :indeterminate="item.updating"
+                <v-progress-linear v-if="$root.showLoadingStatus && $root.renderProgressBars" :active="item.updating" :indeterminate="item.updating"
                                    :height="1" class="ma-0"></v-progress-linear>
                 <v-list-group v-if="item.children.length"
                               no-action v-model=item.open>
@@ -47,7 +47,8 @@
                         </v-list-tile-content>
                         <v-list-tile-action @click.prevent.stop>
                             <v-menu bottom left max-width="300" offset-y="10" transition="slide-y-transition"
-                                    :close-on-content-click="false" :close-on-click="true">
+                                    :close-on-content-click="false" :close-on-click="true"
+                                    v-model="item.menuVisibility">
                                 <v-btn icon slot="activator">
                                     <v-icon>more_vert</v-icon>
                                 </v-btn>
@@ -78,11 +79,12 @@
                         </v-list-tile-content>
                         <v-list-tile-action @click.prevent.stop>
                             <v-menu bottom left max-width="300" offset-y="10" transition="slide-y-transition"
-                                    :close-on-content-click="false" :close-on-click="true">
+                                    :close-on-content-click="false" :close-on-click="true"
+                                    v-model="children.menuVisibility">
                                 <v-btn icon slot="activator">
                                     <v-icon>more_vert</v-icon>
                                 </v-btn>
-                                <layer-menu :i18n="i18n" :item="item"/>
+                                <layer-menu :i18n="i18n" :item="children"/>
                             </v-menu>
                         </v-list-tile-action>
                     </v-list-tile>
@@ -104,7 +106,8 @@
                         </v-list-tile-content>
                         <v-list-tile-action @click.prevent.stop>
                             <v-menu bottom left max-width="300" offset-y="10" transition="slide-y-transition"
-                                    :close-on-content-click="false" :close-on-click="true">
+                                    :close-on-content-click="false" :close-on-click="true"
+                                    v-model="item.menuVisibility">
                                 <v-btn icon slot="activator">
                                     <v-icon>more_vert</v-icon>
                                 </v-btn>

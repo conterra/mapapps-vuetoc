@@ -60,6 +60,7 @@
         data: function () {
             return {
                 renderComponent: true,
+                renderProgressBars: true,
                 operationalItems: null,
                 opacityArray: [],
                 legendArray: [],
@@ -96,6 +97,12 @@
                 this.renderComponent = false;
                 this.$nextTick(() => {
                     this.renderComponent = true;
+                });
+            },
+            rerenderProgressBars: function () {
+                this.renderProgressBars = false;
+                this.$nextTick(() => {
+                    this.renderProgressBars = true;
                 });
             },
             reverseArray: function (items) {

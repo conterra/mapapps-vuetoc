@@ -78,7 +78,7 @@ export default class MapContentWidgetFactory {
 
             value.watch("stationary", (response) => {
                 if (response) {
-                    vm.rerender();
+                    vm.rerenderProgressBars();
                 }
             });
         });
@@ -108,7 +108,7 @@ export default class MapContentWidgetFactory {
             item.initialVisible = !!item.visible;
             item.menuVisibility = false;
             this._layerWatchers.push(item.watch("updating", () => {
-                vm.rerender();
+                vm.rerenderProgressBars();
             }));
         };
         if (layerListViewModel.state === "ready") {
