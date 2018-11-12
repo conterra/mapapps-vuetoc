@@ -36,8 +36,6 @@ export default class MapContentWidgetFactory {
         const defaultSelectedId = this._basemapModel.selectedId;
         const vm = this.vm = new Vue(MapContentWidget);
         vm.i18n = this._i18n.get().ui;
-        vm.basemaps = basemapModel.basemaps;
-        vm.selectedId = basemapModel.selectedId;
         vm.showBasemaps = properties.showBasemaps;
         vm.showOperationalLayer = properties.showOperationalLayer;
         vm.showLegend = properties.showLegend;
@@ -66,11 +64,11 @@ export default class MapContentWidgetFactory {
             this._enableAllLayers(value);
         });
 
-        Binding
-            .create()
-            .bindTo(vm, basemapModel)
-            .syncAll("selectedId", "operationalItems", "opacityArray", "legendArray")
-            .enable();
+        Binding.for(vm, basemapModel)
+            .sync("selectedId")
+            .sync("basemaps")
+            .enable()
+            .syncToLeftNow();
 
         mapWidgetModel.watch("view", ({value}) => {
             this._createLayerListViewModel(vm);
@@ -110,17 +108,27 @@ export default class MapContentWidgetFactory {
             this._layerWatchers.push(item.watch("updating", () => {
                 vm.rerenderProgressBars();
             }));
+            this._layerWatchers.push(item.watch("visible", () => {
+                vm.rerender();
+            }));
         };
         if (layerListViewModel.state === "ready") {
-            vm.operationalItems = layerListViewModel.operationalItems;
             vm.rerender();
         } else {
             let watch = layerListViewModel.watch("state", (state) => {
                 watch.remove();
-                vm.operationalItems = layerListViewModel.operationalItems;
                 vm.rerender();
             });
         }
+
+        if (this.binding) {
+            this.binding.unbind();
+        }
+
+        this.binding = Binding.for(vm, layerListViewModel)
+            .syncAll("operationalItems")
+            .enable()
+            .syncToLeftNow();
     }
 
     _createOpacityArray(vm) {
