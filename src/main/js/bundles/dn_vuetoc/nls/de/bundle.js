@@ -28,8 +28,8 @@ module.exports = {
         activateAllLayer: "Alle Inhalte aktivieren",
         deactivateAllLayer: "Alle Inhalte deaktivieren",
         opacity: "Transparenz",
-        visible: "visible",
-        invisible: "invisible"
+        visible: "sichtbar",
+        invisible: "unsichtbar"
     },
     tool: {
         title: "Karteninhalt",
