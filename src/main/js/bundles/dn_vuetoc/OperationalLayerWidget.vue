@@ -26,13 +26,10 @@
             </v-menu>
         </v-toolbar>
         <div v-if="$root.operationalItems">
-            <v-list v-for="item in $root.operationalItems.items"
-                    :key="item.uid" class="pa-0">
+            <v-list v-for="item in $root.operationalItems.items" :key="item.uid" class="pa-0">
                 <v-progress-linear v-if="$root.showLoadingStatus && $root.renderProgressBars" :active="item.updating"
-                                   :indeterminate="item.updating"
-                                   :height="2" class="ma-0"></v-progress-linear>
-                <v-list-group v-if="item.children.length"
-                              no-action v-model=item.open>
+                                   :indeterminate="item.updating" :height="2" class="ma-0"></v-progress-linear>
+                <v-list-group v-if="item.children.length" no-action v-model="item.open">
                     <v-list-tile slot="activator" :key="item.uid" :disabled="!item.visibleAtCurrentScale">
                         <v-list-tile-action @click.prevent.stop>
                             <v-btn icon @click="item.visible = !item.visible; $root.rerender()">
@@ -40,9 +37,8 @@
                                 <v-icon v-else="item.visible">{{invisibleIconClass}}</v-icon>
                             </v-btn>
                         </v-list-tile-action>
-                        <v-list-tile-content
-                            @click.prevent.stop
-                            @click="item.visible = !item.visible; $root.rerender()">
+                        <v-list-tile-content @click.prevent.stop
+                                             @click="item.visible = !item.visible; $root.rerender()">
                             <v-list-tile-title v-text="item.title"></v-list-tile-title>
                         </v-list-tile-content>
                         <v-list-tile-action @click.prevent.stop>
@@ -56,11 +52,8 @@
                             </v-menu>
                         </v-list-tile-action>
                     </v-list-tile>
-                    <v-list-tile
-                        v-for="children in item.children.items"
-                        :disabled="!children.visibleAtCurrentScale"
-                        :key="children.uid"
-                        @click.prevent.stop>
+                    <v-list-tile v-for="children in item.children.items" :disabled="!children.visibleAtCurrentScale"
+                                 :key="children.uid" @click.prevent.stop>
                         <v-list-tile-action @click.prevent.stop>
                             <v-btn icon @click="children.visible = !children.visible; $root.rerender()">
                                 <v-icon v-if="children.visible">{{visibleIconClass}}</v-icon>
@@ -72,8 +65,7 @@
                             @click="children.visible = !children.visible; $root.rerender()">
                             <img :src="$root.getLegend(children.layer.url, children.layer.id)"/>
                         </v-list-tile-action>
-                        <v-list-tile-content
-                            @click="children.visible = !children.visible; $root.rerender()">
+                        <v-list-tile-content @click="children.visible = !children.visible; $root.rerender()">
                             <v-list-tile-title v-text="children.title"></v-list-tile-title>
                         </v-list-tile-content>
                         <v-list-tile-action @click.prevent.stop>
@@ -89,17 +81,15 @@
                     </v-list-tile>
                 </v-list-group>
                 <v-list-group v-else no-action append-icon="">
-                    <v-list-tile slot="activator"
-                                 :disabled="!item.visibleAtCurrentScale">
+                    <v-list-tile slot="activator" :disabled="!item.visibleAtCurrentScale">
                         <v-list-tile-action @click.prevent.stop>
                             <v-btn icon @click="item.visible = !item.visible; $root.rerender()">
                                 <v-icon v-if="item.visible">{{visibleIconClass}}</v-icon>
                                 <v-icon v-else="item.visible">{{invisibleIconClass}}</v-icon>
                             </v-btn>
                         </v-list-tile-action>
-                        <v-list-tile-content
-                            @click.prevent.stop
-                            @click="item.visible = !item.visible; $root.rerender()">
+                        <v-list-tile-content @click.prevent.stop
+                                             @click="item.visible = !item.visible; $root.rerender()">
                             <v-list-tile-title v-text="item.title"></v-list-tile-title>
                         </v-list-tile-content>
                         <v-list-tile-action @click.prevent.stop>
