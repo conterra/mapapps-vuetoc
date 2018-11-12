@@ -22,7 +22,7 @@
                 <v-list-tile class="vue-toc__opacity">
                     {{i18n.invisible}}
                     <v-slider v-if="$root.getOpacityValue(item)" v-model="$root.getOpacityValue(item).opacity"
-                              hide-details :max="1" step="0.1" @input="$root.onOpacitySliderChange(item, $event)">
+                              hide-details :max="1" step="0.01" @input="$root.onOpacitySliderChange(item, $event)">
                     </v-slider>
                     {{i18n.visible}}
                 </v-list-tile>
