@@ -26,9 +26,10 @@
             </v-menu>
         </v-toolbar>
         <div v-if="$root.operationalItems">
-            <v-list v-for="item in $root.operationalItems.toArray()"
+            <v-list v-for="item in $root.operationalItems.items"
                     :key="item.uid" class="pa-0">
-                <v-progress-linear v-if="$root.showLoadingStatus && $root.renderProgressBars" :active="item.updating" :indeterminate="item.updating"
+                <v-progress-linear v-if="$root.showLoadingStatus && $root.renderProgressBars" :active="item.updating"
+                                   :indeterminate="item.updating"
                                    :height="1" class="ma-0"></v-progress-linear>
                 <v-list-group v-if="item.children.length"
                               no-action v-model=item.open>
@@ -56,7 +57,7 @@
                         </v-list-tile-action>
                     </v-list-tile>
                     <v-list-tile
-                        v-for="children in item.children.toArray()"
+                        v-for="children in item.children.items"
                         :disabled="!children.visibleAtCurrentScale"
                         :key="children.uid"
                         @click.prevent.stop>
