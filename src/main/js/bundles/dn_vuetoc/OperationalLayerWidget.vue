@@ -35,8 +35,7 @@
                     <v-list-tile slot="activator" :key="item.uid" :disabled="!item.visibleAtCurrentScale">
                         <v-list-tile-action @click.prevent.stop>
                             <v-btn icon @click="item.visible = !item.visible; $root.rerender()">
-                                <v-icon v-if="!item.visibleAtCurrentScale">{{invisibleIconClass}}</v-icon>
-                                <v-icon v-else-if="item.visible">{{visibleIconClass}}</v-icon>
+                                <v-icon v-if="item.visible">{{visibleIconClass}}</v-icon>
                                 <v-icon v-else="item.visible">{{invisibleIconClass}}</v-icon>
                             </v-btn>
                         </v-list-tile-action>
@@ -63,8 +62,7 @@
                         @click.prevent.stop>
                         <v-list-tile-action @click.prevent.stop>
                             <v-btn icon @click="children.visible = !children.visible; $root.rerender()">
-                                <v-icon v-if="!children.visibleAtCurrentScale">{{invisibleIconClass}}</v-icon>
-                                <v-icon v-else-if="children.visible">{{visibleIconClass}}</v-icon>
+                                <v-icon v-if="children.visible">{{visibleIconClass}}</v-icon>
                                 <v-icon v-else="children.visible">{{invisibleIconClass}}</v-icon>
                             </v-btn>
                         </v-list-tile-action>
@@ -94,8 +92,7 @@
                                  :disabled="!item.visibleAtCurrentScale">
                         <v-list-tile-action @click.prevent.stop>
                             <v-btn icon @click="item.visible = !item.visible; $root.rerender()">
-                                <v-icon v-if="!item.visibleAtCurrentScale">{{invisibleIconClass}}</v-icon>
-                                <v-icon v-else-if="item.visible">{{visibleIconClass}}</v-icon>
+                                <v-icon v-if="item.visible">{{visibleIconClass}}</v-icon>
                                 <v-icon v-else="item.visible">{{invisibleIconClass}}</v-icon>
                             </v-btn>
                         </v-list-tile-action>
