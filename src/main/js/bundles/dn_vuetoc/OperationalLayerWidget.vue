@@ -10,14 +10,14 @@
                 <v-list>
                     <v-list-tile @click="$root.enableAllLayers(true)">
                         <v-list-tile-action>
-                            <v-icon primary>{{visibleIconClass}}</v-icon>
+                            <v-icon primary>visibility</v-icon>
                         </v-list-tile-action>
                         <v-list-tile-title>{{i18n.activateAllLayer}}
                         </v-list-tile-title>
                     </v-list-tile>
                     <v-list-tile @click="$root.enableAllLayers(false)">
                         <v-list-tile-action>
-                            <v-icon primary>{{invisibleIconClass}}</v-icon>
+                            <v-icon primary>visibility_off</v-icon>
                         </v-list-tile-action>
                         <v-list-tile-title>{{i18n.deactivateAllLayer}}
                         </v-list-tile-title>
@@ -30,7 +30,7 @@
                     :key="item.uid" class="pa-0">
                 <v-progress-linear v-if="$root.showLoadingStatus && $root.renderProgressBars" :active="item.updating"
                                    :indeterminate="item.updating"
-                                   :height="1" class="ma-0"></v-progress-linear>
+                                   :height="2" class="ma-0"></v-progress-linear>
                 <v-list-group v-if="item.children.length"
                               no-action v-model=item.open>
                     <v-list-tile slot="activator" :key="item.uid" :disabled="!item.visibleAtCurrentScale">
