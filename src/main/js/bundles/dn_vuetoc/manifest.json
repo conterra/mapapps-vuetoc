@@ -81,8 +81,8 @@
                 "showOperationalLayer": true,
                 "showLegend": true,
                 "showLoadingStatus": true,
-                "visibleIconClass": "visibility",
-                "invisibleIconClass": "visibility_off"
+                "visibleIconClass": "check_box",
+                "invisibleIconClass": "check_box_outline_blank"
             },
             "references": [
                 {

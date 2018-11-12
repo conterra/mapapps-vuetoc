@@ -20,8 +20,8 @@ Simply add the bundle "dn_vuetoc" to your map.apps 4 app.
     "showOperationalLayer": true,
     "showLegend": true,
     "showLoadingStatus": true,
-    "visibleIconClass": "visibility",
-    "invisibleIconClass": "visibility_off"
+    "visibleIconClass": "check_box",
+    "invisibleIconClass": "check_box_outline_blank"
 }
 ```
 
