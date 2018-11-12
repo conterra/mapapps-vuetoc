@@ -124,7 +124,6 @@ export default class MapContentWidgetFactory {
         if (this.binding) {
             this.binding.unbind();
         }
-
         this.binding = Binding.for(vm, layerListViewModel)
             .syncAll("operationalItems")
             .enable()
@@ -173,16 +172,24 @@ export default class MapContentWidgetFactory {
     _waitForLayers(vm) {
         let map = this._mapWidgetModel.get("map");
         let layers = map.get("layers");
+        let promises = [];
         layers.forEach((layer) => {
-            if (layer.loaded === false) {
-                layer.when((layer) => {
-                    this._createOpacityArray(vm);
-                    this._createLegendArray(vm);
-                }, (error) => {
-                    this._createOpacityArray(vm);
-                    this._createLegendArray(vm);
-                });
-            }
+            let promise = new Promise((resolve, reject) => {
+                if (layer.loaded === false) {
+                    layer.when((layer) => {
+                        resolve();
+                    }, (error) => {
+                        resolve();
+                    });
+                } else {
+                    resolve();
+                }
+            });
+            promises.push(promise);
+        });
+        Promise.all(promises).then(() => {
+            this._createOpacityArray(vm);
+            this._createLegendArray(vm);
         });
     }
 
