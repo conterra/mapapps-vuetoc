@@ -23,6 +23,7 @@
             "theme-autumn",
             "map-init",
             "toolset",
+            "toolrules",
             "mapnavigation",
             "popups-default",
             "dn_vuetoc"
