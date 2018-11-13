@@ -37,13 +37,19 @@
                     "w": 400,
                     "r": 0
                 },
+                "resizable": true,
+                "resizeAxis":{
+                    "l": true,
+                    "r": false,
+                    "t": false,
+                    "b": false
+                },
                 "fixEdgesInViewPort": {
                     "r": true,
                     "b": true,
                     "t": true
                 },
                 "minimizeOnClose": true,
-                "resizable": false,
                 "windowClass": "noTitleBarAndWindowTools noPadding vue-toc-window"
             }
         },

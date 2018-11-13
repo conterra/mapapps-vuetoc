@@ -149,23 +149,28 @@ export default class MapContentWidgetFactory {
     _createLegendArray(vm) {
         let map = this._mapWidgetModel.get("map");
         let layers = map.get("layers");
-        layers.forEach((layer) => {
-            let legendUrl = layer.url + "/legend?f=pjson&dynamicLayers=[1]";
-            apprt_request(legendUrl, {
-                handleAs: "json"
-            }).then((results) => {
-                if (results && results.layers) {
-                    results.layers.forEach((results) => {
-                        vm.legendArray.push({
-                            url: layer.url + "/" + results.layerId,
-                            title: results.layerName,
-                            imageUrl: results.legend && results.legend[0].url
-                        })
-                    });
-                }
-            }, (e) => {
-                // push nothing
-            });
+        let flattenLayers = layers.flatten((item) => {
+            return item.layers || item.sublayers;
+        });
+        flattenLayers.forEach((layer) => {
+            if (layer.url) {
+                let legendUrl = layer.url + "/legend?f=pjson&dynamicLayers=[1]";
+                apprt_request(legendUrl, {
+                    handleAs: "json"
+                }).then((results) => {
+                    if (results && results.layers) {
+                        results.layers.forEach((results) => {
+                            vm.legendArray.push({
+                                url: layer.url + "/" + results.layerId,
+                                title: results.layerName,
+                                imageUrl: results.legend && results.legend[0].url
+                            })
+                        });
+                    }
+                }, (e) => {
+                    // push nothing
+                });
+            }
         });
     }
 
@@ -190,6 +195,7 @@ export default class MapContentWidgetFactory {
         Promise.all(promises).then(() => {
             this._createOpacityArray(vm);
             this._createLegendArray(vm);
+            vm.rerender();
         });
     }
 

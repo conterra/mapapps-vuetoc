@@ -12,7 +12,7 @@
                 <v-list-tile-title>{{i18n.zoomToExtent}}</v-list-tile-title>
             </v-list-tile>
             <v-divider></v-divider>
-            <v-list-group no-action>
+            <v-list-group no-action v-if="$root.getOpacityValue(item)">
                 <v-list-tile slot="activator">
                     <v-list-tile-action>
                         <v-icon primary>opacity</v-icon>
@@ -21,7 +21,7 @@
                 </v-list-tile>
                 <v-list-tile class="vue-toc__opacity">
                     {{i18n.invisible}}
-                    <v-slider v-if="$root.getOpacityValue(item)" v-model="$root.getOpacityValue(item).opacity"
+                    <v-slider v-model="$root.getOpacityValue(item).opacity"
                               hide-details :max="1" step="0.01" @input="$root.onOpacitySliderChange(item, $event)">
                     </v-slider>
                     {{i18n.visible}}
