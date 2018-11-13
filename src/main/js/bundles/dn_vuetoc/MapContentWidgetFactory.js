@@ -51,14 +51,7 @@ export default class MapContentWidgetFactory {
             vm.selectedId = defaultSelectedId;
         });
         vm.$on('zoomToExtent', (item) => {
-            let layer = item.layer;
-            let extent = layer.fullExtent || layer.layer.fullExtent;
-            let view = mapWidgetModel.get('view');
-            view.goTo({target: extent}, {
-                "animate": true,
-                "duration": 1000,
-                "easing": "ease-in-out"
-            });
+            this._zoomToLayerExtent(item.layer);
         });
         vm.$on('enableAllLayers', (value) => {
             this._enableAllLayers(value);
@@ -219,5 +212,15 @@ export default class MapContentWidgetFactory {
             item.set("visible", value);
         });
         this.vm.rerender();
+    }
+
+    _zoomToLayerExtent(layer){
+        let extent = layer.fullExtent;
+        let view = mapWidgetModel.get('view');
+        view.goTo({target: extent}, {
+            "animate": true,
+            "duration": 1000,
+            "easing": "ease-in-out"
+        });
     }
 }

@@ -5,7 +5,7 @@
         </v-card-title>
         <v-divider></v-divider>
         <v-list>
-            <v-list-tile @click="$root.zoomToExtent(item)">
+            <v-list-tile v-if="item.layer && item.layer.fullExtent" @click="$root.zoomToExtent(item)">
                 <v-list-tile-action>
                     <v-icon primary>search</v-icon>
                 </v-list-tile-action>
