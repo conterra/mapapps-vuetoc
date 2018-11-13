@@ -28,13 +28,20 @@
 .ctAppRoot .vue-toc__layer-menu .list__group--active:after {
     content: none;
 }
-.ctAppRoot .vue-toc__layer-tree .list__group__items .list__tile{
+
+.ctAppRoot .vue-toc__layer-tree .list__group__items .list__tile {
     padding-left: 16px;
 }
-.ctAppRoot .vue-toc__layer-tree .vue-toc__layer-tree{
-   padding-left: 54px;
+
+.ctAppRoot .vue-toc__layer-tree .vue-toc__layer-tree {
+    padding-left: 40px;
 }
 
-.ctAppRoot .vue-toc__layer-tree .list__group__header>div:not(.list__group__header__prepend-icon):not(.list__group__header__append-icon){
+.ctAppRoot .vue-toc__layer-tree .list__tile__action,
+.ctAppRoot .vue-toc__basemaps .list__tile__action {
+    min-width: 40px;
+}
+
+.ctAppRoot .vue-toc__layer-tree .list__group__header > div:not(.list__group__header__prepend-icon):not(.list__group__header__append-icon) {
     max-width: 100%;
 }
