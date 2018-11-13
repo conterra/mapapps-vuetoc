@@ -28,16 +28,16 @@ Simply add the bundle "dn_vuetoc" to your map.apps 4 app.
 ```
 
 ##### Properties
-| Property                       | Type    | Possible Values                 | Default                | Description                          |
-|--------------------------------|---------|---------------------------------|------------------------|--------------------------------------|
-| showBasemaps                   | boolean | ```true``` &#124; ```false```   | ```true```             | Show basemaps in vuetoc              |
-| showOperationalLayer           | boolean | ```true``` &#124; ```false```   | ```true```             | Show operational layers in vuetoc    |
-| showLegend                     | boolean | ```true``` &#124; ```false```   | ```true```             | Show legend in vuetoc                |
-| showLoadingStatus              | boolean | ```true``` &#124; ```false```   | ```true```             | Show current loading status of layer |
-| showOperationalLayerHeaderMenu | boolean | ```true``` &#124; ```false```   | ```true```             | Show operational layer menu          |
-| showLayerMenu                  | boolean | ```true``` &#124; ```false```   | ```true```             | Show layer menu                      |
-| visibleIconClass               | String  |                                 | ```"visibility"```     | Visible icon class                   |
-| invisibleIconClass             | String  |                                 | ```"visibility_off"``` | Invisible icon class                 |
+| Property                       | Type    | Possible Values                 | Default                         | Description                          |
+|--------------------------------|---------|---------------------------------|---------------------------------|--------------------------------------|
+| showBasemaps                   | boolean | ```true``` &#124; ```false```   | ```true```                      | Show basemaps in vuetoc              |
+| showOperationalLayer           | boolean | ```true``` &#124; ```false```   | ```true```                      | Show operational layers in vuetoc    |
+| showLegend                     | boolean | ```true``` &#124; ```false```   | ```true```                      | Show legend in vuetoc                |
+| showLoadingStatus              | boolean | ```true``` &#124; ```false```   | ```true```                      | Show current loading status of layer |
+| showOperationalLayerHeaderMenu | boolean | ```true``` &#124; ```false```   | ```true```                      | Show operational layer menu          |
+| showLayerMenu                  | boolean | ```true``` &#124; ```false```   | ```true```                      | Show layer menu                      |
+| visibleIconClass               | String  |                                 | ```"check_box"```               | Visible icon class                   |
+| invisibleIconClass             | String  |                                 | ```"check_box_outline_blank"``` | Invisible icon class                 |
 
 ##### Icon class samples
 Any material design icon class is possible: https://material.io/tools/icons/?icon=check_box_outline_blank&style=baseline
