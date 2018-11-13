@@ -1,5 +1,6 @@
 <template>
-    <v-card v-if="item && item.layer" class="vue-toc__layer-menu">
+    <v-card v-if="item && item.layer"
+            class="vue-toc__layer-menu">
         <v-toolbar dense>
             <v-toolbar-title>{{item.title}}</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -13,14 +14,16 @@
         </v-card-title>
         <v-divider></v-divider>
         <v-list>
-            <v-list-tile v-if="item.layer && item.layer.fullExtent" @click="$root.zoomToExtent(item)">
+            <v-list-tile v-if="item.layer && item.layer.fullExtent"
+                         @click="$root.zoomToExtent(item)">
                 <v-list-tile-action>
                     <v-icon primary>search</v-icon>
                 </v-list-tile-action>
                 <v-list-tile-title>{{i18n.zoomToExtent}}</v-list-tile-title>
             </v-list-tile>
             <v-divider></v-divider>
-            <v-list-group no-action v-if="$root.getOpacityValue(item)">
+            <v-list-group v-if="$root.getOpacityValue(item)"
+                          no-action>
                 <v-list-tile slot="activator">
                     <v-list-tile-action>
                         <v-icon primary>opacity</v-icon>
@@ -30,7 +33,8 @@
                 <v-list-tile class="vue-toc__opacity">
                     {{i18n.invisible}}
                     <v-slider v-model="$root.getOpacityValue(item).opacity"
-                              hide-details :max="1" step="0.01" @input="$root.onOpacitySliderChange(item, $event)">
+                              hide-details :max="1" step="0.01"
+                              @input="$root.onOpacitySliderChange(item, $event)">
                     </v-slider>
                     {{i18n.visible}}
                 </v-list-tile>

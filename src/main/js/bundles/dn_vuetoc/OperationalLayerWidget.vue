@@ -1,10 +1,17 @@
 <template>
-    <v-card class="elevation-6" v-if="$root.renderComponent">
+    <v-card v-if="$root.renderComponent"
+            class="elevation-6">
         <v-toolbar class="primary title mb-1" dense>
             <v-toolbar-title>{{i18n.layers}}</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-menu v-if="$root.showOperationalLayerHeaderMenu" bottom left max-width="300" offset-y="10" transition="slide-y-transition">
-                <v-btn icon slot="activator">
+            <v-menu v-if="$root.showOperationalLayerHeaderMenu"
+                    bottom
+                    left
+                    max-width="300"
+                    offset-y="10"
+                    transition="slide-y-transition">
+                <v-btn icon
+                       slot="activator">
                     <v-icon>more_vert</v-icon>
                 </v-btn>
                 <v-list>
@@ -26,8 +33,10 @@
             </v-menu>
         </v-toolbar>
         <div v-if="$root.operationalItems">
-            <layer-tree :i18n="i18n" :visibleIconClass="visibleIconClass"
-                        :invisibleIconClass="invisibleIconClass" :items="$root.operationalItems.items">
+            <layer-tree :i18n="i18n"
+                        :visibleIconClass="visibleIconClass"
+                        :invisibleIconClass="invisibleIconClass"
+                        :items="$root.operationalItems.items">
             </layer-tree>
         </div>
     </v-card>

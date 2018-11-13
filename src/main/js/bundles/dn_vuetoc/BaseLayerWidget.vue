@@ -9,7 +9,8 @@
                          @click.prevent.stop="$root.selectedId = basemap.id"
                          :class="{'primary--text': basemap.id === $root.selectedId}">
                 <v-list-tile-action v-if="basemap.icon">
-                    <v-icon v-if="basemap.id === $root.selectedId" primary medium>{{basemap.icon}}
+                    <v-icon v-if="basemap.id === $root.selectedId"
+                            primary medium>{{basemap.icon}}
                     </v-icon>
                     <v-icon v-else="basemap.id === $root.selectedId">{{basemap.icon}}
                     </v-icon>
