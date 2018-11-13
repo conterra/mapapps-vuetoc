@@ -64,6 +64,7 @@
                 operationalItems: null,
                 opacityArray: [],
                 legendArray: [],
+                menuArray: [],
                 basemaps: [],
                 selectedId: "",
                 showBasemaps: true,
@@ -112,8 +113,13 @@
                 item.layer.set("opacity", value);
             },
             getOpacityValue: function (item) {
-                return this.opacityArray.find((opacity) => {
-                    return opacity.uid === item.uid;
+                return this.opacityArray.find((obj) => {
+                    return obj.uid === item.uid;
+                });
+            },
+            getMenuValue: function (item) {
+                return this.menuArray.find((obj) => {
+                    return obj.uid === item.uid;
                 });
             },
             close: function () {

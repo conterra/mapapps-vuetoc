@@ -1,5 +1,13 @@
 <template>
     <v-card v-if="item && item.layer" class="vue-toc__layer-menu">
+        <v-toolbar dense>
+            <v-toolbar-title>{{item.title}}</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-btn icon
+                   @click="$root.getMenuValue(item).visible=false">
+                <v-icon>close</v-icon>
+            </v-btn>
+        </v-toolbar>
         <v-card-title v-if="item.layer.description">
             <div class="regular">{{item.layer.description}}</div>
         </v-card-title>

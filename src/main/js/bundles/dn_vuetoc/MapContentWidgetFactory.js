@@ -132,10 +132,14 @@ export default class MapContentWidgetFactory {
             return item.children;
         });
         items.forEach((item) => {
-            item.set("visible", item.initialVisible);
+            let opacity = item.layer.opacity;
+            if (typeof opacity === "undefined") {
+                item.layer.opacity = 1;
+                opacity = 1;
+            }
             opacityArray.push({
                 uid: item.uid,
-                opacity: item.layer.opacity || 1
+                opacity: opacity
             });
         });
         vm.opacityArray = opacityArray;
@@ -169,6 +173,21 @@ export default class MapContentWidgetFactory {
         });
     }
 
+    _createMenuArray(vm) {
+        let menuArray = [];
+        let operationalItems = vm.operationalItems;
+        let items = operationalItems.flatten((item) => {
+            return item.children;
+        });
+        items.forEach((item) => {
+            menuArray.push({
+                uid: item.uid,
+                visible: false
+            });
+        });
+        vm.menuArray = menuArray;
+    }
+
     _waitForLayers(vm) {
         let map = this._mapWidgetModel.get("map");
         let layers = map.get("layers");
@@ -190,6 +209,7 @@ export default class MapContentWidgetFactory {
         Promise.all(promises).then(() => {
             this._createOpacityArray(vm);
             this._createLegendArray(vm);
+            this._createMenuArray(vm);
             vm.rerender();
         });
     }
@@ -216,9 +236,9 @@ export default class MapContentWidgetFactory {
         this.vm.rerender();
     }
 
-    _zoomToLayerExtent(layer){
+    _zoomToLayerExtent(layer) {
         let extent = layer.fullExtent;
-        let view = mapWidgetModel.get('view');
+        let view = this._mapWidgetModel.get('view');
         view.goTo({target: extent}, {
             "animate": true,
             "duration": 1000,
