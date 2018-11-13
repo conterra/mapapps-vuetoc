@@ -38,7 +38,7 @@
                     "r": 0
                 },
                 "resizable": true,
-                "resizeAxis":{
+                "resizeAxis": {
                     "l": true,
                     "r": false,
                     "t": false,
@@ -87,6 +87,8 @@
                 "showOperationalLayer": true,
                 "showLegend": true,
                 "showLoadingStatus": true,
+                "showOperationalLayerHeaderMenu": true,
+                "showLayerMenu": true,
                 "visibleIconClass": "check_box",
                 "invisibleIconClass": "check_box_outline_blank"
             },

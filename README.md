@@ -20,6 +20,8 @@ Simply add the bundle "dn_vuetoc" to your map.apps 4 app.
     "showOperationalLayer": true,
     "showLegend": true,
     "showLoadingStatus": true,
+    "showOperationalLayerHeaderMenu": false,
+    "showLayerMenu": false,
     "visibleIconClass": "check_box",
     "invisibleIconClass": "check_box_outline_blank"
 }
@@ -32,6 +34,8 @@ Simply add the bundle "dn_vuetoc" to your map.apps 4 app.
 | showOperationalLayer           | boolean | ```true``` &#124; ```false```   | ```true```             | Show operational layers in vuetoc    |
 | showLegend                     | boolean | ```true``` &#124; ```false```   | ```true```             | Show legend in vuetoc                |
 | showLoadingStatus              | boolean | ```true``` &#124; ```false```   | ```true```             | Show current loading status of layer |
+| showOperationalLayerHeaderMenu | boolean | ```true``` &#124; ```false```   | ```true```             | Show operational layer menu          |
+| showLayerMenu                  | boolean | ```true``` &#124; ```false```   | ```true```             | Show layer menu                      |
 | visibleIconClass               | String  |                                 | ```"visibility"```     | Visible icon class                   |
 | invisibleIconClass             | String  |                                 | ```"visibility_off"``` | Invisible icon class                 |
 

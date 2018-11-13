@@ -3,7 +3,7 @@
         <v-toolbar class="primary title mb-1" dense>
             <v-toolbar-title>{{i18n.layers}}</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-menu bottom left max-width="300" offset-y="10" transition="slide-y-transition">
+            <v-menu v-if="$root.showOperationalLayerHeaderMenu" bottom left max-width="300" offset-y="10" transition="slide-y-transition">
                 <v-btn icon slot="activator">
                     <v-icon>more_vert</v-icon>
                 </v-btn>

@@ -40,6 +40,8 @@ export default class MapContentWidgetFactory {
         vm.showOperationalLayer = properties.showOperationalLayer;
         vm.showLegend = properties.showLegend;
         vm.showLoadingStatus = properties.showLoadingStatus;
+        vm.showOperationalLayerHeaderMenu = properties.showOperationalLayerHeaderMenu;
+        vm.showLayerMenu = properties.showLayerMenu;
         vm.visibleIconClass = properties.visibleIconClass;
         vm.invisibleIconClass = properties.invisibleIconClass;
         vm.isMobile = isMobile;
