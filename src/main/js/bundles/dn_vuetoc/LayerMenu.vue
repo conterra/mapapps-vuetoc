@@ -1,11 +1,9 @@
 <template>
-    <v-card v-if="item && item.layer"
-            class="vue-toc__layer-menu">
+    <v-card v-if="item && item.layer" class="vue-toc__layer-menu">
         <v-toolbar dense>
             <v-toolbar-title>{{item.title}}</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn icon
-                   @click="$root.getMenuValue(item).visible=false">
+            <v-btn icon @click="$root.getMenuValue(item).visible=false">
                 <v-icon>close</v-icon>
             </v-btn>
         </v-toolbar>
@@ -14,31 +12,10 @@
         </v-card-title>
         <v-divider></v-divider>
         <v-list>
-            <v-list-tile v-if="item.layer && item.layer.fullExtent"
-                         @click="$root.zoomToExtent(item)">
-                <v-list-tile-action>
-                    <v-icon primary>search</v-icon>
-                </v-list-tile-action>
-                <v-list-tile-title>{{i18n.zoomToExtent}}</v-list-tile-title>
-            </v-list-tile>
-            <v-divider></v-divider>
-            <v-list-group v-if="$root.getOpacityValue(item)"
-                          no-action>
-                <v-list-tile slot="activator">
-                    <v-list-tile-action>
-                        <v-icon primary>opacity</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-title>{{i18n.opacity}}</v-list-tile-title>
-                </v-list-tile>
-                <v-list-tile class="vue-toc__opacity">
-                    {{i18n.invisible}}
-                    <v-slider v-model="$root.getOpacityValue(item).opacity"
-                              hide-details :max="1" step="0.01"
-                              @input="$root.onOpacitySliderChange(item, $event)">
-                    </v-slider>
-                    {{i18n.visible}}
-                </v-list-tile>
-            </v-list-group>
+            <div v-for="(tool, idx) in customLayerTools" :key="tool.name">
+                <component :is="tool" :item="item"></component>
+                <v-divider v-if="idx < customLayerTools.length - 1"></v-divider>
+            </div>
         </v-list>
         <v-divider></v-divider>
         <v-card-title v-if="item.layer.copyright">
@@ -49,10 +26,7 @@
 </template>
 
 <script>
-    export default {
-        props: [
-            "i18n",
-            "item"
-        ]
-    }
+export default {
+  props: ["i18n", "customLayerTools", "item"]
+};
 </script>

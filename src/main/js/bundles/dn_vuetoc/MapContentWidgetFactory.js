@@ -38,6 +38,7 @@ export default class MapContentWidgetFactory {
         vm.i18n = this._i18n.get().ui;
         vm.showBasemaps = properties.showBasemaps;
         vm.showOperationalLayer = properties.showOperationalLayer;
+        vm.customLayerTools = this._layerToolResolver.getLayerTools();
         vm.showLegend = properties.showLegend;
         vm.showLoadingStatus = properties.showLoadingStatus;
         vm.showOperationalLayerHeaderMenu = properties.showOperationalLayerHeaderMenu;
@@ -81,6 +82,14 @@ export default class MapContentWidgetFactory {
             this._createLayerListViewModel(vm);
             this._waitForLayers(vm);
         });
+
+        // listen to custom tool registrations
+        this._layerToolResolver.on("layer-tool-added", () => {
+            vm.customLayerTools = this._layerToolResolver.getLayerTools();
+        });
+        this._layerToolResolver.on("layer-tool-removed", () => {
+            vm.customLayerTools = this._layerToolResolver.getLayerTools();
+        });
     }
 
     createInstance() {
@@ -123,26 +132,6 @@ export default class MapContentWidgetFactory {
             .syncAll("operationalItems")
             .enable()
             .syncToLeftNow();
-    }
-
-    _createOpacityArray(vm) {
-        let opacityArray = [];
-        let operationalItems = vm.operationalItems;
-        let items = operationalItems.flatten((item) => {
-            return item.children;
-        });
-        items.forEach((item) => {
-            let opacity = item.layer.opacity;
-            if (typeof opacity === "undefined") {
-                item.layer.opacity = 1;
-                opacity = 1;
-            }
-            opacityArray.push({
-                uid: item.uid,
-                opacity: opacity
-            });
-        });
-        vm.opacityArray = opacityArray;
     }
 
     _createLegendArray(vm) {
@@ -207,7 +196,6 @@ export default class MapContentWidgetFactory {
             promises.push(promise);
         });
         Promise.all(promises).then(() => {
-            this._createOpacityArray(vm);
             this._createLegendArray(vm);
             this._createMenuArray(vm);
             vm.rerender();
@@ -234,15 +222,5 @@ export default class MapContentWidgetFactory {
             item.set("visible", value);
         });
         this.vm.rerender();
-    }
-
-    _zoomToLayerExtent(layer) {
-        let extent = layer.fullExtent;
-        let view = this._mapWidgetModel.get('view');
-        view.goTo({target: extent}, {
-            "animate": true,
-            "duration": 1000,
-            "easing": "ease-in-out"
-        });
     }
 }

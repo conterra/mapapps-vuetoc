@@ -37,6 +37,7 @@
             <layer-tree :i18n="i18n"
                         :visibleIconClass="visibleIconClass"
                         :invisibleIconClass="invisibleIconClass"
+                        :customLayerTools="customLayerTools"
                         :items="$root.operationalItems.items">
             </layer-tree>
         </div>
@@ -51,6 +52,7 @@
         },
         props: [
             "i18n",
+            "customLayerTools",
             "visibleIconClass",
             "invisibleIconClass"
         ]

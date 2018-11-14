@@ -9,6 +9,7 @@
                                          :i18n="i18n"
                                          :visibleIconClass="visibleIconClass"
                                          :invisibleIconClass="invisibleIconClass"
+                                         :customLayerTools="customLayerTools"
                                          v-if="showOperationalLayer"/>
             </v-container>
         </div>
@@ -63,10 +64,10 @@
         },
         data: function () {
             return {
+                customLayerTools: [],
                 renderComponent: true,
                 renderProgressBars: true,
                 operationalItems: null,
-                opacityArray: [],
                 legendArray: [],
                 menuArray: [],
                 basemaps: [],
@@ -86,12 +87,10 @@
                             close: "Close",
                             backToMap: "Back to map",
                             reset: "Reset",
-                            zoomToExtent: "Zoom to extent",
                             description: "Description:",
                             copyright: "Copyright:",
                             activateAllLayer: "Activate all layer",
-                            deactivateAllLayer: "Deactivate all layer",
-                            opacity: "Opacity"
+                            deactivateAllLayer: "Deactivate all layer"
                         }
                     }
                 }
@@ -113,14 +112,6 @@
             reverseArray: function (items) {
                 return items.slice().reverse();
             },
-            onOpacitySliderChange: function (item, value) {
-                item.layer.set("opacity", value);
-            },
-            getOpacityValue: function (item) {
-                return this.opacityArray.find((obj) => {
-                    return obj.uid === item.uid;
-                });
-            },
             getMenuValue: function (item) {
                 return this.menuArray.find((obj) => {
                     return obj.uid === item.uid;
@@ -131,9 +122,6 @@
             },
             reset: function () {
                 this.$emit('reset', {});
-            },
-            zoomToExtent: function (item) {
-                this.$emit('zoomToExtent', item);
             },
             enableAllLayers: function (value) {
                 this.$emit('enableAllLayers', value);

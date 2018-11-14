@@ -36,11 +36,13 @@
                                 <v-icon>more_vert</v-icon>
                             </v-btn>
                             <layer-menu :i18n="i18n"
+                                        :customLayerTools="customLayerTools"
                                         :item="item"/>
                         </v-menu>
                     </v-list-tile-action>
                 </v-list-tile>
                 <layer-tree :i18n="i18n"
+                            :customLayerTools="customLayerTools"
                             :visibleIconClass="visibleIconClass"
                             :invisibleIconClass="invisibleIconClass"
                             :items="item.children.items">
@@ -83,6 +85,7 @@
                                 <v-icon>more_vert</v-icon>
                             </v-btn>
                             <layer-menu :i18n="i18n"
+                                        :customLayerTools="customLayerTools"
                                         :item="item"/>
                         </v-menu>
                     </v-list-tile-action>
@@ -101,6 +104,7 @@
         },
         props: [
             "i18n",
+            "customLayerTools",
             "items",
             "visibleIconClass",
             "invisibleIconClass"

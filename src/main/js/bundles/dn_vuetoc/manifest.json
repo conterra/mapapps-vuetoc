@@ -8,6 +8,7 @@
     "dependencies": {
         "apprt-vue": "^4.2.0",
         "apprt-binding": "^4.2.0",
+        "apprt-core": "^4.2.0",
         "apprt-vuetify": "^4.2.0"
     },
     "CSS-Themes-Extension": [
@@ -105,8 +106,29 @@
                     "name": "_tool",
                     "providing": "ct.tools.Tool",
                     "filter": "(id=vueTocToggleTool)"
+                },
+                {
+                    "name": "_layerToolResolver",
+                    "providing": "vue-toc.LayerToolResolver"
                 }
             ]
+        },
+        {
+            "name": "LayerToolResolver",
+            "provides": "vue-toc.LayerToolResolver",
+            "references": [{
+                "name": "layerToolFactory",
+                "providing": "popups.LayerToolFactory",
+                "cardinality": "0..n"
+            }]
+        },
+        {
+            "name": "ZoomToExtentToolFactory",
+            "provides": "popups.LayerToolFactory"
+        },
+        {
+            "name": "OpacitySliderToolFactory",
+            "provides": "popups.LayerToolFactory"
         },
         {
             "name": "VueTocToggleTool",
