@@ -26,7 +26,8 @@
                     <v-list-tile-action v-if="$root.showLayerMenu && $root.getMenuValue(item)"
                                         @click.prevent.stop>
                         <v-menu bottom left max-width="300"
-                                offset-y="10"
+                                nudge-top="-10"
+                                offset-y
                                 transition="slide-y-transition"
                                 :close-on-content-click="false"
                                 :close-on-click="true"
@@ -71,7 +72,8 @@
                         <v-menu bottom
                                 left
                                 max-width="300"
-                                offset-y="10"
+                                nudge-top="-10"
+                                offset-y
                                 transition="slide-y-transition"
                                 :close-on-content-click="false"
                                 :close-on-click="true"

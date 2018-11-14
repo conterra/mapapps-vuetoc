@@ -8,7 +8,8 @@
                     bottom
                     left
                     max-width="300"
-                    offset-y="10"
+                    nudge-top="-10"
+                    offset-y
                     transition="slide-y-transition">
                 <v-btn icon
                        slot="activator">
