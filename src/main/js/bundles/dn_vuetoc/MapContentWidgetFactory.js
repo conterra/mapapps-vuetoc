@@ -25,7 +25,7 @@ export default class MapContentWidgetFactory {
     activate() {
         let envs = this._componentContext.getBundleContext().getCurrentExecutionEnvironment();
         let isMobile = this.isMobile = envs.some((env) => {
-            return env.name === "Mobile"
+            return env.name === "Mobile" || env.name === "Android"
         });
         let mapWidgetModel = this._mapWidgetModel;
         let basemapModel = this._basemapModel;
