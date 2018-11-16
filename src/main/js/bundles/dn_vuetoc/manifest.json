@@ -118,17 +118,17 @@
             "provides": "vue-toc.LayerToolResolver",
             "references": [{
                 "name": "layerToolFactory",
-                "providing": "popups.LayerToolFactory",
+                "providing": "vue-toc.LayerToolFactory",
                 "cardinality": "0..n"
             }]
         },
         {
             "name": "ZoomToExtentToolFactory",
-            "provides": "popups.LayerToolFactory"
+            "provides": "vue-toc.LayerToolFactory"
         },
         {
             "name": "OpacitySliderToolFactory",
-            "provides": "popups.LayerToolFactory"
+            "provides": "vue-toc.LayerToolFactory"
         },
         {
             "name": "VueTocToggleTool",
