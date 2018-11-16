@@ -50,7 +50,7 @@ export default function OpacitySliderToolFactory() {
                     if (opacity === undefined) {
                         opacity = 1;
                     }
-                    return { opacity };
+                    return {opacity};
                 },
                 beforeMount: function () {
                     this.item.layer.watch("opacity", value => {

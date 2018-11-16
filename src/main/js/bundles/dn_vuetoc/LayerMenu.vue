@@ -26,7 +26,7 @@
 </template>
 
 <script>
-export default {
-  props: ["i18n", "customLayerTools", "item"]
-};
+    export default {
+        props: ["i18n", "customLayerTools", "item"]
+    };
 </script>

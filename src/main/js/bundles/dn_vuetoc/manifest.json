@@ -116,11 +116,13 @@
         {
             "name": "LayerToolResolver",
             "provides": "vue-toc.LayerToolResolver",
-            "references": [{
-                "name": "layerToolFactory",
-                "providing": "vue-toc.LayerToolFactory",
-                "cardinality": "0..n"
-            }]
+            "references": [
+                {
+                    "name": "layerToolFactory",
+                    "providing": "vue-toc.LayerToolFactory",
+                    "cardinality": "0..n"
+                }
+            ]
         },
         {
             "name": "ZoomToExtentToolFactory",

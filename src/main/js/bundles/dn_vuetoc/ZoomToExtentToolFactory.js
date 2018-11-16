@@ -45,7 +45,7 @@ export default function ZoomToExtentToolFactory() {
                         if (!extent) {
                             return;
                         }
-                        item.view.goTo({ target: extent }, {
+                        item.view.goTo({target: extent}, {
                             "animate": true,
                             "duration": 1000,
                             "easing": "ease-in-out"

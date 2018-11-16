@@ -17,19 +17,18 @@ import {Evented} from "apprt-core/Events";
 
 const _layerTools = Symbol("layerTools");
 
-class LayerToolResolver extends Evented {
+export default class LayerToolResolver extends Evented {
     constructor() {
         super();
         this[_layerTools] = new Map();
     }
 
-    getLayerTools(){
+    getLayerTools() {
         return Array.from(this[_layerTools].values());
     }
 
-
     addLayerToolFactory(factory) {
-        if(!factory.getComponent){
+        if (!factory.getComponent) {
             console.warn("LayerToolResolver: Factory must provide a 'getComponent' function!");
             return;
         }
@@ -48,5 +47,3 @@ class LayerToolResolver extends Evented {
         });
     }
 }
-
-export default LayerToolResolver;
