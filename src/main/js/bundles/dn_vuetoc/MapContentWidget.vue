@@ -23,14 +23,14 @@
                         <v-card class="elevation-6">
                             <v-btn v-if="isMobile" block
                                    color="primary"
-                                   @click.native="close"
+                                   @click.native="$emit('close')"
                                    class="btn btn--block btn--raised theme--light">
                                 <v-icon left>arrow_back</v-icon>
                                 {{i18n.backToMap}}
                             </v-btn>
                             <v-btn v-else block
                                    color="primary"
-                                   @click.native="close"
+                                   @click.native="$emit('close')"
                                    class="btn btn--block btn--raised theme--light">
                                 <v-icon left>arrow_back</v-icon>
                                 {{i18n.close}}
@@ -41,7 +41,7 @@
                         <v-card class="elevation-6">
                             <v-btn block
                                    color="primary"
-                                   @click.native="reset"
+                                   @click.native="$emit('reset')"
                                    class="btn btn--block btn--raised theme--light">
                                 <v-icon left>settings_backup_restore</v-icon>
                                 {{i18n.reset}}
@@ -112,19 +112,10 @@
                     this.renderProgressBars = true;
                 });
             },
-            reverseArray: function (items) {
-                return items.slice().reverse();
-            },
             getMenuValue: function (item) {
                 return this.menuArray.find((obj) => {
                     return obj.uid === item.uid;
                 });
-            },
-            close: function () {
-                this.$emit('close', {});
-            },
-            reset: function () {
-                this.$emit('reset', {});
             },
             getLegend: function (url) {
                 let imageUrl = "";

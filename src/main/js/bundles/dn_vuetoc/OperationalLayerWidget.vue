@@ -19,15 +19,13 @@
                         <v-list-tile-action>
                             <v-icon primary>visibility</v-icon>
                         </v-list-tile-action>
-                        <v-list-tile-title>{{i18n.activateAllLayer}}
-                        </v-list-tile-title>
+                        <v-list-tile-title>{{i18n.activateAllLayer}}</v-list-tile-title>
                     </v-list-tile>
                     <v-list-tile @click="$root.$emit('enableAllLayers', false)">
                         <v-list-tile-action>
                             <v-icon primary>visibility_off</v-icon>
                         </v-list-tile-action>
-                        <v-list-tile-title>{{i18n.deactivateAllLayer}}
-                        </v-list-tile-title>
+                        <v-list-tile-title>{{i18n.deactivateAllLayer}}</v-list-tile-title>
                     </v-list-tile>
                 </v-list>
             </v-menu>
