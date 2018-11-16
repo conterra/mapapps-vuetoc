@@ -5,12 +5,14 @@
                 <baselayer-widget class="vue-toc__basemaps"
                                   :i18n="i18n"
                                   v-if="showBasemaps"/>
-                <operationallayer-widget class="vue-toc__layers"
+                <operationallayer-widget v-if="showOperationalLayer && renderComponent"
+                                         class="vue-toc__layers"
                                          :i18n="i18n"
+                                         :operationalItems="operationalItems"
                                          :visibleIconClass="visibleIconClass"
                                          :invisibleIconClass="invisibleIconClass"
                                          :customLayerTools="customLayerTools"
-                                         v-if="showOperationalLayer"/>
+                                         :showOperationalLayerHeaderMenu="showOperationalLayerHeaderMenu"/>
             </v-container>
         </div>
         <div class="ct-flex-item ct-flex-item--no-grow ct-flex-item--no-shrink">
@@ -122,9 +124,6 @@
             },
             reset: function () {
                 this.$emit('reset', {});
-            },
-            enableAllLayers: function (value) {
-                this.$emit('enableAllLayers', value);
             },
             getLegend: function (url) {
                 let imageUrl = "";
