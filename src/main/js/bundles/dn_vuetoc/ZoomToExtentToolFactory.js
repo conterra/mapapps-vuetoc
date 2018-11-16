@@ -16,7 +16,7 @@
 export default function ZoomToExtentToolFactory() {
     return {
         getComponent() {
-            let i18n = this._i18n.get().ui.zoomToExtent;
+            let i18n = this._i18n.get().ui;
             return {
                 name: "zoom-to-extent",
                 template: `
@@ -32,9 +32,7 @@ export default function ZoomToExtentToolFactory() {
                     i18n: {
                         type: Object,
                         default: function () {
-                            return {
-                                zoomToExtent: i18n
-                            }
+                            return i18n;
                         }
                     }
                 },
