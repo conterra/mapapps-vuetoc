@@ -119,6 +119,7 @@
                             "visible": false,
                             "minScale": 500000,
                             "maxScale": 250000,
+                            "open": true,
                             "sublayers": [
                                 {
                                     "title": "${map.koeln1.districts.title}",

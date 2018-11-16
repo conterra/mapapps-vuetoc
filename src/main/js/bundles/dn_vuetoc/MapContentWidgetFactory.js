@@ -108,6 +108,11 @@ export default class MapContentWidgetFactory {
         layerListViewModel.listItemCreatedFunction = (event) => {
             let item = event.item;
             item.initialVisible = !!item.visible;
+            if (event.item.layer.open !== undefined) {
+                item.open = event.item.layer.open;
+            } else {
+                item.open = false;
+            }
             item.menuVisibility = false;
             this._layerWatchers.push(item.watch("updating", () => {
                 vm.rerenderProgressBars();
