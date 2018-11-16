@@ -4,7 +4,7 @@
             <v-toolbar-title>{{i18n.basemaps}}</v-toolbar-title>
         </v-toolbar>
         <v-list>
-            <v-list-tile v-for="basemap in $root.basemaps"
+            <v-list-tile v-for="basemap in basemaps"
                          :key="basemap.id"
                          @click.prevent.stop="$root.selectedId = basemap.id"
                          :class="{'primary--text': basemap.id === $root.selectedId}">
@@ -34,7 +34,8 @@
 <script>
     export default {
         props: [
-            "i18n"
+            "i18n",
+            "basemaps"
         ]
     }
 </script>

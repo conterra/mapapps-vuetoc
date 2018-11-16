@@ -2,17 +2,18 @@
     <div class="ct-flex-container ct-flex-container--column fullHeight">
         <div class="ct-flex-item overflowAuto">
             <v-container grid-list-sm>
-                <baselayer-widget class="vue-toc__basemaps"
+                <baselayer-widget v-if="showBasemaps"
                                   :i18n="i18n"
-                                  v-if="showBasemaps"/>
+                                  :basemaps="basemaps"
+                                  class="vue-toc__basemaps"/>
                 <operationallayer-widget v-if="showOperationalLayer && renderComponent"
-                                         class="vue-toc__layers"
                                          :i18n="i18n"
                                          :operationalItems="operationalItems"
                                          :visibleIconClass="visibleIconClass"
                                          :invisibleIconClass="invisibleIconClass"
                                          :customLayerTools="customLayerTools"
-                                         :showOperationalLayerHeaderMenu="showOperationalLayerHeaderMenu"/>
+                                         :showOperationalLayerHeaderMenu="showOperationalLayerHeaderMenu"
+                                         class="vue-toc__layers"/>
             </v-container>
         </div>
         <div class="ct-flex-item ct-flex-item--no-grow ct-flex-item--no-shrink">
