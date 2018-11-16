@@ -32,9 +32,9 @@ Simply add the bundle "dn_vuetoc" to your map.apps 4 app.
 ##### Properties
 | Property                       | Type    | Possible Values                 | Default                         | Description                          |
 |--------------------------------|---------|---------------------------------|---------------------------------|--------------------------------------|
-| showBasemaps                   | boolean | ```true``` &#124; ```false```   | ```true```                      | Show basemaps in vuetoc              |
-| showOperationalLayer           | boolean | ```true``` &#124; ```false```   | ```true```                      | Show operational layers in vuetoc    |
-| showLegend                     | boolean | ```true``` &#124; ```false```   | ```true```                      | Show legend in vuetoc                |
+| showBasemaps                   | boolean | ```true``` &#124; ```false```   | ```true```                      | Show basemaps             |
+| showOperationalLayer           | boolean | ```true``` &#124; ```false```   | ```true```                      | Show operational layers   |
+| showLegend                     | boolean | ```true``` &#124; ```false```   | ```true```                      | Show legend                |
 | showLoadingStatus              | boolean | ```true``` &#124; ```false```   | ```true```                      | Show current loading status of layer |
 | showOperationalLayerHeaderMenu | boolean | ```true``` &#124; ```false```   | ```true```                      | Show operational layer menu          |
 | showLayerMenu                  | boolean | ```true``` &#124; ```false```   | ```true```                      | Show layer menu                      |
