@@ -15,6 +15,8 @@
  */
 import ".";
 import "./MapContentWidgetFactory";
+import "./LegendFactory";
 import "./LayerToolResolver";
-import "./ZoomToExtentToolFactory"
-import "./OpacitySliderToolFactory"
+import "./ZoomToExtentToolFactory";
+import "./OpacitySliderToolFactory";
+import "./ShowLegendToolFactory";

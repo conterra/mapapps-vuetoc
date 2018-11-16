@@ -45,3 +45,7 @@
 .ctAppRoot .vue-toc__layer-tree .list__group__header > div:not(.list__group__header__prepend-icon):not(.list__group__header__append-icon) {
     max-width: 100%;
 }
+
+.ctAppRoot .vue-toc__layer-tree .list__group__header > div:not(.list__group__header__prepend-icon):not(.list__group__header__append-icon) {
+    max-width: 100%;
+}

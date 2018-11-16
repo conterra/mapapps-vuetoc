@@ -7,9 +7,11 @@
     "productName": "devnet-mapapps-vuetoc",
     "dependencies": {
         "apprt-vue": "^4.2.0",
+        "apprt-vuetify": "^4.2.0",
         "apprt-binding": "^4.2.0",
         "apprt-core": "^4.2.0",
-        "apprt-vuetify": "^4.2.0"
+        "esri-widgets": "^4.2.0",
+        "esri": "^4.6.0"
     },
     "CSS-Themes-Extension": [
         {
@@ -75,6 +77,17 @@
                 },
                 "windowClass": "mobileWindow noTitleBarAndWindowTools noPadding vue-toc-window"
             }
+        },
+        {
+            "widgetRole": "vuetocLegend",
+            "window": {
+                "minimizeOnClose": true,
+                "resizable": true,
+                "marginBox": {
+                    "w": 400,
+                    "h": 400
+                }
+            }
         }
     ],
     "components": [
@@ -133,6 +146,33 @@
         {
             "name": "OpacitySliderToolFactory",
             "provides": "vue-toc.LayerToolFactory"
+        },
+        {
+            "name": "ShowLegendToolFactory",
+            "provides": "vue-toc.LayerToolFactory",
+            "references": [
+                {
+                    "name": "legendFactory",
+                    "providing": "vue-toc.LegendFactory"
+                }
+            ]
+        },
+        {
+            "name": "LegendFactory",
+            "provides": "vue-toc.LegendFactory",
+            "properties": {
+                "widgetRole": "legend"
+            },
+            "references": [
+                {
+                    "name": "_mapWidgetModel",
+                    "providing": "map-widget.MapWidgetModel"
+                },
+                {
+                    "name": "_windowManager",
+                    "providing": "ct.framework.api.WindowManager"
+                }
+            ]
         },
         {
             "name": "VueTocToggleTool",
