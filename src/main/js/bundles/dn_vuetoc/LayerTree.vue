@@ -25,7 +25,10 @@
                     </v-list-tile-content>
                     <v-list-tile-action v-if="$root.showLayerMenu && $root.getMenuValue(item)"
                                         @click.prevent.stop>
-                        <v-menu bottom left max-width="300"
+                        <v-menu bottom
+                                left
+                                max-width="300"
+                                min-width="300"
                                 nudge-top="-10"
                                 offset-y
                                 transition="slide-y-transition"
@@ -74,6 +77,7 @@
                         <v-menu bottom
                                 left
                                 max-width="300"
+                                min-width="300"
                                 nudge-top="-10"
                                 offset-y
                                 transition="slide-y-transition"
