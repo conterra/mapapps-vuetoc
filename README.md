@@ -22,6 +22,8 @@ Simply add the bundle "dn_vuetoc" to your map.apps 4 app.
     "showLoadingStatus": true,
     "showOperationalLayerHeaderMenu": true,
     "showLayerMenu": true,
+    "showResetButton": true,
+    "showCloseButton": true,
     "visibleIconClass": "check_box",
     "invisibleIconClass": "check_box_outline_blank"
 }
@@ -36,6 +38,8 @@ Simply add the bundle "dn_vuetoc" to your map.apps 4 app.
 | showLoadingStatus              | boolean | ```true``` &#124; ```false```   | ```true```                      | Show current loading status of layer |
 | showOperationalLayerHeaderMenu | boolean | ```true``` &#124; ```false```   | ```true```                      | Show operational layer menu          |
 | showLayerMenu                  | boolean | ```true``` &#124; ```false```   | ```true```                      | Show layer menu                      |
+| showResetButton                | boolean | ```true``` &#124; ```false```   | ```true```                      | Show reset button                    |
+| showCloseButton                | boolean | ```true``` &#124; ```false```   | ```true```                      | Show close menu                      |
 | visibleIconClass               | String  |                                 | ```"check_box"```               | Visible icon class                   |
 | invisibleIconClass             | String  |                                 | ```"check_box_outline_blank"``` | Invisible icon class                 |
 

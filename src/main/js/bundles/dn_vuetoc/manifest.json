@@ -90,6 +90,8 @@
                 "showLoadingStatus": true,
                 "showOperationalLayerHeaderMenu": true,
                 "showLayerMenu": true,
+                "showResetButton": true,
+                "showCloseButton": true,
                 "visibleIconClass": "check_box",
                 "invisibleIconClass": "check_box_outline_blank"
             },

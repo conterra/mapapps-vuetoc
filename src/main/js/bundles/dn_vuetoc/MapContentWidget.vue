@@ -19,7 +19,7 @@
         <div class="ct-flex-item ct-flex-item--no-grow ct-flex-item--no-shrink">
             <v-container grid-list-md>
                 <v-layout row wrap>
-                    <v-flex xs6>
+                    <v-flex v-if="showCloseButton">
                         <v-card class="elevation-6">
                             <v-btn v-if="isMobile" block
                                    color="primary"
@@ -37,7 +37,7 @@
                             </v-btn>
                         </v-card>
                     </v-flex>
-                    <v-flex xs6>
+                    <v-flex v-if="showResetButton">
                         <v-card class="elevation-6">
                             <v-btn block
                                    color="primary"
@@ -79,6 +79,10 @@
                 showOperationalLayer: true,
                 showLegend: true,
                 showLoadingStatus: true,
+                showOperationalLayerHeaderMenu: true,
+                showLayerMenu: true,
+                showResetButton: true,
+                showCloseButton: true,
                 visibleIconClass: "visibility",
                 invisibleIconClass: "visibility_off",
                 i18n: {
