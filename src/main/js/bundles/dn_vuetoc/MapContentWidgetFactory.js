@@ -68,16 +68,17 @@ export default class MapContentWidgetFactory {
             .enable()
             .syncToLeftNow();
 
-        mapWidgetModel.watch("view", ({value}) => {
+        if (mapWidgetModel.view) {
             this._createLayerListViewModel(vm);
             this._waitForLayers(vm);
-
-            value.watch("stationary", (response) => {
-                if (response) {
-                    vm.rerenderProgressBars();
-                }
+            this._watchForStationary(mapWidgetModel.view, vm)
+        } else {
+            mapWidgetModel.watch("view", ({value}) => {
+                this._createLayerListViewModel(vm);
+                this._waitForLayers(vm);
+                this._watchForStationary(value, vm)
             });
-        });
+        }
 
         let map = mapWidgetModel.get("map");
         map.allLayers.on("change", (event) => {
@@ -208,6 +209,17 @@ export default class MapContentWidgetFactory {
             }
             this._createMenuArray(vm);
             vm.rerender();
+        });
+    }
+
+    _watchForStationary(view, vm) {
+        if (this._stationaryWatch) {
+            this._stationaryWatch.remove();
+        }
+        this._stationaryWatch = view.watch("stationary", (response) => {
+            if (response) {
+                vm.rerenderProgressBars();
+            }
         });
     }
 
