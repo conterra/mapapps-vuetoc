@@ -203,7 +203,9 @@ export default class MapContentWidgetFactory {
             promises.push(promise);
         });
         Promise.all(promises).then(() => {
-            this._createLegendArray(vm);
+            if (this._properties.showLegend) {
+                this._createLegendArray(vm);
+            }
             this._createMenuArray(vm);
             vm.rerender();
         });
