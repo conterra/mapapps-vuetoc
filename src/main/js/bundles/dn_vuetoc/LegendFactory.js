@@ -22,7 +22,7 @@ export default class LegendFactory {
         let mapWidgetModel = this._mapWidgetModel;
         let view = mapWidgetModel.get("view");
         let legendWidget = new Legend({
-            class: "ct-legend",
+            class: "vuetocLegend",
             view: view,
             layerInfos: [{
                 layer: layer
@@ -43,7 +43,7 @@ export default class LegendFactory {
                 h: 500
             },
             content: widget.domNode,
-            windowClass: "vuetocLegend"
+            windowClass: "vuetocLegendWindow"
         });
         w.show();
     }
