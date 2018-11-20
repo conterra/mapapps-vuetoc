@@ -40,8 +40,10 @@ export default class LayerToolResolver extends Evented {
         });
     }
 
-    removeLayerToolFactory(component) {
-        this[_layerTools].remove(name);
+    removeLayerToolFactory(factory) {
+        let component = factory.getComponent();
+        let name = component.name;
+        this[_layerTools].delete(name);
         this.emit("layer-tool-removed", {
             name, component
         });
