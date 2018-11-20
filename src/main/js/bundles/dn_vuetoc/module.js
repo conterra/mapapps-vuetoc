@@ -18,4 +18,3 @@ import "./MapContentWidgetFactory";
 import "./LayerToolResolver";
 import "./ZoomToExtentTool";
 import "./OpacityTool";
-import "./LegendTool";
