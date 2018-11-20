@@ -140,29 +140,16 @@
             ]
         },
         {
-            "name": "ZoomToExtentToolFactory",
+            "name": "ZoomToExtentTool",
             "provides": "vue-toc.LayerToolFactory"
         },
         {
-            "name": "OpacitySliderToolFactory",
+            "name": "OpacityTool",
             "provides": "vue-toc.LayerToolFactory"
         },
         {
-            "name": "ShowLegendToolFactory",
+            "name": "LegendTool",
             "provides": "vue-toc.LayerToolFactory",
-            "references": [
-                {
-                    "name": "legendFactory",
-                    "providing": "vue-toc.LegendFactory"
-                }
-            ]
-        },
-        {
-            "name": "LegendFactory",
-            "provides": "vue-toc.LegendFactory",
-            "properties": {
-                "widgetRole": "legend"
-            },
             "references": [
                 {
                     "name": "_mapWidgetModel",

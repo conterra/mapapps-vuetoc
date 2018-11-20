@@ -38,7 +38,6 @@ export default class MapContentWidgetFactory {
         vm.i18n = this._i18n.get().ui;
         vm.showBasemaps = properties.showBasemaps;
         vm.showOperationalLayer = properties.showOperationalLayer;
-        vm.customLayerTools = this._layerToolResolver.getLayerTools();
         vm.showLegend = properties.showLegend;
         vm.showLoadingStatus = properties.showLoadingStatus;
         vm.showOperationalLayerHeaderMenu = properties.showOperationalLayerHeaderMenu;
@@ -71,12 +70,14 @@ export default class MapContentWidgetFactory {
         if (mapWidgetModel.view) {
             this._createLayerListViewModel(vm);
             this._waitForLayers(vm);
-            this._watchForStationary(mapWidgetModel.view, vm)
+            this._watchForStationary(mapWidgetModel.view, vm);
+            vm.customLayerTools = this._layerToolResolver.getLayerTools();
         } else {
             mapWidgetModel.watch("view", ({value}) => {
                 this._createLayerListViewModel(vm);
                 this._waitForLayers(vm);
-                this._watchForStationary(value, vm)
+                this._watchForStationary(value, vm);
+                vm.customLayerTools = this._layerToolResolver.getLayerTools();
             });
         }
 
