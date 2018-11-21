@@ -41,7 +41,7 @@ export default function OpacityTool() {
                 },
                 methods: {
                     displayToolForItem() {
-                        return item.layer && item.layer.opacity;
+                        return item.layer && item.layer.opacity !== undefined;
                     },
                     onChange(value) {
                         this.item.layer.opacity = value;

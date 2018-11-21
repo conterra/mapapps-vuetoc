@@ -19,7 +19,9 @@ export default {
   },
   methods: {
     onChange(value) {},
-    displayToolForItem(item) {}
+    displayToolForItem(item) {
+      return true;
+    }
   }
 };
 </script>
