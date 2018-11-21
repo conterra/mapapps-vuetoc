@@ -6,7 +6,7 @@
       </v-list-tile-action>
       <v-list-tile-title>{{titleLabel}}</v-list-tile-title>
     </v-list-tile>
-    <v-list-tile class="vue-toc__opacity">
+    <v-list-tile class="vue-toc__slider">
       {{fromLabel}}
       <v-slider v-model="sliderValue" hide-details :max="max" :step="step" @input="onChange"></v-slider>
       {{toLabel}}
