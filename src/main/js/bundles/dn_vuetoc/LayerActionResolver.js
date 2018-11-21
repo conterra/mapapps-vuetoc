@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2018 con terra GmbH (info@conterra.de)
  *
@@ -15,37 +16,37 @@
  */
 import {Evented} from "apprt-core/Events";
 
-const _layerTools = Symbol("layerTools");
+const _layerActions = Symbol("layerActions");
 
-export default class LayerToolResolver extends Evented {
+export default class LayerActionResolver extends Evented {
     constructor() {
         super();
-        this[_layerTools] = new Map();
+        this[_layerActions] = new Map();
     }
 
-    getLayerTools() {
-        return Array.from(this[_layerTools].values());
+    getLayerActions() {
+        return Array.from(this[_layerActions].values());
     }
 
-    addLayerToolFactory(factory) {
+    addLayerActionFactory(factory) {
         if (!factory.getComponent) {
-            console.warn("LayerToolResolver: Factory must provide a 'getComponent' function!");
+            console.warn("LayerActionResolver: Factory must provide a 'getComponent' function!");
             return;
         }
-        let component = factory.getComponent();
-        let name = component.name;
-        this[_layerTools].set(name, component);
-        this.emit("layer-tool-added", {
-            name, component
+        let action = factory.getComponent();
+        let name = action.name;
+        this[_layerActions].set(name, action);
+        this.emit("layer-action-added", {
+            name, action
         });
     }
 
-    removeLayerToolFactory(factory) {
-        let component = factory.getComponent();
-        let name = component.name;
-        this[_layerTools].delete(name);
-        this.emit("layer-tool-removed", {
-            name, component
+    removeLayerActionFactory(factory) {
+        let action = factory.getComponent();
+        let name = action.name;
+        this[_layerActions].delete(name);
+        this.emit("layer-action-removed", {
+            name, action
         });
     }
 }

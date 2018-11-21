@@ -71,13 +71,13 @@ export default class MapContentWidgetFactory {
             this._createLayerListViewModel(vm);
             this._waitForLayers(vm);
             this._watchForStationary(mapWidgetModel.view, vm);
-            vm.customLayerTools = this._layerToolResolver.getLayerTools();
+            vm.customLayerTools = this._layerActionResolver.getLayerActions();
         } else {
-            mapWidgetModel.watch("view", ({value}) => {
+            mapWidgetModel.watch("view", ({ value }) => {
                 this._createLayerListViewModel(vm);
                 this._waitForLayers(vm);
                 this._watchForStationary(value, vm);
-                vm.customLayerTools = this._layerToolResolver.getLayerTools();
+                vm.customLayerTools = this._layerActionResolver.getLayerActions();
             });
         }
 
@@ -88,12 +88,13 @@ export default class MapContentWidgetFactory {
         });
 
         // listen to custom tool registrations
-        this._layerToolResolver.on("layer-tool-added", () => {
-            vm.customLayerTools = this._layerToolResolver.getLayerTools();
-        });
-        this._layerToolResolver.on("layer-tool-removed", () => {
-            vm.customLayerTools = this._layerToolResolver.getLayerTools();
-        });
+        this.watchHandles = [];
+        this.watchHandles.push(this._layerActionResolver.on("layer-tool-added", () => {
+            vm.customLayerTools = this._layerActionResolver.getLayerTools();
+        }));
+        this.watchHandles.push(this._layerActionResolver.on("layer-tool-removed", () => {
+            vm.customLayerTools = this._layerActionResolver.getLayerTools();
+        }));
     }
 
     createInstance() {
@@ -244,5 +245,11 @@ export default class MapContentWidgetFactory {
             item.set("visible", value);
         });
         this.vm.rerender();
+    }
+
+    deactivate() {
+        this.watchHandles.forEach(handle => {
+            handle.remove();
+        })
     }
 }

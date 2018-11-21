@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2018 con terra GmbH (info@conterra.de)
  *
@@ -13,37 +14,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export default function ZoomToExtentToolFactory() {
+import ButtonAction from "./ButtonAction.vue";
+
+export default function ZoomToExtentAction() {
     return {
         getComponent() {
             let i18n = this._i18n.get().ui;
             return {
                 name: "zoom-to-extent",
-                template: `
-                <v-list-tile v-if="item.layer && item.layer.fullExtent" @click="zoomToExtent(item)">
-                    <v-list-tile-action>
-                        <v-icon primary>search</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-title>{{i18n.zoomToExtent}}</v-list-tile-title>
-                </v-list-tile>`,
-
-                props: {
-                    item: Object,
-                    i18n: {
-                        type: Object,
-                        default: function () {
-                            return i18n;
-                        }
+                extends: ButtonAction,
+                data: function () {
+                    return {
+                        icon: "search",
+                        titleLabel: i18n.zoomToExtent
                     }
                 },
                 methods: {
-                    zoomToExtent(item) {
+                    displayToolForItem(item) {
+                        return item.layer && item.layer.fullExtent;
+                    },
+                    onClick(item) {
                         const layer = item.layer;
                         let extent = layer.fullExtent;
                         if (!extent) {
                             return;
                         }
-                        item.view.goTo({target: extent}, {
+                        item.view.goTo({ target: extent }, {
                             "animate": true,
                             "duration": 1000,
                             "easing": "ease-in-out"

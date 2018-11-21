@@ -24,8 +24,6 @@ module.exports = {
             backToMap: "Back to map",
             reset: "Reset",
             zoomToExtent: "Zoom to extent",
-            showLegend: "Show Legend",
-            legend: "Legend",
             description: "Description:",
             copyright: "Copyright:",
             activateAllLayer: "Activate all layer",

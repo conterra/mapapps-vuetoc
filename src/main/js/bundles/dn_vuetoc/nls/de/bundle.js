@@ -23,8 +23,6 @@ module.exports = {
         backToMap: "Zur Karte",
         reset: "Zurücksetzen",
         zoomToExtent: "Auf Ausdehnung zoomen",
-        showLegend: "Legende anzeigen",
-        legend: "Legende",
         description: "Beschreibung:",
         copyright: "Copyright:",
         activateAllLayer: "Alle Inhalte aktivieren",

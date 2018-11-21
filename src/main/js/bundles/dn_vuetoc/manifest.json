@@ -123,29 +123,29 @@
                     "filter": "(id=vueTocToggleTool)"
                 },
                 {
-                    "name": "_layerToolResolver",
-                    "providing": "vue-toc.LayerToolResolver"
+                    "name": "_layerActionResolver",
+                    "providing": "vue-toc.LayerActionResolver"
                 }
             ]
         },
         {
-            "name": "LayerToolResolver",
-            "provides": "vue-toc.LayerToolResolver",
+            "name": "LayerActionResolver",
+            "provides": "vue-toc.LayerActionResolver",
             "references": [
                 {
-                    "name": "layerToolFactory",
-                    "providing": "vue-toc.LayerToolFactory",
+                    "name": "layerActionFactory",
+                    "providing": "vue-toc.LayerActionFactory",
                     "cardinality": "0..n"
                 }
             ]
         },
         {
-            "name": "ZoomToExtentTool",
-            "provides": "vue-toc.LayerToolFactory"
+            "name": "ZoomToExtentAction",
+            "provides": "vue-toc.LayerActionFactory"
         },
         {
-            "name": "OpacityTool",
-            "provides": "vue-toc.LayerToolFactory"
+            "name": "OpacityAction",
+            "provides": "vue-toc.LayerActionFactory"
         },
         {
             "name": "VueTocToggleTool",
