@@ -54,9 +54,6 @@ export default class MapContentWidgetFactory {
             this._resetLayerVisibility();
             vm.selectedId = defaultSelectedId;
         });
-        vm.$on('zoomToExtent', (item) => {
-            this._zoomToLayerExtent(item.layer);
-        });
         vm.$on('enableAllLayers', (value) => {
             this._enableAllLayers(value);
         });
