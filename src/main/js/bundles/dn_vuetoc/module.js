@@ -17,4 +17,6 @@ import ".";
 import "./MapContentWidgetFactory";
 import "./LayerActionResolver";
 import "./ZoomToExtentAction";
+import "./ShowSublayerAction";
+import "./HideSublayerAction";
 import "./OpacityAction";

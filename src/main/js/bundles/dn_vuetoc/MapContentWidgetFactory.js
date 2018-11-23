@@ -120,15 +120,15 @@ export default class MapContentWidgetFactory {
                 vm.rerenderProgressBars();
             }));
             this._layerWatchers.push(item.watch("visible", () => {
-                vm.rerender();
+                vm.rerenderListActions();
             }));
         };
         if (layerListViewModel.state === "ready") {
-            vm.rerender();
+            vm.rerenderListActions();
         } else {
             let watch = layerListViewModel.watch("state", (state) => {
                 watch.remove();
-                vm.rerender();
+                vm.rerenderListActions();
             });
         }
 
@@ -207,7 +207,7 @@ export default class MapContentWidgetFactory {
                 this._createLegendArray(vm);
             }
             this._createMenuArray(vm);
-            vm.rerender();
+            vm.rerenderListActions();
         });
     }
 
@@ -230,7 +230,7 @@ export default class MapContentWidgetFactory {
         items.forEach((item) => {
             item.set("visible", item.initialVisible);
         });
-        this.vm.rerender();
+        this.vm.rerenderListActions();
     }
 
     _enableAllLayers(value) {
@@ -241,7 +241,7 @@ export default class MapContentWidgetFactory {
         items.forEach((item) => {
             item.set("visible", value);
         });
-        this.vm.rerender();
+        this.vm.rerenderListActions();
     }
 
     deactivate() {

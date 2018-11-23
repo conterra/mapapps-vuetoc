@@ -13,14 +13,14 @@
                 <v-list-tile slot="activator"
                              :key="item.uid"
                              :disabled="!item.visibleAtCurrentScale">
-                    <v-list-tile-action @click.prevent.stop>
-                        <v-btn icon @click="item.visible = !item.visible; $root.rerender()">
+                    <v-list-tile-action v-if="$root.renderListActions" @click.prevent.stop>
+                        <v-btn icon @click="item.visible = !item.visible; $root.rerenderListActions()">
                             <v-icon v-if="item.visible">{{visibleIconClass}}</v-icon>
                             <v-icon v-else>{{invisibleIconClass}}</v-icon>
                         </v-btn>
                     </v-list-tile-action>
                     <v-list-tile-content @click.prevent.stop
-                                         @click="item.visible = !item.visible; $root.rerender()">
+                                         @click="item.visible = !item.visible; $root.rerenderListActions()">
                         <v-list-tile-title v-text="item.title"></v-list-tile-title>
                     </v-list-tile-content>
                     <v-list-tile-action v-if="$root.showLayerMenu && $root.getMenuValue(item)"
@@ -44,7 +44,8 @@
                         </v-menu>
                     </v-list-tile-action>
                 </v-list-tile>
-                <layer-tree :i18n="i18n"
+                <layer-tree v-if="item.children"
+                            :i18n="i18n"
                             :customLayerTools="customLayerTools"
                             :visibleIconClass="visibleIconClass"
                             :invisibleIconClass="invisibleIconClass"
@@ -56,20 +57,20 @@
                           append-icon="">
                 <v-list-tile slot="activator"
                              :disabled="!item.visibleAtCurrentScale">
-                    <v-list-tile-action @click.prevent.stop>
+                    <v-list-tile-action v-if="$root.renderListActions" @click.prevent.stop>
                         <v-btn icon
-                               @click="item.visible = !item.visible; $root.rerender()">
+                               @click="item.visible = !item.visible; $root.rerenderListActions()">
                             <v-icon v-if="item.visible">{{visibleIconClass}}</v-icon>
                             <v-icon v-else>{{invisibleIconClass}}</v-icon>
                         </v-btn>
                     </v-list-tile-action>
                     <v-list-tile-action
                         v-if="$root.showLegend && $root.getLegend(item.layer.url)"
-                        @click="item.visible = !item.visible; $root.rerender()">
+                        @click="item.visible = !item.visible; $root.rerenderListActions()">
                         <img :src="$root.getLegend(item.layer.url)"/>
                     </v-list-tile-action>
                     <v-list-tile-content @click.prevent.stop
-                                         @click="item.visible = !item.visible; $root.rerender()">
+                                         @click="item.visible = !item.visible; $root.rerenderListActions()">
                         <v-list-tile-title v-text="item.title"></v-list-tile-title>
                     </v-list-tile-content>
                     <v-list-tile-action v-if="$root.showLayerMenu && $root.getMenuValue(item)"

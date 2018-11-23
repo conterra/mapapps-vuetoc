@@ -147,9 +147,23 @@
             "provides": "vue-toc.LayerActionFactory"
         },
         {
-            "name": "OpacityAction",
+            "name": "ShowSublayerAction",
             "properties": {
                 "Service-Ranking": -2
+            },
+            "provides": "vue-toc.LayerActionFactory"
+        },
+        {
+            "name": "HideSublayerAction",
+            "properties": {
+                "Service-Ranking": -3
+            },
+            "provides": "vue-toc.LayerActionFactory"
+        },
+        {
+            "name": "OpacityAction",
+            "properties": {
+                "Service-Ranking": -4
             },
             "provides": "vue-toc.LayerActionFactory"
         },

@@ -27,6 +27,8 @@ module.exports = {
         copyright: "Copyright:",
         activateAllLayer: "Alle Inhalte aktivieren",
         deactivateAllLayer: "Alle Inhalte deaktivieren",
+        showAllSublayer: "Alle Inhalte aktivieren",
+        hideAllSublayer: "Alle Inhalte deaktivieren",
         opacity: "Transparenz",
         visible: "sichtbar",
         invisible: "unsichtbar"

@@ -28,6 +28,8 @@ module.exports = {
             copyright: "Copyright:",
             activateAllLayer: "Activate all layer",
             deactivateAllLayer: "Deactivate all layer",
+            showAllSublayer: "Show all sublayer",
+            hideAllSublayer: "Hide all sublayer",
             opacity: "Opacity",
             visible: "visible",
             invisible: "invisible"

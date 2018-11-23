@@ -6,7 +6,7 @@
                                   :i18n="i18n"
                                   :basemaps="basemaps"
                                   class="vue-toc__basemaps"/>
-                <operationallayer-widget v-if="showOperationalLayer && renderComponent"
+                <operationallayer-widget v-if="showOperationalLayer"
                                          :i18n="i18n"
                                          :operationalItems="operationalItems"
                                          :visibleIconClass="visibleIconClass"
@@ -68,7 +68,7 @@
         data: function () {
             return {
                 customLayerTools: [],
-                renderComponent: true,
+                renderListActions: true,
                 renderProgressBars: true,
                 operationalItems: null,
                 legendArray: [],
@@ -104,10 +104,10 @@
             };
         },
         methods: {
-            rerender: function () {
-                this.renderComponent = false;
+            rerenderListActions: function () {
+                this.renderListActions = false;
                 this.$nextTick(() => {
-                    this.renderComponent = true;
+                    this.renderListActions = true;
                 });
             },
             rerenderProgressBars: function () {
