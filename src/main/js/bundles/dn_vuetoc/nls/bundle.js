@@ -30,6 +30,8 @@ module.exports = {
             hideAllLayer: "Deactivate all layer",
             showAllSublayer: "Show all sublayer",
             hideAllSublayer: "Hide all sublayer",
+            openAllLayer: "Open all layer",
+            closeAllLayer: "Close all layer",
             opacity: "Opacity",
             visible: "visible",
             invisible: "invisible"

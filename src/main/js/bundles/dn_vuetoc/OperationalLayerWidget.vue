@@ -27,6 +27,18 @@
                         </v-list-tile-action>
                         <v-list-tile-title>{{i18n.hideAllLayer}}</v-list-tile-title>
                     </v-list-tile>
+                    <v-list-tile @click="$root.$emit('openAllLayer', true)">
+                        <v-list-tile-action>
+                            <v-icon primary>unfold_more</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-title>{{i18n.openAllLayer}}</v-list-tile-title>
+                    </v-list-tile>
+                    <v-list-tile @click="$root.$emit('openAllLayer', false)">
+                        <v-list-tile-action>
+                            <v-icon primary>unfold_less</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-title>{{i18n.closeAllLayer}}</v-list-tile-title>
+                    </v-list-tile>
                 </v-list>
             </v-menu>
         </v-toolbar>

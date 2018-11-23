@@ -29,6 +29,8 @@ module.exports = {
         hideAllLayer: "Alle Inhalte deaktivieren",
         showAllSublayer: "Alle Inhalte aktivieren",
         hideAllSublayer: "Alle Inhalte deaktivieren",
+        openAllLayer: "Alle Inhalte aufklappen",
+        closeAllLayer: "Alle Inhalte zuklappen",
         opacity: "Transparenz",
         visible: "sichtbar",
         invisible: "unsichtbar"
