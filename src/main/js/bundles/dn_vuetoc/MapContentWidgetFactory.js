@@ -54,8 +54,8 @@ export default class MapContentWidgetFactory {
             this._resetLayerVisibility();
             vm.selectedId = defaultSelectedId;
         });
-        vm.$on('enableAllLayers', (value) => {
-            this._enableAllLayers(value);
+        vm.$on('enableAllLayer', (value) => {
+            this._enableAllLayer(value);
         });
 
         Binding.for(vm, basemapModel)
@@ -233,7 +233,7 @@ export default class MapContentWidgetFactory {
         this.vm.rerenderListActions();
     }
 
-    _enableAllLayers(value) {
+    _enableAllLayer(value) {
         let operationalItems = this.vm.operationalItems;
         let items = operationalItems.flatten((item) => {
             return item.children;

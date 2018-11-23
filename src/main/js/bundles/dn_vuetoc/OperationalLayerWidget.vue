@@ -15,17 +15,17 @@
                     <v-icon>more_vert</v-icon>
                 </v-btn>
                 <v-list>
-                    <v-list-tile @click="$root.$emit('enableAllLayers', true)">
+                    <v-list-tile @click="$root.$emit('enableAllLayer', true)">
                         <v-list-tile-action>
                             <v-icon primary>visibility</v-icon>
                         </v-list-tile-action>
-                        <v-list-tile-title>{{i18n.activateAllLayer}}</v-list-tile-title>
+                        <v-list-tile-title>{{i18n.showAllLayer}}</v-list-tile-title>
                     </v-list-tile>
-                    <v-list-tile @click="$root.$emit('enableAllLayers', false)">
+                    <v-list-tile @click="$root.$emit('enableAllLayer', false)">
                         <v-list-tile-action>
                             <v-icon primary>visibility_off</v-icon>
                         </v-list-tile-action>
-                        <v-list-tile-title>{{i18n.deactivateAllLayer}}</v-list-tile-title>
+                        <v-list-tile-title>{{i18n.hideAllLayer}}</v-list-tile-title>
                     </v-list-tile>
                 </v-list>
             </v-menu>
