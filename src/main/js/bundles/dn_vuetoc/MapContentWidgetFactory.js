@@ -86,10 +86,10 @@ export default class MapContentWidgetFactory {
 
         // listen to custom tool registrations
         this.watchHandles = [];
-        this.watchHandles.push(this._layerActionResolver.on("layer-tool-added", () => {
+        this.watchHandles.push(this._layerActionResolver.on("layer-action-added", () => {
             vm.customLayerTools = this._layerActionResolver.getLayerTools();
         }));
-        this.watchHandles.push(this._layerActionResolver.on("layer-tool-removed", () => {
+        this.watchHandles.push(this._layerActionResolver.on("layer-action-removed", () => {
             vm.customLayerTools = this._layerActionResolver.getLayerTools();
         }));
     }
