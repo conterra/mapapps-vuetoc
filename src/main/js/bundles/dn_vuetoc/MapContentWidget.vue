@@ -11,7 +11,7 @@
                                          :operationalItems="operationalItems"
                                          :visibleIconClass="visibleIconClass"
                                          :invisibleIconClass="invisibleIconClass"
-                                         :customLayerTools="customLayerTools"
+                                         :customLayerActions="customLayerActions"
                                          :showOperationalLayerHeaderMenu="showOperationalLayerHeaderMenu"
                                          class="vue-toc__layers"/>
             </v-container>
@@ -67,7 +67,7 @@
         },
         data: function () {
             return {
-                customLayerTools: [],
+                customLayerActions: [],
                 renderListActions: true,
                 renderProgressBars: true,
                 operationalItems: null,

@@ -39,14 +39,14 @@
                                 <v-icon>more_vert</v-icon>
                             </v-btn>
                             <layer-menu :i18n="i18n"
-                                        :customLayerTools="customLayerTools"
+                                        :customLayerActions="customLayerActions"
                                         :item="item"/>
                         </v-menu>
                     </v-list-tile-action>
                 </v-list-tile>
                 <layer-tree v-if="item.children"
                             :i18n="i18n"
-                            :customLayerTools="customLayerTools"
+                            :customLayerActions="customLayerActions"
                             :visibleIconClass="visibleIconClass"
                             :invisibleIconClass="invisibleIconClass"
                             :items="item.children.items">
@@ -90,7 +90,7 @@
                                 <v-icon>more_vert</v-icon>
                             </v-btn>
                             <layer-menu :i18n="i18n"
-                                        :customLayerTools="customLayerTools"
+                                        :customLayerActions="customLayerActions"
                                         :item="item"/>
                         </v-menu>
                     </v-list-tile-action>
@@ -109,7 +109,7 @@
         },
         props: [
             "i18n",
-            "customLayerTools",
+            "customLayerActions",
             "items",
             "visibleIconClass",
             "invisibleIconClass"

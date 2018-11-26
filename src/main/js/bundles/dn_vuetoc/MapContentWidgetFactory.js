@@ -71,13 +71,13 @@ export default class MapContentWidgetFactory {
             this._createLayerListViewModel(vm);
             this._waitForLayers(vm);
             this._watchForStationary(mapWidgetModel.view, vm);
-            vm.customLayerTools = this._layerActionResolver.getLayerActions();
+            vm.customLayerActions = this._layerActionResolver.getLayerActions();
         } else {
             mapWidgetModel.watch("view", ({ value }) => {
                 this._createLayerListViewModel(vm);
                 this._waitForLayers(vm);
                 this._watchForStationary(value, vm);
-                vm.customLayerTools = this._layerActionResolver.getLayerActions();
+                vm.customLayerActions = this._layerActionResolver.getLayerActions();
             });
         }
 
@@ -90,10 +90,10 @@ export default class MapContentWidgetFactory {
         // listen to custom tool registrations
         this.watchHandles = [];
         this.watchHandles.push(this._layerActionResolver.on("layer-action-added", () => {
-            vm.customLayerTools = this._layerActionResolver.getLayerTools();
+            vm.customLayerActions = this._layerActionResolver.getLayerTools();
         }));
         this.watchHandles.push(this._layerActionResolver.on("layer-action-removed", () => {
-            vm.customLayerTools = this._layerActionResolver.getLayerTools();
+            vm.customLayerActions = this._layerActionResolver.getLayerTools();
         }));
     }
 

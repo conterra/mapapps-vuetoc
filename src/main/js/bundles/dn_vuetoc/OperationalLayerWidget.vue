@@ -46,7 +46,7 @@
             <layer-tree :i18n="i18n"
                         :visibleIconClass="visibleIconClass"
                         :invisibleIconClass="invisibleIconClass"
-                        :customLayerTools="customLayerTools"
+                        :customLayerActions="customLayerActions"
                         :items="operationalItems.items">
             </layer-tree>
         </div>
@@ -62,7 +62,7 @@
         props: [
             "i18n",
             "operationalItems",
-            "customLayerTools",
+            "customLayerActions",
             "visibleIconClass",
             "invisibleIconClass",
             "showOperationalLayerHeaderMenu"
