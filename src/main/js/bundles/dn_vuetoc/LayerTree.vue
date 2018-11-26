@@ -23,7 +23,7 @@
                                          @click="item.visible = !item.visible; $root.rerenderListActions()">
                         <v-list-tile-title v-text="item.title"></v-list-tile-title>
                     </v-list-tile-content>
-                    <v-list-tile-action v-if="$root.showLayerMenu && $root.getMenuValue(item)"
+                    <v-list-tile-action v-if="$root.showLayerMenu && $root.getMenuValue(item) && hasLayerActions(item)"
                                         @click.prevent.stop>
                         <v-menu bottom
                                 left
@@ -73,7 +73,7 @@
                                          @click="item.visible = !item.visible; $root.rerenderListActions()">
                         <v-list-tile-title v-text="item.title"></v-list-tile-title>
                     </v-list-tile-content>
-                    <v-list-tile-action v-if="$root.showLayerMenu && $root.getMenuValue(item)"
+                    <v-list-tile-action v-if="$root.showLayerMenu && $root.getMenuValue(item) && hasLayerActions(item)"
                                         @click.prevent.stop>
                         <v-menu bottom
                                 left
@@ -113,6 +113,13 @@
             "items",
             "visibleIconClass",
             "invisibleIconClass"
-        ]
+        ],
+        methods: {
+            hasLayerActions: function(item) {
+                return this.customLayerActions.some(action =>
+                    action.methods.displayActionForItem(item)
+                );
+            }
+        }
     }
 </script>

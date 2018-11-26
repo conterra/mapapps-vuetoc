@@ -1,6 +1,6 @@
 <template>
-    <v-list-group v-if="displayToolForItem(item)" :disabled="disableToolForItem(item)" no-action>
-        <v-list-tile slot="activator" :disabled="disableToolForItem(item)">
+    <v-list-group v-if="displayActionForItem(item)" :disabled="disableActionForItem(item)" no-action>
+        <v-list-tile slot="activator" :disabled="disableActionForItem(item)">
             <v-list-tile-action>
                 <v-icon primary>{{icon}}</v-icon>
             </v-list-tile-action>
@@ -34,10 +34,10 @@
         methods: {
             onChange(value) {
             },
-            displayToolForItem(item) {
+            displayActionForItem(item) {
                 return true;
             },
-            disableToolForItem(item) {
+            disableActionForItem(item) {
                 return false;
             }
         }

@@ -40,7 +40,7 @@ export default function OpacityAction() {
                     this.opacityWatchHandle.remove();
                 },
                 methods: {
-                    displayToolForItem(item) {
+                    displayActionForItem(item) {
                         return item.layer && item.layer.opacity !== undefined;
                     },
                     onChange(value) {

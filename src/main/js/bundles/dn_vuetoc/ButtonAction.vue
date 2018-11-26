@@ -1,5 +1,5 @@
 <template>
-    <v-list-tile v-if="displayToolForItem(item)" :disabled="disableToolForItem(item)" @click="onClick(item)">
+    <v-list-tile v-if="displayActionForItem(item)" :disabled="disableActionForItem(item)" @click="onClick(item)">
         <v-list-tile-action>
             <v-icon primary>{{icon}}</v-icon>
         </v-list-tile-action>
@@ -14,16 +14,16 @@
         data: function () {
             return {
                 icon: "settings",
-                titleLabel: "Tool Title"
+                titleLabel: "Action Title"
             };
         },
         methods: {
             onClick(item) {
             },
-            displayToolForItem(item) {
+            displayActionForItem(item) {
                 return true;
             },
-            disableToolForItem(item) {
+            disableActionForItem(item) {
                 return false;
             }
         }

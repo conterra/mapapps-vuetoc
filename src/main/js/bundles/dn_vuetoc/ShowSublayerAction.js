@@ -29,7 +29,7 @@ export default function ShowSublayerAction() {
                     }
                 },
                 methods: {
-                    displayToolForItem(item) {
+                    displayActionForItem(item) {
                         return item.children && item.children.length;
                     },
                     onClick(item) {

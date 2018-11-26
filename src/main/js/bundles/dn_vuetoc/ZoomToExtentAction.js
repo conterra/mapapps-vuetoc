@@ -30,7 +30,7 @@ export default function ZoomToExtentAction() {
                     }
                 },
                 methods: {
-                    displayToolForItem(item) {
+                    displayActionForItem(item) {
                         return item.layer && item.layer.fullExtent;
                     },
                     onClick(item) {

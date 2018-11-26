@@ -87,13 +87,13 @@ export default class MapContentWidgetFactory {
             this._waitForLayers(vm);
         });
 
-        // listen to custom tool registrations
+        // listen to custom action registrations
         this.watchHandles = [];
         this.watchHandles.push(this._layerActionResolver.on("layer-action-added", () => {
-            vm.customLayerActions = this._layerActionResolver.getLayerTools();
+            vm.customLayerActions = this._layerActionResolver.getLayerActions();
         }));
         this.watchHandles.push(this._layerActionResolver.on("layer-action-removed", () => {
-            vm.customLayerActions = this._layerActionResolver.getLayerTools();
+            vm.customLayerActions = this._layerActionResolver.getLayerActions();
         }));
     }
 

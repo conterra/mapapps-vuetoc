@@ -12,8 +12,8 @@
         </v-card-title>
         <v-divider></v-divider>
         <v-list>
-            <div v-for="(tool, idx) in customLayerActions" :key="tool.name">
-                <component :is="tool" :item="item"></component>
+            <div v-for="(action, idx) in customLayerActions" :key="action.name">
+                <component :is="action" :item="item"></component>
                 <v-divider v-if="idx < customLayerActions.length - 1"></v-divider>
             </div>
         </v-list>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-    export default {
-        props: ["i18n", "customLayerActions", "item"]
-    };
+export default {
+  props: ["i18n", "customLayerActions", "item"]
+};
 </script>
