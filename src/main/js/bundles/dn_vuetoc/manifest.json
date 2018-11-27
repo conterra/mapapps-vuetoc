@@ -142,28 +142,28 @@
         {
             "name": "ZoomToExtentAction",
             "properties": {
-                "Service-Ranking": -1
-            },
-            "provides": "vue-toc.LayerActionFactory"
-        },
-        {
-            "name": "ShowSublayerAction",
-            "properties": {
-                "Service-Ranking": -2
-            },
-            "provides": "vue-toc.LayerActionFactory"
-        },
-        {
-            "name": "HideSublayerAction",
-            "properties": {
-                "Service-Ranking": 1
+                "Service-Ranking": 40
             },
             "provides": "vue-toc.LayerActionFactory"
         },
         {
             "name": "OpacityAction",
             "properties": {
-                "Service-Ranking": -4
+                "Service-Ranking": 30
+            },
+            "provides": "vue-toc.LayerActionFactory"
+        },
+        {
+            "name": "ShowSublayerAction",
+            "properties": {
+                "Service-Ranking": 20
+            },
+            "provides": "vue-toc.LayerActionFactory"
+        },
+        {
+            "name": "HideSublayerAction",
+            "properties": {
+                "Service-Ranking": 10
             },
             "provides": "vue-toc.LayerActionFactory"
         },
