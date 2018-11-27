@@ -1,18 +1,8 @@
 {
     "extends": [
-        "eslint:recommended",
-        "plugin:vue/recommended"
+        "eslint-config-ct-prodeng"
     ],
     "parserOptions": {
-        "ecmaVersion": 2018,
-        "sourceType": "module"
-    },
-    "globals": {
-        "module": true,
-        "require": true
-    },
-    "rules": {
-        "no-console": "off",
-        "no-unused-vars": "warn"
+        "ecmaVersion": 7
     }
 }

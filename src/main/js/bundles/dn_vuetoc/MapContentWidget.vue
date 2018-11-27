@@ -2,49 +2,58 @@
     <div class="ct-flex-container ct-flex-container--column fullHeight">
         <div class="ct-flex-item overflowAuto">
             <v-container grid-list-sm>
-                <baselayer-widget v-if="showBasemaps"
-                                  :i18n="i18n"
-                                  :basemaps="basemaps"
-                                  class="vue-toc__basemaps"/>
-                <operationallayer-widget v-if="showOperationalLayer"
-                                         :i18n="i18n"
-                                         :operationalItems="operationalItems"
-                                         :visibleIconClass="visibleIconClass"
-                                         :invisibleIconClass="invisibleIconClass"
-                                         :customLayerActions="customLayerActions"
-                                         :showOperationalLayerHeaderMenu="showOperationalLayerHeaderMenu"
-                                         class="vue-toc__layers"/>
+                <baselayer-widget
+                    v-if="showBasemaps"
+                    :i18n="i18n"
+                    :basemaps="basemaps"
+                    class="vue-toc__basemaps"/>
+                <operationallayer-widget
+                    v-if="showOperationalLayer"
+                    :i18n="i18n"
+                    :operational-items="operationalItems"
+                    :visible-icon-class="visibleIconClass"
+                    :invisible-icon-class="invisibleIconClass"
+                    :custom-layer-actions="customLayerActions"
+                    :show-operational-layer-header-menu="showOperationalLayerHeaderMenu"
+                    class="vue-toc__layers"/>
             </v-container>
         </div>
         <div class="ct-flex-item ct-flex-item--no-grow ct-flex-item--no-shrink">
             <v-container grid-list-md>
-                <v-layout row wrap>
+                <v-layout
+                    row
+                    wrap>
                     <v-flex v-if="showCloseButton">
                         <v-card class="elevation-6">
-                            <v-btn v-if="isMobile" block
-                                   color="primary"
-                                   @click.native="$emit('close')"
-                                   class="btn btn--block btn--raised theme--light">
+                            <v-btn
+                                v-if="isMobile"
+                                block
+                                color="primary"
+                                class="btn btn--block btn--raised theme--light"
+                                @click.native="$emit('close')">
                                 <v-icon left>arrow_back</v-icon>
-                                {{i18n.backToMap}}
+                                {{ i18n.backToMap }}
                             </v-btn>
-                            <v-btn v-else block
-                                   color="primary"
-                                   @click.native="$emit('close')"
-                                   class="btn btn--block btn--raised theme--light">
+                            <v-btn
+                                v-else
+                                block
+                                color="primary"
+                                class="btn btn--block btn--raised theme--light"
+                                @click.native="$emit('close')">
                                 <v-icon left>arrow_back</v-icon>
-                                {{i18n.close}}
+                                {{ i18n.close }}
                             </v-btn>
                         </v-card>
                     </v-flex>
                     <v-flex v-if="showResetButton">
                         <v-card class="elevation-6">
-                            <v-btn block
-                                   color="primary"
-                                   @click.native="$emit('reset')"
-                                   class="btn btn--block btn--raised theme--light">
+                            <v-btn
+                                block
+                                color="primary"
+                                class="btn btn--block btn--raised theme--light"
+                                @click.native="$emit('reset')">
                                 <v-icon left>settings_backup_restore</v-icon>
-                                {{i18n.reset}}
+                                {{ i18n.reset }}
                             </v-btn>
                         </v-card>
                     </v-flex>
@@ -55,16 +64,15 @@
 </template>
 <script>
     import Bindable from "apprt-vue/mixins/Bindable";
-
     import BaseLayerWidget from "./BaseLayerWidget.vue";
     import OperationalLayerWidget from "./OperationalLayerWidget.vue";
 
     export default {
-        mixins: [Bindable],
         components: {
             "baselayer-widget": BaseLayerWidget,
             "operationallayer-widget": OperationalLayerWidget
         },
+        mixins: [Bindable],
         data: function () {
             return {
                 customLayerActions: [],
@@ -117,9 +125,7 @@
                 });
             },
             getMenuValue: function (item) {
-                return this.menuArray.find((obj) => {
-                    return obj.uid === item.uid;
-                });
+                return this.menuArray.find((obj) => obj.uid === item.uid);
             },
             getLegend: function (url) {
                 let imageUrl = "";

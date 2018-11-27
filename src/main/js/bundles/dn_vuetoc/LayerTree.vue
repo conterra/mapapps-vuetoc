@@ -1,111 +1,54 @@
 <template>
     <div class="vue-toc__layer-tree">
-        <v-list v-for="item in items"
-                :key="item.uid" class="pa-0">
-            <v-progress-linear v-if="$root.showLoadingStatus && $root.renderProgressBars"
-                               :active="item.updating"
-                               :indeterminate="item.updating"
-                               :height="2"
-                               class="ma-0"></v-progress-linear>
-            <v-list-group v-if="item.children.length"
-                          no-action
-                          v-model="item.open">
-                <v-list-tile slot="activator"
-                             :key="item.uid"
-                             :disabled="!item.visibleAtCurrentScale">
-                    <v-list-tile-action v-if="$root.renderListActions" @click.prevent.stop>
-                        <v-btn icon @click="item.visible = !item.visible; $root.rerenderListActions()">
-                            <v-icon v-if="item.visible">{{visibleIconClass}}</v-icon>
-                            <v-icon v-else>{{invisibleIconClass}}</v-icon>
-                        </v-btn>
-                    </v-list-tile-action>
-                    <v-list-tile-content @click.prevent.stop
-                                         @click="item.visible = !item.visible; $root.rerenderListActions()">
-                        <v-list-tile-title v-text="item.title"></v-list-tile-title>
-                    </v-list-tile-content>
-                    <v-list-tile-action v-if="$root.showLayerMenu && $root.getMenuValue(item) && hasLayerActions(item)"
-                                        @click.prevent.stop>
-                        <v-menu bottom
-                                left
-                                max-width="300"
-                                min-width="300"
-                                nudge-top="-10"
-                                offset-y
-                                transition="slide-y-transition"
-                                :close-on-content-click="false"
-                                :close-on-click="true"
-                                v-model="$root.getMenuValue(item).visible">
-                            <v-btn icon slot="activator">
-                                <v-icon>more_vert</v-icon>
-                            </v-btn>
-                            <layer-menu :i18n="i18n"
-                                        :customLayerActions="customLayerActions"
-                                        :item="item"/>
-                        </v-menu>
-                    </v-list-tile-action>
-                </v-list-tile>
-                <layer-tree v-if="item.children"
-                            :i18n="i18n"
-                            :customLayerActions="customLayerActions"
-                            :visibleIconClass="visibleIconClass"
-                            :invisibleIconClass="invisibleIconClass"
-                            :items="item.children.items">
-                </layer-tree>
+        <v-list
+            v-for="item in items"
+            :key="item.uid"
+            class="pa-0">
+            <v-progress-linear
+                v-if="$root.showLoadingStatus && $root.renderProgressBars"
+                :active="item.updating"
+                :indeterminate="item.updating"
+                :height="2"
+                class="ma-0"
+            />
+            <v-list-group
+                v-if="item.children.length"
+                v-model="item.open"
+                no-action>
+                <layer-item
+                    slot="activator"
+                    :item="item"
+                    :custom-layer-actions="customLayerActions"
+                    :i18n="i18n"
+                    :visible-icon-class="visibleIconClass"
+                    :invisible-icon-class="invisibleIconClass"
+                />
+                <layer-tree
+                    :i18n="i18n"
+                    :custom-layer-actions="customLayerActions"
+                    :visible-icon-class="visibleIconClass"
+                    :invisible-icon-class="invisibleIconClass"
+                    :items="item.children.items"
+                />
             </v-list-group>
-            <v-list-group v-else
-                          no-action
-                          append-icon="">
-                <v-list-tile slot="activator"
-                             :disabled="!item.visibleAtCurrentScale">
-                    <v-list-tile-action v-if="$root.renderListActions" @click.prevent.stop>
-                        <v-btn icon
-                               @click="item.visible = !item.visible; $root.rerenderListActions()">
-                            <v-icon v-if="item.visible">{{visibleIconClass}}</v-icon>
-                            <v-icon v-else>{{invisibleIconClass}}</v-icon>
-                        </v-btn>
-                    </v-list-tile-action>
-                    <v-list-tile-action
-                        v-if="$root.showLegend && $root.getLegend(item.layer.url)"
-                        @click="item.visible = !item.visible; $root.rerenderListActions()">
-                        <img :src="$root.getLegend(item.layer.url)"/>
-                    </v-list-tile-action>
-                    <v-list-tile-content @click.prevent.stop
-                                         @click="item.visible = !item.visible; $root.rerenderListActions()">
-                        <v-list-tile-title v-text="item.title"></v-list-tile-title>
-                    </v-list-tile-content>
-                    <v-list-tile-action v-if="$root.showLayerMenu && $root.getMenuValue(item) && hasLayerActions(item)"
-                                        @click.prevent.stop>
-                        <v-menu bottom
-                                left
-                                max-width="300"
-                                min-width="300"
-                                nudge-top="-10"
-                                offset-y
-                                transition="slide-y-transition"
-                                :close-on-content-click="false"
-                                :close-on-click="true"
-                                v-model="$root.getMenuValue(item).visible">
-                            <v-btn icon
-                                   slot="activator">
-                                <v-icon>more_vert</v-icon>
-                            </v-btn>
-                            <layer-menu :i18n="i18n"
-                                        :customLayerActions="customLayerActions"
-                                        :item="item"/>
-                        </v-menu>
-                    </v-list-tile-action>
-                </v-list-tile>
-            </v-list-group>
+            <layer-item
+                v-else
+                :item="item"
+                :custom-layer-actions="customLayerActions"
+                :i18n="i18n"
+                :visible-icon-class="visibleIconClass"
+                :invisible-icon-class="invisibleIconClass"
+            />
         </v-list>
     </div>
 </template>
 <script>
-    import LayerMenu from "./LayerMenu.vue";
+    import LayerItem from "./LayerItem.vue";
 
     export default {
         name: "layer-tree",
         components: {
-            "layer-menu": LayerMenu
+            "layer-item": LayerItem
         },
         props: [
             "i18n",
@@ -113,13 +56,6 @@
             "items",
             "visibleIconClass",
             "invisibleIconClass"
-        ],
-        methods: {
-            hasLayerActions: function(item) {
-                return this.customLayerActions.some(action =>
-                    action.methods.displayActionForItem(item)
-                );
-            }
-        }
-    }
+        ]
+    };
 </script>

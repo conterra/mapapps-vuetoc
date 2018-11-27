@@ -1,0 +1,72 @@
+<template>
+    <v-list-tile
+        :disabled="!item.visibleAtCurrentScale">
+        <v-list-tile-action
+            v-if="$root.renderListActions"
+            @click.prevent.stop>
+            <v-btn
+                icon
+                @click="item.visible = !item.visible; $root.rerenderListActions()">
+                <v-icon v-if="item.visible">{{ visibleIconClass }}</v-icon>
+                <v-icon v-else>{{ invisibleIconClass }}</v-icon>
+            </v-btn>
+        </v-list-tile-action>
+        <v-list-tile-content
+            @click.prevent.stop
+            @click="item.visible = !item.visible; $root.rerenderListActions()"
+        >
+            <v-list-tile-title v-text="item.title"/>
+        </v-list-tile-content>
+        <v-list-tile-action
+            v-if="$root.showLayerMenu && $root.getMenuValue(item) && hasLayerActions(item)"
+            @click.prevent.stop
+        >
+            <v-menu
+                :close-on-content-click="false"
+                :close-on-click="true"
+                v-model="$root.getMenuValue(item).visible"
+                bottom
+                left
+                max-width="300"
+                min-width="300"
+                nudge-top="-10"
+                offset-y
+                transition="slide-y-transition"
+            >
+                <v-btn
+                    slot="activator"
+                    icon>
+                    <v-icon>more_vert</v-icon>
+                </v-btn>
+                <layer-menu
+                    :i18n="i18n"
+                    :custom-layer-actions="customLayerActions"
+                    :item="item"/>
+            </v-menu>
+        </v-list-tile-action>
+    </v-list-tile>
+</template>
+<script>
+    import LayerMenu from "./LayerMenu.vue";
+
+    export default {
+        name: "layer-item",
+        components: {
+            "layer-menu": LayerMenu
+        },
+        props: [
+            "item",
+            "customLayerActions",
+            "visibleIconClass",
+            "invisibleIconClass",
+            "i18n"
+        ],
+        methods: {
+            hasLayerActions: function(item) {
+                return this.customLayerActions.some(action =>
+                    action.methods.displayActionForItem(item)
+                );
+            }
+        }
+    };
+</script>

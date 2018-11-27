@@ -1,17 +1,27 @@
 <template>
-    <v-list-group v-if="displayActionForItem(item)" :disabled="disableActionForItem(item)" no-action>
-        <v-list-tile slot="activator" :disabled="disableActionForItem(item)">
+    <v-list-group
+        v-if="displayActionForItem(item)"
+        :disabled="disableActionForItem(item)"
+        no-action>
+        <v-list-tile
+            slot="activator"
+            :disabled="disableActionForItem(item)">
             <v-list-tile-action>
-                <v-icon primary>{{icon}}</v-icon>
+                <v-icon primary>{{ icon }}</v-icon>
             </v-list-tile-action>
-            <v-list-tile-title>{{titleLabel}}</v-list-tile-title>
+            <v-list-tile-title>{{ titleLabel }}</v-list-tile-title>
         </v-list-tile>
         <v-list-tile class="vue-toc__slider">
-            {{fromLabel}}
-            <v-icon>{{fromIcon}}</v-icon>
-            <v-slider v-model="sliderValue" hide-details :max="max" :step="step" @input="onChange"></v-slider>
-            {{toLabel}}
-            <v-icon>{{toIcon}}</v-icon>
+            {{ fromLabel }}
+            <v-icon>{{ fromIcon }}</v-icon>
+            <v-slider
+                v-model="sliderValue"
+                :max="max"
+                :step="step"
+                hide-details
+                @input="onChange"/>
+            {{ toLabel }}
+            <v-icon>{{ toIcon }}</v-icon>
         </v-list-tile>
     </v-list-group>
 </template>

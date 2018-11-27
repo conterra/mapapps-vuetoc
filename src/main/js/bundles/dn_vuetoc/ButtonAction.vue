@@ -1,9 +1,12 @@
 <template>
-    <v-list-tile v-if="displayActionForItem(item)" :disabled="disableActionForItem(item)" @click="onClick(item)">
+    <v-list-tile
+        v-if="displayActionForItem(item)"
+        :disabled="disableActionForItem(item)"
+        @click="onClick(item)">
         <v-list-tile-action>
-            <v-icon primary>{{icon}}</v-icon>
+            <v-icon primary>{{ icon }}</v-icon>
         </v-list-tile-action>
-        <v-list-tile-title>{{titleLabel}}</v-list-tile-title>
+        <v-list-tile-title>{{ titleLabel }}</v-list-tile-title>
     </v-list-tile>
 </template>
 <script>
