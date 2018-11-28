@@ -7,7 +7,7 @@
             <v-spacer/>
             <v-btn
                 icon
-                @click="$root.getMenuValue(item).visible=false">
+                @click="$emit('close-menu')">
                 <v-icon>close</v-icon>
             </v-btn>
         </v-toolbar>
@@ -21,7 +21,8 @@
                 :key="action.name">
                 <component
                     :is="action"
-                    :item="item"/>
+                    :item="item"
+                    @close-menu="$emit('close-menu')"/>
                 <v-divider v-if="idx < customLayerActions.length - 1"/>
             </div>
         </v-list>

@@ -124,9 +124,6 @@
                     this.renderProgressBars = true;
                 });
             },
-            getMenuValue: function (item) {
-                return this.menuArray.find((obj) => obj.uid === item.uid);
-            },
             getLegend: function (url) {
                 let imageUrl = "";
                 this.legendArray.forEach((legend) => {

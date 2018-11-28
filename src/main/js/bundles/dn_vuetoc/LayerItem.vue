@@ -18,13 +18,13 @@
             <v-list-tile-title v-text="item.title"/>
         </v-list-tile-content>
         <v-list-tile-action
-            v-if="$root.showLayerMenu && $root.getMenuValue(item) && hasLayerActions(item)"
+            v-if="$root.showLayerMenu && hasLayerActions(item)"
             @click.prevent.stop
         >
             <v-menu
                 :close-on-content-click="false"
                 :close-on-click="true"
-                v-model="$root.getMenuValue(item).visible"
+                v-model="menuOpen"
                 bottom
                 left
                 max-width="300"
@@ -41,7 +41,8 @@
                 <layer-menu
                     :i18n="i18n"
                     :custom-layer-actions="customLayerActions"
-                    :item="item"/>
+                    :item="item"
+                    @close-menu="menuOpen=false"/>
             </v-menu>
         </v-list-tile-action>
     </v-list-tile>
@@ -61,6 +62,11 @@
             "invisibleIconClass",
             "i18n"
         ],
+        data: function(){
+            return {
+                menuOpen: false
+            }
+        },
         methods: {
             hasLayerActions: function(item) {
                 return this.customLayerActions.some(action =>

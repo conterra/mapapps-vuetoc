@@ -44,6 +44,7 @@ export default function ZoomToExtentAction() {
                             "duration": 1000,
                             "easing": "ease-in-out"
                         });
+                        this.$emit('close-menu');
                     }
                 }
             }

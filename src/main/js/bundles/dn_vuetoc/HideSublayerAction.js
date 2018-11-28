@@ -34,13 +34,12 @@ export default function HideSublayerAction() {
                     },
                     onClick(item) {
                         if (item.children) {
-                            let allChildren = item.children.flatten((item) => {
-                                return item.children;
-                            });
+                            let allChildren = item.children.flatten((item) => item.children);
                             allChildren.forEach((child) => {
                                 child.visible = false;
                             })
                         }
+                        this.$emit('close-menu');
                     }
                 }
             }

@@ -34,13 +34,12 @@ export default function ShowSublayerAction() {
                     },
                     onClick(item) {
                         if (item.children) {
-                            let allChildren = item.children.flatten((item) => {
-                                return item.children;
-                            });
+                            let allChildren = item.children.flatten((item) => item.children);
                             allChildren.forEach((child) => {
                                 child.visible = true;
                             })
                         }
+                        this.$emit('close-menu');
                     }
                 }
             }
