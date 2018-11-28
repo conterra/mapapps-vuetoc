@@ -111,6 +111,16 @@
                 "map": {
                     "layers": [
                         {
+                            "title": "PegelOnline WMS",
+                            "url": "http://www.pegelonline.wsv.de/webservices/gis/wms?VERSION=1.1.1",
+                            "type": "WMS"
+                        },
+                        {
+                            "title": "BKG WebAtlasDE - Grau",
+                            "url": "http://sg.geodatenzentrum.de/wmts_webatlasde.light_grau",
+                            "type": "WMTS"
+                        },
+                        {
                             "id": "koeln1",
                             "title": "${map.koeln1.title}",
                             "description": "Basisdaten der Stadt Köln",

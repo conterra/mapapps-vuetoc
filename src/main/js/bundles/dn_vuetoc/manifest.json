@@ -105,6 +105,7 @@
                 "showLayerMenu": true,
                 "showResetButton": true,
                 "showCloseButton": true,
+                "collapseInitially": true,
                 "visibleIconClass": "check_box",
                 "invisibleIconClass": "check_box_outline_blank"
             },
@@ -140,6 +141,13 @@
             ]
         },
         {
+            "name": "ItemDescriptionAction",
+            "properties": {
+                "Service-Ranking": 100
+            },
+            "provides": "vue-toc.LayerActionFactory"
+        },
+        {
             "name": "ZoomToExtentAction",
             "properties": {
                 "Service-Ranking": 40
@@ -164,6 +172,13 @@
             "name": "HideSublayerAction",
             "properties": {
                 "Service-Ranking": 10
+            },
+            "provides": "vue-toc.LayerActionFactory"
+        },
+        {
+            "name": "ItemCopyrightAction",
+            "properties": {
+                "Service-Ranking": 5
             },
             "provides": "vue-toc.LayerActionFactory"
         },

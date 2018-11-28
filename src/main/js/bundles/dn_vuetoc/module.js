@@ -16,7 +16,9 @@
 import ".";
 import "./MapContentWidgetFactory";
 import "./LayerActionResolver";
+import "./ItemDescriptionAction";
 import "./ZoomToExtentAction";
 import "./ShowSublayerAction";
 import "./HideSublayerAction";
 import "./OpacityAction";
+import "./ItemCopyrightAction";
