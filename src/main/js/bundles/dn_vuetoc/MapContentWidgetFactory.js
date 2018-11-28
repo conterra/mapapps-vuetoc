@@ -24,9 +24,7 @@ export default class MapContentWidgetFactory {
 
     activate() {
         let envs = this._componentContext.getBundleContext().getCurrentExecutionEnvironment();
-        let isMobile = this.isMobile = envs.some((env) => {
-            return env.name === "Mobile" || env.name === "Android"
-        });
+        let isMobile = this.isMobile = envs.some((env) => env.name === "Mobile" || env.name === "Android");
         let mapWidgetModel = this._mapWidgetModel;
         let basemapModel = this._basemapModel;
         let tool = this._tool;
@@ -147,9 +145,7 @@ export default class MapContentWidgetFactory {
     _createLegendArray(vm) {
         let map = this._mapWidgetModel.get("map");
         let layers = map.get("layers");
-        let flattenLayers = layers.flatten((item) => {
-            return item.layers || item.sublayers;
-        });
+        let flattenLayers = layers.flatten((item) => item.layers || item.sublayers);
         flattenLayers.forEach((layer) => {
             if (layer.url) {
                 let legendUrl = layer.url + "/legend?f=pjson&dynamicLayers=[1]";
@@ -175,9 +171,7 @@ export default class MapContentWidgetFactory {
     _createMenuArray(vm) {
         let menuArray = [];
         let operationalItems = vm.operationalItems;
-        let items = operationalItems.flatten((item) => {
-            return item.children;
-        });
+        let items = operationalItems.flatten((item) => item.children);
         items.forEach((item) => {
             menuArray.push({
                 uid: item.uid,
@@ -227,9 +221,7 @@ export default class MapContentWidgetFactory {
 
     _resetLayerVisibility() {
         let operationalItems = this.vm.operationalItems;
-        let items = operationalItems.flatten((item) => {
-            return item.children;
-        });
+        let items = operationalItems.flatten((item) => item.children);
         items.forEach((item) => {
             item.set("visible", item.initialVisible);
         });
@@ -238,9 +230,7 @@ export default class MapContentWidgetFactory {
 
     _enableAllLayer(value) {
         let operationalItems = this.vm.operationalItems;
-        let items = operationalItems.flatten((item) => {
-            return item.children;
-        });
+        let items = operationalItems.flatten((item) => item.children);
         items.forEach((item) => {
             item.set("visible", value);
         });
@@ -249,9 +239,7 @@ export default class MapContentWidgetFactory {
 
     _openAllLayer(value) {
         let operationalItems = this.vm.operationalItems;
-        let items = operationalItems.flatten((item) => {
-            return item.children;
-        });
+        let items = operationalItems.flatten((item) => item.children);
         items.forEach((item) => {
             item.set("open", value);
         });
