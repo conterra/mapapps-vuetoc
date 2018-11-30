@@ -105,7 +105,7 @@
                 "showLayerMenu": true,
                 "showResetButton": true,
                 "showCloseButton": true,
-                "collapseInitially": true,
+                "expandInitially": true,
                 "visibleIconClass": "check_box",
                 "invisibleIconClass": "check_box_outline_blank"
             },

@@ -44,6 +44,9 @@
                 "showLoadingStatus": true,
                 "showOperationalLayerHeaderMenu": true,
                 "showLayerMenu": true,
+                "showResetButton": true,
+                "showCloseButton": true,
+                "expandInitially": true,
                 "visibleIconClass": "check_box",
                 "invisibleIconClass": "check_box_outline_blank"
             }
@@ -129,7 +132,6 @@
                             "visible": false,
                             "minScale": 500000,
                             "maxScale": 250000,
-                            "open": false,
                             "sublayers": [
                                 {
                                     "title": "${map.koeln1.districts.title}",
@@ -266,7 +268,6 @@
                             "url": "https://services.conterra.de/arcgis/rest/services/common/koeln/MapServer",
                             "type": "AGS_DYNAMIC",
                             "visible": false,
-                            "open": true,
                             "sublayers": [
                                 {
                                     "title": "${map.koeln2.libraries.title}",
@@ -358,7 +359,6 @@
                             "url": "https://services.conterra.de/arcgis/rest/services/common/koeln/MapServer",
                             "type": "AGS_DYNAMIC",
                             "visible": true,
-                            "open": true,
                             "sublayers": [
                                 {
                                     "title": "${map.koeln3.sights.title}",
