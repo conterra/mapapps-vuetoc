@@ -68,13 +68,11 @@ export default class MapContentWidgetFactory {
         if (mapWidgetModel.view) {
             this._createLayerListViewModel(vm);
             this._waitForLayers(vm);
-            this._watchForStationary(mapWidgetModel.view, vm);
             vm.customLayerActions = this._layerActionResolver.getLayerActions();
         } else {
             mapWidgetModel.watch("view", ({ value }) => {
                 this._createLayerListViewModel(vm);
                 this._waitForLayers(vm);
-                this._watchForStationary(value, vm);
                 vm.customLayerActions = this._layerActionResolver.getLayerActions();
             });
         }
@@ -113,21 +111,7 @@ export default class MapContentWidgetFactory {
             item.initialVisible = !!item.visible;
             item.open = this._properties.expandInitially;
             item.menuVisibility = false;
-            this._layerWatchers.push(item.watch("updating", () => {
-                vm.rerenderProgressBars();
-            }));
-            this._layerWatchers.push(item.watch("visible", () => {
-                vm.rerenderListActions();
-            }));
         };
-        if (layerListViewModel.state === "ready") {
-            vm.rerenderListActions();
-        } else {
-            let watch = layerListViewModel.watch("state", (state) => {
-                watch.remove();
-                vm.rerenderListActions();
-            });
-        }
 
         if (this.binding) {
             this.binding.unbind();
@@ -164,19 +148,6 @@ export default class MapContentWidgetFactory {
         });
     }
 
-    _createMenuArray(vm) {
-        let menuArray = [];
-        let operationalItems = vm.operationalItems;
-        let items = operationalItems.flatten((item) => item.children);
-        items.forEach((item) => {
-            menuArray.push({
-                uid: item.uid,
-                visible: false
-            });
-        });
-        vm.menuArray = menuArray;
-    }
-
     _waitForLayers(vm) {
         let map = this._mapWidgetModel.get("map");
         let layers = map.get("layers");
@@ -199,19 +170,6 @@ export default class MapContentWidgetFactory {
             if (this._properties.showLegend) {
                 this._createLegendArray(vm);
             }
-            this._createMenuArray(vm);
-            vm.rerenderListActions();
-        });
-    }
-
-    _watchForStationary(view, vm) {
-        if (this._stationaryWatch) {
-            this._stationaryWatch.remove();
-        }
-        this._stationaryWatch = view.watch("stationary", (response) => {
-            if (response) {
-                vm.rerenderProgressBars();
-            }
         });
     }
 
@@ -221,7 +179,6 @@ export default class MapContentWidgetFactory {
         items.forEach((item) => {
             item.set("visible", item.initialVisible);
         });
-        this.vm.rerenderListActions();
     }
 
     _enableAllLayer(value) {
@@ -230,7 +187,6 @@ export default class MapContentWidgetFactory {
         items.forEach((item) => {
             item.set("visible", value);
         });
-        this.vm.rerenderListActions();
     }
 
     _openAllLayer(value) {
@@ -239,7 +195,6 @@ export default class MapContentWidgetFactory {
         items.forEach((item) => {
             item.set("open", value);
         });
-        this.vm.rerenderListActions();
     }
 
     deactivate() {

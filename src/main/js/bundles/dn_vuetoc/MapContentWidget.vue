@@ -76,11 +76,8 @@
         data: function () {
             return {
                 customLayerActions: [],
-                renderListActions: true,
-                renderProgressBars: true,
                 operationalItems: null,
                 legendArray: [],
-                menuArray: [],
                 basemaps: [],
                 selectedId: "",
                 showBasemaps: true,
@@ -112,18 +109,6 @@
             };
         },
         methods: {
-            rerenderListActions: function () {
-                this.renderListActions = false;
-                this.$nextTick(() => {
-                    this.renderListActions = true;
-                });
-            },
-            rerenderProgressBars: function () {
-                this.renderProgressBars = false;
-                this.$nextTick(() => {
-                    this.renderProgressBars = true;
-                });
-            },
             getLegend: function (url) {
                 let imageUrl = "";
                 this.legendArray.forEach((legend) => {

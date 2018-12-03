@@ -1,24 +1,23 @@
+
 <template>
     <v-list-tile
         :disabled="!item.visibleAtCurrentScale">
         <v-list-tile-action
-            v-if="$root.renderListActions"
             @click.prevent.stop>
             <v-btn
                 icon
-                @click="item.visible = !item.visible; $root.rerenderListActions()">
-                <v-icon v-if="item.visible">{{ visibleIconClass }}</v-icon>
-                <v-icon v-else>{{ invisibleIconClass }}</v-icon>
+                @click="item.visible = !item.visible">
+                <v-icon>{{ visible ? visibleIconClass : invisibleIconClass }}</v-icon>
             </v-btn>
         </v-list-tile-action>
         <v-list-tile-action
             v-if="$root.showLegend && $root.getLegend(item.layer.url)"
-            @click="item.visible = !item.visible; $root.rerenderListActions()">
-            <img :src="$root.getLegend(item.layer.url)"/>
+            @click="item.visible = !item.visible">
+            <img :src="$root.getLegend(item.layer.url)">
         </v-list-tile-action>
         <v-list-tile-content
             @click.prevent.stop
-            @click="item.visible = !item.visible; $root.rerenderListActions()"
+            @click="item.visible = !item.visible"
         >
             <v-list-tile-title v-text="item.title"/>
         </v-list-tile-content>
@@ -62,15 +61,23 @@
         },
         props: [
             "item",
+            "i18n",
             "customLayerActions",
             "visibleIconClass",
-            "invisibleIconClass",
-            "i18n"
+            "invisibleIconClass"
         ],
         data: function(){
             return {
-                menuOpen: false
+                menuOpen: false,
+                visible: this.item.visible,
+                watchHandle: undefined
             }
+        },
+        beforeMount: function(){
+            this.watchHandle = this.item.watch("visible", visible => this.visible = visible);
+        },
+        beforeDestroy: function(){
+            this.watchHandle && this.watchHandle.remove();
         },
         methods: {
             hasLayerActions: function(item) {

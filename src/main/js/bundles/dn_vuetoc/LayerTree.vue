@@ -4,19 +4,12 @@
             v-for="item in items"
             :key="item.uid"
             class="pa-0">
-            <v-progress-linear
-                v-if="$root.showLoadingStatus && $root.renderProgressBars"
-                :active="item.updating"
-                :indeterminate="item.updating"
-                :height="2"
-                class="ma-0"
-            />
-            <v-list-group
+            <node-layer
                 v-if="item.children.length"
-                v-model="item.open"
-                no-action>
-                <layer-item
-                    slot="activator"
+                :item="item"
+                :i18n="i18n">
+                <layer-details
+                    slot="header"
                     :item="item"
                     :custom-layer-actions="customLayerActions"
                     :i18n="i18n"
@@ -24,31 +17,40 @@
                     :invisible-icon-class="invisibleIconClass"
                 />
                 <layer-tree
+                    slot="tree"
                     :i18n="i18n"
                     :custom-layer-actions="customLayerActions"
                     :visible-icon-class="visibleIconClass"
                     :invisible-icon-class="invisibleIconClass"
                     :items="item.children.items"
                 />
-            </v-list-group>
-            <layer-item
+            </node-layer>
+            <leaf-layer
                 v-else
                 :item="item"
-                :custom-layer-actions="customLayerActions"
-                :i18n="i18n"
-                :visible-icon-class="visibleIconClass"
-                :invisible-icon-class="invisibleIconClass"
-            />
+                :i18n="i18n">
+                <layer-details
+                    :item="item"
+                    :custom-layer-actions="customLayerActions"
+                    :i18n="i18n"
+                    :visible-icon-class="visibleIconClass"
+                    :invisible-icon-class="invisibleIconClass"
+                />
+            </leaf-layer>
         </v-list>
     </div>
 </template>
 <script>
-    import LayerItem from "./LayerItem.vue";
+    import LayerDetails from "./LayerDetails.vue";
+    import NodeLayer from "./NodeLayer.vue";
+    import LeafLayer from './LeafLayer.vue';
 
     export default {
         name: "layer-tree",
         components: {
-            "layer-item": LayerItem
+            "node-layer": NodeLayer,
+            "leaf-layer": LeafLayer,
+            "layer-details": LayerDetails
         },
         props: [
             "i18n",
