@@ -143,42 +143,42 @@
         {
             "name": "ItemDescriptionAction",
             "properties": {
-                "Service-Ranking": 100
+                "Service-Ranking": 70
             },
             "provides": "vue-toc.LayerActionFactory"
         },
         {
             "name": "ZoomToExtentAction",
             "properties": {
-                "Service-Ranking": 40
+                "Service-Ranking": 50
             },
             "provides": "vue-toc.LayerActionFactory"
         },
         {
             "name": "OpacityAction",
             "properties": {
-                "Service-Ranking": 30
+                "Service-Ranking": 40
             },
             "provides": "vue-toc.LayerActionFactory"
         },
         {
             "name": "ShowSublayerAction",
             "properties": {
-                "Service-Ranking": 20
+                "Service-Ranking": 30
             },
             "provides": "vue-toc.LayerActionFactory"
         },
         {
             "name": "HideSublayerAction",
             "properties": {
-                "Service-Ranking": 10
+                "Service-Ranking": 20
             },
             "provides": "vue-toc.LayerActionFactory"
         },
         {
             "name": "ItemCopyrightAction",
             "properties": {
-                "Service-Ranking": 5
+                "Service-Ranking": 0
             },
             "provides": "vue-toc.LayerActionFactory"
         },
