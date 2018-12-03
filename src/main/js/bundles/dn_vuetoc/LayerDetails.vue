@@ -22,7 +22,7 @@
             <v-list-tile-title v-text="item.title"/>
         </v-list-tile-content>
         <v-list-tile-action
-            v-if="$root.showLayerMenu && hasLayerActions(item)"
+            v-if="$root.showLayerMenu && hasLayerActions()"
             @click.prevent.stop
         >
             <v-menu
@@ -80,9 +80,9 @@
             this.watchHandle && this.watchHandle.remove();
         },
         methods: {
-            hasLayerActions: function(item) {
+            hasLayerActions: function() {
                 return this.customLayerActions.some(action =>
-                    action.methods.displayActionForItem(item)
+                    action.methods.displayActionForItem(this.item)
                 );
             }
         }
