@@ -1,7 +1,9 @@
 <template>
     <div class="ct-flex-container ct-flex-container--column fullHeight">
         <div class="ct-flex-item overflowAuto">
-            <v-container grid-list-sm>
+            <v-container
+                grid-list-sm
+                class="pa-1">
                 <baselayer-widget
                     v-if="showBasemaps"
                     :i18n="i18n"
@@ -19,7 +21,9 @@
             </v-container>
         </div>
         <div class="ct-flex-item ct-flex-item--no-grow ct-flex-item--no-shrink">
-            <v-container grid-list-md>
+            <v-container
+                grid-list-md
+                class="pa-1">
                 <v-layout
                     row
                     wrap>
