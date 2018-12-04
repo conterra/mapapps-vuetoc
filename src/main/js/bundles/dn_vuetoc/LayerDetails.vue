@@ -22,7 +22,7 @@
             <v-list-tile-title v-text="item.title"/>
         </v-list-tile-content>
         <v-list-tile-action
-            v-if="$root.showLayerMenu && hasLayerActions()"
+            v-if="$root.showLayerMenu && loaded && hasLayerActions()"
             @click.prevent.stop
         >
             <v-menu
@@ -69,15 +69,22 @@
         data: function(){
             return {
                 menuOpen: false,
+                loaded: false,
                 visible: this.item.visible,
-                watchHandle: undefined
+                watchHandles: []
             }
         },
         beforeMount: function(){
-            this.watchHandle = this.item.watch("visible", visible => this.visible = visible);
+            this.watchHandles.push(this.item.watch("visible", visible => this.visible = visible));
+            if(this.item.layer.loaded === undefined){
+                this.loaded = true;
+                return;
+            }
+            this.loaded = this.item.layer.loaded;
+            this.watchHandles.push(this.item.layer.watch("loaded", loaded => this.loaded = loaded));
         },
         beforeDestroy: function(){
-            this.watchHandle && this.watchHandle.remove();
+            this.watchHandles.forEach(handle => handle.remove());
         },
         methods: {
             hasLayerActions: function() {
