@@ -22,7 +22,7 @@ export default function ItemCopyrightAction() {
                 name: "item-copyright",
                 template: `
                     <v-card-title v-if="item.layer.copyright">
-                        <div class="mb-1 grey--text caption">{{ copyrightLabel }}</div>
+                        <div class="grey--text caption">{{ copyrightLabel }}</div>
                         <div class="grey--text caption">{{ item.layer.copyright }}</div>
                     </v-card-title>
                 `,
