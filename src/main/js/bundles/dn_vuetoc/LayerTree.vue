@@ -4,52 +4,29 @@
             v-for="item in items"
             :key="item.uid"
             class="pa-0">
-            <layer-node
-                v-if="item.children.length"
-                :item="item"
+            <layer-item
                 :i18n="i18n"
-                :config="config">
-                <layer-details
-                    slot="header"
-                    :item="item"
-                    :i18n="i18n"
-                    :config="config"
-                    :custom-layer-actions="customLayerActions"
-                />
+                :item="item"
+                :config="config"
+                :custom-layer-actions="customLayerActions">
                 <layer-tree
-                    slot="tree"
-                    :i18n="i18n"
-                    :config="config"
-                    :items="item.children.items"
-                    :custom-layer-actions="customLayerActions"
-                />
-            </layer-node>
-            <layer-leaf
-                v-else
-                :item="item"
-                :i18n="i18n"
-                :config="config">
-                <layer-details
-                    :item="item"
+                    slot="sub"
+                    slot-scope="itemProps"
                     :i18n="i18n"
                     :config="config"
                     :custom-layer-actions="customLayerActions"
-                />
-            </layer-leaf>
+                    :items="itemProps.children"/>
+            </layer-item>
         </v-list>
     </div>
 </template>
 <script>
-    import LayerDetails from "./LayerDetails.vue";
-    import LayerNode from "./LayerNode.vue";
-    import LayerLeaf from './LayerLeaf.vue';
+    import LayerItem from "./LayerItem.vue";
 
     export default {
         name: "layer-tree",
         components: {
-            "layer-node": LayerNode,
-            "layer-leaf": LayerLeaf,
-            "layer-details": LayerDetails
+            "layer-item": LayerItem
         },
         props: [
             "i18n",

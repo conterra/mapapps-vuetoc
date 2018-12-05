@@ -8,20 +8,38 @@
             class="ma-0"
         />
         <v-list-group
+            v-if="item.children.length"
             v-model="open"
             no-action>
-            <slot
+            <layer-details
                 slot="activator"
                 :item="item"
-                name="header"/>
+                :i18n="i18n"
+                :config="config"
+                :custom-layer-actions="customLayerActions"
+            />
             <slot
-                name="tree"/>
+                :children="item.children.items"
+                name="sub"
+            />
         </v-list-group>
+        <layer-details
+            v-else
+            :item="item"
+            :i18n="i18n"
+            :config="config"
+            :custom-layer-actions="customLayerActions"
+        />
     </div>
 </template>
 <script>
+    import LayerDetails from "./LayerDetails.vue";
+
     export default {
-        props: ["item", "config"],
+        components: {
+            "layer-details": LayerDetails
+        },
+        props: ["i18n", "item", "config", "customLayerActions"],
         data: function(){
             return {
                 open: this.item.open,
