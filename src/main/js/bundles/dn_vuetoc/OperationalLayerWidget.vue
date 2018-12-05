@@ -19,25 +19,25 @@
                     <v-icon>more_vert</v-icon>
                 </v-btn>
                 <v-list>
-                    <v-list-tile @click="$root.$emit('enableAllLayer', true)">
+                    <v-list-tile @click="enableAllLayer(true)">
                         <v-list-tile-action>
                             <v-icon primary>visibility</v-icon>
                         </v-list-tile-action>
                         <v-list-tile-title>{{ i18n.showAllLayer }}</v-list-tile-title>
                     </v-list-tile>
-                    <v-list-tile @click="$root.$emit('enableAllLayer', false)">
+                    <v-list-tile @click="enableAllLayer(false)">
                         <v-list-tile-action>
                             <v-icon primary>visibility_off</v-icon>
                         </v-list-tile-action>
                         <v-list-tile-title>{{ i18n.hideAllLayer }}</v-list-tile-title>
                     </v-list-tile>
-                    <v-list-tile @click="$root.$emit('openAllLayer', true)">
+                    <v-list-tile @click="openAllLayer(true)">
                         <v-list-tile-action>
                             <v-icon primary>unfold_more</v-icon>
                         </v-list-tile-action>
                         <v-list-tile-title>{{ i18n.openAllLayer }}</v-list-tile-title>
                     </v-list-tile>
-                    <v-list-tile @click="$root.$emit('openAllLayer', false)">
+                    <v-list-tile @click="openAllLayer(false)">
                         <v-list-tile-action>
                             <v-icon primary>unfold_less</v-icon>
                         </v-list-tile-action>
@@ -70,6 +70,20 @@
             "visibleIconClass",
             "invisibleIconClass",
             "showOperationalLayerHeaderMenu"
-        ]
+        ],
+        methods: {
+            enableAllLayer: function(value) {
+                let items = this.operationalItems.flatten((item) => item.children);
+                items.forEach((item) => {
+                    item.set("visible", value);
+                });
+            },
+            openAllLayer(value) {
+                let items = this.operationalItems.flatten((item) => item.children);
+                items.forEach((item) => {
+                    item.set("open", value);
+                });
+            }
+        }
     }
 </script>

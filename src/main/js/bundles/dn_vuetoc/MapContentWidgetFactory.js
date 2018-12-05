@@ -51,12 +51,6 @@ export default class MapContentWidgetFactory {
             this._resetLayerVisibility();
             vm.selectedId = defaultSelectedId;
         });
-        vm.$on('enableAllLayer', (value) => {
-            this._enableAllLayer(value);
-        });
-        vm.$on('openAllLayer', (value) => {
-            this._openAllLayer(value);
-        });
 
         Binding.for(vm, basemapModel)
             .sync("selectedId")
@@ -173,22 +167,6 @@ export default class MapContentWidgetFactory {
         let items = operationalItems.flatten((item) => item.children);
         items.forEach((item) => {
             item.set("visible", item.initialVisible);
-        });
-    }
-
-    _enableAllLayer(value) {
-        let operationalItems = this.vm.operationalItems;
-        let items = operationalItems.flatten((item) => item.children);
-        items.forEach((item) => {
-            item.set("visible", value);
-        });
-    }
-
-    _openAllLayer(value) {
-        let operationalItems = this.vm.operationalItems;
-        let items = operationalItems.flatten((item) => item.children);
-        items.forEach((item) => {
-            item.set("open", value);
         });
     }
 
