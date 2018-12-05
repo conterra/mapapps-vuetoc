@@ -14,23 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export default function ItemDescriptionAction() {
+import ItemDescriptionAction from "./ItemDescriptionAction.vue";
+
+export default function ItemDescriptionActionFactory() {
     return {
         getComponent() {
-            return {
-                name: "item-description",
-                template: `
-                    <v-card-title v-if="displayActionForItem(item)">
-                        <div class="regular">{{ item.layer.description }}</div>
-                     </v-card-title>
-                `,
-                props: ["item"],
-                methods: {
-                    displayActionForItem(item) {
-                        return !!item.layer && !!item.layer.description;
-                    }
-                }
-            }
+            return ItemDescriptionAction
         }
     }
 }

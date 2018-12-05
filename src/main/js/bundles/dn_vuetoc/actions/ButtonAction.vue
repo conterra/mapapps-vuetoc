@@ -12,13 +12,15 @@
 <script>
     export default {
         props: {
-            item: Object
-        },
-        data: function () {
-            return {
-                icon: "settings",
-                titleLabel: "Action Title"
-            };
+            item: Object,
+            titleLabel: {
+                type: String,
+                default: "Action Title"
+            },
+            icon: {
+                type: String,
+                default: "settings"
+            }
         },
         methods: {
             onClick(item) {

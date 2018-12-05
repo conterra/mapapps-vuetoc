@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2018 con terra GmbH (info@conterra.de)
  *
@@ -13,12 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import ".";
-import "./TableOfContentsFactory";
-import "./LayerActionResolver";
-import "./actions/ItemDescriptionActionFactory";
-import "./actions/ZoomToExtentActionFactory";
-import "./actions/ShowSublayerActionFactory";
-import "./actions/HideSublayerActionFactory";
-import "./actions/OpacityActionFactory";
-import "./actions/ItemCopyrightActionFactory";
+import ZoomToExtentAction from "./ZoomToExtentAction.vue";
+
+export default function ZoomToExtentActionFactory() {
+    return {
+        getComponent() {
+            let i18n = this._i18n.get().ui;
+            ZoomToExtentAction.props.titleLabel = {
+                type: String,
+                default: i18n.zoomToExtent
+            };
+            return ZoomToExtentAction;
+        }
+    }
+}

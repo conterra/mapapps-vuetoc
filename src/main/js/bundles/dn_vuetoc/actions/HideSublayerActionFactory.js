@@ -13,12 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import ".";
-import "./TableOfContentsFactory";
-import "./LayerActionResolver";
-import "./actions/ItemDescriptionActionFactory";
-import "./actions/ZoomToExtentActionFactory";
-import "./actions/ShowSublayerActionFactory";
-import "./actions/HideSublayerActionFactory";
-import "./actions/OpacityActionFactory";
-import "./actions/ItemCopyrightActionFactory";
+import HideSublayerAction from "./HideSublayerAction.vue";
+
+export default function HideSublayerActionFactory() {
+    return {
+        getComponent() {
+            let i18n = this._i18n.get().ui;
+            HideSublayerAction.props.titleLabel = {
+                type: String,
+                default: i18n.hideAllSublayer
+            };
+            return HideSublayerAction;
+        }
+    }
+}

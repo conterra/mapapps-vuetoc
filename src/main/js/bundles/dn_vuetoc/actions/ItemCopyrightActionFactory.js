@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2018 con terra GmbH (info@conterra.de)
  *
@@ -13,12 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import ".";
-import "./TableOfContentsFactory";
-import "./LayerActionResolver";
-import "./actions/ItemDescriptionActionFactory";
-import "./actions/ZoomToExtentActionFactory";
-import "./actions/ShowSublayerActionFactory";
-import "./actions/HideSublayerActionFactory";
-import "./actions/OpacityActionFactory";
-import "./actions/ItemCopyrightActionFactory";
+import ItemCopyrightAction from "./ItemCopyRightAction.vue";
+export default function ItemCopyrightActionFactory() {
+    return {
+        getComponent() {
+            let copyright = this._i18n.get().ui.copyright;
+            ItemCopyrightAction.props.itemCopyRightLabel = {
+                type: String,
+                default: copyright
+            }
+            return ItemCopyrightAction;
+        }
+    }
+}

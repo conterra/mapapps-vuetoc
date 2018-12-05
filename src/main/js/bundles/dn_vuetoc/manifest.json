@@ -142,14 +142,16 @@
             ]
         },
         {
-            "name": "ItemDescriptionAction",
+            "name": "ItemDescriptionActionFactory",
+            "impl": "./actions/ItemDescriptionActionFactory",
             "properties": {
                 "Service-Ranking": 70
             },
             "provides": "vue-toc.LayerActionFactory"
         },
         {
-            "name": "ZoomToExtentAction",
+            "name": "ZoomToExtentActionFactory",
+            "impl": "./actions/ZoomToExtentActionFactory",
             "properties": {
                 "Service-Ranking": 50
             },
@@ -157,27 +159,31 @@
         },
         {
             "name": "OpacityActionFactory",
+            "impl": "./actions/OpacityActionFactory",
             "properties": {
                 "Service-Ranking": 40
             },
             "provides": "vue-toc.LayerActionFactory"
         },
         {
-            "name": "ShowSublayerAction",
+            "name": "ShowSublayerActionFactory",
+            "impl": "./actions/ShowSublayerActionFactory",
             "properties": {
                 "Service-Ranking": 30
             },
             "provides": "vue-toc.LayerActionFactory"
         },
         {
-            "name": "HideSublayerAction",
+            "name": "HideSublayerActionFactory",
+            "impl": "./actions/HideSublayerActionFactory",
             "properties": {
                 "Service-Ranking": 20
             },
             "provides": "vue-toc.LayerActionFactory"
         },
         {
-            "name": "ItemCopyrightAction",
+            "name": "ItemCopyrightActionFactory",
+            "impl": "./actions/ItemCopyrightActionFactory",
             "properties": {
                 "Service-Ranking": 0
             },
