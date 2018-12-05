@@ -29,7 +29,6 @@ export default class MapContentWidgetFactory {
         let basemapModel = this._basemapModel;
         let tool = this._tool;
         let properties = this._properties;
-        this._layerWatchers = [];
 
         const defaultSelectedId = this._basemapModel.selectedId;
         const vm = this.vm = new Vue(MapContentWidget);
@@ -102,10 +101,6 @@ export default class MapContentWidgetFactory {
         let layerListViewModel = new LayerListViewModel({
             view: view
         });
-        this._layerWatchers.forEach((watcher) => {
-            watcher.remove();
-        });
-        this._layerWatchers = [];
         layerListViewModel.listItemCreatedFunction = (event) => {
             let item = event.item;
             item.initialVisible = !!item.visible;
