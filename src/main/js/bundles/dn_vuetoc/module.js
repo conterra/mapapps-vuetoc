@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import ".";
-import "./MapContentWidgetFactory";
+import "./TableOfContentsFactory";
 import "./LayerActionResolver";
 import "./ItemDescriptionAction";
 import "./ZoomToExtentAction";

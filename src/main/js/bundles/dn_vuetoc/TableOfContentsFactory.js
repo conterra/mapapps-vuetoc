@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import MapContentWidget from "./MapContentWidget.vue";
+import TableOfContents from "./TableOfContents.vue";
 import Vue from "apprt-vue/Vue";
 import VueDijit from "apprt-vue/VueDijit";
 import Binding from "apprt-binding/Binding";
 import apprt_request from "apprt-request";
 import LayerListViewModel from "esri/widgets/LayerList/LayerListViewModel";
 
-export default class MapContentWidgetFactory {
+export default class TableOfContentsFactory {
 
     activate() {
         let envs = this._componentContext.getBundleContext().getCurrentExecutionEnvironment();
@@ -31,7 +31,7 @@ export default class MapContentWidgetFactory {
         let properties = this._properties;
 
         const defaultSelectedId = this._basemapModel.selectedId;
-        const vm = this.vm = new Vue(MapContentWidget);
+        const vm = this.vm = new Vue(TableOfContents);
         vm.i18n = this._i18n.get().ui;
         vm.showBasemaps = properties.showBasemaps;
         vm.showOperationalLayer = properties.showOperationalLayer;

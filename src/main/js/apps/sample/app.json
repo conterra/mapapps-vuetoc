@@ -37,7 +37,7 @@
     },
     "bundles": {
         "dn_vuetoc": {
-            "MapContentWidgetFactory": {
+            "TableOfContents": {
                 "showBasemaps": true,
                 "showOperationalLayer": true,
                 "showLegend": true,

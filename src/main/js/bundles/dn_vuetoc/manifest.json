@@ -92,7 +92,8 @@
     ],
     "components": [
         {
-            "name": "MapContentWidgetFactory",
+            "name": "TableOfContents",
+            "impl": "./TableOfContentsFactory",
             "provides": "dijit.Widget",
             "instanceFactory": true,
             "properties": {
