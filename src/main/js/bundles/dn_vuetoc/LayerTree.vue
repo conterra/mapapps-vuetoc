@@ -4,7 +4,7 @@
             v-for="item in items"
             :key="item.uid"
             class="pa-0">
-            <node-layer
+            <layer-node
                 v-if="item.children.length"
                 :item="item"
                 :i18n="i18n">
@@ -24,8 +24,8 @@
                     :invisible-icon-class="invisibleIconClass"
                     :items="item.children.items"
                 />
-            </node-layer>
-            <leaf-layer
+            </layer-node>
+            <layer-leaf
                 v-else
                 :item="item"
                 :i18n="i18n">
@@ -36,20 +36,20 @@
                     :visible-icon-class="visibleIconClass"
                     :invisible-icon-class="invisibleIconClass"
                 />
-            </leaf-layer>
+            </layer-leaf>
         </v-list>
     </div>
 </template>
 <script>
     import LayerDetails from "./LayerDetails.vue";
-    import NodeLayer from "./NodeLayer.vue";
-    import LeafLayer from './LeafLayer.vue';
+    import LayerNode from "./LayerNode.vue";
+    import LayerLeaf from './LayerLeaf.vue';
 
     export default {
         name: "layer-tree",
         components: {
-            "node-layer": NodeLayer,
-            "leaf-layer": LeafLayer,
+            "layer-node": LayerNode,
+            "layer-leaf": LayerLeaf,
             "layer-details": LayerDetails
         },
         props: [

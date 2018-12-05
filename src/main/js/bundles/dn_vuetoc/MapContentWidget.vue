@@ -4,12 +4,12 @@
             <v-container
                 grid-list-sm
                 class="pa-1">
-                <baselayer-widget
+                <base-layer-node
                     v-if="showBasemaps"
                     :i18n="i18n"
                     :basemaps="basemaps"
                     class="vue-toc__basemaps"/>
-                <operationallayer-widget
+                <operational-layer-node
                     v-if="showOperationalLayer"
                     :i18n="i18n"
                     :operational-items="operationalItems"
@@ -68,13 +68,13 @@
 </template>
 <script>
     import Bindable from "apprt-vue/mixins/Bindable";
-    import BaseLayerWidget from "./BaseLayerWidget.vue";
-    import OperationalLayerWidget from "./OperationalLayerWidget.vue";
+    import BaseLayerNode from "./BaseLayerNode.vue";
+    import OperationalLayerNode from './OperationalLayerNode.vue';
 
     export default {
         components: {
-            "baselayer-widget": BaseLayerWidget,
-            "operationallayer-widget": OperationalLayerWidget
+            "base-layer-node": BaseLayerNode,
+            "operational-layer-node": OperationalLayerNode
         },
         mixins: [Bindable],
         data: function () {
