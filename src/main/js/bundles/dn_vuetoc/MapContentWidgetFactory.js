@@ -70,12 +70,6 @@ export default class MapContentWidgetFactory {
             });
         }
 
-        let map = mapWidgetModel.get("map");
-        map.allLayers.on("change", (event) => {
-            this._createLayerListViewModel(vm);
-            this._waitForLayers(vm);
-        });
-
         // listen to custom action registrations
         this.watchHandles = [];
         this.watchHandles.push(this._layerActionResolver.on("layer-action-added", () => {
@@ -99,7 +93,6 @@ export default class MapContentWidgetFactory {
             let item = event.item;
             item.initialVisible = !!item.visible;
             item.open = this._properties.expandInitially;
-            item.menuVisibility = false;
         };
 
         if (this.binding) {
