@@ -71,6 +71,10 @@ export default class TableOfContentsFactory {
                 vm.customLayerActions = this._layerActionResolver.getLayerActions();
             });
         }
+        mapWidgetModel.map.allLayers.on("change", (event) => {
+            this._createLayerListViewModel(vm);
+            this._waitForLayers(vm);
+        });
 
         // listen to custom action registrations
         this.watchHandles = [];
