@@ -28,17 +28,15 @@
 <script>
     export default {
         props: {
-            item: Object
+            item: Object,
+            fromLabel: String,
+            toLabel: String
         },
         data: function () {
             return {
                 sliderValue: 1,
                 max: 1,
-                step: 0.01,
-                fromLabel: "",
-                toLabel: "",
-                fromIcon: "",
-                toIcon: ""
+                step: 0.01
             };
         },
         methods: {

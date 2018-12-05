@@ -20,5 +20,5 @@ import "./ItemDescriptionAction";
 import "./ZoomToExtentAction";
 import "./ShowSublayerAction";
 import "./HideSublayerAction";
-import "./OpacityAction";
+import "./OpacityActionFactory";
 import "./ItemCopyrightAction";
