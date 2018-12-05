@@ -7,34 +7,33 @@
             <layer-node
                 v-if="item.children.length"
                 :item="item"
-                :i18n="i18n">
+                :i18n="i18n"
+                :config="config">
                 <layer-details
                     slot="header"
                     :item="item"
-                    :custom-layer-actions="customLayerActions"
                     :i18n="i18n"
-                    :visible-icon-class="visibleIconClass"
-                    :invisible-icon-class="invisibleIconClass"
+                    :config="config"
+                    :custom-layer-actions="customLayerActions"
                 />
                 <layer-tree
                     slot="tree"
                     :i18n="i18n"
-                    :custom-layer-actions="customLayerActions"
-                    :visible-icon-class="visibleIconClass"
-                    :invisible-icon-class="invisibleIconClass"
+                    :config="config"
                     :items="item.children.items"
+                    :custom-layer-actions="customLayerActions"
                 />
             </layer-node>
             <layer-leaf
                 v-else
                 :item="item"
-                :i18n="i18n">
+                :i18n="i18n"
+                :config="config">
                 <layer-details
                     :item="item"
-                    :custom-layer-actions="customLayerActions"
                     :i18n="i18n"
-                    :visible-icon-class="visibleIconClass"
-                    :invisible-icon-class="invisibleIconClass"
+                    :config="config"
+                    :custom-layer-actions="customLayerActions"
                 />
             </layer-leaf>
         </v-list>
@@ -56,8 +55,7 @@
             "i18n",
             "customLayerActions",
             "items",
-            "visibleIconClass",
-            "invisibleIconClass"
+            "config"
         ]
     };
 </script>

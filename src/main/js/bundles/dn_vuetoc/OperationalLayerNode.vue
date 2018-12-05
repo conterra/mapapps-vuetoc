@@ -7,7 +7,7 @@
             <v-toolbar-title>{{ i18n.layers }}</v-toolbar-title>
             <v-spacer/>
             <v-menu
-                v-if="showOperationalLayerHeaderMenu"
+                v-if="config.showOperationalLayerHeaderMenu"
                 bottom
                 left
                 max-width="300"
@@ -50,8 +50,7 @@
         <div v-if="operationalItems">
             <layer-tree
                 :i18n="i18n"
-                :visible-icon-class="visibleIconClass"
-                :invisible-icon-class="invisibleIconClass"
+                :config="config"
                 :custom-layer-actions="customLayerActions"
                 :items="operationalItems.items"/>
         </div>
@@ -66,11 +65,9 @@
         },
         props: [
             "i18n",
+            "config",
             "operationalItems",
-            "customLayerActions",
-            "visibleIconClass",
-            "invisibleIconClass",
-            "showOperationalLayerHeaderMenu"
+            "customLayerActions"
         ],
         methods: {
             enableAllLayer: function(value) {

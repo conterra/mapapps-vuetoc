@@ -33,17 +33,19 @@ export default class TableOfContentsFactory {
         const defaultSelectedId = this._basemapModel.selectedId;
         const vm = this.vm = new Vue(TableOfContents);
         vm.i18n = this._i18n.get().ui;
-        vm.showBasemaps = properties.showBasemaps;
-        vm.showOperationalLayer = properties.showOperationalLayer;
-        vm.showLegend = properties.showLegend;
-        vm.showLoadingStatus = properties.showLoadingStatus;
-        vm.showOperationalLayerHeaderMenu = properties.showOperationalLayerHeaderMenu;
-        vm.showLayerMenu = properties.showLayerMenu;
-        vm.showResetButton = properties.showResetButton;
-        vm.showCloseButton = properties.showCloseButton;
-        vm.visibleIconClass = properties.visibleIconClass;
-        vm.invisibleIconClass = properties.invisibleIconClass;
-        vm.isMobile = isMobile;
+        vm.config = {
+            showBasemaps: properties.showBasemaps,
+            showOperationalLayer: properties.showOperationalLayer,
+            showLegend: properties.showLegend,
+            showLoadingStatus: properties.showLoadingStatus,
+            showOperationalLayerHeaderMenu: properties.showOperationalLayerHeaderMenu,
+            showLayerMenu: properties.showLayerMenu,
+            showResetButton: properties.showResetButton,
+            showCloseButton: properties.showCloseButton,
+            visibleIconClass: properties.visibleIconClass,
+            invisibleIconClass: properties.invisibleIconClass,
+            isMobile: isMobile
+        }
 
         // listen to view model methods
         vm.$on('close', () => tool.set("active", false));

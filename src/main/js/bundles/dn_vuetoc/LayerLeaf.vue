@@ -1,6 +1,7 @@
 <template>
     <div>
         <v-progress-linear
+            v-if="config.showLoadingStatus"
             :active="updating"
             :height="2"
             indeterminate
@@ -11,7 +12,7 @@
 </template>
 <script>
     export default {
-        props: ["item"],
+        props: ["item", "config"],
         data: function(){
             return {
                 updating: false,

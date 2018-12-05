@@ -7,11 +7,11 @@
             <v-btn
                 icon
                 @click="item.visible = !item.visible">
-                <v-icon>{{ visible ? visibleIconClass : invisibleIconClass }}</v-icon>
+                <v-icon>{{ visible ? config.visibleIconClass : config.invisibleIconClass }}</v-icon>
             </v-btn>
         </v-list-tile-action>
         <v-list-tile-action
-            v-if="$root.showLegend && $root.getLegend(item.layer.url)"
+            v-if="config.showLegend && $root.getLegend(item.layer.url)"
             @click="item.visible = !item.visible">
             <img :src="$root.getLegend(item.layer.url)">
         </v-list-tile-action>
@@ -22,7 +22,7 @@
             <v-list-tile-title v-text="item.title"/>
         </v-list-tile-content>
         <v-list-tile-action
-            v-if="$root.showLayerMenu && loaded && hasLayerActions()"
+            v-if="config.showLayerMenu && loaded && hasLayerActions()"
             @click.prevent.stop
         >
             <v-menu
@@ -55,7 +55,7 @@
     import LayerMenu from "./LayerMenu.vue";
 
     export default {
-        name: "layer-item",
+        name: "layer-details",
         components: {
             "layer-menu": LayerMenu
         },
@@ -63,8 +63,7 @@
             "item",
             "i18n",
             "customLayerActions",
-            "visibleIconClass",
-            "invisibleIconClass"
+            "config"
         ],
         data: function(){
             return {

@@ -5,18 +5,16 @@
                 grid-list-sm
                 class="pa-1">
                 <base-layer-node
-                    v-if="showBasemaps"
+                    v-if="config.showBasemaps"
                     :i18n="i18n"
                     :basemaps="basemaps"
                     class="vue-toc__basemaps"/>
                 <operational-layer-node
-                    v-if="showOperationalLayer"
+                    v-if="config.showOperationalLayer"
                     :i18n="i18n"
                     :operational-items="operationalItems"
-                    :visible-icon-class="visibleIconClass"
-                    :invisible-icon-class="invisibleIconClass"
+                    :config="config"
                     :custom-layer-actions="customLayerActions"
-                    :show-operational-layer-header-menu="showOperationalLayerHeaderMenu"
                     class="vue-toc__layers"/>
             </v-container>
         </div>
@@ -27,10 +25,10 @@
                 <v-layout
                     row
                     wrap>
-                    <v-flex v-if="showCloseButton">
+                    <v-flex v-if="config.showCloseButton">
                         <v-card class="elevation-6">
                             <v-btn
-                                v-if="isMobile"
+                                v-if="config.isMobile"
                                 block
                                 color="primary"
                                 class="btn btn--block btn--raised theme--light"
@@ -49,7 +47,7 @@
                             </v-btn>
                         </v-card>
                     </v-flex>
-                    <v-flex v-if="showResetButton">
+                    <v-flex v-if="config.showResetButton">
                         <v-card class="elevation-6">
                             <v-btn
                                 block
@@ -77,40 +75,21 @@
             "operational-layer-node": OperationalLayerNode
         },
         mixins: [Bindable],
-        data: function () {
+        props: {
+            config: Object,
+            selectedId:String,
+            legendArray: {
+                type:Array,
+                default: () => []
+            },
+            i18n: Object
+        },
+        data: function(){
             return {
-                customLayerActions: [],
-                operationalItems: null,
-                legendArray: [],
                 basemaps: [],
-                selectedId: "",
-                showBasemaps: true,
-                showOperationalLayer: true,
-                showLegend: true,
-                showLoadingStatus: true,
-                showOperationalLayerHeaderMenu: true,
-                showLayerMenu: true,
-                showResetButton: true,
-                showCloseButton: true,
-                visibleIconClass: "visibility",
-                invisibleIconClass: "visibility_off",
-                i18n: {
-                    type: Object,
-                    default: function () {
-                        return {
-                            basemaps: "Basemaps",
-                            layers: "Operational Layer",
-                            close: "Close",
-                            backToMap: "Back to map",
-                            reset: "Reset",
-                            description: "Description:",
-                            copyright: "Copyright:",
-                            activateAllLayer: "Activate all layer",
-                            deactivateAllLayer: "Deactivate all layer"
-                        }
-                    }
-                }
-            };
+                operationalItems: [],
+                customLayerActions: []
+            }
         },
         methods: {
             getLegend: function (url) {
