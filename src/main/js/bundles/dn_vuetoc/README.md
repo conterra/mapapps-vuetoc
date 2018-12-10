@@ -13,7 +13,7 @@ The toc provides a menu entry for displaying the description of the selected lay
 To disable this entry the corresponding component has to be disabled in the app.json configuration below this bundle:
 
 ```json
-"sdi_toc": {
+"dn_vuetoc": {
     "ItemDescriptionAction": {
         "componentEnabled": false
     }
@@ -25,7 +25,7 @@ The toc provides a menu entry for changing the current view to the __full-extent
 To disable this entry the corresponding component has to be disabled in the app.json configuration below this bundle:
 
 ```json
-"sdi_toc": {
+"dn_vuetoc": {
     "ZoomToExtentActionFactory": {
         "componentEnabled": false
     }
@@ -37,7 +37,7 @@ The toc provides a menu entry for displaying the copyright information of the se
 To disable this entry the corresponding component has to be disabled in the app.json configuration below this bundle:
 
 ```json
-"sdi_toc": {
+"dn_vuetoc": {
     "ItemCopyrightAction": {
         "componentEnabled": false
     }
