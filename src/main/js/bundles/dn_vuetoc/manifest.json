@@ -147,7 +147,13 @@
             "properties": {
                 "Service-Ranking": 70
             },
-            "provides": "vue-toc.LayerActionFactory"
+            "provides": "vue-toc.LayerActionFactory",
+            "references": [
+                {
+                    "name": "_windowManager",
+                    "providing": "ct.framework.api.WindowManager"
+                }
+            ]
         },
         {
             "name": "ZoomToExtentActionFactory",

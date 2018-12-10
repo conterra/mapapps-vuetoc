@@ -16,14 +16,23 @@
  */
 import ItemDescriptionAction from "./ItemDescriptionAction.vue";
 
-export default function ItemDescriptionActionFactory() {
+export default function LegendActionFactory() {
     return {
         getComponent() {
-            let description = this._i18n.get().ui.description;
-            ItemDescriptionAction.props.descriptionLabel = {
+            let i18n = this._i18n.get().ui;
+            let windowManager = this._windowManager;
+            ItemDescriptionAction.props.windowManager = {
+                type: Object,
+                default: () => windowManager
+            };
+            ItemDescriptionAction.props.descriptionTitleLable = {
                 type: String,
-                default: description
-            }
+                default: i18n.description
+            };
+            ItemDescriptionAction.props.titleLabel = {
+                type: String,
+                default: i18n.description
+            };
             return ItemDescriptionAction;
         }
     }

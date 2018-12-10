@@ -1,34 +1,56 @@
-<template>
-    <v-list-group
-        v-if="displayActionForItem(item)"
-        no-action>
-        <v-list-tile
-            slot="activator">
-            <v-list-tile-action>
-                <v-icon primary>description</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-title>{{ descriptionLabel }}</v-list-tile-title>
-        </v-list-tile>
-        <v-card-title v-if="displayActionForItem(item)">
-            <div class="regular">{{ item.layer.description }}</div>
-        </v-card-title>
-    </v-list-group>
-</template>
 <script>
+    import ButtonAction from "dn_vuetoc/actions/ButtonAction.vue";
     export default  {
         name: "item-description",
+        extends: ButtonAction,
         props: {
-            item: {
-                type: Object
+            icon: {
+                type: String,
+                default: "description"
             },
-            descriptionLabel: {
+            descriptionTitleLable: {
                 type: String,
                 default: "Description"
+            },
+            windowManager: {
+                type: Object,
+                default: () => {}
+            },
+            titleLable: String
+        },
+        data: function () {
+            return {
+                descriptionWindow: undefined
+            }
+        },
+        beforeDestroy: function () {
+            if (this.descriptionWindow) {
+                this.descriptionWindow.close();
+                this.descriptionWindow = undefined;
             }
         },
         methods: {
-            displayActionForItem(item) {
+            displayActionForItem: function (item) {
                 return !!item.layer && !!item.layer.description;
+            },
+            onClick(item) {
+                const layer = item.layer;
+                let descriptionWindow = this.descriptionWindow = this.windowManager.createWindow({
+                    title: this.descriptionTitleLable + " - " + layer.title,
+                    dockable: false,
+                    closable: true,
+                    minimizeOnClose: false,
+                    maximizable: true,
+                    destroyContent: false,
+                    marginBox: {
+                        w: 300,
+                        h: 500
+                    },
+                    content: layer.description,
+                    windowClass: "vuetocLegendWindow"
+                });
+                descriptionWindow.show();
+                this.$emit('close-menu');
             }
         }
     }
