@@ -8,7 +8,7 @@
             class="ma-0"
         />
         <v-list-group
-            v-if="item.children && item.children.length > 0"
+            v-if="item.children.length"
             v-model="open"
             no-action>
             <layer-details
