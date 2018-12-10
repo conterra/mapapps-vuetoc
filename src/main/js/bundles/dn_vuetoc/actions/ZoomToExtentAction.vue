@@ -4,8 +4,6 @@
         name: "zoom-to-extent",
         extends: ButtonAction,
         props: {
-            fromLabel: String,
-            toLabel: String,
             titleLabel: String,
             icon: {
                 type: String,
