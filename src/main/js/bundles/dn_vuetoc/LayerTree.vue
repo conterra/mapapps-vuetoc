@@ -10,7 +10,6 @@
                 :config="config"
                 :custom-layer-actions="customLayerActions">
                 <layer-tree
-                    v-if="item.children.length"
                     slot="sub"
                     slot-scope="itemProps"
                     :i18n="i18n"
