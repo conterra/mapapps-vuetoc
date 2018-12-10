@@ -47,7 +47,7 @@ export default class TableOfContentsFactory {
             invisibleIconClass: properties.invisibleIconClass,
             isMobile: isMobile
         };
-        vm.operationalItems =
+        vm.operationalItems = [];
 
         // listen to view model methods
         vm.$on('close', () => tool.set("active", false));
