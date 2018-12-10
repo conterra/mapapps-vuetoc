@@ -19,6 +19,7 @@ import VueDijit from "apprt-vue/VueDijit";
 import Binding from "apprt-binding/Binding";
 import apprt_request from "apprt-request";
 import LayerListViewModel from "esri/widgets/LayerList/LayerListViewModel";
+import {whenOnce} from "esri/core/watchUtils";
 
 export default class TableOfContentsFactory {
 
@@ -61,20 +62,12 @@ export default class TableOfContentsFactory {
             .syncToLeftNow();
 
         if (mapWidgetModel.view) {
-            this._createLayerListViewModel(vm);
-            this._waitForLayers(vm);
-            vm.customLayerActions = this._layerActionResolver.getLayerActions();
+            this.onViewAvailable(mapWidgetModel.view, vm);
         } else {
-            mapWidgetModel.watch("view", ({ value }) => {
-                this._createLayerListViewModel(vm);
-                this._waitForLayers(vm);
-                vm.customLayerActions = this._layerActionResolver.getLayerActions();
+            mapWidgetModel.watch("view", (view) => {
+                this.onViewAvailable(view, vm);
             });
         }
-        mapWidgetModel.map.allLayers.on("change", (event) => {
-            this._createLayerListViewModel(vm);
-            this._waitForLayers(vm);
-        });
 
         // listen to custom action registrations
         this.watchHandles = [];
@@ -84,6 +77,25 @@ export default class TableOfContentsFactory {
         this.watchHandles.push(this._layerActionResolver.on("layer-action-removed", () => {
             vm.customLayerActions = this._layerActionResolver.getLayerActions();
         }));
+    }
+
+    onViewAvailable(){
+        whenOnce(this._mapWidgetModel.view, "ready", (value) => {
+            value && this.onViewReady();
+        });
+    }
+
+    onViewReady(){
+        let vm = this.vm;
+        this._createLayerListViewModel(vm);
+        this._waitForLayers(vm);
+        vm.customLayerActions = this._layerActionResolver.getLayerActions();
+        this.watchLayersHandle && this.watchLayersHandle.remove()
+        this.watchLayersHandle = this._mapWidgetModel.map.allLayers.on("change", (evt) => {
+            console.log(`%c AllLayers changed: ${evt}`, 'color: #ffff00');
+            this._createLayerListViewModel(vm);
+            this._waitForLayers(vm);
+        });
     }
 
     createInstance() {
@@ -172,6 +184,7 @@ export default class TableOfContentsFactory {
     deactivate() {
         this.watchHandles.forEach(handle => {
             handle.remove();
-        })
+        });
+        this.watchLayersHandle.remove();
     }
 }

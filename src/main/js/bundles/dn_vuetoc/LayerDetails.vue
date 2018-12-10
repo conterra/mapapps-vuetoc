@@ -80,7 +80,9 @@
                 return;
             }
             this.loaded = this.item.layer.loaded;
-            this.watchHandles.push(this.item.layer.watch("loaded", loaded => this.loaded = loaded));
+            this.watchHandles.push(this.item.layer.watch("loaded", loaded => {
+                this.loaded = loaded
+            }));
         },
         beforeDestroy: function(){
             this.watchHandles.forEach(handle => handle.remove());
