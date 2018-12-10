@@ -19,7 +19,12 @@ import ItemDescriptionAction from "./ItemDescriptionAction.vue";
 export default function ItemDescriptionActionFactory() {
     return {
         getComponent() {
-            return ItemDescriptionAction
+            let description = this._i18n.get().ui.description;
+            ItemDescriptionAction.props.descriptionLabel = {
+                type: String,
+                default: description
+            }
+            return ItemDescriptionAction;
         }
     }
 }

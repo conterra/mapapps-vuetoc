@@ -24,7 +24,7 @@ module.exports = {
             backToMap: "Back to map",
             reset: "Reset",
             zoomToExtent: "Zoom to extent",
-            description: "Description:",
+            description: "Description",
             copyright: "Copyright:",
             showAllLayer: "Activate all layer",
             hideAllLayer: "Deactivate all layer",
