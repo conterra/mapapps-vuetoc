@@ -47,6 +47,13 @@
                 watchHandle: []
             }
         },
+        watch: {
+            open: function(value) {
+                if(value !== this.item.open){
+                    this.item.open = value;
+                }
+            }
+        },
         beforeMount: function(){
             this.watchHandle.push(this.item.watch("updating", updating => this.updating = updating));
             this.watchHandle.push(this.item.watch("open", open => this.open = open));
