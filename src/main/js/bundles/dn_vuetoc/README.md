@@ -20,6 +20,18 @@ To disable this entry the corresponding component has to be disabled in the app.
 }
 ```
 
+### Zoom-To-Extent Menu Entry
+The toc provides a menu entry for changing the current view to the __full-extent__ of the selected layer.
+To disable this entry the corresponding component has to be disabled in the app.json configuration below this bundle:
+
+```json
+"sdi_toc": {
+    "ZoomToExtentActionFactory": {
+        "componentEnabled": false
+    }
+}
+```
+
 ### Copyright Menu Entry
 The toc provides a menu entry for displaying the copyright information of the selected layer.
 To disable this entry the corresponding component has to be disabled in the app.json configuration below this bundle:
