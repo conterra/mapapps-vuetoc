@@ -25,7 +25,7 @@ export default function LegendActionFactory() {
                 type: Object,
                 default: () => windowManager
             };
-            ItemDescriptionAction.props.descriptionTitleLable = {
+            ItemDescriptionAction.props.descriptionTitleLabel = {
                 type: String,
                 default: i18n.description
             };

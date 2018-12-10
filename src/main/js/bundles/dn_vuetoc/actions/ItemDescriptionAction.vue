@@ -8,7 +8,7 @@
                 type: String,
                 default: "description"
             },
-            descriptionTitleLable: {
+            descriptionTitleLabel: {
                 type: String,
                 default: "Description"
             },
@@ -36,7 +36,7 @@
             onClick(item) {
                 const layer = item.layer;
                 let descriptionWindow = this.descriptionWindow = this.windowManager.createWindow({
-                    title: this.descriptionTitleLable + " - " + layer.title,
+                    title: this.descriptionTitleLabel + " - " + layer.title,
                     dockable: false,
                     closable: true,
                     minimizeOnClose: false,
