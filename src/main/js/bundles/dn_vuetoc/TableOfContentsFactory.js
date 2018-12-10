@@ -92,7 +92,6 @@ export default class TableOfContentsFactory {
         vm.customLayerActions = this._layerActionResolver.getLayerActions();
         this.watchLayersHandle && this.watchLayersHandle.remove()
         this.watchLayersHandle = this._mapWidgetModel.map.allLayers.on("change", (evt) => {
-            console.log(`%c AllLayers changed: ${evt}`, 'color: #ffff00');
             this._createLayerListViewModel(vm);
             this._waitForLayers(vm);
         });
