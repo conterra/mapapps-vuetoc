@@ -1,5 +1,4 @@
 <script>
-    import WMTSLayer from "esri/layers/WMTSLayer";
     import ButtonAction from "dn_vuetoc/actions/ButtonAction.vue";
 
     export default {
@@ -31,7 +30,7 @@
         },
         data: function () {
             let layer = this.item.layer;
-            let description = layer instanceof WMTSLayer ? layer.activeLayer.description : layer.description;
+            let description = layer.type === "wmts" ? layer.activeLayer.description : layer.description;
             return {
                 description,
                 descriptionWindow: undefined
@@ -49,7 +48,7 @@
                 if (!item.layer) {
                     return false;
                 }
-                if (layer instanceof WMTSLayer) {
+                if (layer.type === "wmts") {
                     return layer.activeLayer && !!item.layer.activeLayer.description;
                 }
                 return !!layer.description;
