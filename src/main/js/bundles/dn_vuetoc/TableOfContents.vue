@@ -1,5 +1,5 @@
 <template>
-    <div class="ct-flex-container ct-flex-container--column fullHeight">
+    <div class="ct-flex-container ct-flex-container--column fullHeight vue-toc">
         <div class="ct-flex-item overflowAuto">
             <v-container
                 grid-list-sm

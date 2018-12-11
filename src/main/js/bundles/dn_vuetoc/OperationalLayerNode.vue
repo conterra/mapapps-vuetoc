@@ -2,7 +2,7 @@
 <template>
     <v-card class="elevation-6">
         <v-toolbar
-            class="primary title mb-1"
+            class="primary title mb-1 vue-toc_layer-tree-title"
             dense>
             <v-toolbar-title>{{ i18n.layers }}</v-toolbar-title>
             <v-spacer/>

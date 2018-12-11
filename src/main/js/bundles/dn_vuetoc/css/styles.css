@@ -2,7 +2,7 @@
     height: 100%
 }
 
-.ctAppRoot .vue-toc-window .overflowAuto {
+.ctAppRoot .vue-toc-window .overflow--auto {
     overflow: auto;
 }
 
@@ -30,12 +30,37 @@
     content: none;
 }
 
-.ctAppRoot .vue-toc__layer-tree .v-list__group__items .v-list__tile {
-    padding-left: 16px;
+
+.ctAppRoot .vue-toc .vue-toc_layer-tree-title .v-toolbar__content{
+    padding-right: 15px;
 }
 
-.ctAppRoot .vue-toc__layer-tree .vue-toc__layer-tree {
-    padding-left: 40px; /*not working any longer*/
+.ctAppRoot .vue-toc__layer-tree{
+    padding-left: 30px;
+}
+.ctAppRoot .vue-toc__layers > div > .vue-toc__layer-tree{
+    padding-left: 0;
+}
+
+.ctAppRoot .vue-toc__layer-tree .v-list__group__items--no-action .v-list__tile,
+.ctAppRoot .vue-toc__layer-tree .vue-toc__layer-tree-item--no-childs .v-list__tile{
+    padding-left: 34px;
+}
+
+.ctAppRoot .vue-base .v-list__group__header .v-list__group__header__prepend-icon{
+    min-width: 30px;
+}
+
+.everlasting .vue-toc__layer-tree .v-list__tile__action .v-btn--icon{
+    margin-left: 0;
+}
+
+.ctAppRoot .vue-toc__layer-tree  .v-list__group__header--sub-group  .v-list__group__header__prepend-icon{
+    padding-left: 10px;
+    margin-right: 0;
+}
+.ctAppRoot .vue-toc__layer-tree .v-list__group__header--active.v-list__group__header--sub-group .v-list__group__header__prepend-icon .v-icon{
+    transform: rotate(90deg);
 }
 
 .ctAppRoot .vue-toc__layer-tree .v-list__tile__action,
