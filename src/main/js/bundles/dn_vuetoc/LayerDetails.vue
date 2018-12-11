@@ -69,7 +69,7 @@
         data: function(){
             return {
                 menuOpen: false,
-                loaded: !!this.item.layer.loaded,
+                loaded: true,
                 visible: this.item.visible,
                 initialVisibility: this.item.visible,
                 watchHandles: []
