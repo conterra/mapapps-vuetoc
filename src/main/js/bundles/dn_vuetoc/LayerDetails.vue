@@ -1,4 +1,3 @@
-
 <template>
     <v-list-tile
         :disabled="!item.visibleAtCurrentScale">
@@ -66,7 +65,7 @@
             "config",
             "customLayerActions"
         ],
-        data: function(){
+        data: function () {
             let item = this.item;
             let layer = item.layer;
             return {
@@ -78,26 +77,26 @@
             }
         },
         computed: {
-            showMenu: function(){
-                return this.config.showLayerMenu && this.loaded && this.hasLayerActions();
+            showMenu: function () {
+                return this.config.showLayerMenu && this.visible && this.loaded && this.hasLayerActions();
             }
         },
-        beforeMount: function(){
+        beforeMount: function () {
             this.watchHandles.push(this.item.watch("visible", visible => this.visible = visible));
             this.watchHandles.push(this.item.layer.watch("loaded", loaded => this.loaded = loaded));
             this.bus.$on('reset', this.reset);
         },
-        beforeDestroy: function(){
+        beforeDestroy: function () {
             this.watchHandles.forEach(handle => handle.remove());
             this.bus.$off('reset', this.reset);
         },
         methods: {
-            hasLayerActions: function() {
+            hasLayerActions: function () {
                 return this.customLayerActions.some(action =>
                     action.methods.displayActionForItem(this.item)
                 );
             },
-            reset: function() {
+            reset: function () {
                 this.visible = this.item.visible = this.initialVisibility;
             }
         }
