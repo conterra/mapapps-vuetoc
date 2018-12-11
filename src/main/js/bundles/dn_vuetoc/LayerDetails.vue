@@ -68,17 +68,23 @@
         data: function () {
             let item = this.item;
             let layer = item.layer;
+            let loaded = layer.loaded === undefined ? true : layer.loaded;
+            let visible = item.visible;
             return {
                 menuOpen: false,
-                loaded: layer.loaded === undefined ? true : layer.loaded,
-                visible: item.visible,
-                initialVisibility: item.visible,
-                watchHandles: []
+                loaded,
+                visible,
+                initialVisibility: visible,
+                watchHandles: [],
+                showMenu:  this.menuVisible() && loaded
             }
         },
-        computed: {
-            showMenu: function () {
-                return this.config.showLayerMenu && this.visible && this.loaded && this.hasLayerActions();
+        watch: {
+            loaded: function () {
+                this.showMenu = this.menuVisible() && this.loaded
+            },
+            visible: function () {
+                this.showMenu = this.menuVisible() && this.loaded
             }
         },
         beforeMount: function () {
@@ -91,10 +97,12 @@
             this.bus.$off('reset', this.reset);
         },
         methods: {
-            hasLayerActions: function () {
-                return this.customLayerActions.some(action =>
+            menuVisible: function () {
+                let hasActions = this.customLayerActions.some(action =>
                     action.methods.displayActionForItem(this.item)
                 );
+                return hasActions && this.config.showLayerMenu;
+
             },
             reset: function () {
                 this.visible = this.item.visible = this.initialVisibility;
