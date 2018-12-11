@@ -72,7 +72,7 @@
                     destroyContent: false,
                     marginBox: widgetSize,
                     content: this.description,
-                    windowClass: "vuetocLegendWindow"
+                    windowClass: "vueTocDescriptionWindow"
                 });
                 descriptionWindow.show();
                 this.$emit('close-menu');
