@@ -1,7 +1,7 @@
 <template>
     <v-list-tile
-        v-if="displayActionForItem(item)"
-        :disabled="disableActionForItem(item)"
+        v-if="displayAction"
+        :disabled="disableAction"
         @click="onClick(item)">
         <v-list-tile-action>
             <v-icon primary>{{ icon }}</v-icon>
@@ -20,6 +20,12 @@
             icon: {
                 type: String,
                 default: "settings"
+            }
+        },
+        data: function () {
+            return {
+                displayAction: this.displayActionForItem(this.item),
+                disableAction: this.disableActionForItem(this.item)
             }
         },
         methods: {
