@@ -47,7 +47,9 @@ export default class TableOfContentsFactory {
             invisibleIconClass: properties.invisibleIconClass,
             isMobile: isMobile
         };
-        vm.operationalItems = [];
+        vm.operationalItems = {
+            items: []
+        };
 
         // listen to view model methods
         vm.$on('close', () => tool.set("active", false));
@@ -104,7 +106,7 @@ export default class TableOfContentsFactory {
             this.binding.unbind();
         }
         this.binding = Binding.for(vm, layerListViewModel)
-            .syncAll("operationalItems", "operationalItems", (operationalItems => operationalItems.items))
+            .syncAll("operationalItems")
             .enable()
             .syncToLeftNow();
     }
