@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2018 con terra GmbH (info@conterra.de)
  *
@@ -19,11 +18,22 @@ import ItemDescriptionAction from "./ItemDescriptionAction.vue";
 export default function LegendActionFactory() {
     return {
         getComponent() {
+            let envs = this._componentContext.getBundleContext().getCurrentExecutionEnvironment();
+            let isMobile = this.isMobile = envs.some((env) => env.name === "Mobile" || env.name === "Android");
             let i18n = this._i18n.get().ui;
             let windowManager = this._windowManager;
+            let widgetSize = this._properties.widgetSize;
             ItemDescriptionAction.props.windowManager = {
                 type: Object,
                 default: () => windowManager
+            };
+            ItemDescriptionAction.props.widgetSize = {
+                type: Object,
+                default: () => widgetSize
+            };
+            ItemDescriptionAction.props.isMobile = {
+                type: Boolean,
+                default: isMobile
             };
             ItemDescriptionAction.props.descriptionTitleLabel = {
                 type: String,

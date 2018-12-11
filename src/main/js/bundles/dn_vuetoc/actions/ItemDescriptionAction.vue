@@ -1,7 +1,8 @@
 <script>
     import WMTSLayer from "esri/layers/WMTSLayer";
     import ButtonAction from "dn_vuetoc/actions/ButtonAction.vue";
-    export default  {
+
+    export default {
         name: "item-description",
         extends: ButtonAction,
         props: {
@@ -13,11 +14,22 @@
                 type: String,
                 default: "Description"
             },
+            isMobile: {
+                type: Boolean,
+                default: false
+            },
             windowManager: {
                 type: Object,
-                default: () => {}
+                default: () => {
+                }
             },
-            titleLable: String
+            widgetSize: {
+                type: Object,
+                default: {
+                    w: 500,
+                    h: 500
+                }
+            }
         },
         data: function () {
             let layer = this.item.layer;
@@ -46,6 +58,13 @@
             },
             onClick(item) {
                 const layer = item.layer;
+                let widgetSize = this.widgetSize;
+                if (this.isMobile) {
+                    widgetSize = {
+                        w: "100%",
+                        h: "100%"
+                    };
+                }
                 let descriptionWindow = this.descriptionWindow = this.windowManager.createWindow({
                     title: this.descriptionTitleLabel + " - " + layer.title,
                     dockable: false,
@@ -53,10 +72,7 @@
                     minimizeOnClose: false,
                     maximizable: true,
                     destroyContent: false,
-                    marginBox: {
-                        w: 300,
-                        h: 500
-                    },
+                    marginBox: widgetSize,
                     content: this.description,
                     windowClass: "vuetocLegendWindow"
                 });
