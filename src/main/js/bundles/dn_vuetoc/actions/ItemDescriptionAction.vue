@@ -25,9 +25,7 @@
             },
             widgetSize: {
                 type: Object,
-                default: {
-                    w: 500,
-                    h: 500
+                default: () => {
                 }
             }
         },
@@ -48,10 +46,10 @@
         methods: {
             displayActionForItem: function (item) {
                 let layer = item.layer;
-                if(!item.layer){
+                if (!item.layer) {
                     return false;
                 }
-                if(layer instanceof WMTSLayer){
+                if (layer instanceof WMTSLayer) {
                     return layer.activeLayer && !!item.layer.activeLayer.description;
                 }
                 return !!layer.description;
