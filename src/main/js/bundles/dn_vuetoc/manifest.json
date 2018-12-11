@@ -23,7 +23,7 @@
     ],
     "layout-widgets": [
         {
-            "widgetRole": "mapContent",
+            "widgetRole": "vueTocWidget",
             "sublayout": [
                 "desktop",
                 "tablet_landscape",
@@ -57,7 +57,7 @@
             }
         },
         {
-            "widgetRole": "mapContent",
+            "widgetRole": "vueTocWidget",
             "sublayout": [
                 "mobile_landscape",
                 "mobile_portrait"
@@ -97,7 +97,7 @@
             "provides": "dijit.Widget",
             "instanceFactory": true,
             "properties": {
-                "widgetRole": "mapContent",
+                "widgetRole": "vueTocWidget",
                 "showBasemaps": true,
                 "showOperationalLayer": true,
                 "showLegend": true,
