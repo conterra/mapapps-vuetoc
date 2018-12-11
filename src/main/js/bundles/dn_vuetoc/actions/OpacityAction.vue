@@ -20,7 +20,7 @@
         },
         methods: {
             displayActionForItem(item) {
-                return item.layer && item.layer.opacity !== undefined;
+                return item.layer && item.layer.type !== "group" && item.layer.opacity !== undefined;
             },
             onChange(value) {
                 this.item.layer.opacity = value;
