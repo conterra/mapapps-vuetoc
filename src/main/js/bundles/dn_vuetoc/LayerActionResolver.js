@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) 2018 con terra GmbH (info@conterra.de)
  *
@@ -14,10 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import {Evented} from "apprt-core/Events";
 
-export default class LayerActionResolver {
+const _layerActionFactories = Symbol("layerActions");
+
+export default class LayerActionResolver extends Evented {
+    constructor() {
+        super();
+        this[_layerActionFactories] = new Map();
+    }
 
     getLayerActions() {
-        return this.layerActionFactories.map(factory => factory.getComponent());
+        let factories = Array.from(this[_layerActionFactories].values());
+        factories.sort((a, b) => {
+            if (a._properties["priority"] < b._properties["priority"])
+                return 1;
+            if (a._properties["priority"] > b._properties["priority"])
+                return -1;
+            return 0;
+        });
+        return factories.map(factory => factory.getComponent());
+    }
+
+    addLayerActionFactory(factory) {
+        if (!factory.getComponent) {
+            console.warn("LayerActionResolver: Factory must provide a 'getComponent' function!");
+            return;
+        }
+        let name = factory.getComponent().name;
+        this[_layerActionFactories].set(name, factory);
+        this.emit("layer-action-added", {
+            name, factory
+        });
+    }
+
+    removeLayerActionFactory(factory) {
+        let name = factory.getComponent().name;
+        this[_layerActionFactories].delete(name);
+        this.emit("layer-action-removed", {
+            name, factory
+        });
     }
 }

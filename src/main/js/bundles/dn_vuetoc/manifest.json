@@ -135,7 +135,7 @@
             "provides": "vue-toc.LayerActionResolver",
             "references": [
                 {
-                    "name": "layerActionFactories",
+                    "name": "layerActionFactory",
                     "providing": "vue-toc.LayerActionFactory",
                     "cardinality": "0..n"
                 }
@@ -145,7 +145,7 @@
             "name": "ItemDescriptionActionFactory",
             "impl": "./actions/ItemDescriptionActionFactory",
             "properties": {
-                "Service-Ranking": 70
+                "priority": 70
             },
             "provides": "vue-toc.LayerActionFactory",
             "references": [
@@ -159,7 +159,7 @@
             "name": "ZoomToExtentActionFactory",
             "impl": "./actions/ZoomToExtentActionFactory",
             "properties": {
-                "Service-Ranking": 50
+                "priority": 50
             },
             "provides": "vue-toc.LayerActionFactory"
         },
@@ -167,7 +167,7 @@
             "name": "OpacityActionFactory",
             "impl": "./actions/OpacityActionFactory",
             "properties": {
-                "Service-Ranking": 40
+                "priority": 40
             },
             "provides": "vue-toc.LayerActionFactory"
         },
@@ -175,7 +175,7 @@
             "name": "ShowSublayerActionFactory",
             "impl": "./actions/ShowSublayerActionFactory",
             "properties": {
-                "Service-Ranking": 30
+                "priority": 30
             },
             "provides": "vue-toc.LayerActionFactory"
         },
@@ -183,7 +183,7 @@
             "name": "HideSublayerActionFactory",
             "impl": "./actions/HideSublayerActionFactory",
             "properties": {
-                "Service-Ranking": 20
+                "priority": 20
             },
             "provides": "vue-toc.LayerActionFactory"
         },
@@ -191,7 +191,7 @@
             "name": "ItemCopyrightActionFactory",
             "impl": "./actions/ItemCopyrightActionFactory",
             "properties": {
-                "Service-Ranking": 0
+                "priority": 0
             },
             "provides": "vue-toc.LayerActionFactory"
         },
