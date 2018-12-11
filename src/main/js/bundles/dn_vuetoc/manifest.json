@@ -50,7 +50,8 @@
                 "fixEdgesInViewPort": {
                     "r": true,
                     "b": true,
-                    "t": true
+                    "t": true,
+                    "l": false
                 },
                 "minimizeOnClose": true,
                 "windowClass": "noTitleBarAndWindowTools noPadding vue-toc-window"
@@ -76,17 +77,6 @@
                     "l": 0
                 },
                 "windowClass": "mobileWindow noTitleBarAndWindowTools noPadding vue-toc-window"
-            }
-        },
-        {
-            "widgetRole": "vuetocLegend",
-            "window": {
-                "minimizeOnClose": true,
-                "resizable": true,
-                "marginBox": {
-                    "w": 400,
-                    "h": 400
-                }
             }
         }
     ],
