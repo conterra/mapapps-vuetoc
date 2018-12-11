@@ -6,7 +6,7 @@
             <v-btn
                 icon
                 @click="item.visible = !item.visible">
-                <v-icon>{{ visible ? config.visibleIconClass : config.invisibleIconClass }}</v-icon>
+                <v-icon :class="{'success--text': visible}">{{ visible ? config.visibleIconClass : config.invisibleIconClass }}</v-icon>
             </v-btn>
         </v-list-tile-action>
         <v-list-tile-action
