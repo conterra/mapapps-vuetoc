@@ -1,11 +1,11 @@
 <template>
     <v-list-group
-        v-if="displayActionForItem(item)"
-        :disabled="disableActionForItem(item)"
+        v-if="displayAction"
+        :disabled="disableAction"
         no-action>
         <v-list-tile
             slot="activator"
-            :disabled="disableActionForItem(item)">
+            :disabled="disableAction">
             <v-list-tile-action>
                 <v-icon primary>{{ icon }}</v-icon>
             </v-list-tile-action>
@@ -36,7 +36,9 @@
             return {
                 sliderValue: 1,
                 max: 1,
-                step: 0.01
+                step: 0.01,
+                displayAction: this.displayActionForItem(this.item),
+                disableAction: this.disableActionForItem(this.item)
             };
         },
         methods: {
