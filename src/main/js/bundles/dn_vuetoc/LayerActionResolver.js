@@ -14,39 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {Evented} from "apprt-core/Events";
 
-const _layerActions = Symbol("layerActions");
-
-export default class LayerActionResolver extends Evented {
-    constructor() {
-        super();
-        this[_layerActions] = new Map();
-    }
+export default class LayerActionResolver {
 
     getLayerActions() {
-        return Array.from(this[_layerActions].values());
-    }
-
-    addLayerActionFactory(factory) {
-        if (!factory.getComponent) {
-            console.warn("LayerActionResolver: Factory must provide a 'getComponent' function!");
-            return;
-        }
-        let action = factory.getComponent();
-        let name = action.name;
-        this[_layerActions].set(name, action);
-        this.emit("layer-action-added", {
-            name, action
-        });
-    }
-
-    removeLayerActionFactory(factory) {
-        let action = factory.getComponent();
-        let name = action.name;
-        this[_layerActions].delete(name);
-        this.emit("layer-action-removed", {
-            name, action
-        });
+        return this.layerActionFactories.map(factory => factory.getComponent());
     }
 }

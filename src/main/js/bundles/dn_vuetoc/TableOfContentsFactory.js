@@ -65,15 +65,6 @@ export default class TableOfContentsFactory {
                 this.onViewAvailable(view, vm);
             });
         }
-
-        // listen to custom action registrations
-        this.watchHandles = [];
-        this.watchHandles.push(this._layerActionResolver.on("layer-action-added", () => {
-            vm.customLayerActions = this._layerActionResolver.getLayerActions();
-        }));
-        this.watchHandles.push(this._layerActionResolver.on("layer-action-removed", () => {
-            vm.customLayerActions = this._layerActionResolver.getLayerActions();
-        }));
     }
 
     onViewAvailable(){

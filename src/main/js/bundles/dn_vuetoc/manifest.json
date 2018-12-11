@@ -135,7 +135,7 @@
             "provides": "vue-toc.LayerActionResolver",
             "references": [
                 {
-                    "name": "layerActionFactory",
+                    "name": "layerActionFactories",
                     "providing": "vue-toc.LayerActionFactory",
                     "cardinality": "0..n"
                 }
