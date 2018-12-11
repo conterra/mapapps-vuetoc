@@ -1,4 +1,5 @@
 <script>
+    import WMTSLayer from "esri/layers/WMTSLayer";
     import ButtonAction from "dn_vuetoc/actions/ButtonAction.vue";
     export default  {
         name: "item-description",
@@ -19,7 +20,10 @@
             titleLable: String
         },
         data: function () {
+            let layer = this.item.layer;
+            let description = layer instanceof WMTSLayer ? layer.activeLayer.description : layer.description;
             return {
+                description,
                 descriptionWindow: undefined
             }
         },
@@ -31,7 +35,14 @@
         },
         methods: {
             displayActionForItem: function (item) {
-                return !!item.layer && !!item.layer.description;
+                let layer = item.layer;
+                if(!item.layer){
+                    return false;
+                }
+                if(layer instanceof WMTSLayer){
+                    return layer.activeLayer && !!item.layer.activeLayer.description;
+                }
+                return !!layer.description;
             },
             onClick(item) {
                 const layer = item.layer;
@@ -46,7 +57,7 @@
                         w: 300,
                         h: 500
                     },
-                    content: layer.description,
+                    content: this.description,
                     windowClass: "vuetocLegendWindow"
                 });
                 descriptionWindow.show();

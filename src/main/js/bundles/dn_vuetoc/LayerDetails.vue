@@ -22,7 +22,7 @@
             <v-list-tile-title v-text="item.title"/>
         </v-list-tile-content>
         <v-list-tile-action
-            v-if="config.showLayerMenu && loaded && hasLayerActions()"
+            v-if="showMenu"
             @click.prevent.stop
         >
             <v-menu
@@ -67,12 +67,19 @@
             "customLayerActions"
         ],
         data: function(){
+            let item = this.item;
+            let layer = item.layer;
             return {
                 menuOpen: false,
-                loaded: true,
-                visible: this.item.visible,
-                initialVisibility: this.item.visible,
+                loaded: layer.loaded === undefined ? true : layer.loaded,
+                visible: item.visible,
+                initialVisibility: item.visible,
                 watchHandles: []
+            }
+        },
+        computed: {
+            showMenu: function(){
+                return this.config.showLayerMenu && this.loaded && this.hasLayerActions();
             }
         },
         beforeMount: function(){
