@@ -70,11 +70,12 @@
             let layer = item.layer;
             let loaded = layer.loaded === undefined ? true : layer.loaded;
             let visible = item.visible;
+            let initialVisible = item.initialVisible;
             return {
                 menuOpen: false,
                 loaded,
                 visible,
-                initialVisibility: visible,
+                initialVisible: initialVisible,
                 watchHandles: [],
                 showMenu:  this.menuVisible() && loaded
             }
@@ -105,7 +106,7 @@
 
             },
             reset: function () {
-                this.visible = this.item.visible = this.initialVisibility;
+                this.visible = this.item.visible = this.initialVisible;
             }
         }
     };

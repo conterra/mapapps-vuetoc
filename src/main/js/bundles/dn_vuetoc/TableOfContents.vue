@@ -54,7 +54,7 @@
                                 block
                                 color="primary"
                                 class="btn btn--block btn--raised theme--light"
-                                @click.native="bus.$emit('reset')">
+                                @click.native="reset()">
                                 <v-icon left>settings_backup_restore</v-icon>
                                 {{ i18n.reset }}
                             </v-btn>
@@ -79,14 +79,14 @@
         mixins: [Bindable],
         props: {
             config: Object,
-            selectedId:String,
+            selectedId: String,
             legendArray: {
-                type:Array,
+                type: Array,
                 default: () => []
             },
             i18n: Object
         },
-        data: function(){
+        data: function () {
             return {
                 basemaps: [],
                 operationalItems: [],
@@ -95,6 +95,10 @@
             }
         },
         methods: {
+            reset: function () {
+                this.bus.$emit('reset');
+                this.$emit('reset');
+            },
             getLegend: function (url) {
                 let imageUrl = "";
                 this.legendArray.forEach((legend) => {

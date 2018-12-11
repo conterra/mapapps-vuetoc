@@ -53,6 +53,9 @@ export default class TableOfContentsFactory {
 
         // listen to view model methods
         vm.$on('close', () => tool.set("active", false));
+        vm.$on('reset', () => {
+            this._basemapModel.selectedId = defaultSelectedId;
+        });
 
         Binding.for(vm, basemapModel)
             .sync("selectedId")
@@ -69,13 +72,13 @@ export default class TableOfContentsFactory {
         }
     }
 
-    onViewAvailable(){
+    onViewAvailable() {
         whenOnce(this._mapWidgetModel.view, "ready", (value) => {
             value && this.onViewReady();
         });
     }
 
-    onViewReady(){
+    onViewReady() {
         let vm = this.vm;
         this._createLayerListViewModel(vm);
         this._waitForLayers(vm);
