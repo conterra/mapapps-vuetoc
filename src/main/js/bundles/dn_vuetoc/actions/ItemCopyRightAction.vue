@@ -10,7 +10,7 @@
         props: ["item", "copyrightLabel"],
         methods: {
             displayActionForItem(item) {
-                return !!item.layer && !!item.layer.description;
+                return !!item.layer && !!item.layer.copyright;
             }
         }
     }
