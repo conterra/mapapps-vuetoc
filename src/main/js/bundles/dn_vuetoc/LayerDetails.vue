@@ -60,38 +60,38 @@
             "layer-menu": LayerMenu
         },
         props: [
+            "bus",
             "item",
             "i18n",
-            "customLayerActions",
-            "config"
+            "config",
+            "customLayerActions"
         ],
         data: function(){
             return {
                 menuOpen: false,
-                loaded: false,
+                loaded: !!this.item.layer.loaded,
                 visible: this.item.visible,
+                initialVisibility: this.item.visible,
                 watchHandles: []
             }
         },
         beforeMount: function(){
             this.watchHandles.push(this.item.watch("visible", visible => this.visible = visible));
-            if(this.item.layer.loaded === undefined){
-                this.loaded = true;
-                return;
-            }
-            this.loaded = this.item.layer.loaded;
-            this.watchHandles.push(this.item.layer.watch("loaded", loaded => {
-                this.loaded = loaded
-            }));
+            this.watchHandles.push(this.item.layer.watch("loaded", loaded => this.loaded = loaded));
+            this.bus.$on('reset', this.reset);
         },
         beforeDestroy: function(){
             this.watchHandles.forEach(handle => handle.remove());
+            this.bus.$off('reset', this.reset);
         },
         methods: {
             hasLayerActions: function() {
                 return this.customLayerActions.some(action =>
                     action.methods.displayActionForItem(this.item)
                 );
+            },
+            reset: function() {
+                this.visible = this.item.visible = this.initialVisibility;
             }
         }
     };

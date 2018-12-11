@@ -51,10 +51,6 @@ export default class TableOfContentsFactory {
 
         // listen to view model methods
         vm.$on('close', () => tool.set("active", false));
-        vm.$on('reset', () => {
-            this._resetLayerVisibility();
-            vm.selectedId = defaultSelectedId;
-        });
 
         Binding.for(vm, basemapModel)
             .sync("selectedId")
@@ -170,14 +166,6 @@ export default class TableOfContentsFactory {
             if (this._properties.showLegend) {
                 this._createLegendArray(vm);
             }
-        });
-    }
-
-    _resetLayerVisibility() {
-        let operationalItems = this.vm.operationalItems;
-        let items = operationalItems.flatten((item) => item.children);
-        items.forEach((item) => {
-            item.set("visible", item.initialVisible);
         });
     }
 

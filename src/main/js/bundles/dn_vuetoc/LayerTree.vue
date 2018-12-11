@@ -5,6 +5,7 @@
             :key="item.uid"
             class="pa-0">
             <layer-item
+                :bus="bus"
                 :i18n="i18n"
                 :item="item"
                 :config="config"
@@ -12,6 +13,7 @@
                 <layer-tree
                     slot="sub"
                     slot-scope="itemProps"
+                    :bus="bus"
                     :i18n="i18n"
                     :config="config"
                     :custom-layer-actions="customLayerActions"
@@ -29,10 +31,11 @@
             "layer-item": LayerItem
         },
         props: [
+            "bus",
             "i18n",
-            "customLayerActions",
             "items",
-            "config"
+            "config",
+            "customLayerActions"
         ]
     };
 </script>

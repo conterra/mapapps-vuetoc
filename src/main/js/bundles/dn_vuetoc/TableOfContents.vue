@@ -11,6 +11,7 @@
                     class="vue-toc__basemaps"/>
                 <operational-layer-node
                     v-if="config.showOperationalLayer"
+                    :bus="bus"
                     :i18n="i18n"
                     :operational-items="operationalItems"
                     :config="config"
@@ -53,7 +54,7 @@
                                 block
                                 color="primary"
                                 class="btn btn--block btn--raised theme--light"
-                                @click.native="$emit('reset')">
+                                @click.native="bus.$emit('reset')">
                                 <v-icon left>settings_backup_restore</v-icon>
                                 {{ i18n.reset }}
                             </v-btn>
@@ -68,6 +69,7 @@
     import Bindable from "apprt-vue/mixins/Bindable";
     import BaseLayerNode from "./BaseLayerNode.vue";
     import OperationalLayerNode from './OperationalLayerNode.vue';
+    import Vue from "apprt-vue/Vue";
 
     export default {
         components: {
@@ -88,7 +90,8 @@
             return {
                 basemaps: [],
                 operationalItems: [],
-                customLayerActions: []
+                customLayerActions: [],
+                bus: new Vue()
             }
         },
         methods: {

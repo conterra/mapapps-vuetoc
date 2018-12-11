@@ -13,6 +13,7 @@
             no-action>
             <layer-details
                 slot="activator"
+                :bus="bus"
                 :item="item"
                 :i18n="i18n"
                 :config="config"
@@ -25,6 +26,7 @@
         </v-list-group>
         <layer-details
             v-else
+            :bus="bus"
             :item="item"
             :i18n="i18n"
             :config="config"
@@ -39,7 +41,7 @@
         components: {
             "layer-details": LayerDetails
         },
-        props: ["i18n", "item", "config", "customLayerActions"],
+        props: ["bus", "i18n", "item", "config", "customLayerActions"],
         data: function(){
             return {
                 open: this.item.open,

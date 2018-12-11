@@ -49,6 +49,7 @@
         </v-toolbar>
         <div v-if="operationalItems">
             <layer-tree
+                :bus="bus"
                 :i18n="i18n"
                 :config="config"
                 :custom-layer-actions="customLayerActions"
@@ -64,6 +65,7 @@
             "layer-tree": LayerTree
         },
         props: [
+            "bus",
             "i18n",
             "config",
             "operationalItems",
