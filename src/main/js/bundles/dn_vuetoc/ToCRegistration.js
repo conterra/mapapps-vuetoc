@@ -17,7 +17,11 @@ export default class Activator{
     activate(){
         let componentInstance = this.instance = this._factory.newInstance(this._properties);
         let impl = componentInstance.getInstance();
-        this.registration = this._componentContext.getBundleContext().registerService(["dijit.Widget"], impl, this._properties);
+        this.registration = this._componentContext.getBundleContext().registerService(
+            ["dijit.Widget"],
+            impl,
+            this._properties
+        );
     }
 
     deactivate(){
