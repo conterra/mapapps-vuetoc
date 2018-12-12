@@ -70,7 +70,13 @@
 .ctAppRoot .vue-toc__layer-tree .v-list__group__header > div:not(.v-list__group__header__prepend-icon):not(.v-list__group__header__append-icon) {
     max-width: 100%;
 }
-
 .ctAppRoot .vuetocLegendWindow .esri-legend__service-label { /*esri-legend__service-label .... class not existing inside toc.*/
     margin-top: 0;
+}
+
+
+/*Döner Menu on Operational Layers and LayerItems*/
+.ctAppRoot .vue-toc__item-menu .v-toolbar__content{
+    padding-left: 12px;
+    padding-right: 12px;
 }

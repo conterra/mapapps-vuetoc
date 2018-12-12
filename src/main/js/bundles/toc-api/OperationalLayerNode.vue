@@ -11,40 +11,52 @@
                 bottom
                 left
                 max-width="300"
-                nudge-top="-10"
-                offset-y
-                transition="slide-y-transition">
+                nudge-top="5"
+                nudge-right="7"
+                transition="slide-y-transition"
+                content-class="vue-toc__item-menu">
                 <v-btn
                     slot="activator"
                     icon>
                     <v-icon>more_vert</v-icon>
                 </v-btn>
-                <v-list>
-                    <v-list-tile @click="enableAllLayer(true)">
-                        <v-list-tile-action>
-                            <v-icon primary>visibility</v-icon>
-                        </v-list-tile-action>
-                        <v-list-tile-title>{{ i18n.showAllLayer }}</v-list-tile-title>
-                    </v-list-tile>
-                    <v-list-tile @click="enableAllLayer(false)">
-                        <v-list-tile-action>
-                            <v-icon primary>visibility_off</v-icon>
-                        </v-list-tile-action>
-                        <v-list-tile-title>{{ i18n.hideAllLayer }}</v-list-tile-title>
-                    </v-list-tile>
-                    <v-list-tile @click="openAllLayer(true)">
-                        <v-list-tile-action>
-                            <v-icon primary>unfold_more</v-icon>
-                        </v-list-tile-action>
-                        <v-list-tile-title>{{ i18n.openAllLayer }}</v-list-tile-title>
-                    </v-list-tile>
-                    <v-list-tile @click="openAllLayer(false)">
-                        <v-list-tile-action>
-                            <v-icon primary>unfold_less</v-icon>
-                        </v-list-tile-action>
-                        <v-list-tile-title>{{ i18n.closeAllLayer }}</v-list-tile-title>
-                    </v-list-tile>
-                </v-list>
+                <v-card>
+                    <v-toolbar
+                        dense
+                        card>
+                        <v-toolbar-title>{{ i18n.OperationalLayerOptions }}</v-toolbar-title>
+                        <v-spacer/>
+                        <v-btn icon>
+                            <v-icon>close</v-icon>
+                        </v-btn>
+                    </v-toolbar>
+                    <v-list>
+                        <v-list-tile @click="enableAllLayer(true)">
+                            <v-list-tile-action>
+                                <v-icon primary>visibility</v-icon>
+                            </v-list-tile-action>
+                            <v-list-tile-title>{{ i18n.showAllLayer }}</v-list-tile-title>
+                        </v-list-tile>
+                        <v-list-tile @click="enableAllLayer(false)">
+                            <v-list-tile-action>
+                                <v-icon primary>visibility_off</v-icon>
+                            </v-list-tile-action>
+                            <v-list-tile-title>{{ i18n.hideAllLayer }}</v-list-tile-title>
+                        </v-list-tile>
+                        <v-list-tile @click="openAllLayer(true)">
+                            <v-list-tile-action>
+                                <v-icon primary>unfold_more</v-icon>
+                            </v-list-tile-action>
+                            <v-list-tile-title>{{ i18n.openAllLayer }}</v-list-tile-title>
+                        </v-list-tile>
+                        <v-list-tile @click="openAllLayer(false)">
+                            <v-list-tile-action>
+                                <v-icon primary>unfold_less</v-icon>
+                            </v-list-tile-action>
+                            <v-list-tile-title>{{ i18n.closeAllLayer }}</v-list-tile-title>
+                        </v-list-tile>
+                    </v-list>
+                </v-card>
             </v-menu>
         </v-toolbar>
         <div v-if="operationalItems">

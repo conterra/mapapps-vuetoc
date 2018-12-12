@@ -32,10 +32,11 @@
                 left
                 max-width="300"
                 min-width="300"
-                nudge-top="-10"
+                nudge-top="42"
+                nudge-right="4"
                 offset-y
                 transition="slide-y-transition"
-            >
+                content-class="vue-toc__item-menu">
                 <v-btn
                     slot="activator"
                     icon>

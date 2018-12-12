@@ -20,6 +20,7 @@ module.exports = {
         ui: {
             basemaps: "Basemaps",
             layers: "Operational Layer",
+            "OperationalLayerOptions":"Options",
             showAllLayer: "Activate all layer",
             hideAllLayer: "Deactivate all layer",
             openAllLayer: "Open all layer",

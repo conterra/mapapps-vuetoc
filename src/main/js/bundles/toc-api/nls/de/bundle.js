@@ -19,6 +19,7 @@ module.exports = {
     ui: {
         basemaps: "Hintergrundkarten",
         layers: "Karteninhalte",
+        OperationalLayerOptions:"Optionen",
         showAllLayer: "Alle Inhalte aktivieren",
         hideAllLayer: "Alle Inhalte deaktivieren",
         openAllLayer: "Alle Inhalte aufklappen",
