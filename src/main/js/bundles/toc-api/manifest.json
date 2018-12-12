@@ -1,0 +1,65 @@
+{
+    "name": "toc-api",
+    "version": "1.2.1-SNAPSHOT",
+    "title": "${bundleName}",
+    "description": "${bundleDescription}",
+    "vendor": "con terra GmbH",
+    "productName": "devnet-mapapps-vuetoc",
+    "dependencies": {
+        "apprt-vue": "^4.2.0",
+        "apprt-vuetify": "^4.2.0",
+        "apprt-binding": "^4.2.0",
+        "apprt-core": "^4.2.0",
+        "esri-widgets": "^4.2.0",
+        "esri": "^4.6.0"
+    },
+    "CSS-Themes-Extension": [
+        {
+            "name": "*",
+            "files": [
+                "./css/styles.css"
+            ]
+        }
+    ],
+    "components": [
+        {
+            "name": "TableOfContentsFactory",
+            "provides": "toc-api.TableOfContentsFactory",
+            "componentFactory" : true,
+            "instanceFactory" : true,
+            "properties": {
+                "widgetRole": "vueTocWidget",
+                "showBasemaps": true,
+                "showOperationalLayer": true,
+                "showLegend": true,
+                "showLoadingStatus": true,
+                "showOperationalLayerHeaderMenu": true,
+                "showLayerMenu": true,
+                "showResetButton": true,
+                "showCloseButton": true,
+                "expandInitially": true,
+                "visibleIconClass": "check_box",
+                "invisibleIconClass": "check_box_outline_blank"
+            },
+            "references": [
+                {
+                    "name": "_mapWidgetModel",
+                    "providing": "map-widget.MapWidgetModel"
+                },
+                {
+                    "name": "_basemapModel",
+                    "providing": "map-basemaps-api.BasemapsModel"
+                },
+                {
+                    "name": "_tool",
+                    "providing": "ct.tools.Tool",
+                    "filter": "(id=vueTocToggleTool)"
+                },
+                {
+                    "name": "_layerActionResolver",
+                    "providing": "vue-toc.LayerActionResolver"
+                }
+            ]
+        }
+    ]
+}

@@ -13,5 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import ".";
-import "./ToCRegistration";
+module.exports = {
+    bundleName: "Vue TOC",
+    bundleDescription: "Der Vue TOC ist ein neues Widget, welches die Kontrolle \u00FCber den Karteninhalt erm\u00F6glicht.",
+    ui: {
+        basemaps: "Hintergrundkarten",
+        layers: "Karteninhalte",
+        close: "Schließen",
+        backToMap: "Zur Karte",
+        reset: "Zurücksetzen"
+    }
+};

@@ -6,6 +6,7 @@
     "vendor": "con terra GmbH",
     "productName": "devnet-mapapps-vuetoc",
     "dependencies": {
+        "toc-api": "^1.2.0",
         "apprt-vue": "^4.2.0",
         "apprt-vuetify": "^4.2.0",
         "apprt-binding": "^4.2.0",
@@ -13,14 +14,6 @@
         "esri-widgets": "^4.2.0",
         "esri": "^4.6.0"
     },
-    "CSS-Themes-Extension": [
-        {
-            "name": "*",
-            "files": [
-                "./css/styles.css"
-            ]
-        }
-    ],
     "layout-widgets": [
         {
             "widgetRole": "vueTocWidget",
@@ -82,10 +75,8 @@
     ],
     "components": [
         {
-            "name": "TableOfContents",
-            "impl": "./TableOfContentsFactory",
-            "provides": "dijit.Widget",
-            "instanceFactory": true,
+            "name": "Config",
+            "impl": "./ToCRegistration",
             "properties": {
                 "widgetRole": "vueTocWidget",
                 "showBasemaps": true,
@@ -100,28 +91,15 @@
                 "visibleIconClass": "check_box",
                 "invisibleIconClass": "check_box_outline_blank"
             },
-            "references": [
-                {
-                    "name": "_mapWidgetModel",
-                    "providing": "map-widget.MapWidgetModel"
-                },
-                {
-                    "name": "_basemapModel",
-                    "providing": "map-basemaps-api.BasemapsModel"
-                },
-                {
-                    "name": "_tool",
-                    "providing": "ct.tools.Tool",
-                    "filter": "(id=vueTocToggleTool)"
-                },
-                {
-                    "name": "_layerActionResolver",
-                    "providing": "vue-toc.LayerActionResolver"
-                }
-            ]
+            "references" : [{ 
+                "name" : "_factory",
+                "providing" : "ct.framework.api.ComponentFactory",
+                "filter": "(Component-Name=TableOfContentsFactory)"
+            }]
         },
         {
             "name": "LayerActionResolver",
+            "impl": "toc-api/LayerActionResolver",
             "provides": "vue-toc.LayerActionResolver",
             "references": [
                 {
@@ -133,7 +111,7 @@
         },
         {
             "name": "ItemDescriptionActionFactory",
-            "impl": "./actions/ItemDescriptionActionFactory",
+            "impl": "toc-api/actions/ItemDescriptionActionFactory",
             "properties": {
                 "priority": 70,
                 "widgetSize": {
@@ -151,7 +129,7 @@
         },
         {
             "name": "ZoomToExtentActionFactory",
-            "impl": "./actions/ZoomToExtentActionFactory",
+            "impl": "toc-api/actions/ZoomToExtentActionFactory",
             "properties": {
                 "priority": 50
             },
@@ -159,7 +137,7 @@
         },
         {
             "name": "OpacityActionFactory",
-            "impl": "./actions/OpacityActionFactory",
+            "impl": "toc-api/actions/OpacityActionFactory",
             "properties": {
                 "priority": 40
             },
@@ -167,7 +145,7 @@
         },
         {
             "name": "ShowSublayerActionFactory",
-            "impl": "./actions/ShowSublayerActionFactory",
+            "impl": "toc-api/actions/ShowSublayerActionFactory",
             "properties": {
                 "priority": 30
             },
@@ -175,7 +153,7 @@
         },
         {
             "name": "HideSublayerActionFactory",
-            "impl": "./actions/HideSublayerActionFactory",
+            "impl": "toc-api/actions/HideSublayerActionFactory",
             "properties": {
                 "priority": 20
             },
@@ -183,7 +161,7 @@
         },
         {
             "name": "ItemCopyrightActionFactory",
-            "impl": "./actions/ItemCopyrightActionFactory",
+            "impl": "toc-api/actions/ItemCopyrightActionFactory",
             "properties": {
                 "priority": 0
             },

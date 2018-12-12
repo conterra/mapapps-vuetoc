@@ -1,5 +1,5 @@
 <script>
-    import ButtonAction from "dn_vuetoc/actions/ButtonAction.vue";
+    import ButtonAction from "./ButtonAction.vue";
 
     export default {
         name: "item-description",

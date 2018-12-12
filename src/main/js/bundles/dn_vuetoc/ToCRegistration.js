@@ -13,5 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import ".";
-import "./ToCRegistration";
+export default class Activator{
+    activate(){
+        let componentInstance = this.instance = this._factory.newInstance(this._properties);
+        let impl = componentInstance.getInstance();
+        this.registration = this._componentContext.getBundleContext().registerService(["dijit.Widget"], impl, this._properties);
+    }
+
+    deactivate(){
+        this.registration && this.registration.unregister();
+        this.instance && this.instance.dispose();
+    }
+}

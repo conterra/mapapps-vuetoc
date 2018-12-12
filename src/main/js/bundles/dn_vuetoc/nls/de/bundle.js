@@ -17,11 +17,6 @@ module.exports = {
     bundleName: "Vue TOC",
     bundleDescription: "Der Vue TOC ist ein neues Widget, welches die Kontrolle \u00FCber den Karteninhalt erm\u00F6glicht.",
     ui: {
-        basemaps: "Hintergrundkarten",
-        layers: "Karteninhalte",
-        close: "Schließen",
-        backToMap: "Zur Karte",
-        reset: "Zurücksetzen",
         zoomToExtent: "Auf Ausdehnung zoomen",
         description: "Beschreibung",
         copyright: "Copyright:",

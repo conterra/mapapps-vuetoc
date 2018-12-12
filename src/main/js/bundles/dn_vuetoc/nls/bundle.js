@@ -18,11 +18,6 @@ module.exports = {
         bundleName: "Vue TOC",
         bundleDescription: "The Vue TOC is a new Widget that allows you to control the map content.",
         ui: {
-            basemaps: "Basemaps",
-            layers: "Operational Layer",
-            close: "Close",
-            backToMap: "Back to map",
-            reset: "Reset",
             zoomToExtent: "Zoom to extent",
             description: "Description",
             copyright: "Copyright:",

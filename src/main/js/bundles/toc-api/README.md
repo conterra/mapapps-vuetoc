@@ -49,13 +49,13 @@ Developers can provide their own menu entries, called __Actions__.
 Therefore, a CustomActionFactory mist be implemented and provided:
 
 ```javascript
-import MyCustomAction from "./MyCustomAction.vue";
+import MyCustomActionFactory from "./MyCustomActionFactory.vue";
 
 export default function MyCustomActionFactory() {
     return {
         getComponent() {
             // inject other references, configurations or i18n here
-            return MyCustomAction;
+            return ZoomToExtentAction;
         }
     }
 }

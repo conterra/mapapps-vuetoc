@@ -14,4 +14,11 @@
  * limitations under the License.
  */
 import ".";
-import "./ToCRegistration";
+import "./TableOfContentsFactory";
+import "./LayerActionResolver";
+import "./actions/ItemDescriptionActionFactory";
+import "./actions/ZoomToExtentActionFactory";
+import "./actions/ShowSublayerActionFactory";
+import "./actions/HideSublayerActionFactory";
+import "./actions/OpacityActionFactory";
+import "./actions/ItemCopyrightActionFactory";
