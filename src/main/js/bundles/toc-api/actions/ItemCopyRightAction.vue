@@ -1,5 +1,5 @@
 <template>
-    <v-card-title v-if="item.layer.copyright">
+    <v-card-title v-if="item.layer.copyright && item.layer.copyright !=='none'">
         <div class="grey--text caption">{{ copyrightLabel }}</div>
         <div class="grey--text caption">{{ item.layer.copyright }}</div>
     </v-card-title>
