@@ -2,7 +2,9 @@
     <v-card
         v-if="item && item.layer"
         class="vue-toc__layer-menu">
-        <v-toolbar dense>
+        <v-toolbar
+            dense
+            card>
             <v-toolbar-title>{{ item.title }}</v-toolbar-title>
             <v-spacer/>
             <v-btn
