@@ -15,7 +15,7 @@ Simply add the bundle "dn_vuetoc" to your map.apps 4 app.
 
 #### TableOfContents:
 ```
-"TableOfContents": {
+"Config": {
     "showBasemaps": true,
     "showOperationalLayer": true,
     "showLegend": true,
@@ -49,31 +49,31 @@ Simply add the bundle "dn_vuetoc" to your map.apps 4 app.
 Any material design icon class is possible: https://material.io/tools/icons/?icon=check_box_outline_blank&style=baseline
 
 ```
-"TableOfContents": {
+"Config": {
     "visibleIconClass": "visibility",
     "invisibleIconClass": "visibility_off"
 }
 ```
 ```
-"TableOfContents": {
+"Config": {
     "visibleIconClass": "check",
     "invisibleIconClass": "close"
 }
 ```
 ```
-"TableOfContents": {
+"Config": {
     "visibleIconClass": "check_box",
     "invisibleIconClass": "check_box_outline_blank"
 }
 ```
 ```
-"TableOfContents": {
+"Config": {
     "visibleIconClass": "radio_button_checked",
     "invisibleIconClass": "radio_button_unchecked"
 }
 ```
 ```
-"TableOfContents": {
+"Config": {
     "visibleIconClass": "thumb_up",
     "invisibleIconClass": "thumb_down"
 }
