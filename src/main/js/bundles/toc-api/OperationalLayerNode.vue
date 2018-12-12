@@ -31,24 +31,28 @@
                         </v-btn>
                     </v-toolbar>
                     <v-list>
+                        <v-divider/>
                         <v-list-tile @click="enableAllLayer(true)">
                             <v-list-tile-action>
                                 <v-icon primary>visibility</v-icon>
                             </v-list-tile-action>
                             <v-list-tile-title>{{ i18n.showAllLayer }}</v-list-tile-title>
                         </v-list-tile>
+                        <v-divider/>
                         <v-list-tile @click="enableAllLayer(false)">
                             <v-list-tile-action>
                                 <v-icon primary>visibility_off</v-icon>
                             </v-list-tile-action>
                             <v-list-tile-title>{{ i18n.hideAllLayer }}</v-list-tile-title>
                         </v-list-tile>
+                        <v-divider/>
                         <v-list-tile @click="openAllLayer(true)">
                             <v-list-tile-action>
                                 <v-icon primary>unfold_more</v-icon>
                             </v-list-tile-action>
                             <v-list-tile-title>{{ i18n.openAllLayer }}</v-list-tile-title>
                         </v-list-tile>
+                        <v-divider/>
                         <v-list-tile @click="openAllLayer(false)">
                             <v-list-tile-action>
                                 <v-icon primary>unfold_less</v-icon>

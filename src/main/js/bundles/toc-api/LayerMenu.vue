@@ -17,11 +17,11 @@
             <div
                 v-for="(action, idx) in customLayerActions"
                 :key="action.name">
+                <v-divider v-if="idx < customLayerActions.length - 1"/>
                 <component
                     :is="action"
                     :item="item"
                     @close-menu="$emit('close-menu')"/>
-                <v-divider v-if="idx < customLayerActions.length - 1"/>
             </div>
         </v-list>
     </v-card>
