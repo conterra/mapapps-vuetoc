@@ -16,8 +16,8 @@
                     :bus="bus"
                     :i18n="i18n"
                     :config="config"
-                    :custom-layer-actions="customLayerActions"
-                    :items="itemProps.children"/>
+                    :items="itemProps.children"
+                    :custom-layer-actions="customLayerActions"/>
             </layer-item>
         </v-list>
     </div>

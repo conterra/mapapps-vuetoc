@@ -58,6 +58,11 @@
                 {
                     "name": "_layerActionResolver",
                     "providing": "vue-toc.LayerActionResolver"
+                },
+                {
+                    "name": "_layerListItemServices",
+                    "providing": "vue-toc.LayerListItemServices",
+                    "cardinality": "0..n"
                 }
             ]
         }

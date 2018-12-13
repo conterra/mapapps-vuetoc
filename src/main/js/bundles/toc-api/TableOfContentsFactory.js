@@ -34,6 +34,12 @@ export default class TableOfContentsFactory {
         const defaultSelectedId = this._basemapModel.selectedId;
         const vm = this.vm = new Vue(TableOfContents);
         vm.i18n = this._i18n.get().ui;
+        let bus = new Vue();
+        let layerListItemServices = this._layerListItemServices;
+        if(layerListItemServices){
+            bus.layerListItemServices = layerListItemServices;
+        }
+        vm.bus = bus;
         vm.config = {
             showBasemaps: properties.showBasemaps,
             showOperationalLayer: properties.showOperationalLayer,

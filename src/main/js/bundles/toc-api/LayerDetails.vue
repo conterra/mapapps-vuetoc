@@ -1,6 +1,6 @@
 <template>
     <v-list-tile
-        :disabled="!item.visibleAtCurrentScale">
+        :disabled="disabled">
         <v-list-tile-action
             @click.prevent.stop>
             <v-btn
@@ -64,6 +64,7 @@
             "item",
             "i18n",
             "config",
+            "disabled",
             "customLayerActions"
         ],
         data: function () {

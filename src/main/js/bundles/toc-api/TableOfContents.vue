@@ -69,7 +69,6 @@
     import Bindable from "apprt-vue/mixins/Bindable";
     import BaseLayerNode from "./BaseLayerNode.vue";
     import OperationalLayerNode from './OperationalLayerNode.vue';
-    import Vue from "apprt-vue/Vue";
 
     export default {
         components: {
@@ -84,14 +83,14 @@
                 type: Array,
                 default: () => []
             },
+            bus: Object,
             i18n: Object
         },
         data: function () {
             return {
                 basemaps: [],
                 operationalItems: [],
-                customLayerActions: [],
-                bus: new Vue()
+                customLayerActions: []
             }
         },
         methods: {

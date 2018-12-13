@@ -20,6 +20,7 @@
                 :item="item"
                 :i18n="i18n"
                 :config="config"
+                :disabled="disabled"
                 :custom-layer-actions="customLayerActions"
             />
             <slot
@@ -33,6 +34,7 @@
             :item="item"
             :i18n="i18n"
             :config="config"
+            :disabled="disabled"
             :custom-layer-actions="customLayerActions"
             class="vue-toc__layer-tree-item--no-childs"
         />
@@ -48,6 +50,7 @@
         props: ["bus", "i18n", "item", "config", "customLayerActions"],
         data: function(){
             return {
+                disabled: false,
                 open: this.item.open,
                 updating: this.item.updating,
                 watchHandle: []
@@ -63,6 +66,12 @@
         beforeMount: function(){
             this.watchHandle.push(this.item.watch("updating", updating => this.updating = updating));
             this.watchHandle.push(this.item.watch("open", open => this.open = open));
+            let layerListItemServices = this.bus.layerListItemServices;
+            if(layerListItemServices){
+                layerListItemServices.forEach(service => service.subscribe(this.item.layer, ({visible, message}) => {
+                    this.disabled = !visible;
+                }));
+            }
         },
         beforeDestroy: function(){
             this.watchHandle.forEach(handle => handle.remove);
