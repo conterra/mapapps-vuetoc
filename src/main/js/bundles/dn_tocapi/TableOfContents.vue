@@ -1,5 +1,5 @@
 <template>
-    <div class="ct-flex-container ct-flex-container--column fullHeight vue-toc">
+    <div class="ct-flex-container ct-flex-container--column fullHeight dn-toc">
         <div class="ct-flex-item overflowAuto">
             <v-container
                 grid-list-sm
@@ -8,7 +8,7 @@
                     v-if="config.showBasemaps"
                     :i18n="i18n"
                     :basemaps="basemaps"
-                    class="vue-toc__basemaps"/>
+                    class="dn-toc__basemaps"/>
                 <operational-layer-node
                     v-if="config.showOperationalLayer"
                     :bus="bus"
@@ -16,7 +16,7 @@
                     :operational-items="operationalItems"
                     :config="config"
                     :custom-layer-actions="customLayerActions"
-                    class="vue-toc__layers"/>
+                    class="dn-toc__layers"/>
             </v-container>
         </div>
         <div class="ct-flex-item ct-flex-item--no-grow ct-flex-item--no-shrink">

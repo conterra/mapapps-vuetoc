@@ -43,7 +43,7 @@
                 nudge-right="4"
                 offset-y
                 transition="slide-y-transition"
-                content-class="vue-toc__item-menu">
+                content-class="dn-toc__item-menu">
                 <v-btn
                     slot="activator"
                     icon>

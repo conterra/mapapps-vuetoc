@@ -2,7 +2,7 @@
 <template>
     <v-card class="elevation-6">
         <v-toolbar
-            class="primary title mb-1 vue-toc_layer-tree-title"
+            class="primary title mb-1 dn-toc_layer-tree-title"
             dense>
             <v-toolbar-title>{{ i18n.layers }}</v-toolbar-title>
             <v-spacer/>
@@ -14,7 +14,7 @@
                 nudge-top="5"
                 nudge-right="7"
                 transition="slide-y-transition"
-                content-class="vue-toc__item-menu">
+                content-class="dn-toc__item-menu">
                 <v-btn
                     slot="activator"
                     icon>

@@ -11,7 +11,7 @@
             </v-list-tile-action>
             <v-list-tile-title>{{ titleLabel }}</v-list-tile-title>
         </v-list-tile>
-        <v-list-tile class="vue-toc__slider">
+        <v-list-tile class="dn-toc__slider">
             {{ fromLabel }}
             <v-icon>{{ fromIcon }}</v-icon>
             <v-slider

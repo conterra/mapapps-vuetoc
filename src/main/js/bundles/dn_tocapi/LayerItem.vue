@@ -33,7 +33,7 @@
             :i18n="i18n"
             :config="config"
             :custom-layer-actions="customLayerActions"
-            class="vue-toc__layer-tree-item--no-childs"
+            class="dn-toc__layer-tree-item--no-childs"
         />
     </div>
 </template>

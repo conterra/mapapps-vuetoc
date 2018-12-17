@@ -1,7 +1,7 @@
 <template>
     <v-card
         v-if="item && item.layer"
-        class="vue-toc__layer-menu">
+        class="dn-toc__layer-menu">
         <v-toolbar
             dense
             card>

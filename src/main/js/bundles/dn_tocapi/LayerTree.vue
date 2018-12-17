@@ -1,5 +1,5 @@
 <template>
-    <div class="vue-toc__layer-tree">
+    <div class="dn-toc__layer-tree">
         <v-list
             v-for="item in items"
             :key="item.uid"
