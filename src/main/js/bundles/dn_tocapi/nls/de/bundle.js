@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 module.exports = {
-    bundleName: "Vue TOC",
-    bundleDescription: "Der Vue TOC ist ein neues Widget, welches die Kontrolle \u00FCber den Karteninhalt erm\u00F6glicht.",
+    bundleName: "TOC API",
+    bundleDescription: "Das TOC API Bundle bildet die Grundlage für den Vue TOC.",
     ui: {
         basemaps: "Hintergrundkarten",
         layers: "Karteninhalte",
-        OperationalLayerOptions:"Optionen",
+        operationalLayerOptions: "Optionen",
         showAllLayer: "Alle Inhalte aktivieren",
         hideAllLayer: "Alle Inhalte deaktivieren",
         openAllLayer: "Alle Inhalte aufklappen",

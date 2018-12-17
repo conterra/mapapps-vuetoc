@@ -24,7 +24,7 @@
                     <v-toolbar
                         dense
                         card>
-                        <v-toolbar-title>{{ i18n.OperationalLayerOptions }}</v-toolbar-title>
+                        <v-toolbar-title>{{ i18n.operationalLayerOptions }}</v-toolbar-title>
                         <v-spacer/>
                         <v-btn icon>
                             <v-icon>close</v-icon>

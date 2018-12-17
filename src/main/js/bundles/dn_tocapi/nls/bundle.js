@@ -15,12 +15,12 @@
  */
 module.exports = {
     root: ({
-        bundleName: "Vue TOC",
-        bundleDescription: "The Vue TOC is a new Widget that allows you to control the map content.",
+        bundleName: "TOC API",
+        bundleDescription: "The TOC API Bundle forms the basis for the Vue TOC.",
         ui: {
             basemaps: "Basemaps",
             layers: "Operational Layer",
-            "OperationalLayerOptions":"Options",
+            operationalLayerOptions: "Options",
             showAllLayer: "Activate all layer",
             hideAllLayer: "Deactivate all layer",
             openAllLayer: "Open all layer",
