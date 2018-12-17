@@ -46,6 +46,10 @@
     padding-left: 34px;
 }
 
+.ctAppRoot .vue-toc__layer-tree .v-progress-linear{
+    position: absolute
+}
+
 .ctAppRoot .vue-base .v-list__group__header .v-list__group__header__prepend-icon{
     min-width: 30px;
 }
