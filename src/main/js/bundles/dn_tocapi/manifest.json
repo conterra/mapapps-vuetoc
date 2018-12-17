@@ -28,7 +28,7 @@
             "componentFactory" : true,
             "instanceFactory" : true,
             "properties": {
-                "widgetRole": "vueTocWidget",
+                "widgetRole": "tocWidget",
                 "showBasemaps": true,
                 "showOperationalLayer": true,
                 "showLegend": true,
@@ -53,7 +53,7 @@
                 {
                     "name": "_tool",
                     "providing": "ct.tools.Tool",
-                    "filter": "(id=vueTocToggleTool)"
+                    "filter": "(id=tocToggleTool)"
                 },
                 {
                     "name": "_layerActionResolver",

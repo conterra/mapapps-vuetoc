@@ -16,7 +16,7 @@
     },
     "layout-widgets": [
         {
-            "widgetRole": "vueTocWidget",
+            "widgetRole": "tocWidget",
             "sublayout": [
                 "desktop",
                 "tablet_landscape",
@@ -24,7 +24,7 @@
             ],
             "window": {
                 "autofocus": false,
-                "dockTool": "vueTocToggleTool",
+                "dockTool": "tocToggleTool",
                 "dockable": true,
                 "dockingBar": "${id}-dockingBarBottomLeft",
                 "marginBox": {
@@ -51,7 +51,7 @@
             }
         },
         {
-            "widgetRole": "vueTocWidget",
+            "widgetRole": "tocWidget",
             "sublayout": [
                 "mobile_landscape",
                 "mobile_portrait"
@@ -60,7 +60,7 @@
                 "autofocus": false,
                 "dockable": true,
                 "dockingBar": "${id}-dockingBarBottomLeft",
-                "dockTool": "vueTocToggleTool",
+                "dockTool": "tocToggleTool",
                 "minimizeOnClose": true,
                 "resizable": false,
                 "marginBox": {
@@ -78,7 +78,7 @@
             "name": "Config",
             "impl": "./ToCRegistration",
             "properties": {
-                "widgetRole": "vueTocWidget",
+                "widgetRole": "tocWidget",
                 "showBasemaps": true,
                 "showOperationalLayer": true,
                 "showLegend": true,
@@ -168,14 +168,14 @@
             "provides": "vue-toc.LayerActionFactory"
         },
         {
-            "name": "VueTocToggleTool",
+            "name": "TocToggleTool",
             "impl": "ct/tools/Tool",
             "provides": [
                 "ct.tools.Tool"
             ],
             "propertiesConstructor": true,
             "properties": {
-                "id": "vueTocToggleTool",
+                "id": "tocToggleTool",
                 "title": "${tool.title}",
                 "tooltip": "${tool.tooltip}",
                 "iconClass": "icon-layer-settings",
