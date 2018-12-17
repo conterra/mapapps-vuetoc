@@ -2,8 +2,9 @@
     height: 100%
 }
 
-.ctAppRoot .dn-toc-window .overflow--auto {
+.ctAppRoot .dn-toc-window .dn-toc__scroll-container {
     overflow: auto;
+    overflow-x: hidden;
 }
 
 .ctAppRoot .dn-toc-window .dn-toc__basemaps .v-list__tile:not(.v-list__tile--active),
