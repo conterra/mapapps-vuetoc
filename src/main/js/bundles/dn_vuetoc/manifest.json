@@ -171,7 +171,8 @@
             "name": "DnTocToggleTool",
             "impl": "ct/tools/Tool",
             "provides": [
-                "ct.tools.Tool"
+                "ct.tools.Tool",
+                "dn_tocapi.ToggleTool"
             ],
             "propertiesConstructor": true,
             "properties": {

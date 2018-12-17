@@ -52,8 +52,7 @@
                 },
                 {
                     "name": "_tool",
-                    "providing": "ct.tools.Tool",
-                    "filter": "(id=*TocToggleTool)"
+                    "providing": "dn_tocapi.ToggleTool"
                 },
                 {
                     "name": "_layerActionResolver",
