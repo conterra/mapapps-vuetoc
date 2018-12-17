@@ -27,7 +27,8 @@ module.exports = {
             closeAllLayer: "Close all layer",
             close: "Close",
             backToMap: "Back to map",
-            reset: "Reset"
+            reset: "Reset",
+            scaleErrorMsg: "Layer does not support current scale"
         }
     }),
     "de": true

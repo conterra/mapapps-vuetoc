@@ -111,7 +111,8 @@
                 });
             } else {
                 this.watchHandles.push(this.item.watch("visibleAtCurrentScale", visible => {
-                    this.disabled = !visible
+                    this.disabled = !visible;
+                    this.message = visible ? undefined : this.i18n.scaleErrorMsg;
                 }));
             }
         },

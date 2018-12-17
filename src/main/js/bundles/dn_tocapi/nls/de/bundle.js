@@ -26,6 +26,7 @@ module.exports = {
         closeAllLayer: "Alle Inhalte zuklappen",
         close: "Schließen",
         backToMap: "Zur Karte",
-        reset: "Zurücksetzen"
+        reset: "Zurücksetzen",
+        scaleErrorMsg: "Layer unterst\u00FCtzt den aktuellen Ma\u00DFstab nicht"
     }
 };
