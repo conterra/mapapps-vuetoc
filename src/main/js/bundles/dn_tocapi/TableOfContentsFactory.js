@@ -35,9 +35,9 @@ export default class TableOfContentsFactory {
         const vm = this.vm = new Vue(TableOfContents);
         vm.i18n = this._i18n.get().ui;
         let bus = new Vue();
-        let layerListItemServices = this._layerListItemServices;
-        if(layerListItemServices){
-            bus.layerListItemServices = layerListItemServices;
+        let layerVisibilityService = this._layerVisibilityService;
+        if(layerVisibilityService){
+            bus.layerVisibilityService = layerVisibilityService;
         }
         vm.bus = bus;
         vm.config = {

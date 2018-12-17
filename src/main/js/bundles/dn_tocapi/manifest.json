@@ -60,9 +60,9 @@
                     "providing": "vue-toc.LayerActionResolver"
                 },
                 {
-                    "name": "_layerListItemServices",
-                    "providing": "vue-toc.LayerListItemServices",
-                    "cardinality": "0..n"
+                    "name": "_layerVisibilityService",
+                    "providing": "vue-toc.LayerVisibilityService",
+                    "cardinality": "0..1"
                 }
             ]
         }

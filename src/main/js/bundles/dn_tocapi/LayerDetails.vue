@@ -16,14 +16,22 @@
         </v-list-tile-action>
         <v-list-tile-content
             @click.prevent.stop
-            @click="item.visible = !item.visible"
-        >
-            <v-list-tile-title v-text="item.title"/>
+            @click="item.visible = !item.visible">
+            <v-list-tile-title
+                disabled
+                v-text="item.title"/>
         </v-list-tile-content>
+        <v-list-tile-action v-if="message">
+            <v-tooltip bottom>
+                <v-icon
+                    slot="activator"
+                    color="orange">warning</v-icon>
+                <span>{{ message }}</span>
+            </v-tooltip>
+        </v-list-tile-action>
         <v-list-tile-action
             v-if="showMenu"
-            @click.prevent.stop
-        >
+            @click.prevent.stop>
             <v-menu
                 :close-on-content-click="false"
                 :close-on-click="true"
@@ -64,7 +72,6 @@
             "item",
             "i18n",
             "config",
-            "disabled",
             "customLayerActions"
         ],
         data: function () {
@@ -77,6 +84,8 @@
                 menuOpen: false,
                 loaded,
                 visible,
+                disabled: false,
+                message: "",
                 initialVisible: initialVisible,
                 watchHandles: [],
                 showMenu:  this.menuVisible() && loaded
@@ -94,6 +103,17 @@
             this.watchHandles.push(this.item.watch("visible", visible => this.visible = visible));
             this.watchHandles.push(this.item.layer.watch("loaded", loaded => this.loaded = loaded));
             this.bus.$on('reset', this.reset);
+            let layerVisibilityService = this.bus.layerVisibilityService;
+            if(layerVisibilityService){
+                layerVisibilityService.subscribe(this.item.layer, ({visible, message}) => {
+                    this.disabled = !visible;
+                    this.message = message;
+                });
+            } else {
+                this.watchHandles.push(this.item.watch("visibleAtCurrentScale", visible => {
+                    this.disabled = !visible
+                }));
+            }
         },
         beforeDestroy: function () {
             this.watchHandles.forEach(handle => handle.remove());
