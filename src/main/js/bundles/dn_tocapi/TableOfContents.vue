@@ -1,6 +1,6 @@
 <template>
     <div class="ct-flex-container ct-flex-container--column fullHeight dn-toc">
-        <div class="ct-flex-item overflowAuto">
+        <div class="ct-flex-item overflow--auto">
             <v-container
                 grid-list-sm
                 class="pa-1">

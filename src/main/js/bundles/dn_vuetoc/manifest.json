@@ -47,7 +47,7 @@
                     "l": true
                 },
                 "minimizeOnClose": true,
-                "windowClass": "noTitleBarAndWindowTools noPadding vue-toc-window"
+                "windowClass": "noTitleBarAndWindowTools noPadding dn-toc-window"
             }
         },
         {
