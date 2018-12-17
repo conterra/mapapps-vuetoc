@@ -31,20 +31,20 @@
                     "t": 40,
                     "b": 40,
                     "w": 400,
-                    "r": 0
+                    "l": 0
                 },
                 "resizable": true,
                 "resizeAxis": {
-                    "l": true,
-                    "r": false,
+                    "l": false,
+                    "r": true,
                     "t": false,
                     "b": false
                 },
                 "fixEdgesInViewPort": {
-                    "r": true,
+                    "r": false,
                     "b": true,
                     "t": true,
-                    "l": false
+                    "l": true
                 },
                 "minimizeOnClose": true,
                 "windowClass": "noTitleBarAndWindowTools noPadding vue-toc-window"
