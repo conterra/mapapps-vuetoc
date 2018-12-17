@@ -7,7 +7,7 @@
         props: {
             icon: {
                 type: String,
-                default: "description"
+                default: "info"
             },
             descriptionTitleLabel: {
                 type: String,
