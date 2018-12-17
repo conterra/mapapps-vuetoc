@@ -1,6 +1,5 @@
 <template>
-    <v-list-tile
-        :disabled="disabled">
+    <v-list-tile>
         <v-list-tile-action
             @click.prevent.stop>
             <v-btn
@@ -18,7 +17,7 @@
             @click.prevent.stop
             @click="item.visible = !item.visible">
             <v-list-tile-title
-                disabled
+                :class="{'layer-item__not-visible': disabled}"
                 v-text="item.title"/>
         </v-list-tile-content>
         <v-list-tile-action v-if="message">

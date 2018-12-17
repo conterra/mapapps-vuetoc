@@ -46,6 +46,10 @@
     padding-left: 34px;
 }
 
+.ctAppRoot .vue-toc__layer-tree .layer-item__not-visible{
+    color: #8d8d8d;
+}
+
 .ctAppRoot .vue-toc__layer-tree .v-progress-linear{
     position: absolute
 }
