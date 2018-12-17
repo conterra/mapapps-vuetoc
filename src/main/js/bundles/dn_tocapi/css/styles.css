@@ -18,7 +18,6 @@
 .ctAppRoot .vue-toc__layer-menu .vue-toc__slider .v-list__tile {
     padding-left: 16px;
 }
-
 .ctAppRoot .vue-toc__layer-menu .vue-toc__slider .v-input--slider {
     padding-top: 6px;
     padding-left: 12px;
@@ -54,6 +53,10 @@
     position: absolute
 }
 
+.ctAppRoot .vue-toc__layer-tree .v-list__tile__content:not(.layer-item__not-visible),
+.ctAppRoot .vue-toc__layer-tree-item--no-childs .v-list__tile__content:not(.layer-item__not-visible){
+    cursor: pointer;
+}
 .ctAppRoot .vue-base .v-list__group__header .v-list__group__header__prepend-icon{
     min-width: 30px;
 }
