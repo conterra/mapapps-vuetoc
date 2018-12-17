@@ -1,5 +1,5 @@
 {
-    "name": "toc-api",
+    "name": "dn_tocapi",
     "version": "1.2.1-SNAPSHOT",
     "title": "${bundleName}",
     "description": "${bundleDescription}",
@@ -24,7 +24,7 @@
     "components": [
         {
             "name": "TableOfContentsFactory",
-            "provides": "toc-api.TableOfContentsFactory",
+            "provides": "dn_tocapi.TableOfContentsFactory",
             "componentFactory" : true,
             "instanceFactory" : true,
             "properties": {

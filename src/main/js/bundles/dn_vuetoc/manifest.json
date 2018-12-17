@@ -6,7 +6,7 @@
     "vendor": "con terra GmbH",
     "productName": "devnet-mapapps-vuetoc",
     "dependencies": {
-        "toc-api": "^1.2.0",
+        "dn_tocapi": "^1.2.0",
         "apprt-vue": "^4.2.0",
         "apprt-vuetify": "^4.2.0",
         "apprt-binding": "^4.2.0",
@@ -91,7 +91,7 @@
                 "visibleIconClass": "check_box",
                 "invisibleIconClass": "check_box_outline_blank"
             },
-            "references" : [{ 
+            "references" : [{
                 "name" : "_factory",
                 "providing" : "ct.framework.api.ComponentFactory",
                 "filter": "(Component-Name=TableOfContentsFactory)"
@@ -99,7 +99,7 @@
         },
         {
             "name": "LayerActionResolver",
-            "impl": "toc-api/LayerActionResolver",
+            "impl": "dn_tocapi/LayerActionResolver",
             "provides": "vue-toc.LayerActionResolver",
             "references": [
                 {
@@ -111,7 +111,7 @@
         },
         {
             "name": "ItemDescriptionActionFactory",
-            "impl": "toc-api/actions/ItemDescriptionActionFactory",
+            "impl": "dn_tocapi/actions/ItemDescriptionActionFactory",
             "properties": {
                 "priority": 70,
                 "widgetSize": {
@@ -129,7 +129,7 @@
         },
         {
             "name": "ZoomToExtentActionFactory",
-            "impl": "toc-api/actions/ZoomToExtentActionFactory",
+            "impl": "dn_tocapi/actions/ZoomToExtentActionFactory",
             "properties": {
                 "priority": 50
             },
@@ -137,7 +137,7 @@
         },
         {
             "name": "OpacityActionFactory",
-            "impl": "toc-api/actions/OpacityActionFactory",
+            "impl": "dn_tocapi/actions/OpacityActionFactory",
             "properties": {
                 "priority": 40
             },
@@ -145,7 +145,7 @@
         },
         {
             "name": "ShowSublayerActionFactory",
-            "impl": "toc-api/actions/ShowSublayerActionFactory",
+            "impl": "dn_tocapi/actions/ShowSublayerActionFactory",
             "properties": {
                 "priority": 30
             },
@@ -153,7 +153,7 @@
         },
         {
             "name": "HideSublayerActionFactory",
-            "impl": "toc-api/actions/HideSublayerActionFactory",
+            "impl": "dn_tocapi/actions/HideSublayerActionFactory",
             "properties": {
                 "priority": 20
             },
@@ -161,7 +161,7 @@
         },
         {
             "name": "ItemCopyrightActionFactory",
-            "impl": "toc-api/actions/ItemCopyrightActionFactory",
+            "impl": "dn_tocapi/actions/ItemCopyrightActionFactory",
             "properties": {
                 "priority": 0
             },
