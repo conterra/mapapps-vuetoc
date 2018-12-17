@@ -1,6 +1,7 @@
 <script>
     import ButtonAction from "./ButtonAction.vue";
-    export default  {
+
+    export default {
         name: "hide-sublayer",
         extends: ButtonAction,
         props: {
@@ -12,7 +13,9 @@
         },
         methods: {
             displayActionForItem(item) {
-                return item.children && item.children.length;
+                let displayAction = !!item.children && !!item.children.length;
+                this.$emit("display-changed", displayAction);
+                return displayAction;
             },
             onClick(item) {
                 if (item.children) {

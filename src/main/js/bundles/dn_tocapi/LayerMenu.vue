@@ -14,21 +14,22 @@
             </v-btn>
         </v-toolbar>
         <v-list>
-            <div
-                v-for="(action, idx) in customLayerActions"
-                :key="action.name">
-                <v-divider v-if="idx < customLayerActions.length - 1"/>
-                <component
-                    :is="action"
-                    :item="item"
-                    @close-menu="$emit('close-menu')"/>
-            </div>
+            <layer-menu-item v-for="(action, index) in customLayerActions"
+                             :key="action.name"
+                             :action="action"
+                             :lastAction="index >= customLayerActions.length - 1"
+                             :item="item"/>
         </v-list>
     </v-card>
 </template>
 
 <script>
+    import LayerMenuItem from "./LayerMenuItem.vue";
+
     export default {
+        components: {
+            "layer-menu-item": LayerMenuItem
+        },
         props: ["i18n", "customLayerActions", "item"]
     };
 </script>

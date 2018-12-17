@@ -45,7 +45,9 @@
             onChange(value) {
             },
             displayActionForItem(item) {
-                return true;
+                let displayAction = true;
+                this.$emit("display-changed", displayAction);
+                return displayAction;
             },
             disableActionForItem(item) {
                 return false;

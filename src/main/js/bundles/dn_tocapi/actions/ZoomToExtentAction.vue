@@ -1,6 +1,7 @@
 <script>
     import ButtonAction from "./ButtonAction.vue";
-    export default  {
+
+    export default {
         name: "zoom-to-extent",
         extends: ButtonAction,
         props: {
@@ -12,7 +13,9 @@
         },
         methods: {
             displayActionForItem(item) {
-                return item.layer && item.layer.fullExtent;
+                let displayAction = item.layer && item.layer.fullExtent;
+                this.$emit("display-changed", displayAction);
+                return displayAction;
             },
             onClick(item) {
                 const layer = item.layer;
@@ -20,7 +23,7 @@
                 if (!extent) {
                     return;
                 }
-                item.view.goTo({ target: extent }, {
+                item.view.goTo({target: extent}, {
                     "animate": true,
                     "duration": 1000,
                     "easing": "ease-in-out"

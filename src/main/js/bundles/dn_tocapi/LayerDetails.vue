@@ -29,7 +29,7 @@
             </v-tooltip>
         </v-list-tile-action>
         <v-list-tile-action
-            v-if="showMenu"
+            v-if="loaded"
             @click.prevent.stop>
             <v-menu
                 :close-on-content-click="false"
@@ -86,16 +86,7 @@
                 disabled: false,
                 message: "",
                 initialVisible: initialVisible,
-                watchHandles: [],
-                showMenu:  this.menuVisible() && loaded
-            }
-        },
-        watch: {
-            loaded: function () {
-                this.showMenu = this.menuVisible() && this.loaded
-            },
-            visible: function () {
-                this.showMenu = this.menuVisible() && this.loaded
+                watchHandles: []
             }
         },
         beforeMount: function () {
@@ -120,13 +111,6 @@
             this.bus.$off('reset', this.reset);
         },
         methods: {
-            menuVisible: function () {
-                let hasActions = this.customLayerActions.some(action =>
-                    action.methods.displayActionForItem(this.item)
-                );
-                return hasActions && this.config.showLayerMenu;
-
-            },
             reset: function () {
                 this.visible = this.item.visible = this.initialVisible;
             }

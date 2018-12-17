@@ -5,12 +5,23 @@
     </v-card-title>
 </template>
 <script>
-    export default  {
+    export default {
         name: "item-copyright",
         props: ["item", "copyrightLabel"],
+        data: function () {
+            return {
+                displayAction: this.displayActionForItem(this.item),
+                disableAction: this.disableActionForItem(this.item)
+            }
+        },
         methods: {
             displayActionForItem(item) {
-                return !!item.layer && !!item.layer.copyright;
+                let displayAction = !!item.layer && !!item.layer.copyright;
+                this.$emit("display-changed", displayAction);
+                return displayAction;
+            },
+            disableActionForItem(item) {
+                return false;
             }
         }
     }

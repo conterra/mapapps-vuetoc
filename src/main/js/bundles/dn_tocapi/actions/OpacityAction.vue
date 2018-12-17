@@ -20,7 +20,9 @@
         },
         methods: {
             displayActionForItem(item) {
-                return item.layer && item.layer.type !== "group" && item.layer.opacity !== undefined;
+                let displayAction = item.layer && item.layer.type !== "group" && item.layer.opacity !== undefined;
+                this.$emit("display-changed", displayAction);
+                return displayAction;
             },
             onChange(value) {
                 this.item.layer.opacity = value;

@@ -45,13 +45,20 @@
         methods: {
             displayActionForItem: function (item) {
                 let layer = item.layer;
+                let displayAction;
                 if (!item.layer) {
-                    return false;
+                    displayAction = false;
+                    this.$emit("display-changed", displayAction);
+                    return displayAction;
                 }
                 if (layer.type === "wmts") {
-                    return layer.activeLayer && !!item.layer.activeLayer.description;
+                    displayAction = layer.activeLayer && !!item.layer.activeLayer.description;
+                    this.$emit("display-changed", displayAction);
+                    return displayAction;
                 }
-                return !!layer.description;
+                displayAction = !!layer.description;
+                this.$emit("display-changed", displayAction);
+                return displayAction;
             },
             onClick(item) {
                 const layer = item.layer;

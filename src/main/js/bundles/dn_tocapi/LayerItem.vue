@@ -5,8 +5,7 @@
             :active="updating"
             :height="2"
             indeterminate
-            class="ma-0"
-        />
+            class="ma-0"></v-progress-linear>
         <v-list-group
             v-if="item.children.length"
             v-model="open"
@@ -46,7 +45,7 @@
             "layer-details": LayerDetails
         },
         props: ["bus", "i18n", "item", "config", "customLayerActions"],
-        data: function(){
+        data: function () {
             return {
                 open: this.item.open,
                 updating: this.item.updating,
@@ -54,17 +53,17 @@
             }
         },
         watch: {
-            open: function(value) {
-                if(value !== this.item.open){
+            open: function (value) {
+                if (value !== this.item.open) {
                     this.item.open = value;
                 }
             }
         },
-        beforeMount: function(){
+        beforeMount: function () {
             this.watchHandle.push(this.item.watch("updating", updating => this.updating = updating));
             this.watchHandle.push(this.item.watch("open", open => this.open = open));
         },
-        beforeDestroy: function(){
+        beforeDestroy: function () {
             this.watchHandle.forEach(handle => handle.remove);
         }
     }
