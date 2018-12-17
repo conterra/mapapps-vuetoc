@@ -16,7 +16,7 @@
     },
     "layout-widgets": [
         {
-            "widgetRole": "tocWidget",
+            "widgetRole": "dnTocWidget",
             "sublayout": [
                 "desktop",
                 "tablet_landscape",
@@ -24,7 +24,7 @@
             ],
             "window": {
                 "autofocus": false,
-                "dockTool": "tocToggleTool",
+                "dockTool": "dnTocToggleTool",
                 "dockable": true,
                 "dockingBar": "${id}-dockingBarBottomLeft",
                 "marginBox": {
@@ -51,7 +51,7 @@
             }
         },
         {
-            "widgetRole": "tocWidget",
+            "widgetRole": "dnTocWidget",
             "sublayout": [
                 "mobile_landscape",
                 "mobile_portrait"
@@ -60,7 +60,7 @@
                 "autofocus": false,
                 "dockable": true,
                 "dockingBar": "${id}-dockingBarBottomLeft",
-                "dockTool": "tocToggleTool",
+                "dockTool": "dnTocToggleTool",
                 "minimizeOnClose": true,
                 "resizable": false,
                 "marginBox": {
@@ -69,7 +69,7 @@
                     "b": 40,
                     "l": 0
                 },
-                "windowClass": "mobileWindow noTitleBarAndWindowTools noPadding vue-toc-window"
+                "windowClass": "mobileWindow noTitleBarAndWindowTools noPadding dn-toc-window"
             }
         }
     ],
@@ -78,7 +78,7 @@
             "name": "Config",
             "impl": "./ToCRegistration",
             "properties": {
-                "widgetRole": "tocWidget",
+                "widgetRole": "dnTocWidget",
                 "showBasemaps": true,
                 "showOperationalLayer": true,
                 "showLegend": true,
@@ -168,14 +168,14 @@
             "provides": "vue-toc.LayerActionFactory"
         },
         {
-            "name": "TocToggleTool",
+            "name": "DnTocToggleTool",
             "impl": "ct/tools/Tool",
             "provides": [
                 "ct.tools.Tool"
             ],
             "propertiesConstructor": true,
             "properties": {
-                "id": "tocToggleTool",
+                "id": "dnTocToggleTool",
                 "title": "${tool.title}",
                 "tooltip": "${tool.tooltip}",
                 "iconClass": "icon-layer-settings",

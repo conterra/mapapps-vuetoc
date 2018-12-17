@@ -1,13 +1,13 @@
-.ctAppRoot .vue-toc-window .vue-base {
+.ctAppRoot .dn-toc-window .vue-base {
     height: 100%
 }
 
-.ctAppRoot .vue-toc-window .overflow--auto {
+.ctAppRoot .dn-toc-window .overflow--auto {
     overflow: auto;
 }
 
-.ctAppRoot .vue-toc-window .vue-toc__basemaps .v-list__tile:not(.v-list__tile--active),
-.ctAppRoot .vue-toc-window .vue-toc__basemaps .v-list__tile .v-icon {
+.ctAppRoot .dn-toc-window .vue-toc__basemaps .v-list__tile:not(.v-list__tile--active),
+.ctAppRoot .dn-toc-window .vue-toc__basemaps .v-list__tile .v-icon {
     color: inherit;
 }
 
@@ -57,11 +57,11 @@
 .ctAppRoot .vue-toc__layer-tree-item--no-childs .v-list__tile__content:not(.layer-item__not-visible){
     cursor: pointer;
 }
-.ctAppRoot .vue-base .v-list__group__header .v-list__group__header__prepend-icon{
+.ctAppRoot .vue-toc__layer-tree .v-list__group__header .v-list__group__header__prepend-icon{
     min-width: 30px;
 }
 
-.everlasting .vue-toc__layer-tree .v-list__tile__action .v-btn--icon{
+.ctAppRoot .vue-toc__layer-tree .v-list__tile__action .v-icon{
     margin-left: 0;
 }
 
