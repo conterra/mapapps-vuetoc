@@ -53,7 +53,7 @@
                 {
                     "name": "_tool",
                     "providing": "ct.tools.Tool",
-                    "filter": "(id=dnTocToggleTool)"
+                    "filter": "(id=*TocToggleTool)"
                 },
                 {
                     "name": "_layerActionResolver",
