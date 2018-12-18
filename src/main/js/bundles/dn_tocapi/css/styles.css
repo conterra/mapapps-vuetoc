@@ -33,6 +33,9 @@
 .ctAppRoot .dn-toc .dn-toc_layer-tree-title .v-toolbar__content{
     padding-right: 15px;
 }
+.ctAppRoot .dn-toc .v-toolbar__title{
+    line-height: 1.1em;
+}
 
 .ctAppRoot .dn-toc__layer-tree{
     padding-left: 30px;
