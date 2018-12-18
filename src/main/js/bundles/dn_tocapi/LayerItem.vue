@@ -49,7 +49,7 @@
             return {
                 open: this.item.open,
                 updating: this.item.updating,
-                children: this.item.chilren,
+                children: this.item.children,
                 watchHandle: []
             }
         },
