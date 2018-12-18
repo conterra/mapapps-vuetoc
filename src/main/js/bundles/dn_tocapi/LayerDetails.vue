@@ -20,7 +20,7 @@
                 <v-icon
                     slot="activator"
                     color="orange">warning</v-icon>
-                <span>{{ message }}</span>
+                <span v-html="message"/>
             </v-tooltip>
         </v-list-tile-action>
         <v-list-tile-action
