@@ -9,11 +9,6 @@
                 <v-icon :class="{'success--text': visible}">{{ visible ? config.visibleIconClass : config.invisibleIconClass }}</v-icon>
             </v-btn>
         </v-list-tile-action>
-        <v-list-tile-action
-            v-if="config.showLegend && $root.getLegend(item.layer.url)"
-            @click="item.visible = !item.visible">
-            <img :src="$root.getLegend(item.layer.url)">
-        </v-list-tile-action>
         <v-list-tile-content
             @click.prevent.stop
             @click="item.visible = !item.visible">

@@ -31,7 +31,6 @@
                 "widgetRole": "dnTocWidget",
                 "showBasemaps": true,
                 "showOperationalLayer": true,
-                "showLegend": true,
                 "showLoadingStatus": true,
                 "showOperationalLayerHeaderMenu": true,
                 "showLayerMenu": true,

@@ -5,7 +5,7 @@
             :active="updating"
             :height="2"
             indeterminate
-            class="ma-0"></v-progress-linear>
+            class="ma-0"/>
         <v-list-group
             v-if="item.children.length"
             v-model="open"

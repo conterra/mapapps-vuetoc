@@ -17,7 +17,6 @@ import TableOfContents from "./TableOfContents.vue";
 import Vue from "apprt-vue/Vue";
 import VueDijit from "apprt-vue/VueDijit";
 import Binding from "apprt-binding/Binding";
-import apprt_request from "apprt-request";
 import LayerListViewModel from "esri/widgets/LayerList/LayerListViewModel";
 import {whenOnce} from "esri/core/watchUtils";
 
@@ -43,7 +42,6 @@ export default class TableOfContentsFactory {
         vm.config = {
             showBasemaps: properties.showBasemaps,
             showOperationalLayer: properties.showOperationalLayer,
-            showLegend: properties.showLegend,
             showLoadingStatus: properties.showLoadingStatus,
             showOperationalLayerHeaderMenu: properties.showOperationalLayerHeaderMenu,
             showLayerMenu: properties.showLayerMenu,
@@ -87,12 +85,10 @@ export default class TableOfContentsFactory {
     onViewReady() {
         let vm = this.vm;
         this._createLayerListViewModel(vm);
-        this._waitForLayers(vm);
         vm.customLayerActions = this._layerActionResolver.getLayerActions();
         this.watchLayersHandle && this.watchLayersHandle.remove()
         this.watchLayersHandle = this._mapWidgetModel.map.allLayers.on("change", (evt) => {
             this._createLayerListViewModel(vm);
-            this._waitForLayers(vm);
         });
     }
 
@@ -118,57 +114,6 @@ export default class TableOfContentsFactory {
             .syncAll("operationalItems")
             .enable()
             .syncToLeftNow();
-    }
-
-    _createLegendArray(vm) {
-        let map = this._mapWidgetModel.get("map");
-        let layers = map.get("layers");
-        let flattenLayers = layers.flatten((item) => item.layers || item.sublayers);
-        flattenLayers.forEach((layer) => {
-            if (layer.url) {
-                let legendUrl = layer.url + "/legend?f=pjson&dynamicLayers=[1]";
-                apprt_request(legendUrl, {
-                    handleAs: "json"
-                }).then((results) => {
-                    if (results && results.layers) {
-                        results.layers.forEach((results) => {
-                            vm.legendArray.push({
-                                url: layer.url + "/" + results.layerId,
-                                title: results.layerName,
-                                imageUrl: results.legend && results.legend[0].url
-                            })
-                        });
-                    }
-                }, (e) => {
-                    // push nothing
-                });
-            }
-        });
-    }
-
-    _waitForLayers(vm) {
-        let map = this._mapWidgetModel.get("map");
-        let layers = map.get("layers");
-        let promises = [];
-        layers.forEach((layer) => {
-            let promise = new Promise((resolve, reject) => {
-                if (layer.loaded === false) {
-                    layer.when((layer) => {
-                        resolve();
-                    }, (error) => {
-                        resolve();
-                    });
-                } else {
-                    resolve();
-                }
-            });
-            promises.push(promise);
-        });
-        Promise.all(promises).then(() => {
-            if (this._properties.showLegend) {
-                this._createLegendArray(vm);
-            }
-        });
     }
 
     deactivate() {
