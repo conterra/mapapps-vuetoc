@@ -16,7 +16,7 @@
                 v-text="item.title"/>
         </v-list-tile-content>
         <v-list-tile-action v-if="message">
-            <v-tooltip bottom>
+            <v-tooltip right>
                 <v-icon
                     slot="activator"
                     color="orange">warning</v-icon>
