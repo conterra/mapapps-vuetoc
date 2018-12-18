@@ -24,7 +24,7 @@
             ],
             "window": {
                 "autofocus": false,
-                "dockTool": "dnTocToggleTool",
+                "dockTool": "vueTocToggleTool",
                 "dockable": true,
                 "dockingBar": "${id}-dockingBarBottomLeft",
                 "marginBox": {
@@ -60,7 +60,7 @@
                 "autofocus": false,
                 "dockable": true,
                 "dockingBar": "${id}-dockingBarBottomLeft",
-                "dockTool": "dnTocToggleTool",
+                "dockTool": "vueTocToggleTool",
                 "minimizeOnClose": true,
                 "resizable": false,
                 "marginBox": {
@@ -168,7 +168,7 @@
             "provides": "vue-toc.LayerActionFactory"
         },
         {
-            "name": "DnTocToggleTool",
+            "name": "VueTocToggleTool",
             "impl": "ct/tools/Tool",
             "provides": [
                 "ct.tools.Tool",
@@ -176,7 +176,7 @@
             ],
             "propertiesConstructor": true,
             "properties": {
-                "id": "dnTocToggleTool",
+                "id": "vueTocToggleTool",
                 "title": "${tool.title}",
                 "tooltip": "${tool.tooltip}",
                 "iconClass": "icon-layer-settings",
