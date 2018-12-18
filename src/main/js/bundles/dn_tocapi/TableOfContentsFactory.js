@@ -78,17 +78,12 @@ export default class TableOfContentsFactory {
 
     onViewAvailable() {
         whenOnce(this._mapWidgetModel.view, "ready", (value) => {
-            value && this.onViewReady();
-        });
-    }
-
-    onViewReady() {
-        let vm = this.vm;
-        this._createLayerListViewModel(vm);
-        vm.customLayerActions = this._layerActionResolver.getLayerActions();
-        this.watchLayersHandle && this.watchLayersHandle.remove()
-        this.watchLayersHandle = this._mapWidgetModel.map.allLayers.on("change", (evt) => {
+            if(!value){
+                return;
+            }
+            let vm = this.vm;
             this._createLayerListViewModel(vm);
+            vm.customLayerActions = this._layerActionResolver.getLayerActions();
         });
     }
 
