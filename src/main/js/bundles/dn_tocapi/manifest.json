@@ -28,7 +28,7 @@
             "componentFactory" : true,
             "instanceFactory" : true,
             "properties": {
-                "widgetRole": "tocWidget",
+                "widgetRole": "dnTocWidget",
                 "showBasemaps": true,
                 "showOperationalLayer": true,
                 "showLegend": true,

@@ -16,7 +16,7 @@
     },
     "layout-widgets": [
         {
-            "widgetRole": "dnTocWidget",
+            "widgetRole": "vueTocWidget",
             "sublayout": [
                 "desktop",
                 "tablet_landscape",
@@ -51,7 +51,7 @@
             }
         },
         {
-            "widgetRole": "dnTocWidget",
+            "widgetRole": "vueTocWidget",
             "sublayout": [
                 "mobile_landscape",
                 "mobile_portrait"
@@ -78,7 +78,7 @@
             "name": "Config",
             "impl": "./ToCRegistration",
             "properties": {
-                "widgetRole": "dnTocWidget",
+                "widgetRole": "vueTocWidget",
                 "showBasemaps": true,
                 "showOperationalLayer": true,
                 "showLegend": true,
@@ -91,11 +91,13 @@
                 "visibleIconClass": "check_box",
                 "invisibleIconClass": "check_box_outline_blank"
             },
-            "references" : [{
-                "name" : "_factory",
-                "providing" : "ct.framework.api.ComponentFactory",
-                "filter": "(Component-Name=TableOfContentsFactory)"
-            }]
+            "references": [
+                {
+                    "name": "_factory",
+                    "providing": "ct.framework.api.ComponentFactory",
+                    "filter": "(Component-Name=TableOfContentsFactory)"
+                }
+            ]
         },
         {
             "name": "LayerActionResolver",
