@@ -86,20 +86,18 @@
         },
         beforeMount: function () {
             this.watchHandles.push(this.item.watch("visible", visible => this.visible = visible));
-            this.watchHandles.push(this.item.layer.watch("loaded", loaded => this.loaded = loaded));
-            this.bus.$on('reset', this.reset);
-            let layerVisibilityService = this.bus.layerVisibilityService;
-            if(layerVisibilityService){
-                layerVisibilityService.subscribe(this.item.layer, ({visible, message}) => {
-                    this.disabled = !visible;
-                    this.message = message;
-                });
-            } else {
+            let hasCustomVisibilityService = this.bus.layerVisibilityService;
+            this.watchHandles.push(this.item.layer.watch("loaded", loaded => {
+                this.loaded = loaded;
+                hasCustomVisibilityService && this.updateLayerVisibilityService();
+            }));
+            if(!hasCustomVisibilityService){
                 this.watchHandles.push(this.item.watch("visibleAtCurrentScale", visible => {
                     this.disabled = !visible;
                     this.message = visible ? undefined : this.i18n.scaleErrorMsg;
                 }));
             }
+            this.bus.$on('reset', this.reset);
         },
         beforeDestroy: function () {
             this.watchHandles.forEach(handle => handle.remove());
@@ -108,6 +106,17 @@
         methods: {
             reset: function () {
                 this.visible = this.item.visible = this.initialVisible;
+            },
+            updateLayerVisibilityService(){
+                let layerVisibilityService = this.bus.layerVisibilityService;
+                if(this.loaded){
+                    layerVisibilityService.subscribe(this.item.layer, ({visible, message}) => {
+                        this.disabled = !visible;
+                        this.message = message;
+                    });
+                    return;
+                }
+                layerVisibilityService.unsubscribe(this.item.layer);
             }
         }
     };
