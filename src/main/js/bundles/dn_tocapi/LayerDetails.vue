@@ -104,6 +104,10 @@
         beforeDestroy: function () {
             this.watchHandles.forEach(handle => handle.remove());
             this.bus.$off('reset', this.reset);
+            let layerVisibilityService = this.bus.layerVisibilityService;
+            if(layerVisibilityService){
+                layerVisibilityService.subscribe(this.item.layer);
+            }
         },
         methods: {
             reset: function () {
