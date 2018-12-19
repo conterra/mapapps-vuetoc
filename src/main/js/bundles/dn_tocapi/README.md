@@ -1,52 +1,16 @@
 # dn_tocapi
 
-Provides a widget that allows you to control the map content.
+Provides a component-factory that allows you to register a widget for controlling the map content.
 
 ## Usage
 
-No configuration required. Default values will be applied.
+In order to use the widget you need to create a component instance and register it.
 
 ## Configuration Reference
 
-### Description Menu Entry
-The toc provides a menu entry for displaying the description of the selected layer.
-To disable this entry the corresponding component has to be disabled in the app.json configuration below this bundle:
-
-```json
-"dn_vuetoc": {
-    "ItemDescriptionAction": {
-        "componentEnabled": false
-    }
-}
-```
-
-### Zoom-To-Extent Menu Entry
-The toc provides a menu entry for changing the current view to the __full-extent__ of the selected layer.
-To disable this entry the corresponding component has to be disabled in the app.json configuration below this bundle:
-
-```json
-"dn_vuetoc": {
-    "ZoomToExtentActionFactory": {
-        "componentEnabled": false
-    }
-}
-```
-
-### Copyright Menu Entry
-The toc provides a menu entry for displaying the copyright information of the selected layer.
-To disable this entry the corresponding component has to be disabled in the app.json configuration below this bundle:
-
-```json
-"dn_vuetoc": {
-    "ItemCopyrightAction": {
-        "componentEnabled": false
-    }
-}
-```
-
 ### Implementing a custom Menu Entry/Action
 Developers can provide their own menu entries, called __Actions__.
-Therefore, a CustomActionFactory mist be implemented and provided:
+A CustomActionFactory must be implemented and provided:
 
 ```javascript
 import MyCustomActionFactory from "./MyCustomActionFactory.vue";
