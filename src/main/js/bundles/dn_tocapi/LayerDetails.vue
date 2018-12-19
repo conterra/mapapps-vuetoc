@@ -106,7 +106,7 @@
             this.bus.$off('reset', this.reset);
             let layerVisibilityService = this.bus.layerVisibilityService;
             if(layerVisibilityService){
-                layerVisibilityService.subscribe(this.item.layer);
+                layerVisibilityService.unsubscribe(this.item.layer);
             }
         },
         methods: {
