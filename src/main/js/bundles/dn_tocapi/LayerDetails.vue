@@ -6,7 +6,9 @@
             <v-btn
                 icon
                 @click="item.visible = !item.visible">
-                <v-icon :class="{'success--text': visible}">{{ visible ? config.visibleIconClass : config.invisibleIconClass }}</v-icon>
+                <v-icon :class="{'success--text': visible}">{{ visible ? config.visibleIconClass :
+                    config.invisibleIconClass }}
+                </v-icon>
             </v-btn>
         </v-list-tile-action>
         <v-list-tile-content
@@ -19,7 +21,8 @@
             <v-tooltip right>
                 <v-icon
                     slot="activator"
-                    color="orange">warning</v-icon>
+                    color="orange">warning
+                </v-icon>
                 <span v-html="message"/>
             </v-tooltip>
         </v-list-tile-action>
@@ -74,6 +77,7 @@
             let loaded = layer.loaded === undefined ? true : layer.loaded;
             let visible = item.visible;
             let initialVisible = item.initialVisible;
+            let initialOpacity = item.initialOpacity;
             return {
                 menuOpen: false,
                 loaded,
@@ -81,6 +85,7 @@
                 disabled: false,
                 message: "",
                 initialVisible: initialVisible,
+                initialOpacity: initialOpacity,
                 watchHandles: []
             }
         },
@@ -89,7 +94,7 @@
             this.watchHandles.push(this.item.layer.watch("loaded", loaded => this.loaded = loaded));
             this.bus.$on('reset', this.reset);
             let layerVisibilityService = this.bus.layerVisibilityService;
-            if(layerVisibilityService){
+            if (layerVisibilityService) {
                 layerVisibilityService.subscribe(this.item.layer, ({visible, message}) => {
                     this.disabled = !visible;
                     this.message = message;
@@ -105,13 +110,14 @@
             this.watchHandles.forEach(handle => handle.remove());
             this.bus.$off('reset', this.reset);
             let layerVisibilityService = this.bus.layerVisibilityService;
-            if(layerVisibilityService){
+            if (layerVisibilityService) {
                 layerVisibilityService.unsubscribe(this.item.layer);
             }
         },
         methods: {
             reset: function () {
                 this.visible = this.item.visible = this.initialVisible;
+                this.item.layer.opacity = this.initialOpacity;
             }
         }
     };

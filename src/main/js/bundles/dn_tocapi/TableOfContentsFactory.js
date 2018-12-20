@@ -99,6 +99,7 @@ export default class TableOfContentsFactory {
         layerListViewModel.listItemCreatedFunction = (event) => {
             let item = event.item;
             item.initialVisible = !!item.visible;
+            item.initialOpacity = item.layer.opacity;
             item.open = this._properties.expandInitially;
         };
 
