@@ -13,7 +13,7 @@ Simply add the bundle "dn_vuetoc" to your map.apps 4 app.
 
 ### Configurable Components of dn_vuetoc:
 
-#### TableOfContents:
+#### Config:
 ```
 "Config": {
     "showBasemaps": true,
