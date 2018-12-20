@@ -37,7 +37,7 @@
     },
     "bundles": {
         "dn_vuetoc": {
-            "TableOfContents": {
+            "Config": {
                 "showBasemaps": true,
                 "showOperationalLayer": true,
                 "showLoadingStatus": true,
