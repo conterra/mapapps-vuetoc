@@ -24,7 +24,7 @@
             </v-tooltip>
         </v-list-tile-action>
         <v-list-tile-action
-            v-if="loaded"
+            v-if="loaded && config.showLayerMenu"
             @click.prevent.stop>
             <v-menu
                 :close-on-content-click="false"
