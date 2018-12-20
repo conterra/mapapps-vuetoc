@@ -55,11 +55,11 @@
                 },
                 {
                     "name": "_layerActionResolver",
-                    "providing": "vue-toc.LayerActionResolver"
+                    "providing": "dn_tocapi.LayerActionResolver"
                 },
                 {
                     "name": "_layerVisibilityService",
-                    "providing": "vue-toc.LayerVisibilityService",
+                    "providing": "dn_tocapi.LayerVisibilityService",
                     "cardinality": "0..1"
                 }
             ]

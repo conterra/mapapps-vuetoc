@@ -62,14 +62,14 @@ However, you can also extent one of the provided components for common use cases
 Then, register an instance of this factory at the component system.
 You can manipulate the order of all actions by modifying the `priority` property.
 The higher the priority value, the higher the action will apear in the layer actions menu.
-Make sure the instance is provided as `vue-toc.LayerActionFactory` in the bundle's manifest.json:
+Make sure the instance is provided as `dn_tocapi.LayerActionFactory` in the bundle's manifest.json:
 
 ```json
 {
     "components": [
         {
             "name": "MyCustomActionFactory",
-            "provides": "vue-toc.LayerActionFactory",
+            "provides": "dn_tocapi.LayerActionFactory",
             "properties": {
                 "priority": 100
             }

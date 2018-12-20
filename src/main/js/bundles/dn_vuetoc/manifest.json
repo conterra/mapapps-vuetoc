@@ -101,11 +101,11 @@
         {
             "name": "LayerActionResolver",
             "impl": "dn_tocapi/LayerActionResolver",
-            "provides": "vue-toc.LayerActionResolver",
+            "provides": "dn_tocapi.LayerActionResolver",
             "references": [
                 {
                     "name": "layerActionFactory",
-                    "providing": "vue-toc.LayerActionFactory",
+                    "providing": "dn_tocapi.LayerActionFactory",
                     "cardinality": "0..n"
                 }
             ]
@@ -120,7 +120,7 @@
                     "h": 500
                 }
             },
-            "provides": "vue-toc.LayerActionFactory",
+            "provides": "dn_tocapi.LayerActionFactory",
             "references": [
                 {
                     "name": "_windowManager",
@@ -134,7 +134,7 @@
             "properties": {
                 "priority": 50
             },
-            "provides": "vue-toc.LayerActionFactory"
+            "provides": "dn_tocapi.LayerActionFactory"
         },
         {
             "name": "OpacityActionFactory",
@@ -142,7 +142,7 @@
             "properties": {
                 "priority": 40
             },
-            "provides": "vue-toc.LayerActionFactory"
+            "provides": "dn_tocapi.LayerActionFactory"
         },
         {
             "name": "ShowSublayerActionFactory",
@@ -150,7 +150,7 @@
             "properties": {
                 "priority": 30
             },
-            "provides": "vue-toc.LayerActionFactory"
+            "provides": "dn_tocapi.LayerActionFactory"
         },
         {
             "name": "HideSublayerActionFactory",
@@ -158,7 +158,7 @@
             "properties": {
                 "priority": 20
             },
-            "provides": "vue-toc.LayerActionFactory"
+            "provides": "dn_tocapi.LayerActionFactory"
         },
         {
             "name": "ItemCopyrightActionFactory",
@@ -166,7 +166,7 @@
             "properties": {
                 "priority": 0
             },
-            "provides": "vue-toc.LayerActionFactory"
+            "provides": "dn_tocapi.LayerActionFactory"
         },
         {
             "name": "VueTocToggleTool",
