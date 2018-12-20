@@ -113,6 +113,7 @@
         {
             "name": "ItemDescriptionActionFactory",
             "impl": "dn_tocapi/actions/ItemDescriptionActionFactory",
+            "provides": "dn_tocapi.LayerActionFactory",
             "properties": {
                 "priority": 70,
                 "widgetSize": {
@@ -120,7 +121,6 @@
                     "h": 500
                 }
             },
-            "provides": "dn_tocapi.LayerActionFactory",
             "references": [
                 {
                     "name": "_windowManager",
@@ -131,42 +131,42 @@
         {
             "name": "ZoomToExtentActionFactory",
             "impl": "dn_tocapi/actions/ZoomToExtentActionFactory",
+            "provides": "dn_tocapi.LayerActionFactory",
             "properties": {
                 "priority": 50
-            },
-            "provides": "dn_tocapi.LayerActionFactory"
+            }
         },
         {
             "name": "OpacityActionFactory",
             "impl": "dn_tocapi/actions/OpacityActionFactory",
+            "provides": "dn_tocapi.LayerActionFactory",
             "properties": {
                 "priority": 40
-            },
-            "provides": "dn_tocapi.LayerActionFactory"
+            }
         },
         {
             "name": "ShowSublayerActionFactory",
             "impl": "dn_tocapi/actions/ShowSublayerActionFactory",
+            "provides": "dn_tocapi.LayerActionFactory",
             "properties": {
                 "priority": 30
-            },
-            "provides": "dn_tocapi.LayerActionFactory"
+            }
         },
         {
             "name": "HideSublayerActionFactory",
             "impl": "dn_tocapi/actions/HideSublayerActionFactory",
+            "provides": "dn_tocapi.LayerActionFactory",
             "properties": {
                 "priority": 20
-            },
-            "provides": "dn_tocapi.LayerActionFactory"
+            }
         },
         {
             "name": "ItemCopyrightActionFactory",
             "impl": "dn_tocapi/actions/ItemCopyrightActionFactory",
+            "provides": "dn_tocapi.LayerActionFactory",
             "properties": {
                 "priority": 0
-            },
-            "provides": "dn_tocapi.LayerActionFactory"
+            }
         },
         {
             "name": "VueTocToggleTool",
