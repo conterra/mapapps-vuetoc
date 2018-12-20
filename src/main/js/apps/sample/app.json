@@ -75,8 +75,8 @@
                             "marginBox": {
                                 "w": 300,
                                 "h": 140,
-                                "l": 25,
-                                "b": 70
+                                "r": 80,
+                                "b": 76
                             },
                             "draggable": true,
                             "closable": true,
