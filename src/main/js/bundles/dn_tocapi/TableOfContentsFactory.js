@@ -35,7 +35,7 @@ export default class TableOfContentsFactory {
         vm.i18n = this._i18n.get().ui;
         let bus = new Vue();
         let layerVisibilityService = this._layerVisibilityService;
-        if(layerVisibilityService){
+        if (layerVisibilityService) {
             bus.layerVisibilityService = layerVisibilityService;
         }
         vm.bus = bus;
@@ -71,17 +71,18 @@ export default class TableOfContentsFactory {
             this.onViewAvailable(mapWidgetModel.view, vm);
         } else {
             mapWidgetModel.watch("view", (view) => {
-                this.onViewAvailable(view, vm);
+                if (view.value) {
+                    this.onViewAvailable(view, vm);
+                }
             });
         }
     }
 
-    onViewAvailable() {
-        whenOnce(this._mapWidgetModel.view, "ready", (value) => {
-            if(!value){
+    onViewAvailable(view, vm) {
+        whenOnce(view.value, "ready", (value) => {
+            if (!value) {
                 return;
             }
-            let vm = this.vm;
             this._createLayerListViewModel(vm);
             vm.customLayerActions = this._layerActionResolver.getLayerActions();
         });
