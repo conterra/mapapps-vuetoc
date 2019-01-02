@@ -14,11 +14,13 @@
             </v-btn>
         </v-toolbar>
         <v-list>
-            <layer-menu-item v-for="(action, index) in customLayerActions"
-                             :key="action.name"
-                             :action="action"
-                             :lastAction="index >= customLayerActions.length - 1"
-                             :item="item"/>
+            <layer-menu-item
+                v-for="(action, index) in customLayerActions"
+                :key="action.name"
+                :action="action"
+                :last-action="index >= customLayerActions.length - 1"
+                :item="item"
+                @close-menu="$emit('close-menu')"/>
         </v-list>
     </v-card>
 </template>
