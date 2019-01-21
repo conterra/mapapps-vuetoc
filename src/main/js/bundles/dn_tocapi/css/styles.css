@@ -1,46 +1,39 @@
-
 .ctAppRoot .dn-toc-window .vue-base {
     height: 100%
 }
-.ctAppRoot .dn-toc__basemaps .toolbar__title,
-.ctAppRoot .dn-toc__layers .toolbar__title{
-    color: #fff
-}
+
 .ctAppRoot .dn-toc-window .dn-toc__scroll-container {
     overflow: auto;
     overflow-x: hidden;
 }
 
-.ctAppRoot .dn-toc-window .dn-toc__basemaps .list__tile:not(.list__tile--active),
-.ctAppRoot .dn-toc-window .dn-toc__basemaps .list__tile .icon {
+.ctAppRoot .dn-toc-window .dn-toc__basemaps .v-list__tile:not(.v-list__tile--active),
+.ctAppRoot .dn-toc-window .dn-toc__basemaps .v-list__tile .v-icon {
     color: inherit;
 }
 
-.ctAppRoot .dn-toc__layer-menu .list {
+.ctAppRoot .dn-toc__layer-menu .v-list {
     padding: 0;
 }
 
-.ctAppRoot .dn-toc__layer-menu .dn-toc__slider .list__tile {
+.ctAppRoot .dn-toc__layer-menu .dn-toc__slider .v-list__tile {
     padding-left: 16px;
 }
-.ctAppRoot .dn-toc__layer-menu .dn-toc__slider .input-group--slider {
+.ctAppRoot .dn-toc__layer-menu .dn-toc__slider .v-input--slider {
     padding-top: 6px;
     padding-left: 12px;
     padding-right: 12px;
     margin-top: 0;
 }
-.ctAppRoot .dn-toc__layer-menu .dn-toc__slider .slider__thumb{
-    cursor: pointer;
-}
 
-.ctAppRoot .dn-toc__layer-menu .list__group--active:after {
+.ctAppRoot .dn-toc__layer-menu .v-list__group--active:after {
     content: none;
 }
-toolbar__title
-.ctAppRoot .dn-toc .dn-toc_layer-tree-title .toolbar__content >.menu:last-child{
-    margin-right: 0;
+
+.ctAppRoot .dn-toc .dn-toc_layer-tree-title .v-toolbar__content{
+    padding-right: 15px;
 }
-.ctAppRoot .dn-toc .toolbar__title{
+.ctAppRoot .dn-toc .v-toolbar__title{
     line-height: 1.1em;
 }
 
@@ -51,47 +44,47 @@ toolbar__title
     padding-left: 0;
 }
 
-.ctAppRoot .dn-toc__layer-tree .list__group__items--no-action .list__tile,
-.ctAppRoot .dn-toc__layer-tree .dn-toc__layer-tree-item--no-childs .list__tile{
+.ctAppRoot .dn-toc__layer-tree .v-list__group__items--no-action .v-list__tile,
+.ctAppRoot .dn-toc__layer-tree .dn-toc__layer-tree-item--no-childs .v-list__tile{
     padding-left: 34px;
 }
 .ctAppRoot .dn-toc__layer-tree .layer-item__not-visible{
     color: #8d8d8d;
 }
 
-.ctAppRoot .dn-toc__layer-tree .progress-linear{
+.ctAppRoot .dn-toc__layer-tree .v-progress-linear{
     position: absolute
 }
 
-.ctAppRoot .dn-toc__layer-tree .list__tile__content:not(.layer-item__not-visible),
-.ctAppRoot .dn-toc__layer-tree-item--no-childs .list__tile__content:not(.layer-item__not-visible){
+.ctAppRoot .dn-toc__layer-tree .v-list__tile__content:not(.layer-item__not-visible),
+.ctAppRoot .dn-toc__layer-tree-item--no-childs .v-list__tile__content:not(.layer-item__not-visible){
     cursor: pointer;
 }
-.ctAppRoot .vue-base .dn-toc__layer-tree .list__group__header .list__group__header__prepend-icon{
+.ctAppRoot .vue-base .dn-toc__layer-tree .v-list__group__header .v-list__group__header__prepend-icon{
     min-width: 30px;
 }
 
-.ctAppRoot .dn-toc__layer-tree .list__tile__action .icon{
+.ctAppRoot .dn-toc__layer-tree .v-list__tile__action .v-icon{
     margin-left: 0;
 }
 
-.ctAppRoot .vue-base .dn-toc__layer-tree  .list__group__header--sub-group  .list__group__header__prepend-icon{
+.ctAppRoot .vue-base .dn-toc__layer-tree  .v-list__group__header--sub-group  .v-list__group__header__prepend-icon{
     padding-left: 10px;
     margin-right: 0;
 }
-.ctAppRoot .vue-base .dn-toc__layer-tree .list__group__header--active.list__group__header--sub-group .list__group__header__prepend-icon .icon{
+.ctAppRoot .vue-base .dn-toc__layer-tree .v-list__group__header--active.v-list__group__header--sub-group .v-list__group__header__prepend-icon .v-icon{
     transform: rotate(90deg);
 }
 
-.ctAppRoot .vue-base .dn-toc__layer-tree .list__tile__action,
-.ctAppRoot .vue-base .dn-toc__basemaps .list__tile__action {
+.ctAppRoot .vue-base .dn-toc__layer-tree .v-list__tile__action,
+.ctAppRoot .vue-base .dn-toc__basemaps .v-list__tile__action {
     min-width: 40px;
 }
-.ctAppRoot .vue-base .dn-toc__layer-tree .list__tile__action{
+.ctAppRoot .vue-base .dn-toc__layer-tree .v-list__tile__action{
     justify-content: center;
 }
 
-.ctAppRoot .dn-toc__layer-tree .list__group__header > div:not(.list__group__header__prepend-icon):not(.list__group__header__append-icon) {
+.ctAppRoot .dn-toc__layer-tree .v-list__group__header > div:not(.v-list__group__header__prepend-icon):not(.v-list__group__header__append-icon) {
     max-width: 100%;
 }
 .ctAppRoot .vuetocLegendWindow .esri-legend__service-label { /*esri-legend__service-label .... class not existing inside toc.*/
@@ -100,6 +93,7 @@ toolbar__title
 
 
 /*Döner Menu on Operational Layers and LayerItems*/
-.ctAppRoot .dn-toc__item-menu .toolbar__content >.btn:last-child{
-    margin-right: 5px;
+.ctAppRoot .dn-toc__item-menu .v-toolbar__content{
+    padding-left: 12px;
+    padding-right: 12px;
 }

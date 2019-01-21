@@ -11,7 +11,6 @@
         "apprt-vuetify": "^4.2.0",
         "apprt-binding": "^4.2.0",
         "apprt-core": "^4.2.0",
-        "esri-widgets": "^4.2.0",
         "esri": "^4.6.0"
     },
     "layout-widgets": [
