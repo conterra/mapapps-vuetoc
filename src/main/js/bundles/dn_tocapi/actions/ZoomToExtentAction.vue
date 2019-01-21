@@ -1,5 +1,6 @@
 <script>
     import ButtonAction from "./ButtonAction.vue";
+    import when from "apprt-core/when";
 
     export default {
         name: "zoom-to-extent",
@@ -9,6 +10,10 @@
             icon: {
                 type: String,
                 default: "search"
+            },
+            coordinateTransformer: {
+                type: Object,
+                default: () => {}
             }
         },
         methods: {
@@ -23,10 +28,15 @@
                 if (!extent) {
                     return;
                 }
-                item.view.goTo({target: extent}, {
-                    "animate": true,
-                    "duration": 1000,
-                    "easing": "ease-in-out"
+                let view = item.view;
+                const targetWkid = view.spatialReference.wkid;
+                when(this.coordinateTransformer.transform(extent, targetWkid))
+                    .then(targetExtent => {
+                        view.goTo({target: targetExtent}, {
+                            "animate": true,
+                            "duration": 1000,
+                            "easing": "ease-in-out"
+                        });
                 });
                 this.$emit('close-menu');
             }

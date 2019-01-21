@@ -6,6 +6,7 @@
     "vendor": "con terra GmbH",
     "productName": "devnet-mapapps-vuetoc",
     "dependencies": {
+        "ct": "^4.6.0",
         "dn_tocapi": "^1.2.0",
         "apprt-vue": "^4.2.0",
         "apprt-vuetify": "^4.2.0",
@@ -133,7 +134,13 @@
             "provides": "dn_tocapi.LayerActionFactory",
             "properties": {
                 "priority": 50
-            }
+            },
+            "references": [
+                {
+                    "name": "_coordinateTransformer",
+                    "providing": "ct.api.coordinatetransformer.CoordinateTransformer"
+                }
+            ]
         },
         {
             "name": "OpacityActionFactory",

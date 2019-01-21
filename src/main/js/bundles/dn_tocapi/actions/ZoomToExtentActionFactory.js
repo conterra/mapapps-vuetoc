@@ -24,6 +24,10 @@ export default function ZoomToExtentActionFactory() {
                 type: String,
                 default: i18n.zoomToExtent
             };
+            ZoomToExtentAction.props.coordinateTransformer = {
+                type: Object,
+                default: () => this._coordinateTransformer
+            };
             return ZoomToExtentAction;
         }
     }
