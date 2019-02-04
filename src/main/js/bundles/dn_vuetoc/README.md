@@ -1,4 +1,4 @@
-# sdi_toc
+# dn_vuetoc
 
 Provides a widget that allows you to control the map content.
 
