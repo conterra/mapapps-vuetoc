@@ -2,6 +2,10 @@
     import ButtonAction from "./ButtonAction.vue";
     import when from "apprt-core/when";
 
+    const defaultExtent = '{"spatialReference":{"wkid":4326},"xmin":-180,"ymin":-90,"xmax":180,"ymax":90}';
+
+    const isDefaultExtent = extent => JSON.stringify(extent.toJSON()) === defaultExtent
+
     export default {
         name: "zoom-to-extent",
         extends: ButtonAction,
@@ -18,7 +22,8 @@
         },
         methods: {
             displayActionForItem(item) {
-                let displayAction = item.layer && item.layer.fullExtent;
+                let layer = item.layer;
+                let displayAction = layer && layer.fullExtent && !isDefaultExtent(layer.fullExtent);
                 this.$emit("display-changed", displayAction);
                 return displayAction;
             },
