@@ -7,7 +7,7 @@
                 icon
                 @click="item.visible = !item.visible">
                 <v-icon :class="{'success--text': visible}">{{ visible ? config.visibleIconClass :
-                    config.invisibleIconClass }}
+                config.invisibleIconClass }}
                 </v-icon>
             </v-btn>
         </v-list-tile-action>
@@ -78,7 +78,9 @@
             let visible = item.visible;
             let initialVisible = item.initialVisible;
             let initialOpacity = item.initialOpacity;
+            let visibilityServiceId = this._uid + layer.id;
             return {
+                visibilityServiceId,
                 menuOpen: false,
                 loaded,
                 visible,
@@ -95,7 +97,7 @@
             this.bus.$on('reset', this.reset);
             let layerVisibilityService = this.bus.layerVisibilityService;
             if (layerVisibilityService) {
-                layerVisibilityService.subscribe(this.item.layer, ({visible, message}) => {
+                layerVisibilityService.subscribe(this.visibilityServiceId, this.item.layer, ({visible, message}) => {
                     this.disabled = !visible;
                     this.message = message;
                 });
@@ -111,7 +113,7 @@
             this.bus.$off('reset', this.reset);
             let layerVisibilityService = this.bus.layerVisibilityService;
             if (layerVisibilityService) {
-                layerVisibilityService.unsubscribe(this.item.layer);
+                layerVisibilityService.unsubscribe(this.visibilityServiceId);
             }
         },
         methods: {
