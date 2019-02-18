@@ -5,7 +5,7 @@
     "devDependencies": {
         "gulp": "^3.9.1",
         "run-sequence": "^1.2.2",
-        "ct-mapapps-gulp-js": "^0.0.32",
-        "eslint-config-ct-prodeng": "^1.0.1"
+        "ct-mapapps-gulp-js": "^0.0.35",
+        "eslint-config-ct-prodeng": "^1.0.2"
     }
 }
