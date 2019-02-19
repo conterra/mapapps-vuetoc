@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 con terra GmbH (info@conterra.de)
+ * Copyright (C) 2019 con terra GmbH (info@conterra.de)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,21 +18,24 @@ const run_sequence = require('run-sequence');
 const mapapps = require('ct-mapapps-gulp-js');
 
 mapapps.registerTasks({
-    themes: [/*sample_theme*/],
-    hasVuetify: true,
+    /* A detailed description of available setting is available at https://www.npmjs.com/package/ct-mapapps-gulp-js */
+    /* a list of themes inside this project */
+    themes: [/*"sample-theme"*/],
+    /* state that the custom theme will be dependant from map.apps everlasting theme that provides the base styles */
     hasBaseThemes: true,
-    forceTranspile: true/*,
-    themeChangeTargets:{
-        "vuetify":[
+    /* state that we want to support vuetify components and therefore need the the vuetify core styles*/
+    hasVuetify: true,
+    /*themeChangeTargets: {
+        "vuetify": [
             "sample_theme"
         ]
     }*/
 });
 
-gulp.task("default", function(callback) {
+gulp.task("default", function (callback) {
     run_sequence(
-            "copy-resources",
-            "themes-copy",
-            ["js-transpile", "themes-compile"],
-            callback);
+        "copy-resources",
+        "themes-copy",
+        ["js-transpile", "themes-compile"],
+        callback);
 });
