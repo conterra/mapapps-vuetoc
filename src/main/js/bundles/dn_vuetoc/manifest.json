@@ -71,7 +71,8 @@
                 },
                 "windowClass": "mobileWindow noTitleBarAndWindowTools noPadding dn-toc-window"
             }
-        },{
+        },
+        {
             "widgetRole": "vueTocWidget",
             "sublayout": [
                 "mobile_landscape"
