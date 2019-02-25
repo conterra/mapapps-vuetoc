@@ -1,6 +1,6 @@
 {
     "name": "dn_tocapi",
-    "version": "1.2.2-SNAPSHOT",
+    "version": "2.0.0",
     "title": "${bundleName}",
     "description": "${bundleDescription}",
     "vendor": "con terra GmbH",
