@@ -3,7 +3,6 @@
     export default  {
         name: "opacity",
         extends: SliderAction,
-        props: ["fromLabel", "toLabel", "titleLabel"],
         data: function () {
             return {
                 icon: "opacity",
@@ -11,6 +10,7 @@
             }
         },
         beforeMount: function () {
+            this.sliderValue = this.item.layer.opacity;
             this.opacityWatchHandle = this.item.layer.watch("opacity", value => {
                 this.sliderValue = value;
             });

@@ -30,7 +30,8 @@
         props: {
             item: Object,
             fromLabel: String,
-            toLabel: String
+            toLabel: String,
+            titleLabel: String
         },
         data: function () {
             return {
