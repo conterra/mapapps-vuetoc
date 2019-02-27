@@ -1,12 +1,6 @@
 {
-    "extends": [
-        "eslint-config-ct-prodeng"
-    ],
-    "rules": {
-        "vue/require-prop-types": false,
-        "vue/require-default-prop": false
-    },
-    "parserOptions": {
-        "ecmaVersion": 7
-    }
+    "extends": "eslint-config-ct-prodeng",
+    "plugins": [
+        "vue"
+    ]
 }
