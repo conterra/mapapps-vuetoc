@@ -7,7 +7,7 @@
     "productName": "devnet-mapapps-vuetoc",
     "dependencies": {
         "ct": "^4.6.0",
-        "dn_tocapi": "^1.2.0",
+        "dn_tocapi": "^2.0.0",
         "apprt-vue": "^4.2.0",
         "apprt-vuetify": "^4.2.0",
         "apprt-binding": "^4.2.0",
