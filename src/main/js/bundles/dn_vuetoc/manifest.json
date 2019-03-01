@@ -1,6 +1,6 @@
 {
     "name": "dn_vuetoc",
-    "version": "2.0.1-SNAPSHOT",
+    "version": "2.0.1",
     "title": "${bundleName}",
     "description": "${bundleDescription}",
     "vendor": "con terra GmbH",
