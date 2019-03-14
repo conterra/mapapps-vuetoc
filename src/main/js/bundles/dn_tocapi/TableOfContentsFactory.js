@@ -79,7 +79,7 @@ export default class TableOfContentsFactory {
     }
 
     onViewAvailable(view, vm) {
-        whenOnce(view.value, "ready", (value) => {
+        whenOnce(view, "ready", (value) => {
             if (!value) {
                 return;
             }
