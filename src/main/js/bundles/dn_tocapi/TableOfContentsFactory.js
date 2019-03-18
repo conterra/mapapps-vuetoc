@@ -72,7 +72,7 @@ export default class TableOfContentsFactory {
         } else {
             mapWidgetModel.watch("view", (view) => {
                 if (view.value) {
-                    this.onViewAvailable(view, vm);
+                    this.onViewAvailable(view.value, vm);
                 }
             });
         }
