@@ -12,6 +12,7 @@ testConfig({
             packages: [
                 "babel-polyfill",
                 "apprt@4.x",
+                "apprt-binding@4.x",
                 "test-utils@4.x",
                 "apprt-vue@4.x",
                 "vuetify@~0.14.7",
