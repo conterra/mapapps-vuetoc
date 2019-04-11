@@ -21,16 +21,25 @@ import md from "module";
 
 import LayerViewModelFactory from "../LayerViewModelFactory";
 import LayerViewModel from "../LayerViewModel";
+import GroupLayer from "esri/layers/GroupLayer";
 import FeatureLayer from "esri/layers/FeatureLayer";
 
-const createLayer = () => new FeatureLayer({
-    id: "trees",
-    title: "Trees",
-    opacity: 0.5,
-    copyright: "Don't cut my trees",
-    description: "I love trees",
-    visible: true
-});
+const createLayer = () => {
+    const groupLayer = new GroupLayer({
+        id: "trees",
+        title: "Trees",
+        opacity: 0.5,
+        copyright: "Don't cut my trees",
+        description: "I love trees",
+        visible: true
+    });
+    groupLayer.layers.add(new FeatureLayer({id: "oak"}));
+    const conifer = new GroupLayer({id: "conifer"});
+    conifer.layers.add(new FeatureLayer({id: "fir"}));
+    conifer.layers.add(new FeatureLayer({id: "pine"}));
+    groupLayer.layers.add(conifer);
+    return groupLayer;
+};
 
 registerSuite({
     name: md.id,
@@ -76,6 +85,31 @@ registerSuite({
         model.visible = false;
         return later(() => {
             assert.equal(layer.visible, false);
+        })
+    },
+
+    "expect sublayers are available as children in model"() {
+        const layer = createLayer();
+        const model = LayerViewModelFactory.create(layer);
+        assert.isOk(model.children);
+        assert.equal(model.children.length, 2);
+    },
+
+    "expect children of sublayers are available in model"() {
+        const layer = createLayer();
+        const model = LayerViewModelFactory.create(layer);
+        assert.isOk(model.children);
+        assert.equal(model.children.length, 2);
+        assert.equal(model.children[1].children.length, 2);
+    },
+
+    "expect updating child model properties is synced to model"() {
+        const layer = createLayer();
+        const model = LayerViewModelFactory.create(layer);
+        assert.equal(layer.layers.getItemAt(1).layers.getItemAt(0).visible, true);
+        model.children[1].children[0].visible = false;
+        return later(() => {
+            assert.equal(layer.layers.getItemAt(1).layers.getItemAt(0).visible, false);
         })
     },
 

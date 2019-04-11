@@ -22,10 +22,10 @@ import md from "module";
 import LayerViewCollectionModelFactory from "../LayerViewCollectionModelFactory";
 import LayerViewModel from "../LayerViewModel";
 import Collection from "esri/core/Collection";
-import FeatureLayer from "esri/layers/FeatureLayer";
+import GroupLayer from "esri/layers/GroupLayer";
 
 const createLayerCollection = () => {
-    const featureLayer = new FeatureLayer({id: "trees"});
+    const featureLayer = new GroupLayer({id: "trees"});
     const collection = new Collection();
     collection.add(featureLayer);
     return collection;
@@ -56,7 +56,7 @@ registerSuite({
         const {collection: modelCollection} = LayerViewCollectionModelFactory.create(layerCollection);
         assert.equal(layerCollection.length, 1);
         assert.equal(modelCollection.length, 1);
-        layerCollection.add(new FeatureLayer({id: "rivers"}));
+        layerCollection.add(new GroupLayer({id: "rivers"}));
         return later(() => {
             assert.equal(layerCollection.length, 2);
             assert.equal(modelCollection.length, 2);
@@ -68,7 +68,7 @@ registerSuite({
     "expect removing layers from collection is synced to model"() {
         const layerCollection = createLayerCollection();
         const {collection: modelCollection} = LayerViewCollectionModelFactory.create(layerCollection);
-        layerCollection.add(new FeatureLayer({id: "rivers"}));
+        layerCollection.add(new GroupLayer({id: "rivers"}));
         return later(() => {
             layerCollection.remove(layerCollection.getItemAt(0));
             return later(() => {
@@ -82,8 +82,8 @@ registerSuite({
     "expect moving layers in collection is synced to model"() {
         const layerCollection = createLayerCollection();
         const {collection: modelCollection} = LayerViewCollectionModelFactory.create(layerCollection);
-        layerCollection.add(new FeatureLayer({id: "rivers"}));
-        layerCollection.add(new FeatureLayer({id: "buildings"}));
+        layerCollection.add(new GroupLayer({id: "rivers"}));
+        layerCollection.add(new GroupLayer({id: "buildings"}));
         return later(() => {
             layerCollection.reorder(layerCollection.getItemAt(2), 0);
             return later(() => {
@@ -100,8 +100,8 @@ registerSuite({
         const model = LayerViewCollectionModelFactory.create(layerCollection);
         model.dispose();
         const modelCollection = model.collection;
-        layerCollection.add(new FeatureLayer({id: "rivers"}));
-        layerCollection.add(new FeatureLayer({id: "buildings"}));
+        layerCollection.add(new GroupLayer({id: "rivers"}));
+        layerCollection.add(new GroupLayer({id: "buildings"}));
         return later(() => {
             layerCollection.reorder(layerCollection.getItemAt(2), 0);
             return later(() => {
@@ -115,7 +115,7 @@ registerSuite({
         const layerCollection = createLayerCollection();
         const model = LayerViewCollectionModelFactory.create(layerCollection);
         const modelCollection = model.collection
-        layerCollection.add(new FeatureLayer({id: "rivers"}));
+        layerCollection.add(new GroupLayer({id: "rivers"}));
         return later(() => {
             assert.equal(modelCollection.length, 2);
             model.remove(modelCollection[0]);
@@ -132,8 +132,8 @@ registerSuite({
         const layerCollection = createLayerCollection();
         const model = LayerViewCollectionModelFactory.create(layerCollection);
         const modelCollection = model.collection;
-        layerCollection.add(new FeatureLayer({id: "rivers"}));
-        layerCollection.add(new FeatureLayer({id: "buildings"}));
+        layerCollection.add(new GroupLayer({id: "rivers"}));
+        layerCollection.add(new GroupLayer({id: "buildings"}));
         return later(() => {
             assert.equal(modelCollection.length, 3);
             model.reorder(modelCollection[2], 0);
