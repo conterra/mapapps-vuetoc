@@ -13,13 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import ".";
-import "./TableOfContentsFactory";
-import "./TableOfContentsModel";
-import "./LayerActionResolver";
-import "./actions/ItemDescriptionActionFactory";
-import "./actions/ZoomToExtentActionFactory";
-import "./actions/ShowSublayerActionFactory";
-import "./actions/HideSublayerActionFactory";
-import "./actions/OpacityActionFactory";
-import "./actions/ItemCopyrightActionFactory";
+import LayerViewCollectionModelFactory from "./LayerViewCollectionModelFactory";
+
+const operationalLayerModel = Symbol("operationalLayerModel");
+
+export default class TableOfContentsModel {
+
+    getModel() {
+        if(this[operationalLayerModel]){
+            return this[operationalLayerModel];
+        }
+        const layers = this._map.allLayers;
+        const model = this[operationalLayerModel] = LayerViewCollectionModelFactory.create(layers);
+        return model;
+    }
+}

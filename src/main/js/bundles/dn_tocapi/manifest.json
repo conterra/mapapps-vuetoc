@@ -62,6 +62,16 @@
                     "cardinality": "0..1"
                 }
             ]
+        },
+        {
+            "name": "TableOfContentsModel",
+            "provides": "dn_tocapi.TableOfContentsModel",
+            "references": [
+                {
+                    "name": "_map",
+                    "providing": "map-widget.Map"
+                }
+            ]
         }
     ]
 }
