@@ -24,26 +24,35 @@ export default class LayerViewCollectionModelFactory {
         const model = {
             collection: layerCollection.map(layer => LayerViewModelFactory.create(layer)).toArray()
         };
+        model.remove = item => {
+            const idx = model.collection.findIndex(modelItem => modelItem.id === item.id);
+            layerCollection.removeAt(idx);
+        }
+        model.reorder = (item, newIdx) => {
+            const idx = model.collection.findIndex(model => model.id === item.id);
+            const layer = layerCollection.getItemAt(idx);
+            layerCollection.reorder(layer, newIdx);
+        }
         model.dispose = watchCollectionChanges(layerCollection, model.collection);
         return model;
     }
 }
 
-const watchCollectionChanges = (layerCollection, model) => {
+const watchCollectionChanges = (layerCollection, modelCollection) => {
     const watchHandle = layerCollection.on("change", ({added, moved, removed}) => {
         added.forEach(layer => {
             const idx = layerCollection.indexOf(layer);
-            model.splice(idx, 0, LayerViewModelFactory.create(layer));
+            modelCollection.splice(idx, 0, LayerViewModelFactory.create(layer));
         });
         removed.forEach(layer => {
-            const idx = model.findIndex(model => model.id === layer.id);
-            model[idx].dispose();
-            model.splice(idx, 1);
+            const idx = modelCollection.findIndex(model => model.id === layer.id);
+            modelCollection[idx].dispose();
+            modelCollection.splice(idx, 1);
         });
         moved.forEach(layer => {
             const newIdx = layerCollection.indexOf(layer);
-            const oldIdx = model.findIndex(model => model.id === layer.id);
-            model.splice(newIdx, 0, model.splice(oldIdx, 1)[0]);
+            const oldIdx = modelCollection.findIndex(model => model.id === layer.id);
+            modelCollection.splice(newIdx, 0, modelCollection.splice(oldIdx, 1)[0]);
         });
     });
     return () => watchHandle.remove();

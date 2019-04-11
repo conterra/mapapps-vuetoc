@@ -109,5 +109,44 @@ registerSuite({
                 assert.equal(modelCollection[0].id, "trees");
             });
         });
+    },
+
+    "expect removing layer-view-model in collection is synced to layer-collection"() {
+        const layerCollection = createLayerCollection();
+        const model = LayerViewCollectionModelFactory.create(layerCollection);
+        const modelCollection = model.collection
+        layerCollection.add(new FeatureLayer({id: "rivers"}));
+        return later(() => {
+            assert.equal(modelCollection.length, 2);
+            model.remove(modelCollection[0]);
+            return later(() => {
+                assert.equal(modelCollection.length, 1);
+                assert.equal(modelCollection[0].id, "rivers");
+                assert.equal(layerCollection.length, 1);
+                assert.equal(layerCollection.getItemAt(0).id, "rivers");
+            });
+        });
+    },
+
+    "expect reordering layer-view-model in collection is synced to layer-collection"() {
+        const layerCollection = createLayerCollection();
+        const model = LayerViewCollectionModelFactory.create(layerCollection);
+        const modelCollection = model.collection;
+        layerCollection.add(new FeatureLayer({id: "rivers"}));
+        layerCollection.add(new FeatureLayer({id: "buildings"}));
+        return later(() => {
+            assert.equal(modelCollection.length, 3);
+            model.reorder(modelCollection[2], 0);
+            return later(() => {
+                assert.equal(modelCollection.length, 3);
+                assert.equal(modelCollection[0].id, "buildings");
+                assert.equal(modelCollection[1].id, "trees");
+                assert.equal(modelCollection[2].id, "rivers");
+                assert.equal(layerCollection.length, 3);
+                assert.equal(layerCollection.getItemAt(0).id, "buildings");
+                assert.equal(layerCollection.getItemAt(1).id, "trees");
+                assert.equal(layerCollection.getItemAt(2).id, "rivers");
+            });
+        });
     }
 });
