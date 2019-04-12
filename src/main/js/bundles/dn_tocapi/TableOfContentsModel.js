@@ -23,7 +23,7 @@ export default class TableOfContentsModel {
         if(this[operationalLayerModel]){
             return this[operationalLayerModel];
         }
-        const layers = this._map.allLayers;
+        const layers = this._map.layers;
         const model = this[operationalLayerModel] = LayerViewCollectionModelFactory.create(layers);
         return model;
     }
