@@ -15,6 +15,7 @@
  */
 import Binding from "apprt-binding/Binding"
 import Bindable from "apprt-vue/mixins/Bindable";
+import {whenTrueOnce} from "esri/core/watchUtils";
 import Vue from "apprt-vue/Vue";
 
 const propertyKeys = ["id", "title", "loaded", "extent", "opacity", "copyright", "description", "visible"];
@@ -23,8 +24,13 @@ export default class LayerViewModelFactory {
 
     static fromLayer({layer, parent} = {}) {
         const model = initModel(parent);
+        const propWatcher = watchPropertyChanges(layer, model);
         model.children = parseChildren(layer, model);
-        model.dispose = watchPropertyChanges(layer, model);
+        const childWatcher = watchChildChanges(layer, model);
+        model.dispose = () => {
+            propWatcher.unbind();
+            childWatcher.remove();
+        }
         return model;
     }
 }
@@ -51,7 +57,22 @@ const watchPropertyChanges = (layer, model) => {
     binding.syncAll(...propertyKeys)
     binding.syncToLeftNow();
     binding.enable();
-    return () => binding.unbind();
+    return binding;
+}
+
+const watchChildChanges = (layer, model) => {
+    const children = layer.layers || layer.sublayers;
+    if(!children) {
+        whenTrueOnce(layer, "loaded", () => {
+            model.children = parseChildren(layer, model);
+        })
+        return () => {};
+    };
+    return children.on("after-add", ({item}) => {
+        console.log(item);
+        const idx = children.indexOf(item);
+        model.children.splice(idx, 0, LayerViewModelFactory.fromLayer({layer: item}));
+    });
 }
 
 const LayerViewModel = {

@@ -90,6 +90,15 @@ registerSuite({
         assert.equal(model.children.length, 2);
     },
 
+    "expect later added sublayers are available as children in model"() {
+        const layer = createLayer();
+        const model = LayerViewModelFactory.fromLayer({layer});
+        layer.layers.add(new FeatureLayer({id: "palm"}));
+        return later(() => {
+            assert.equal(model.children.length, 3);
+        })
+    },
+
     "expect children of sublayers are available in model"() {
         const layer = createLayer();
         const model = LayerViewModelFactory.fromLayer({layer});
@@ -105,7 +114,7 @@ registerSuite({
         model.children[1].children[0].visible = false;
         return later(() => {
             assert.equal(layer.layers.getItemAt(1).layers.getItemAt(0).visible, false);
-        })
+        });
     },
 
     "expect disposed model won't be updated"() {
@@ -115,6 +124,6 @@ registerSuite({
         layer.title = "updated-title";
         return later(() => {
             assert.equal(model.title, "Trees");
-        })
+        });
     }
 });
