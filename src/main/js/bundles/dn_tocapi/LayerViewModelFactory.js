@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import Layer from "esri/layers/Layer";
 import LayerViewModel from "./LayerViewModel";
 import Binding from "apprt-binding/Binding"
 
