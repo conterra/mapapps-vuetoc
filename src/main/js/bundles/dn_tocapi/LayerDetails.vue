@@ -1,6 +1,6 @@
 <template>
     <v-list-tile
-        :class="{'layer-item__not-visible': disabled}">
+        :class="{'layer-item__not-visible': !item.visibleInContext}">
         <v-list-tile-action @click.prevent.stop>
             <v-btn
                 icon
@@ -17,7 +17,7 @@
             <v-list-tile-title
                 v-text="item.title"/>
         </v-list-tile-content>
-        <v-list-tile-action v-if="message">
+        <v-list-tile-action v-if="!item.visibleInContext">
             <v-tooltip right>
                 <v-icon
                     slot="activator"
@@ -25,7 +25,7 @@
                 >
                     warning
                 </v-icon>
-                <span v-html="message" />
+                <span v-html="item.visibleInContextCause" />
             </v-tooltip>
         </v-list-tile-action>
         <v-list-tile-action
@@ -67,19 +67,7 @@
         components: {
             "layer-menu": LayerMenu
         },
-        props: [
-            "bus",
-            "item",
-            "i18n",
-            "config",
-            "customLayerActions"
-        ],
-        data: function () {
-            return {
-                menuOpen: false,
-                disabled: false,
-                message: ""
-            }
-        }
+        props: ["bus", "item", "i18n", "config", "customLayerActions"],
+        data: () => { menuOpen: false }
     };
 </script>

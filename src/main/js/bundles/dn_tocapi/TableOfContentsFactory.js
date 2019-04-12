@@ -30,13 +30,10 @@ export default class TableOfContentsFactory {
         const defaultSelectedId = this._basemapModel.selectedId;
         const vm = this.vm = new Vue(TableOfContents);
         this._modelSynchronizer.syncToOperationalLayers(vm.operationalItems);
+        this._layerVisibilitySynchronizer.sync(vm.operationalItems);
         vm.customLayerActions = this._layerActionResolver.getLayerActions();
         vm.i18n = this._i18n.get().ui;
         let bus = new Vue();
-        let layerVisibilityService = this._layerVisibilityService;
-        if (layerVisibilityService) {
-            bus.layerVisibilityService = layerVisibilityService;
-        }
         vm.bus = bus;
         vm.config = {
             showBasemaps: properties.showBasemaps,
