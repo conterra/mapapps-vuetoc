@@ -17,7 +17,7 @@ import Layer from "esri/layers/Layer";
 import LayerViewModel from "./LayerViewModel";
 import Binding from "apprt-binding/Binding"
 
-const propertyKeys = ["id", "title", "extent", "opacity", "copyright", "description", "visible"];
+const propertyKeys = ["id", "title", "updating", "extent", "opacity", "copyright", "description", "visible"];
 
 export default class LayerViewModelFactory {
 

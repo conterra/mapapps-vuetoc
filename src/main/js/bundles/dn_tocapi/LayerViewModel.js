@@ -49,6 +49,16 @@ const LayerViewModel = declare({
     },
 
     /**
+     * The loading state of the layer
+     *
+     * @memberOf LayerViewModel#
+     * @type Boolean
+     */
+    updating: {
+        type: Boolean
+    },
+
+    /**
      * The parent layer of the layer.
      *
      * @memberOf LayerViewModel#
