@@ -17,21 +17,20 @@ import TableOfContents from "./TableOfContents.vue";
 import Vue from "apprt-vue/Vue";
 import VueDijit from "apprt-vue/VueDijit";
 import Binding from "apprt-binding/Binding";
-import LayerListViewModel from "esri/widgets/LayerList/LayerListViewModel";
-import {whenOnce} from "esri/core/watchUtils";
 
 export default class TableOfContentsFactory {
 
     activate() {
         let envs = this._componentContext.getBundleContext().getCurrentExecutionEnvironment();
         let isMobile = this.isMobile = envs.some((env) => env.name === "Mobile" || env.name === "Android");
-        let mapWidgetModel = this._mapWidgetModel;
         let basemapModel = this._basemapModel;
         let tool = this._tool;
         let properties = this._properties;
 
         const defaultSelectedId = this._basemapModel.selectedId;
         const vm = this.vm = new Vue(TableOfContents);
+        vm.operationalItems = this._tocModel.getOperationalLayersModel();
+        vm.customLayerActions = this._layerActionResolver.getLayerActions();
         vm.i18n = this._i18n.get().ui;
         let bus = new Vue();
         let layerVisibilityService = this._layerVisibilityService;
@@ -51,9 +50,6 @@ export default class TableOfContentsFactory {
             invisibleIconClass: properties.invisibleIconClass,
             isMobile: isMobile
         };
-        vm.operationalItems = {
-            items: []
-        };
 
         // listen to view model methods
         vm.$on('close', () => tool.set("active", false));
@@ -66,51 +62,10 @@ export default class TableOfContentsFactory {
             .sync("basemaps")
             .enable()
             .syncToLeftNow();
-
-        if (mapWidgetModel.view) {
-            this.onViewAvailable(mapWidgetModel.view, vm);
-        } else {
-            mapWidgetModel.watch("view", (view) => {
-                if (view.value) {
-                    this.onViewAvailable(view.value, vm);
-                }
-            });
-        }
-    }
-
-    onViewAvailable(view, vm) {
-        whenOnce(view, "ready", (value) => {
-            if (!value) {
-                return;
-            }
-            this._createLayerListViewModel(vm);
-            vm.customLayerActions = this._layerActionResolver.getLayerActions();
-        });
     }
 
     createInstance() {
         return VueDijit(this.vm);
-    }
-
-    _createLayerListViewModel(vm) {
-        let view = this._mapWidgetModel.get("view");
-        let layerListViewModel = new LayerListViewModel({
-            view: view
-        });
-        layerListViewModel.listItemCreatedFunction = (event) => {
-            let item = event.item;
-            item.initialVisible = !!item.visible;
-            item.initialOpacity = item.layer.opacity;
-            item.open = this._properties.expandInitially;
-        };
-
-        if (this.binding) {
-            this.binding.unbind();
-        }
-        this.binding = Binding.for(vm, layerListViewModel)
-            .syncAll("operationalItems")
-            .enable()
-            .syncToLeftNow();
     }
 
     deactivate() {
