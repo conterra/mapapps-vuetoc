@@ -44,12 +44,15 @@ const initModel = (parent) => {
 const parseChildren = (layer, model) => {
     const sublayers = layer.layers || layer.sublayers;
     if(!sublayers) return [];
-    return sublayers.map(sublayer => {
-        return LayerViewModelFactory.fromLayer({
-            layer: sublayer,
-            parent: model
+    return sublayers
+        .map(sublayer => {
+            return LayerViewModelFactory.fromLayer({
+                layer: sublayer,
+                parent: model
+            })
         })
-    }).toArray();
+        .reverse()
+        .toArray();
 }
 
 const watchPropertyChanges = (layer, model) => {
@@ -69,8 +72,7 @@ const watchChildChanges = (layer, model) => {
         return () => {};
     };
     return children.on("after-add", ({item}) => {
-        console.log(item);
-        const idx = children.indexOf(item);
+        const idx = children.length - 1 - children.indexOf(item);
         model.children.splice(idx, 0, LayerViewModelFactory.fromLayer({layer: item}));
     });
 }

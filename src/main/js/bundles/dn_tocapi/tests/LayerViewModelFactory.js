@@ -88,6 +88,8 @@ registerSuite({
         const model = LayerViewModelFactory.fromLayer({layer});
         assert.isOk(model.children);
         assert.equal(model.children.length, 2);
+        assert.equal(model.children[0].id, "conifer");
+        assert.equal(model.children[1].id, "oak");
     },
 
     "expect later added sublayers are available as children in model"() {
@@ -96,6 +98,9 @@ registerSuite({
         layer.layers.add(new FeatureLayer({id: "palm"}));
         return later(() => {
             assert.equal(model.children.length, 3);
+            assert.equal(model.children[0].id, "palm");
+            assert.equal(model.children[1].id, "conifer");
+            assert.equal(model.children[2].id, "oak");
         })
     },
 
@@ -104,14 +109,14 @@ registerSuite({
         const model = LayerViewModelFactory.fromLayer({layer});
         assert.isOk(model.children);
         assert.equal(model.children.length, 2);
-        assert.equal(model.children[1].children.length, 2);
+        assert.equal(model.children[0].children.length, 2);
     },
 
     "expect updating child model properties is synced to model"() {
         const layer = createLayer();
         const model = LayerViewModelFactory.fromLayer({layer});
         assert.equal(layer.layers.getItemAt(1).layers.getItemAt(0).visible, true);
-        model.children[1].children[0].visible = false;
+        model.children[0].children[1].visible = false;
         return later(() => {
             assert.equal(layer.layers.getItemAt(1).layers.getItemAt(0).visible, false);
         });

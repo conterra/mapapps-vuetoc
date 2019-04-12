@@ -55,8 +55,8 @@ registerSuite({
         return later(() => {
             assert.equal(layerCollection.length, 2);
             assert.equal(modelCollection.length, 2);
-            assert.equal(modelCollection[0].id, "trees");
-            assert.equal(modelCollection[1].id, "rivers");
+            assert.equal(modelCollection[0].id, "rivers");
+            assert.equal(modelCollection[1].id, "trees");
         });
     },
 
@@ -65,6 +65,10 @@ registerSuite({
         const {collection: modelCollection} = LayerViewCollectionModelFactory.fromLayerCollection(layerCollection);
         layerCollection.add(new GroupLayer({id: "rivers"}));
         return later(() => {
+            assert.equal(layerCollection.length, 2);
+            assert.equal(modelCollection.length, 2);
+            assert.equal(modelCollection[0].id, "rivers");
+            assert.equal(modelCollection[1].id, "trees");
             layerCollection.remove(layerCollection.getItemAt(0));
             return later(() => {
                 assert.equal(layerCollection.length, 1);
@@ -80,12 +84,16 @@ registerSuite({
         layerCollection.add(new GroupLayer({id: "rivers"}));
         layerCollection.add(new GroupLayer({id: "buildings"}));
         return later(() => {
+            assert.equal(modelCollection.length, 3);
+            assert.equal(modelCollection[0].id, "buildings");
+            assert.equal(modelCollection[1].id, "rivers");
+            assert.equal(modelCollection[2].id, "trees");
             layerCollection.reorder(layerCollection.getItemAt(2), 0);
             return later(() => {
                 assert.equal(modelCollection.length, 3);
-                assert.equal(modelCollection[0].id, "buildings");
+                assert.equal(modelCollection[0].id, "rivers");
                 assert.equal(modelCollection[1].id, "trees");
-                assert.equal(modelCollection[2].id, "rivers");
+                assert.equal(modelCollection[2].id, "buildings");
             });
         });
     },
@@ -106,7 +114,7 @@ registerSuite({
         });
     },
 
-    "expect removing layer-view-model in collection is synced to layer-collection"() {
+    "expect removing layers in model is synced to collection"() {
         const layerCollection = createLayerCollection();
         const model = LayerViewCollectionModelFactory.fromLayerCollection(layerCollection);
         const modelCollection = model.collection
@@ -116,14 +124,14 @@ registerSuite({
             model.remove(modelCollection[0]);
             return later(() => {
                 assert.equal(modelCollection.length, 1);
-                assert.equal(modelCollection[0].id, "rivers");
+                assert.equal(modelCollection[0].id, "trees");
                 assert.equal(layerCollection.length, 1);
-                assert.equal(layerCollection.getItemAt(0).id, "rivers");
+                assert.equal(layerCollection.getItemAt(0).id, "trees");
             });
         });
     },
 
-    "expect reordering layer-view-model in collection is synced to layer-collection"() {
+    "expect reordering layers in model is synced to collection"() {
         const layerCollection = createLayerCollection();
         const model = LayerViewCollectionModelFactory.fromLayerCollection(layerCollection);
         const modelCollection = model.collection;
@@ -131,16 +139,19 @@ registerSuite({
         layerCollection.add(new GroupLayer({id: "buildings"}));
         return later(() => {
             assert.equal(modelCollection.length, 3);
+            assert.equal(modelCollection[0].id, "buildings");
+            assert.equal(modelCollection[1].id, "rivers");
+            assert.equal(modelCollection[2].id, "trees");
             model.reorder(modelCollection[2], 0);
             return later(() => {
                 assert.equal(modelCollection.length, 3);
-                assert.equal(modelCollection[0].id, "buildings");
-                assert.equal(modelCollection[1].id, "trees");
+                assert.equal(modelCollection[0].id, "trees");
+                assert.equal(modelCollection[1].id, "buildings");
                 assert.equal(modelCollection[2].id, "rivers");
                 assert.equal(layerCollection.length, 3);
-                assert.equal(layerCollection.getItemAt(0).id, "buildings");
-                assert.equal(layerCollection.getItemAt(1).id, "trees");
-                assert.equal(layerCollection.getItemAt(2).id, "rivers");
+                assert.equal(layerCollection.getItemAt(0).id, "rivers");
+                assert.equal(layerCollection.getItemAt(1).id, "buildings");
+                assert.equal(layerCollection.getItemAt(2).id, "trees");
             });
         });
     }
