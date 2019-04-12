@@ -38,11 +38,6 @@ registerSuite({
         assert.isOk(LayerViewCollectionModelFactory.fromLayerCollection);
     },
 
-    "expect calling factory function without parameters throws error"() {
-        assert.throws(LayerViewCollectionModelFactory.fromLayerCollection,
-            "LayerViewCollectionModelFactory: First parameter must be collection of layers!");
-    },
-
     "expect factory returns array of LayerViewModels"() {
         const layerCollection = createLayerCollection();
         const {collection: modelCollection} = LayerViewCollectionModelFactory.fromLayerCollection(layerCollection);

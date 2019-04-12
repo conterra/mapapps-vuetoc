@@ -18,9 +18,6 @@ import LayerViewModelFactory from "./LayerViewModelFactory";
 export default class LayerViewCollectionModelFactory {
 
     static fromLayerCollection(layerCollection) {
-        if (!layerCollection) {
-            throw Error("LayerViewCollectionModelFactory: First parameter must be collection of layers!");
-        }
         const model = {
             collection: layerCollection.map(layer => LayerViewModelFactory.fromLayer({layer})).toArray()
         };

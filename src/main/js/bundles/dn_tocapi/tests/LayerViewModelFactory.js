@@ -48,11 +48,6 @@ registerSuite({
         assert.isOk(LayerViewModelFactory.fromLayer);
     },
 
-    "expect calling factory function without parameters throws error"() {
-        assert.throws(LayerViewModelFactory.fromLayer,
-            "LayerViewModelFactory: First parameter must be a layer!");
-    },
-
     "expect factory returns a LayerViewModel"() {
         const layer = createLayer();
         const model = LayerViewModelFactory.fromLayer({layer});

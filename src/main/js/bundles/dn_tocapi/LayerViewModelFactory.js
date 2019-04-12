@@ -22,9 +22,6 @@ const propertyKeys = ["id", "title", "loaded", "extent", "opacity", "copyright",
 export default class LayerViewModelFactory {
 
     static fromLayer({layer, parent} = {}) {
-        if (!(layer instanceof Layer)) {
-            throw Error("LayerViewModelFactory: First parameter must be a layer!");
-        }
         const model = initModel(layer, parent);
         model.children = parseChildren(layer, model);
         model.dispose = watchPropertyChanges(layer, model);
@@ -35,9 +32,6 @@ export default class LayerViewModelFactory {
 const initModel = (layer, parent) => {
     const model = LayerViewModel();
     if (parent) model.parent = parent;
-    propertyKeys.forEach(key => {
-        model[key] = layer[key];
-    });
     return model;
 }
 
@@ -55,6 +49,7 @@ const parseChildren = (layer, model) => {
 const watchPropertyChanges = (layer, model) => {
     let binding = Binding.for(model, layer);
     binding.syncAll(...propertyKeys)
+    binding.syncToLeftNow();
     binding.enable();
     return () => binding.unbind();
 }
