@@ -2,5 +2,10 @@
     "extends": "eslint-config-ct-prodeng",
     "plugins": [
         "vue"
-    ]
+    ],
+    "rules": {
+        "vue/require-prop-types": false,
+        "vue/require-default-prop": false,
+        "vue/html-closing-bracket-spacing": false
+    }
 }
