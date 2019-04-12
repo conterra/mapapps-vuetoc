@@ -58,6 +58,7 @@ export default class TableOfContentsModel {
     }
 
     deactivate(){
+        if(!this[handles]) return;
         this[handles].forEach(handle => {
             const remove = handle.remove || handle.unbind;
             remove();
