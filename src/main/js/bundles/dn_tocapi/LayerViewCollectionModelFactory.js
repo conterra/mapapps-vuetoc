@@ -17,12 +17,12 @@ import LayerViewModelFactory from "./LayerViewModelFactory";
 
 export default class LayerViewCollectionModelFactory {
 
-    static create(layerCollection) {
+    static fromLayerCollection(layerCollection) {
         if (!layerCollection) {
             throw Error("LayerViewCollectionModelFactory: First parameter must be collection of layers!");
         }
         const model = {
-            collection: layerCollection.map(layer => LayerViewModelFactory.create(layer)).toArray()
+            collection: layerCollection.map(layer => LayerViewModelFactory.fromLayer({layer})).toArray()
         };
         model.remove = item => {
             const idx = model.collection.findIndex(modelItem => modelItem.id === item.id);
@@ -42,7 +42,7 @@ const watchCollectionChanges = (layerCollection, modelCollection) => {
     const watchHandle = layerCollection.on("change", ({added, moved, removed}) => {
         added.forEach(layer => {
             const idx = layerCollection.indexOf(layer);
-            modelCollection.splice(idx, 0, LayerViewModelFactory.create(layer));
+            modelCollection.splice(idx, 0, LayerViewModelFactory.fromLayer({layer}));
         });
         removed.forEach(layer => {
             const idx = modelCollection.findIndex(model => model.id === layer.id);

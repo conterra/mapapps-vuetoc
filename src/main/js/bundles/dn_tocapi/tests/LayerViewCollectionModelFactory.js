@@ -35,17 +35,17 @@ registerSuite({
     name: md.id,
     "expect factory is available and has 'create' method"() {
         assert.isOk(LayerViewCollectionModelFactory);
-        assert.isOk(LayerViewCollectionModelFactory.create);
+        assert.isOk(LayerViewCollectionModelFactory.fromLayerCollection);
     },
 
     "expect calling factory function without parameters throws error"() {
-        assert.throws(LayerViewCollectionModelFactory.create,
+        assert.throws(LayerViewCollectionModelFactory.fromLayerCollection,
             "LayerViewCollectionModelFactory: First parameter must be collection of layers!");
     },
 
     "expect factory returns array of LayerViewModels"() {
         const layerCollection = createLayerCollection();
-        const {collection: modelCollection} = LayerViewCollectionModelFactory.create(layerCollection);
+        const {collection: modelCollection} = LayerViewCollectionModelFactory.fromLayerCollection(layerCollection);
         assert.isArray(modelCollection);
         assert.isOk(modelCollection.length);
         modelCollection.forEach(layermodel => assert(layermodel instanceof LayerViewModel));
@@ -53,7 +53,7 @@ registerSuite({
 
     "expect adding layers to collection is synced to model"() {
         const layerCollection = createLayerCollection();
-        const {collection: modelCollection} = LayerViewCollectionModelFactory.create(layerCollection);
+        const {collection: modelCollection} = LayerViewCollectionModelFactory.fromLayerCollection(layerCollection);
         assert.equal(layerCollection.length, 1);
         assert.equal(modelCollection.length, 1);
         layerCollection.add(new GroupLayer({id: "rivers"}));
@@ -67,7 +67,7 @@ registerSuite({
 
     "expect removing layers from collection is synced to model"() {
         const layerCollection = createLayerCollection();
-        const {collection: modelCollection} = LayerViewCollectionModelFactory.create(layerCollection);
+        const {collection: modelCollection} = LayerViewCollectionModelFactory.fromLayerCollection(layerCollection);
         layerCollection.add(new GroupLayer({id: "rivers"}));
         return later(() => {
             layerCollection.remove(layerCollection.getItemAt(0));
@@ -81,7 +81,7 @@ registerSuite({
 
     "expect moving layers in collection is synced to model"() {
         const layerCollection = createLayerCollection();
-        const {collection: modelCollection} = LayerViewCollectionModelFactory.create(layerCollection);
+        const {collection: modelCollection} = LayerViewCollectionModelFactory.fromLayerCollection(layerCollection);
         layerCollection.add(new GroupLayer({id: "rivers"}));
         layerCollection.add(new GroupLayer({id: "buildings"}));
         return later(() => {
@@ -97,7 +97,7 @@ registerSuite({
 
     "expect changing layers in collection is not synced to disposed model"() {
         const layerCollection = createLayerCollection();
-        const model = LayerViewCollectionModelFactory.create(layerCollection);
+        const model = LayerViewCollectionModelFactory.fromLayerCollection(layerCollection);
         model.dispose();
         const modelCollection = model.collection;
         layerCollection.add(new GroupLayer({id: "rivers"}));
@@ -113,7 +113,7 @@ registerSuite({
 
     "expect removing layer-view-model in collection is synced to layer-collection"() {
         const layerCollection = createLayerCollection();
-        const model = LayerViewCollectionModelFactory.create(layerCollection);
+        const model = LayerViewCollectionModelFactory.fromLayerCollection(layerCollection);
         const modelCollection = model.collection
         layerCollection.add(new GroupLayer({id: "rivers"}));
         return later(() => {
@@ -130,7 +130,7 @@ registerSuite({
 
     "expect reordering layer-view-model in collection is synced to layer-collection"() {
         const layerCollection = createLayerCollection();
-        const model = LayerViewCollectionModelFactory.create(layerCollection);
+        const model = LayerViewCollectionModelFactory.fromLayerCollection(layerCollection);
         const modelCollection = model.collection;
         layerCollection.add(new GroupLayer({id: "rivers"}));
         layerCollection.add(new GroupLayer({id: "buildings"}));
