@@ -78,8 +78,7 @@
             return {
                 menuOpen: false,
                 disabled: false,
-                message: "",
-                watchHandles: []
+                message: ""
             }
         }
     };
