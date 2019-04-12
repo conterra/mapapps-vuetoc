@@ -39,6 +39,16 @@ const LayerViewModel = declare({
     },
 
     /**
+     * The UI state of the layer in the toc
+     *
+     * @memberOf LayerViewModel#
+     * @type Boolean
+     */
+    open: {
+        type: Boolean
+    },
+
+    /**
      * The parent layer of the layer.
      *
      * @memberOf LayerViewModel#
