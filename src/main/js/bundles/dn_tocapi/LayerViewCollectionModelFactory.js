@@ -17,10 +17,9 @@ import LayerViewModelFactory from "./LayerViewModelFactory";
 
 export default class LayerViewCollectionModelFactory {
 
-    static fromLayerCollection(layerCollection) {
-        const model = {
-            collection: layerCollection.map(layer => LayerViewModelFactory.fromLayer({layer})).toArray()
-        };
+    static fromLayerCollection(layerCollection, initialModel = {}) {
+        const model = initialModel || {};
+        model.collection = layerCollection.map(layer => LayerViewModelFactory.fromLayer({layer})).toArray();
         model.remove = item => {
             const idx = model.collection.findIndex(modelItem => modelItem.id === item.id);
             layerCollection.removeAt(idx);

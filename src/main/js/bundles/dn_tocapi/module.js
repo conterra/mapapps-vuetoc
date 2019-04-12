@@ -15,7 +15,7 @@
  */
 import ".";
 import "./TableOfContentsFactory";
-import "./TableOfContentsModel";
+import "./TocModelSynchronizer";
 import "./LayerActionResolver";
 import "./actions/ItemDescriptionActionFactory";
 import "./actions/ZoomToExtentActionFactory";

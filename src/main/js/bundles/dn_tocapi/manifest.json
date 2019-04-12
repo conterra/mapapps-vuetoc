@@ -41,8 +41,8 @@
             },
             "references": [
                 {
-                    "name": "_tocModel",
-                    "providing": "dn_tocapi.TableOfContentsModel"
+                    "name": "_modelSynchronizer",
+                    "providing": "dn_tocapi.TocModelSynchronizer"
                 },
                 {
                     "name": "_basemapModel",
@@ -64,8 +64,8 @@
             ]
         },
         {
-            "name": "TableOfContentsModel",
-            "provides": "dn_tocapi.TableOfContentsModel",
+            "name": "TocModelSynchronizer",
+            "provides": "dn_tocapi.TocModelSynchronizer",
             "references": [
                 {
                     "name": "_map",

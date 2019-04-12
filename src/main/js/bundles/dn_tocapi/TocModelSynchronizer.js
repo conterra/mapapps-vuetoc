@@ -16,24 +16,19 @@
 import LayerViewCollectionModelFactory from "./LayerViewCollectionModelFactory";
 import Binding from "apprt-binding/Binding"
 
-const operationalLayerModel = Symbol("operationalLayerModel");
 const handles = Symbol("handles");
 
 export default class TableOfContentsModel {
 
-    getOperationalLayersModel() {
-        if(this[operationalLayerModel]){
-            return this[operationalLayerModel];
-        }
+    syncToOperationalLayers(model) {
         const layers = this._map.layers;
-        const model = this[operationalLayerModel] = LayerViewCollectionModelFactory.fromLayerCollection(layers);
+        model = LayerViewCollectionModelFactory.fromLayerCollection(layers, model);
         this[handles] = [];
-        this._registerViewWatcher();
+        this._registerViewWatcher(model);
         return model;
     }
 
-    _registerViewWatcher(){
-        const model = this[operationalLayerModel];
+    _registerViewWatcher(model){
         if(!model) return;
         const mapWidgetModel = this._mapWidgetModel;
         if(mapWidgetModel.view){

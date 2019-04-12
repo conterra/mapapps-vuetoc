@@ -29,7 +29,7 @@ export default class TableOfContentsFactory {
 
         const defaultSelectedId = this._basemapModel.selectedId;
         const vm = this.vm = new Vue(TableOfContents);
-        vm.operationalItems = this._tocModel.getOperationalLayersModel();
+        this._modelSynchronizer.syncToOperationalLayers(vm.operationalItems);
         vm.customLayerActions = this._layerActionResolver.getLayerActions();
         vm.i18n = this._i18n.get().ui;
         let bus = new Vue();
