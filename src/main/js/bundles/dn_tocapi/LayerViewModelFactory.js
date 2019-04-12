@@ -17,12 +17,32 @@ import Layer from "esri/layers/Layer";
 import LayerViewModel from "./LayerViewModel";
 import Binding from "apprt-binding/Binding"
 
-const propertyKeys = ["id", "title", "updating", "loaded", "extent", "opacity", "copyright", "description", "visible"];
+const propertyKeys = ["id", "title", "loaded", "extent", "opacity", "copyright", "description", "visible"];
 
 export default class LayerViewModelFactory {
 
-    static create(layer, parent) {
-        return createLayerViewModel(layer, parent);
+    static fromLayerView(layerView) {
+        const updatingHandle = layerView.watch("updating", newValue => {
+            model.updating = newValue;
+        })
+        return createLayerViewModel({
+            layer: layerView.layer,
+            handles: [updatingHandle]
+        });
+    }
+
+    static fromLayer({layer, parent, handles = []} = {}) {
+        if (!(layer instanceof Layer)) {
+            throw Error("LayerViewModelFactory: First parameter must be a layer!");
+        }
+        const model = initModel(layer, parent);
+        model.children = parseChildren(layer, model);
+        const binding = watchPropertyChanges(layer, model);
+        model.dispose = () => {
+            binding.unbind();
+            handles.forEach(handle => handle.remove());
+        }
+        return model;
     }
 }
 
@@ -48,12 +68,17 @@ const initModel = (layer, parent) => {
 const parseChildren = (layer, model) => {
     const sublayers = layer.layers || layer.sublayers;
     if(!sublayers) return [];
-    return sublayers.map(sublayer => createLayerViewModel(sublayer, model)).toArray();
+    return sublayers.map(sublayer => {
+        return LayerViewModelFactory.fromLayer({
+            layer: sublayer,
+            parent: model
+        })
+    }).toArray();
 }
 
 const watchPropertyChanges = (layer, model) => {
     let binding = Binding.for(model, layer);
     binding.syncAll(...propertyKeys)
     binding.enable();
-    return () => binding.unbind();
+    return binding;
 }

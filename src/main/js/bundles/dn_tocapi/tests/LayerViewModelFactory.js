@@ -43,25 +43,25 @@ const createLayer = () => {
 
 registerSuite({
     name: md.id,
-    "expect factory is available and has 'create' method"() {
+    "expect factory is available and has 'fromLayer' method"() {
         assert.isOk(LayerViewModelFactory);
-        assert.isOk(LayerViewModelFactory.create);
+        assert.isOk(LayerViewModelFactory.fromLayer);
     },
 
     "expect calling factory function without parameters throws error"() {
-        assert.throws(LayerViewModelFactory.create,
+        assert.throws(LayerViewModelFactory.fromLayer,
             "LayerViewModelFactory: First parameter must be a layer!");
     },
 
     "expect factory returns a LayerViewModel"() {
         const layer = createLayer();
-        const model = LayerViewModelFactory.create(layer);
+        const model = LayerViewModelFactory.fromLayer({layer});
         assert(model instanceof LayerViewModel);
     },
 
     "expect model has layer properties"() {
         const layer = createLayer();
-        const model = LayerViewModelFactory.create(layer);
+        const model = LayerViewModelFactory.fromLayer({layer});
         assert.equal(model.id, "trees");
         assert.equal(model.title, "Trees");
         assert.equal(model.opacity, 0.5);
@@ -72,7 +72,7 @@ registerSuite({
 
     "expect updating layer properties is synced to model"() {
         const layer = createLayer();
-        const model = LayerViewModelFactory.create(layer);
+        const model = LayerViewModelFactory.fromLayer({layer});
         layer.title = "updated-title";
         return later(() => {
             assert.equal(model.title, "updated-title");
@@ -81,7 +81,7 @@ registerSuite({
 
     "expect updating model properties is synced to layer"() {
         const layer = createLayer();
-        const model = LayerViewModelFactory.create(layer);
+        const model = LayerViewModelFactory.fromLayer({layer});
         model.visible = false;
         return later(() => {
             assert.equal(layer.visible, false);
@@ -90,14 +90,14 @@ registerSuite({
 
     "expect sublayers are available as children in model"() {
         const layer = createLayer();
-        const model = LayerViewModelFactory.create(layer);
+        const model = LayerViewModelFactory.fromLayer({layer});
         assert.isOk(model.children);
         assert.equal(model.children.length, 2);
     },
 
     "expect children of sublayers are available in model"() {
         const layer = createLayer();
-        const model = LayerViewModelFactory.create(layer);
+        const model = LayerViewModelFactory.fromLayer({layer});
         assert.isOk(model.children);
         assert.equal(model.children.length, 2);
         assert.equal(model.children[1].children.length, 2);
@@ -105,7 +105,7 @@ registerSuite({
 
     "expect updating child model properties is synced to model"() {
         const layer = createLayer();
-        const model = LayerViewModelFactory.create(layer);
+        const model = LayerViewModelFactory.fromLayer({layer});
         assert.equal(layer.layers.getItemAt(1).layers.getItemAt(0).visible, true);
         model.children[1].children[0].visible = false;
         return later(() => {
@@ -115,7 +115,7 @@ registerSuite({
 
     "expect disposed model won't be updated"() {
         const layer = createLayer();
-        const model = LayerViewModelFactory.create(layer);
+        const model = LayerViewModelFactory.fromLayer({layer});
         model.dispose();
         layer.title = "updated-title";
         return later(() => {
