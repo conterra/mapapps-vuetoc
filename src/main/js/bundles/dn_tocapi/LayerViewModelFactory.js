@@ -47,7 +47,7 @@ const initModel = (layer, parent) => {
 
 const parseChildren = (layer, model) => {
     const sublayers = layer.layers || layer.sublayers;
-    if(!sublayers) return;
+    if(!sublayers) return [];
     return sublayers.map(sublayer => createLayerViewModel(sublayer, model)).toArray();
 }
 
