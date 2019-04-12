@@ -21,39 +21,15 @@ const propertyKeys = ["id", "title", "loaded", "extent", "opacity", "copyright",
 
 export default class LayerViewModelFactory {
 
-    static fromLayerView(layerView) {
-        const updatingHandle = layerView.watch("updating", newValue => {
-            model.updating = newValue;
-        })
-        return createLayerViewModel({
-            layer: layerView.layer,
-            handles: [updatingHandle]
-        });
-    }
-
-    static fromLayer({layer, parent, handles = []} = {}) {
+    static fromLayer({layer, parent} = {}) {
         if (!(layer instanceof Layer)) {
             throw Error("LayerViewModelFactory: First parameter must be a layer!");
         }
         const model = initModel(layer, parent);
         model.children = parseChildren(layer, model);
-        const binding = watchPropertyChanges(layer, model);
-        model.dispose = () => {
-            binding.unbind();
-            handles.forEach(handle => handle.remove());
-        }
+        model.dispose = watchPropertyChanges(layer, model);
         return model;
     }
-}
-
-const createLayerViewModel = (layer, parent) => {
-    if (!(layer instanceof Layer)) {
-        throw Error("LayerViewModelFactory: First parameter must be a layer!");
-    }
-    const model = initModel(layer, parent);
-    model.children = parseChildren(layer, model);
-    model.dispose = watchPropertyChanges(layer, model);
-    return model;
 }
 
 const initModel = (layer, parent) => {
@@ -80,5 +56,5 @@ const watchPropertyChanges = (layer, model) => {
     let binding = Binding.for(model, layer);
     binding.syncAll(...propertyKeys)
     binding.enable();
-    return binding;
+    return () => binding.unbind();
 }
