@@ -2,13 +2,13 @@
     <div>
         <v-progress-linear
             v-if="config.showLoadingStatus"
-            :active="updating"
+            :active="!!item.updating"
             :height="2"
             indeterminate
             class="ma-0"/>
         <v-list-group
-            v-if="children.length"
-            v-model="open"
+            v-if="item.children.length"
+            v-model="item.open"
             sub-group
             prepend-icon="chevron_right"
             active-class=""
@@ -22,7 +22,7 @@
                 :custom-layer-actions="customLayerActions"
             />
             <slot
-                :children="children.items"
+                :children="item.children"
                 name="sub"
             />
         </v-list-group>
@@ -44,29 +44,6 @@
         components: {
             "layer-details": LayerDetails
         },
-        props: ["bus", "i18n", "item", "config", "customLayerActions"],
-        data: function () {
-            return {
-                open: this.item.open,
-                updating: this.item.updating,
-                children: this.item.children,
-                watchHandle: []
-            }
-        },
-        watch: {
-            open: function (value) {
-                if (value !== this.item.open) {
-                    this.item.open = value;
-                }
-            }
-        },
-        beforeMount: function () {
-            this.watchHandle.push(this.item.watch("updating", updating => this.updating = updating));
-            this.watchHandle.push(this.item.watch("open", open => this.open = open));
-            this.watchHandle.push(this.item.children.on("change", () => this.children = this.item.children));
-        },
-        beforeDestroy: function () {
-            this.watchHandle.forEach(handle => handle.remove);
-        }
+        props: ["bus", "i18n", "item", "config", "customLayerActions"]
     }
 </script>

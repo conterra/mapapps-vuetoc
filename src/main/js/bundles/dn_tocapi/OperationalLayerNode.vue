@@ -69,7 +69,7 @@
                 :i18n="i18n"
                 :config="config"
                 :custom-layer-actions="customLayerActions"
-                :items="operationalItems.items"/>
+                :items="operationalItems.collection"/>
         </div>
     </v-card>
 </template>

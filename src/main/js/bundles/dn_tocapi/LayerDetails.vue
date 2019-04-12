@@ -1,27 +1,21 @@
 <template>
     <v-list-tile
-        :class="{'layer-item__not-visible': disabled}"
-    >
-        <v-list-tile-action
-            @click.prevent.stop
-        >
+        :class="{'layer-item__not-visible': disabled}">
+        <v-list-tile-action @click.prevent.stop>
             <v-btn
                 icon
-                @click="item.visible = !item.visible"
-            >
-                <v-icon :class="{'success--text': visible}">
-                    {{ visible ? config.visibleIconClass :
+                @click="item.visible = !item.visible">
+                <v-icon :class="{'success--text': item.visible}">
+                    {{ item.visible ? config.visibleIconClass :
                         config.invisibleIconClass }}
                 </v-icon>
             </v-btn>
         </v-list-tile-action>
         <v-list-tile-content
             @click.prevent.stop
-            @click="item.visible = !item.visible"
-        >
+            @click="item.visible = !item.visible">
             <v-list-tile-title
-                v-text="item.title"
-            />
+                v-text="item.title"/>
         </v-list-tile-content>
         <v-list-tile-action v-if="message">
             <v-tooltip right>
@@ -35,9 +29,8 @@
             </v-tooltip>
         </v-list-tile-action>
         <v-list-tile-action
-            v-if="loaded && config.showLayerMenu"
-            @click.prevent.stop
-        >
+            v-if="item.loaded && config.showLayerMenu"
+            @click.prevent.stop>
             <v-menu
                 v-model="menuOpen"
                 :close-on-content-click="false"
@@ -50,12 +43,10 @@
                 nudge-right="4"
                 offset-y
                 transition="slide-y-transition"
-                content-class="dn-toc__item-menu"
-            >
+                content-class="dn-toc__item-menu">
                 <v-btn
                     slot="activator"
-                    icon
-                >
+                    icon>
                     <v-icon>more_vert</v-icon>
                 </v-btn>
                 <layer-menu
@@ -84,57 +75,11 @@
             "customLayerActions"
         ],
         data: function () {
-            let item = this.item;
-            let layer = item.layer;
-            let loaded = layer.loaded === undefined ? true : layer.loaded;
-            let visible = item.visible;
-            let initialVisible = item.initialVisible;
-            let initialOpacity = item.initialOpacity;
-            let visibilityServiceId = this._uid + layer.id;
             return {
-                visibilityServiceId,
                 menuOpen: false,
-                loaded,
-                visible,
                 disabled: false,
                 message: "",
-                initialVisible: initialVisible,
-                initialOpacity: initialOpacity,
                 watchHandles: []
-            }
-        },
-        beforeMount: function () {
-            this.watchHandles.push(this.item.watch("visible", visible => this.visible = visible));
-            this.watchHandles.push(this.item.layer.watch("loaded", loaded => this.loaded = loaded));
-            this.bus.$on('reset', this.reset);
-            let layerVisibilityService = this.bus.layerVisibilityService;
-            if (layerVisibilityService) {
-                layerVisibilityService.subscribe(this.visibilityServiceId, this.item.layer, ({visible, message}) => {
-                    this.updateVisibility(visible, message);
-                });
-            } else {
-                this.updateVisibility(this.item.visibleAtCurrentScale);
-                this.watchHandles.push(this.item.watch("visibleAtCurrentScale", visible => {
-                    this.updateVisibility(visible);
-                }));
-            }
-        },
-        beforeDestroy: function () {
-            this.watchHandles.forEach(handle => handle.remove());
-            this.bus.$off('reset', this.reset);
-            let layerVisibilityService = this.bus.layerVisibilityService;
-            if (layerVisibilityService) {
-                layerVisibilityService.unsubscribe(this.visibilityServiceId);
-            }
-        },
-        methods: {
-            reset: function () {
-                this.visible = this.item.visible = this.initialVisible;
-                this.item.layer.opacity = this.initialOpacity;
-            },
-            updateVisibility(visible, message){
-                this.disabled = !visible;
-                this.message = message || this.i18n.scaleErrorMsg;
             }
         }
     };

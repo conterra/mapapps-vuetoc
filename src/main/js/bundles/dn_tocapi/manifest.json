@@ -41,8 +41,8 @@
             },
             "references": [
                 {
-                    "name": "_mapWidgetModel",
-                    "providing": "map-widget.MapWidgetModel"
+                    "name": "_tocModel",
+                    "providing": "dn_tocapi.TableOfContentsModel"
                 },
                 {
                     "name": "_basemapModel",
@@ -70,6 +70,10 @@
                 {
                     "name": "_map",
                     "providing": "map-widget.Map"
+                },
+                {
+                    "name": "_mapWidgetModel",
+                    "providing": "map-widget.MapWidgetModel"
                 }
             ]
         }

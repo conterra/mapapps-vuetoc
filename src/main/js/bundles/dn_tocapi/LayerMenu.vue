@@ -1,6 +1,5 @@
 <template>
     <v-card
-        v-if="item && item.layer"
         class="dn-toc__layer-menu">
         <v-toolbar
             dense
