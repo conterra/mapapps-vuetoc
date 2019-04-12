@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 import LayerViewCollectionModelFactory from "./LayerViewCollectionModelFactory";
+import Binding from "apprt-binding/Binding"
 
 const operationalLayerModel = Symbol("operationalLayerModel");
+const handles = Symbol("handles");
 
 export default class TableOfContentsModel {
 
@@ -24,7 +26,52 @@ export default class TableOfContentsModel {
             return this[operationalLayerModel];
         }
         const layers = this._map.layers;
-        const model = this[operationalLayerModel] = LayerViewCollectionModelFactory.create(layers);
+        const model = this[operationalLayerModel] = LayerViewCollectionModelFactory.fromLayerCollection(layers);
+        this[handles] = [];
+        this._registerViewWatcher();
         return model;
+    }
+
+    _registerViewWatcher(){
+        const model = this[operationalLayerModel];
+        if(!model) return;
+        const mapWidgetModel = this._mapWidgetModel;
+        if(mapWidgetModel.view){
+            this._watchLayerViewsUpdating(mapWidgetModel.view, model);
+        }
+        this[handles].push(mapWidgetModel.watch("view", ({value: view}) => {
+            if (view) {
+                this._watchLayerViewsUpdating(view, model);
+            }
+        }));
+        }
+
+    _watchLayerViewsUpdating(view, model) {
+        this[handles].push(view.on("layerview-create", ({layerView, layer}) => {
+            const layerModel = getLayerModelById(model.collection, layer.id);
+            if(!layerModel) return;
+            let binding = Binding.for(layerView, layerModel);
+            binding.syncToRight("updating", "updating");
+            binding.syncToRightNow();
+            binding.enable();
+        }));
+    }
+
+    deactivate(){
+        this[handles].forEach(handle => {
+            const remove = handle.remove || handle.unbind;
+            remove();
+        });
+    }
+}
+
+const getLayerModelById = (collection, id) => {
+    if(!collection) return;
+    for(let i = 0; i < collection.length; i++){
+        if(collection[i].id === id){
+            return collection[i]
+        }
+        const matchingChild = getLayerModelById(collection.children);
+        if(matchingChild) return matchingChild;
     }
 }
