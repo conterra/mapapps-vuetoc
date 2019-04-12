@@ -19,7 +19,7 @@ const operationalLayerModel = Symbol("operationalLayerModel");
 
 export default class TableOfContentsModel {
 
-    getModel() {
+    getOperationalLayersModel() {
         if(this[operationalLayerModel]){
             return this[operationalLayerModel];
         }
