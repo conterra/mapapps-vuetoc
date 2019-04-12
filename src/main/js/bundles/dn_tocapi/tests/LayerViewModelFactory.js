@@ -20,9 +20,9 @@ import later from "test-utils/later";
 import md from "module";
 
 import LayerViewModelFactory from "../LayerViewModelFactory";
-import LayerViewModel from "../LayerViewModel";
 import GroupLayer from "esri/layers/GroupLayer";
 import FeatureLayer from "esri/layers/FeatureLayer";
+import Vue from "apprt-vue/Vue";
 
 const createLayer = () => {
     const groupLayer = new GroupLayer({
@@ -48,10 +48,10 @@ registerSuite({
         assert.isOk(LayerViewModelFactory.fromLayer);
     },
 
-    "expect factory returns a LayerViewModel"() {
+    "expect factory returns a vue component"() {
         const layer = createLayer();
         const model = LayerViewModelFactory.fromLayer({layer});
-        assert(model instanceof LayerViewModel);
+        assert(model instanceof Vue);
     },
 
     "expect model has layer properties"() {

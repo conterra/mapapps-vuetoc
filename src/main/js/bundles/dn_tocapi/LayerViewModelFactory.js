@@ -13,23 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import LayerViewModel from "./LayerViewModel";
 import Binding from "apprt-binding/Binding"
+import Bindable from "apprt-vue/mixins/Bindable";
+import Vue from "apprt-vue/Vue";
 
 const propertyKeys = ["id", "title", "loaded", "extent", "opacity", "copyright", "description", "visible"];
 
 export default class LayerViewModelFactory {
 
     static fromLayer({layer, parent} = {}) {
-        const model = initModel(layer, parent);
+        const model = initModel(parent);
         model.children = parseChildren(layer, model);
         model.dispose = watchPropertyChanges(layer, model);
         return model;
     }
 }
 
-const initModel = (layer, parent) => {
-    const model = LayerViewModel();
+const initModel = (parent) => {
+    const model = new Vue(LayerViewModel);
     if (parent) model.parent = parent;
     return model;
 }
@@ -51,4 +52,24 @@ const watchPropertyChanges = (layer, model) => {
     binding.syncToLeftNow();
     binding.enable();
     return () => binding.unbind();
+}
+
+const LayerViewModel = {
+    mixins: [Bindable],
+    props:{
+        id: undefined,
+        title: undefined,
+        open: undefined,
+        updating: undefined,
+        loaded: undefined,
+        parent: undefined,
+        children: undefined,
+        extent: undefined,
+        opacity: undefined,
+        copyright: undefined,
+        description: undefined,
+        visible: undefined,
+        visibleInContext: undefined,
+        visibleInContextCause: undefined
+    }
 }

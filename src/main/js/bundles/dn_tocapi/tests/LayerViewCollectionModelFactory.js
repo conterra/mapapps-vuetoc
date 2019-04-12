@@ -20,9 +20,9 @@ import later from "test-utils/later";
 import md from "module";
 
 import LayerViewCollectionModelFactory from "../LayerViewCollectionModelFactory";
-import LayerViewModel from "../LayerViewModel";
 import Collection from "esri/core/Collection";
 import GroupLayer from "esri/layers/GroupLayer";
+import Vue from "apprt-vue/Vue";
 
 const createLayerCollection = () => {
     const featureLayer = new GroupLayer({id: "trees"});
@@ -38,12 +38,12 @@ registerSuite({
         assert.isOk(LayerViewCollectionModelFactory.fromLayerCollection);
     },
 
-    "expect factory returns array of LayerViewModels"() {
+    "expect factory returns array of vue components"() {
         const layerCollection = createLayerCollection();
         const {collection: modelCollection} = LayerViewCollectionModelFactory.fromLayerCollection(layerCollection);
         assert.isArray(modelCollection);
         assert.isOk(modelCollection.length);
-        modelCollection.forEach(layermodel => assert(layermodel instanceof LayerViewModel));
+        modelCollection.forEach(layermodel => assert(layermodel instanceof Vue));
     },
 
     "expect adding layers to collection is synced to model"() {
