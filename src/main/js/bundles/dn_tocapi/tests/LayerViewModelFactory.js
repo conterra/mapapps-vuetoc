@@ -119,7 +119,21 @@ registerSuite({
         assert.equal(model.children[0].children.length, 2);
     },
 
-    "expect updating child model properties is synced to model"() {
+    "expect updating all child-layers properties recursively is synced to model"() {
+        const layer = createLayer();
+        const model = LayerViewModelFactory.fromLayer({layer});
+        model.setForAll("visible", false);
+        return later(() => {
+            assert.equal(model.visible, false);
+            assert.equal(model.children[0].visible, false);
+            assert.equal(model.children[0].children[0].visible, false);
+            assert.equal(model.children[0].children[1].visible, false);
+            assert.equal(layer.layers.getItemAt(1).layers.getItemAt(0).visible, false);
+            assert.equal(layer.layers.getItemAt(1).layers.getItemAt(1).visible, false);
+        });
+    },
+
+    "expect updating child model properties is synced to layer"() {
         const layer = createLayer();
         const model = LayerViewModelFactory.fromLayer({layer});
         assert.equal(layer.layers.getItemAt(1).layers.getItemAt(0).visible, true);

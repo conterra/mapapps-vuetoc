@@ -18,7 +18,7 @@
                 return displayAction;
             },
             onClick(item) {
-                this.eventBus.$emit("show-sublayers", item);
+                this.item.setForAll("visible", true);
                 this.$emit('close-menu');
             }
         }

@@ -23,6 +23,9 @@ export default class LayerViewCollectionModelFactory {
             .map(layer => LayerViewModelFactory.fromLayer({layer}))
             .reverse()
             .toArray();
+        model.setForAll = (key, value) => {
+            model.collection.forEach(modelItem => modelItem.setForAll(key, value));
+        }
         model.remove = item => {
             const idx = model.collection.findIndex(modelItem => modelItem.id === item.id);
             layerCollection.removeAt(layerCollection.length - 1 - idx);

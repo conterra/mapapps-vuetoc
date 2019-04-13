@@ -27,6 +27,7 @@ export default class LayerViewModelFactory {
         const propWatcher = watchPropertyChanges(layer, model);
         model.children = parseChildren(layer, model);
         const childWatcher = watchChildChanges(layer, model);
+        model.setForAll = (key, value) => setForAll(key, value, model);
         model.dispose = () => {
             propWatcher.unbind();
             childWatcher.remove();
@@ -84,6 +85,16 @@ const watchChildChanges = (layer, model) => {
         const idx = children.length - 1 - children.indexOf(item);
         model.children.splice(idx, 0, LayerViewModelFactory.fromLayer({layer: item}));
     });
+}
+
+const setForAll = (key, value, model) => {
+    model[key] = value;
+    const children = model.children;
+    if(children && children.length){
+        for(let i = 0; i < children.length; i++){
+            setForAll(key, value, children[i]);
+        }
+    }
 }
 
 const LayerViewModel = {

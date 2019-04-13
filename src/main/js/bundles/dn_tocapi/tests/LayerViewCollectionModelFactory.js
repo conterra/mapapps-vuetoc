@@ -60,6 +60,23 @@ registerSuite({
         });
     },
 
+    "expect setting properties recursively in model is synced to layer collection"() {
+        const layerCollection = createLayerCollection();
+        const model = LayerViewCollectionModelFactory.fromLayerCollection(layerCollection);
+        layerCollection.add(new GroupLayer({id: "rivers"}));
+        return later(() => {
+            const modelCollection = model.collection;
+            assert.equal(modelCollection.length, 2);
+            model.setForAll("visible", false);
+            return later(() => {
+                assert.equal(modelCollection[0].visible, false);
+                assert.equal(modelCollection[0].visible, false);
+                assert.equal(layerCollection.getItemAt(0).visible, false);
+                assert.equal(layerCollection.getItemAt(1).visible, false);
+            });
+        });
+    },
+
     "expect removing layers from collection is synced to model"() {
         const layerCollection = createLayerCollection();
         const {collection: modelCollection} = LayerViewCollectionModelFactory.fromLayerCollection(layerCollection);

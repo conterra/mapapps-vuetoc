@@ -32,28 +32,28 @@
                     </v-toolbar>
                     <v-list>
                         <v-divider/>
-                        <v-list-tile @click="setValueRecursive('visible', true)">
+                        <v-list-tile @click="operationalItems.setForAll('visible', true)">
                             <v-list-tile-action>
                                 <v-icon primary>visibility</v-icon>
                             </v-list-tile-action>
                             <v-list-tile-title>{{ i18n.showAllLayer }}</v-list-tile-title>
                         </v-list-tile>
                         <v-divider/>
-                        <v-list-tile @click="setValueRecursive('visible', false)">
+                        <v-list-tile @click="operationalItems.setForAll('visible', false)">
                             <v-list-tile-action>
                                 <v-icon primary>visibility_off</v-icon>
                             </v-list-tile-action>
                             <v-list-tile-title>{{ i18n.hideAllLayer }}</v-list-tile-title>
                         </v-list-tile>
                         <v-divider/>
-                        <v-list-tile @click="setValueRecursive('open', true)">
+                        <v-list-tile @click="operationalItems.setForAll('open', true)">
                             <v-list-tile-action>
                                 <v-icon primary>unfold_more</v-icon>
                             </v-list-tile-action>
                             <v-list-tile-title>{{ i18n.openAllLayer }}</v-list-tile-title>
                         </v-list-tile>
                         <v-divider/>
-                        <v-list-tile @click="setValueRecursive('open', false)">
+                        <v-list-tile @click="operationalItems.setForAll('open', false)">
                             <v-list-tile-action>
                                 <v-icon primary>unfold_less</v-icon>
                             </v-list-tile-action>
@@ -79,15 +79,6 @@
         components: {
             "layer-tree": LayerTree
         },
-        props: ["i18n", "bus", "config", "operationalItems", "customLayerActions"],
-        methods: {
-            setValueRecursive: function(key, value, items) {
-                items = items || this.operationalItems.collection;
-                for(let i = 0; i < items.length; i++){
-                    items[i][key] = value;
-                    items[i].children && this.setValueRecursive(key, value, items[i].children);
-                }
-            }
-        }
+        props: ["i18n", "bus", "config", "operationalItems", "customLayerActions"]
     }
 </script>
