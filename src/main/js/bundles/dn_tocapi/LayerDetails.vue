@@ -68,6 +68,22 @@
             "layer-menu": LayerMenu
         },
         props: ["item", "bus", "config", "customLayerActions"],
-        data: () => { menuOpen: false }
+        data: () => { 
+            return {
+                menuOpen: false,
+                watchHandle: undefined
+            };
+        },
+        beforeMount: function(){
+            this.watchHandle = this.bus.$on("reset", this.resetVisibility);
+        },
+        beforeDestroy: function(){
+            this.bus.$off("reset", this.resetVisibility);
+        },
+        methods: {
+            resetVisibility: function(){
+                this.item.visible = this.item.initialVisible;
+            }
+        }
     };
 </script>

@@ -39,7 +39,11 @@ const initModel = (layer, parent) => {
     const model = new Vue(LayerViewModel);
     if (parent) model.parent = parent;
     model.initialOpacity = layer.opacity;
-    model.initialvisible = layer.visible;
+    model.initialVisible = layer.visible;
+    whenTrueOnce(layer, "loaded", () => {
+        model.initialOpacity = model.initialOpacity === undefined ? layer.opacity : model.initialOpacity;
+        model.initialVisible = model.initialVisible === undefined ? layer.visible : model.initialVisible;
+    })
     return model;
 }
 
@@ -135,8 +139,7 @@ const LayerViewModel = {
             type: String
         },
         initialVisible: {
-            type: Boolean,
-            default: true
+            type: Boolean
         },
         visible: {
             type: Boolean,

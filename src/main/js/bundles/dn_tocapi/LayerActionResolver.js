@@ -17,6 +17,7 @@ import {Evented} from "apprt-core/Events";
 
 const actionFactories = Symbol("actionFactories");
 const actionHandlers = Symbol("actionHandlers");
+const resetHandlers = Symbol("resetHandlers");
 const eventBus = Symbol("eventBus");
 
 export default class LayerActionResolver extends Evented {
@@ -24,6 +25,7 @@ export default class LayerActionResolver extends Evented {
         super();
         this[actionFactories] = new Map();
         this[actionHandlers] = new Map();
+        this[resetHandlers] = new Map();
     }
 
     getLayerActions() {
@@ -56,6 +58,10 @@ export default class LayerActionResolver extends Evented {
         Object.entries(factoryActionHandlers).forEach(handler => {
             let eventName = handler[0];
             let eventHandler = handler[1];
+            if(eventName === "reset"){
+                this._registerResetHandler("name", eventHandler);
+                return;
+            }
             this._registerEventHandler(eventName, eventHandler);
         });
 
@@ -84,6 +90,16 @@ export default class LayerActionResolver extends Evented {
         });
     }
 
+    _registerResetHandler(actionName, handler){
+        this[resetHandlers].set(actionName, handler);
+        if(this[eventBus]) this[eventBus].$on("reset", handler);
+    }
+
+    _unregisterResetHandler(actionName, handler){
+        this[resetHandlers].delete(actionName, handler);
+        if(this[eventBus]) this[eventBus].$off("reset", handler);
+    }
+
     _registerEventHandler(name, handler){
         if(this[actionHandlers].get(name)){
             console.warn(`LayerActionResolver: Event name ${name} already in reserved!`);
@@ -102,6 +118,9 @@ export default class LayerActionResolver extends Evented {
         this[eventBus] = bus;
         this[actionHandlers].forEach((handler, name) => {
             bus.$on(name, handler);
+        });
+        this[resetHandlers].forEach((handler) => {
+            bus.$on("reset", handler);
         });
     }
 }

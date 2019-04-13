@@ -79,6 +79,7 @@ export default class TableOfContentsFactory {
         const defaultSelectedId = this._basemapModel.selectedId;
         vm.$on('close', () => tool.set("active", false));
         vm.$on('reset', () => {
+            vm.bus.$emit("reset");
             this._basemapModel.selectedId = defaultSelectedId;
         });
     }
