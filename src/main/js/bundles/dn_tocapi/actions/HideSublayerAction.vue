@@ -18,12 +18,7 @@
                 return displayAction;
             },
             onClick(item) {
-                if (item.children) {
-                    let allChildren = item.children.flatten((item) => item.children);
-                    allChildren.forEach((child) => {
-                        child.visible = false;
-                    })
-                }
+                this.eventBus.$emit("hide-sublayers", item);
                 this.$emit('close-menu');
             }
         }

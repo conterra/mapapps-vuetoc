@@ -10,8 +10,8 @@
             }
         },
         beforeMount: function () {
-            this.sliderValue = this.item.layer.opacity;
-            this.opacityWatchHandle = this.item.layer.watch("opacity", value => {
+            this.sliderValue = this.item.opacity;
+            this.opacityWatchHandle = this.item.watch("opacity", value => {
                 this.sliderValue = value;
             });
         },
@@ -20,12 +20,12 @@
         },
         methods: {
             displayActionForItem(item) {
-                let displayAction = item.layer && item.layer.type !== "group" && item.layer.opacity !== undefined;
+                let displayAction = item && item.opacity !== undefined;
                 this.$emit("display-changed", displayAction);
                 return displayAction;
             },
             onChange(value) {
-                this.item.layer.opacity = value;
+                this.item.opacity = value;
             }
         }
     }

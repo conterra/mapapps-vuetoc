@@ -121,7 +121,6 @@
             "name": "ItemDescriptionActionFactory",
             "impl": "dn_tocapi/actions/ItemDescriptionActionFactory",
             "provides": "dn_tocapi.LayerActionFactory",
-            "enabled": false,
             "properties": {
                 "priority": 70,
                 "widgetSize": {
@@ -140,11 +139,14 @@
             "name": "ZoomToExtentActionFactory",
             "impl": "dn_tocapi/actions/ZoomToExtentActionFactory",
             "provides": "dn_tocapi.LayerActionFactory",
-            "enabled": false,
             "properties": {
                 "priority": 50
             },
             "references": [
+                {
+                    "name": "_mapWidgetModel",
+                    "providing": "map-widget.MapWidgetModel"
+                },
                 {
                     "name": "_coordinateTransformer",
                     "providing": "ct.api.coordinatetransformer.CoordinateTransformer"
@@ -155,7 +157,6 @@
             "name": "OpacityActionFactory",
             "impl": "dn_tocapi/actions/OpacityActionFactory",
             "provides": "dn_tocapi.LayerActionFactory",
-            "enabled": false,
             "properties": {
                 "priority": 40
             }
@@ -164,7 +165,6 @@
             "name": "ShowSublayerActionFactory",
             "impl": "dn_tocapi/actions/ShowSublayerActionFactory",
             "provides": "dn_tocapi.LayerActionFactory",
-            "enabled": false,
             "properties": {
                 "priority": 30
             }
@@ -173,7 +173,6 @@
             "name": "HideSublayerActionFactory",
             "impl": "dn_tocapi/actions/HideSublayerActionFactory",
             "provides": "dn_tocapi.LayerActionFactory",
-            "enabled": false,
             "properties": {
                 "priority": 20
             }
@@ -182,7 +181,6 @@
             "name": "ItemCopyrightActionFactory",
             "impl": "dn_tocapi/actions/ItemCopyrightActionFactory",
             "provides": "dn_tocapi.LayerActionFactory",
-            "enabled": false,
             "properties": {
                 "priority": 0
             }

@@ -18,32 +18,48 @@ import ItemDescriptionAction from "./ItemDescriptionAction.vue";
 export default function LegendActionFactory() {
     return {
         getComponent() {
-            let envs = this._componentContext.getBundleContext().getCurrentExecutionEnvironment();
-            let isMobile = this.isMobile = envs.some((env) => env.name === "Mobile" || env.name === "Android");
             let i18n = this._i18n.get().ui;
-            let windowManager = this._windowManager;
-            let widgetSize = this._properties.widgetSize;
-            ItemDescriptionAction.props.windowManager = {
-                type: Object,
-                default: () => windowManager
-            };
-            ItemDescriptionAction.props.widgetSize = {
-                type: Object,
-                default: () => widgetSize
-            };
-            ItemDescriptionAction.props.isMobile = {
-                type: Boolean,
-                default: isMobile
-            };
-            ItemDescriptionAction.props.descriptionTitleLabel = {
-                type: String,
-                default: i18n.description
-            };
             ItemDescriptionAction.props.titleLabel = {
                 type: String,
                 default: i18n.description
             };
             return ItemDescriptionAction;
+        },
+        getEventHandlers() {
+            let i18n = this._i18n.get().ui;
+            let envs = this._componentContext.getBundleContext().getCurrentExecutionEnvironment();
+            let isMobile = this.isMobile = envs.some((env) => env.name === "Mobile" || env.name === "Android");
+            let windowManager = this._windowManager;
+            let widgetSize = this._properties.widgetSize;
+            let descriptionWindow;
+            return {
+                "close-description": () => {
+                    if(descriptionWindow){
+                        descriptionWindow.close();
+                        descriptionWindow = undefined;
+                    }
+                },
+                "show-description": item => {
+                    if (isMobile) {
+                        widgetSize = {
+                            w: "100%",
+                            h: "100%"
+                        };
+                    }
+                    descriptionWindow = windowManager.createWindow({
+                        title: i18n.description + " - " + item.title,
+                        dockable: false,
+                        closable: true,
+                        minimizeOnClose: false,
+                        maximizable: true,
+                        destroyContent: false,
+                        marginBox: widgetSize,
+                        content: item.description,
+                        windowClass: "vueTocDescriptionWindow"
+                    });
+                    descriptionWindow.show();
+                }
+            }
         }
     }
 }

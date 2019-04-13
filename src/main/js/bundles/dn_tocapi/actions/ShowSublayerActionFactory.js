@@ -24,6 +24,22 @@ export default function ShowSublayerActionFactory() {
                 default: i18n.showAllSublayer
             };
             return ShowSublayerAction;
+        },
+        getEventHandlers(){
+            return {
+                "show-sublayers": item => {
+                    if (item.children) {
+                        setValueRecursive(item.children, "visible", true);
+                    }
+                }
+            }
         }
+    }
+}
+
+const setValueRecursive = (items, key, value) => {
+    for(let i = 0; i < items.length; i++){
+        items[i][key] = value;
+        items[i].children && setValueRecursive(key, value, items[i].children);
     }
 }

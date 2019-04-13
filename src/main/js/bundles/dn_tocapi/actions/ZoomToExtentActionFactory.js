@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 import ZoomToExtentAction from "./ZoomToExtentAction.vue";
+import Extent from "esri/geometry/Extent";
+import when from "apprt-core/when";
 
 export default function ZoomToExtentActionFactory() {
     return {
@@ -23,11 +25,26 @@ export default function ZoomToExtentActionFactory() {
                 type: String,
                 default: i18n.zoomToExtent
             };
-            ZoomToExtentAction.props.coordinateTransformer = {
-                type: Object,
-                default: () => this._coordinateTransformer
-            };
             return ZoomToExtentAction;
+        },
+        getEventHandlers() {
+            const mapWidgetModel = this._mapWidgetModel;
+            const coordinateTransformer = this._coordinateTransformer;
+            return {
+                "zoom-to-extent": extent => {
+                    let view = mapWidgetModel.view;
+                    if(!view) return;
+                    const targetWkid = view.spatialReference.wkid;
+                    when(coordinateTransformer.transform(Extent.fromJSON(extent), targetWkid))
+                        .then(targetExtent => {
+                            view.goTo({target: targetExtent}, {
+                                "animate": true,
+                                "duration": 1000,
+                                "easing": "ease-in-out"
+                            });
+                    });
+                }
+            }
         }
     }
 }

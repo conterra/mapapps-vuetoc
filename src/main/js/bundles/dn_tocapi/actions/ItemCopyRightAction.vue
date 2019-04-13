@@ -1,7 +1,7 @@
 <template>
-    <v-card-title v-if="item.layer.copyright && item.layer.copyright.toLowerCase() !=='none'">
+    <v-card-title v-if="item.copyright && item.copyright.toLowerCase() !=='none'">
         <div class="grey--text caption">{{ copyrightLabel }}</div>
-        <div class="grey--text caption">{{ item.layer.copyright }}</div>
+        <div class="grey--text caption">{{ item.copyright }}</div>
     </v-card-title>
 </template>
 <script>
@@ -16,7 +16,7 @@
         },
         methods: {
             displayActionForItem(item) {
-                let displayAction = !!item.layer && !!item.layer.copyright;
+                let displayAction = !!item && !!item.copyright;
                 this.$emit("display-changed", displayAction);
                 return displayAction;
             },

@@ -24,6 +24,22 @@ export default function HideSublayerActionFactory() {
                 default: i18n.hideAllSublayer
             };
             return HideSublayerAction;
+        },
+        getEventHandlers(){
+            return {
+                "hide-sublayers": item => {
+                    if (item.children) {
+                        setValueRecursive(item.children, "visible", false);
+                    }
+                }
+            }
         }
+    }
+}
+
+const setValueRecursive = (items, key, value) => {
+    for(let i = 0; i < items.length; i++){
+        items[i][key] = value;
+        items[i].children && setValueRecursive(key, value, items[i].children);
     }
 }
