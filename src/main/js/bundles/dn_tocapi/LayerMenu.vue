@@ -15,10 +15,10 @@
         <v-list>
             <layer-menu-item
                 v-for="(action, index) in customLayerActions"
+                :item="item"
                 :key="action.name"
                 :action="action"
                 :last-action="index >= customLayerActions.length - 1"
-                :item="item"
                 @close-menu="$emit('close-menu')"/>
         </v-list>
     </v-card>
@@ -31,6 +31,6 @@
         components: {
             "layer-menu-item": LayerMenuItem
         },
-        props: ["i18n", "customLayerActions", "item"]
+        props: ["item", "bus", "customLayerActions"]
     };
 </script>

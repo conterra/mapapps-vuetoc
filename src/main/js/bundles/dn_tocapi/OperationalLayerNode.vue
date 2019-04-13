@@ -66,7 +66,6 @@
         <div v-if="operationalItems">
             <layer-tree
                 :bus="bus"
-                :i18n="i18n"
                 :config="config"
                 :custom-layer-actions="customLayerActions"
                 :items="operationalItems.collection"/>
@@ -80,13 +79,7 @@
         components: {
             "layer-tree": LayerTree
         },
-        props: [
-            "bus",
-            "i18n",
-            "config",
-            "operationalItems",
-            "customLayerActions"
-        ],
+        props: ["i18n", "bus", "config", "operationalItems", "customLayerActions"],
         methods: {
             setValueRecursive: function(key, value, items) {
                 items = items || this.operationalItems.collection;

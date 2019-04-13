@@ -6,7 +6,6 @@
             class="pa-0">
             <layer-item
                 :bus="bus"
-                :i18n="i18n"
                 :item="item"
                 :config="config"
                 :custom-layer-actions="customLayerActions">
@@ -14,7 +13,6 @@
                     slot="sub"
                     slot-scope="itemProps"
                     :bus="bus"
-                    :i18n="i18n"
                     :config="config"
                     :items="itemProps.children"
                     :custom-layer-actions="customLayerActions"/>
@@ -30,12 +28,6 @@
         components: {
             "layer-item": LayerItem
         },
-        props: [
-            "bus",
-            "i18n",
-            "items",
-            "config",
-            "customLayerActions"
-        ]
+        props: ["items", "bus", "config", "customLayerActions"]
     };
 </script>

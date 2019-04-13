@@ -17,7 +17,6 @@
                 slot="activator"
                 :bus="bus"
                 :item="item"
-                :i18n="i18n"
                 :config="config"
                 :custom-layer-actions="customLayerActions"
             />
@@ -28,9 +27,8 @@
         </v-list-group>
         <layer-details
             v-else
-            :bus="bus"
             :item="item"
-            :i18n="i18n"
+            :bus="bus"
             :config="config"
             :custom-layer-actions="customLayerActions"
             class="dn-toc__layer-tree-item--no-childs"
@@ -44,6 +42,6 @@
         components: {
             "layer-details": LayerDetails
         },
-        props: ["bus", "i18n", "item", "config", "customLayerActions"]
+        props: ["item", "bus", "config", "customLayerActions"]
     }
 </script>

@@ -50,9 +50,9 @@
                     <v-icon>more_vert</v-icon>
                 </v-btn>
                 <layer-menu
-                    :i18n="i18n"
-                    :custom-layer-actions="customLayerActions"
                     :item="item"
+                    :bus="bus"
+                    :custom-layer-actions="customLayerActions"
                     @close-menu="menuOpen=false"
                 />
             </v-menu>
@@ -67,7 +67,7 @@
         components: {
             "layer-menu": LayerMenu
         },
-        props: ["bus", "item", "i18n", "config", "customLayerActions"],
+        props: ["item", "bus", "config", "customLayerActions"],
         data: () => { menuOpen: false }
     };
 </script>
