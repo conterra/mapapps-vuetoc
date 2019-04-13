@@ -22,19 +22,39 @@ export default class TableOfContentsFactory {
 
     activate() {
         let envs = this._componentContext.getBundleContext().getCurrentExecutionEnvironment();
-        let isMobile = this.isMobile = envs.some((env) => env.name === "Mobile" || env.name === "Android");
-        let basemapModel = this._basemapModel;
-        let tool = this._tool;
-        let properties = this._properties;
+        this._isMobile = envs.some((env) => env.name === "Mobile" || env.name === "Android");
+        this.i18n = this._i18n.get().ui;
+    }
 
-        const defaultSelectedId = this._basemapModel.selectedId;
-        const vm = this.vm = new Vue(TableOfContents);
+    createInstance() {
+        const vm = this._createVueModel();
+        this._syncModel(vm)
+        this._setModelProps(vm);
+        this._registerModelEventWatchers(vm);
+        return VueDijit(vm);
+    }
+
+    _createVueModel(){
+        return new Vue(TableOfContents);
+    }
+
+    _syncModel(vm){
         this._tocModel.sync(vm.operationalItems);
         this._tocVisibility.sync(vm.operationalItems);
-        vm.customLayerActions = this._layerActionResolver.getLayerActions();
-        vm.i18n = this._i18n.get().ui;
+        Binding.for(vm, this._basemapModel)
+            .sync("selectedId")
+            .sync("basemaps")
+            .enable()
+            .syncToLeftNow();
+    }
+
+    _setModelProps(vm){
         let bus = new Vue();
         vm.bus = bus;
+        vm.i18n = this.i18n;
+        vm.customLayerActions = this._layerActionResolver.getLayerActions();
+
+        let properties = this._properties;
         vm.config = {
             showBasemaps: properties.showBasemaps,
             showOperationalLayer: properties.showOperationalLayer,
@@ -45,24 +65,17 @@ export default class TableOfContentsFactory {
             showCloseButton: properties.showCloseButton,
             visibleIconClass: properties.visibleIconClass,
             invisibleIconClass: properties.invisibleIconClass,
-            isMobile: isMobile
+            isMobile: this._isMobile
         };
+    }
 
-        // listen to view model methods
+    _registerModelEventWatchers(vm){
+        let tool = this._tool;
+        const defaultSelectedId = this._basemapModel.selectedId;
         vm.$on('close', () => tool.set("active", false));
         vm.$on('reset', () => {
             this._basemapModel.selectedId = defaultSelectedId;
         });
-
-        Binding.for(vm, basemapModel)
-            .sync("selectedId")
-            .sync("basemaps")
-            .enable()
-            .syncToLeftNow();
-    }
-
-    createInstance() {
-        return VueDijit(this.vm);
     }
 
     deactivate() {
