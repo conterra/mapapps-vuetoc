@@ -65,6 +65,13 @@ registerSuite({
         assert.equal(model.visible, true);
     },
 
+    "expect model has initial properties"() {
+        const layer = createLayer();
+        const model = LayerViewModelFactory.fromLayer({layer});
+        assert.equal(model.initialOpacity, 0.5);
+        assert.equal(model.initialVisible, true);
+    },
+
     "expect updating layer properties is synced to model"() {
         const layer = createLayer();
         const model = LayerViewModelFactory.fromLayer({layer});

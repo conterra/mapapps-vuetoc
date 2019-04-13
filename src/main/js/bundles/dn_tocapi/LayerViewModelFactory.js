@@ -23,7 +23,7 @@ const propertyKeys = ["id", "title", "loaded", "extent", "minScale", "maxScale",
 export default class LayerViewModelFactory {
 
     static fromLayer({layer, parent} = {}) {
-        const model = initModel(parent);
+        const model = initModel(layer, parent);
         const propWatcher = watchPropertyChanges(layer, model);
         model.children = parseChildren(layer, model);
         const childWatcher = watchChildChanges(layer, model);
@@ -35,9 +35,11 @@ export default class LayerViewModelFactory {
     }
 }
 
-const initModel = (parent) => {
+const initModel = (layer, parent) => {
     const model = new Vue(LayerViewModel);
     if (parent) model.parent = parent;
+    model.initialOpacity = layer.opacity;
+    model.initialvisible = layer.visible;
     return model;
 }
 
@@ -119,11 +121,19 @@ const LayerViewModel = {
             type: Number,
             default: 1
         },
+        initialOpacity: {
+            type: Number,
+            default: 1
+        },
         copyright: {
             type: String
         },
         description: {
             type: String
+        },
+        initialVisible: {
+            type: Boolean,
+            default: true
         },
         visible: {
             type: Boolean,
