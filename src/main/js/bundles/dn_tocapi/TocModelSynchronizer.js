@@ -20,7 +20,7 @@ const handles = Symbol("handles");
 
 export default class TableOfContentsModel {
 
-    syncToOperationalLayers(model) {
+    sync(model) {
         const layers = this._map.layers;
         model = LayerViewCollectionModelFactory.fromLayerCollection(layers, model);
         this[handles] = [];

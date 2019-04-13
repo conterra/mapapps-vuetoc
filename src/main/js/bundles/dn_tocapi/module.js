@@ -17,7 +17,6 @@ import ".";
 import "./TableOfContentsFactory";
 import "./TocModelSynchronizer";
 import "./LayerActionResolver";
-import "./LayerVisibilitySynchronizer";
 import "./actions/ItemDescriptionActionFactory";
 import "./actions/ZoomToExtentActionFactory";
 import "./actions/ShowSublayerActionFactory";

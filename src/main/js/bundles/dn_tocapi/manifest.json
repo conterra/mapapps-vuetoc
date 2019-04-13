@@ -41,13 +41,12 @@
             },
             "references": [
                 {
-                    "name": "_modelSynchronizer",
+                    "name": "_tocModel",
                     "providing": "dn_tocapi.TocModelSynchronizer"
                 },
                 {
-                    "name": "_layerVisibilitySynchronizer",
-                    "providing": "dn_tocapi.LayerVisibilitySynchronizer",
-                    "cardinality": "0..1"
+                    "name": "_tocVisibility",
+                    "providing": "dn_tocapi.TocVisibilitySynchronizer"
                 },
                 {
                     "name": "_basemapModel",
@@ -71,16 +70,6 @@
                     "name": "_map",
                     "providing": "map-widget.Map"
                 },
-                {
-                    "name": "_mapWidgetModel",
-                    "providing": "map-widget.MapWidgetModel"
-                }
-            ]
-        },
-        {
-            "name": "LayerVisibilitySynchronizer",
-            "provides": "dn_tocapi.LayerVisibilitySynchronizer",
-            "references": [
                 {
                     "name": "_mapWidgetModel",
                     "providing": "map-widget.MapWidgetModel"

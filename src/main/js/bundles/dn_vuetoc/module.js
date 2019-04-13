@@ -15,3 +15,4 @@
  */
 import ".";
 import "./ToCRegistration";
+import "./TocVisibilitySynchronizer";

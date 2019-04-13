@@ -108,6 +108,16 @@
             ]
         },
         {
+            "name": "TocVisibilitySynchronizer",
+            "provides": "dn_tocapi.TocVisibilitySynchronizer",
+            "references": [
+                {
+                    "name": "_mapWidgetModel",
+                    "providing": "map-widget.MapWidgetModel"
+                }
+            ]
+        },
+        {
             "name": "LayerActionResolver",
             "impl": "dn_tocapi/LayerActionResolver",
             "provides": "dn_tocapi.LayerActionResolver",

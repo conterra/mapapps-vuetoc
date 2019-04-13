@@ -16,13 +16,12 @@
 import AsyncTask from "apprt-core/AsyncTask";
 
 const DEFAULT_DELAY = 200;
-const _handles = Symbol("handles");
+const watchHandle = Symbol("watchHandle");
 const _model = Symbol("model");
 
 export default class LayerVisibilitySynchronizer {
 
     activate(){
-        this[_handles] = [];
         this.i18n = this._i18n.get().ui;
         const DELAY = this._properties.delay || DEFAULT_DELAY;
         this.deferredCheckEffectiveLayers = AsyncTask(this.checkEffectiveLayers.bind(this)).delay.bind(this, DELAY);
@@ -31,9 +30,7 @@ export default class LayerVisibilitySynchronizer {
     sync(model) {
         if(!model || !model.collection) return;
         this[_model] = model;
-        this[_handles].push(this._mapWidgetModel.watch("scale", () => this.deferredCheckEffectiveLayers()));
-        this[_handles].push(this._mapWidgetModel.watch("extent", () => this.deferredCheckEffectiveLayers()));
-        this[_handles].push(this._mapWidgetModel.watch("spatialReference", () => this.deferredCheckEffectiveLayers()));
+        this[watchHandle] = this._mapWidgetModel.watch("scale", () => this.deferredCheckEffectiveLayers());
     }
     
     checkEffectiveLayers(collection){
@@ -53,8 +50,8 @@ export default class LayerVisibilitySynchronizer {
     }
 
     deactivate(){
-        this[_handles] && this[_handles].forEach(handle => handle.remove());
-        this[_handles] = undefined;
+        this[watchHandle] && this[watchHandle].remove();
+        this[watchHandle] = undefined;
     }
 }
 
