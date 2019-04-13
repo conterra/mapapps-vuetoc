@@ -13,7 +13,7 @@
     export default {
         props: {
             item: Object,
-            eventBus:
+            eventBus: Object,
             titleLabel: {
                 type: String,
                 default: "Action Title"

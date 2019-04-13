@@ -29,6 +29,7 @@
     export default {
         props: {
             item: Object,
+            eventBus: Object,
             fromLabel: String,
             toLabel: String,
             titleLabel: String
