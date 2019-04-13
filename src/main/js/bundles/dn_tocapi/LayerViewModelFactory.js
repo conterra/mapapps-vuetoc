@@ -18,7 +18,7 @@ import Bindable from "apprt-vue/mixins/Bindable";
 import {whenTrueOnce} from "esri/core/watchUtils";
 import Vue from "apprt-vue/Vue";
 
-const propertyKeys = ["id", "title", "loaded", "extent", "minScale", "maxScale", "opacity", "copyright", "description", "visible"];
+const propertyKeys = ["id", "title", "loaded", "minScale", "maxScale", "opacity", "copyright", "description", "visible"];
 
 export default class LayerViewModelFactory {
 
@@ -60,6 +60,9 @@ const parseChildren = (layer, model) => {
 const watchPropertyChanges = (layer, model) => {
     let binding = Binding.for(model, layer);
     binding.syncAll(...propertyKeys)
+    binding.syncToLeft("fullExtent", "fullExtent", fullExtent => {
+        return fullExtent && fullExtent.toJSON();
+    })
     binding.syncToLeftNow();
     binding.enable();
     return binding;
