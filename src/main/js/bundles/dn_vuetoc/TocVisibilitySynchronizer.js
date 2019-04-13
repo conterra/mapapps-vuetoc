@@ -58,8 +58,6 @@ export default class LayerVisibilitySynchronizer {
 const isVisibleAtScale = async function(layerModel, scale) {
     let minScale = layerModel.minScale || 0;
     let maxScale = layerModel.maxScale || 0;
-    if (minScale === 0 && maxScale === 0) {
-        return true;
-    }
+    if(!scale || (minScale === 0 && maxScale === 0)) return true
     return scale >= maxScale && (minScale !== 0 ? scale <= minScale : true);
 }

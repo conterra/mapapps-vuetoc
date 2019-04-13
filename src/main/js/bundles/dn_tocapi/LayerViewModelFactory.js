@@ -16,7 +16,6 @@
 import Binding from "apprt-binding/Binding"
 import Bindable from "apprt-vue/mixins/Bindable";
 import {whenTrueOnce} from "esri/core/watchUtils";
-import WMSSublayer from "esri/layers/support/WMSSublayer";
 import Vue from "apprt-vue/Vue";
 
 const propertyKeys = ["id", "title", "loaded", "extent", "minScale", "maxScale", "opacity", "copyright", "description", "visible"];
@@ -24,7 +23,7 @@ const propertyKeys = ["id", "title", "loaded", "extent", "minScale", "maxScale",
 export default class LayerViewModelFactory {
 
     static fromLayer({layer, parent} = {}) {
-        const model = initModel(layer, parent);
+        const model = initModel(parent);
         const propWatcher = watchPropertyChanges(layer, model);
         model.children = parseChildren(layer, model);
         const childWatcher = watchChildChanges(layer, model);
@@ -36,19 +35,10 @@ export default class LayerViewModelFactory {
     }
 }
 
-const initModel = (layer, parent) => {
+const initModel = (parent) => {
     const model = new Vue(LayerViewModel);
     if (parent) model.parent = parent;
-    //if (layer instanceof WMSSublayer) parseWMSSubLayerScaleBounds(layer, model);
     return model;
-}
-
-const parseWMSSubLayerScaleBounds = async (layer, model) => {
-    const sublayersInfo = layer.layer.sublayersInfo;
-    await sublayersInfo.load();
-    const sublayerInfo = sublayersInfo.getById(layer.id);
-    model.minScale = sublayerInfo ? sublayerInfo.minScale : 0;
-    model.maxScale = sublayerInfo ? sublayerInfo.maxScale : 0;
 }
 
 const parseChildren = (layer, model) => {
@@ -90,21 +80,61 @@ const watchChildChanges = (layer, model) => {
 const LayerViewModel = {
     mixins: [Bindable],
     props:{
-        id: undefined,
-        title: undefined,
-        open: undefined,
-        updating: undefined,
-        loaded: undefined,
-        parent: undefined,
-        children: undefined,
-        extent: undefined,
-        minScale: undefined,
-        maxScale: undefined,
-        opacity: undefined,
-        copyright: undefined,
-        description: undefined,
-        visible: undefined,
-        visibleInContext: true,
-        visibleInContextCause: ""
+        id: {
+            type: String
+        },
+        title: {
+            type: String
+        },
+        open: {
+            type: Boolean,
+            default: false
+        },
+        updating: {
+            type: Boolean,
+            default: false
+        },
+        loaded: {
+            type: Boolean,
+            default: false
+        },
+        parent: {
+            type: Object
+        },
+        children: {
+            type: Object
+        },
+        extent: {
+            type: Object
+        },
+        minScale: {
+            type: Boolean,
+            default: 0
+        },
+        maxScale: {
+            type: Number,
+            default: 0
+        },
+        opacity: {
+            type: Number,
+            default: 1
+        },
+        copyright: {
+            type: String
+        },
+        description: {
+            type: String
+        },
+        visible: {
+            type: Boolean,
+            default: true
+        },
+        visibleInContext: {
+            type: Boolean,
+            default: true
+        },
+        visibleInContextCause: {
+            type: String
+        }
     }
 }
