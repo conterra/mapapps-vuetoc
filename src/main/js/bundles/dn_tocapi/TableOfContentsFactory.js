@@ -67,6 +67,9 @@ export default class TableOfContentsFactory {
             invisibleIconClass: properties.invisibleIconClass,
             isMobile: this._isMobile
         };
+        if(properties.expandInitially){
+            setValueRecursive(vm.operationalItems.collection, "open", true);
+        }
     }
 
     _registerModelEventWatchers(vm){
@@ -83,5 +86,12 @@ export default class TableOfContentsFactory {
             handle.remove();
         });
         this.watchLayersHandle.remove();
+    }
+}
+
+const setValueRecursive = (items, key, value) => {
+    for(let i = 0; i < items.length; i++){
+        items[i][key] = value;
+        items[i].children && setValueRecursive(key, value, items[i].children);
     }
 }
