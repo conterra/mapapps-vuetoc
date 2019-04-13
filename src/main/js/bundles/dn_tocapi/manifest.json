@@ -75,6 +75,17 @@
                     "providing": "map-widget.MapWidgetModel"
                 }
             ]
+        },
+        {
+            "name": "LayerActionResolver",
+            "provides": "dn_tocapi.LayerActionResolver",
+            "references": [
+                {
+                    "name": "layerActionFactory",
+                    "providing": "dn_tocapi.LayerActionFactory",
+                    "cardinality": "0..n"
+                }
+            ]
         }
     ]
 }

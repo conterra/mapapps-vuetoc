@@ -16,6 +16,7 @@
             <layer-menu-item
                 v-for="(action, index) in customLayerActions"
                 :item="item"
+                :bus="bus"
                 :key="action.name"
                 :action="action"
                 :last-action="index >= customLayerActions.length - 1"

@@ -118,18 +118,6 @@
             ]
         },
         {
-            "name": "LayerActionResolver",
-            "impl": "dn_tocapi/LayerActionResolver",
-            "provides": "dn_tocapi.LayerActionResolver",
-            "references": [
-                {
-                    "name": "layerActionFactory",
-                    "providing": "dn_tocapi.LayerActionFactory",
-                    "cardinality": "0..n"
-                }
-            ]
-        },
-        {
             "name": "ItemDescriptionActionFactory",
             "impl": "dn_tocapi/actions/ItemDescriptionActionFactory",
             "provides": "dn_tocapi.LayerActionFactory",

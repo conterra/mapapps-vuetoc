@@ -52,7 +52,9 @@ export default class TableOfContentsFactory {
         let bus = new Vue();
         vm.bus = bus;
         vm.i18n = this.i18n;
-        vm.customLayerActions = this._layerActionResolver.getLayerActions();
+        const actionResolver = this._layerActionResolver;
+        actionResolver.setEventBus(bus);
+        vm.customLayerActions = actionResolver.getLayerActions();
 
         let properties = this._properties;
         vm.config = {

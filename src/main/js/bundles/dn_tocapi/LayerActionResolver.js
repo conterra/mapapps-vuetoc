@@ -15,16 +15,19 @@
  */
 import {Evented} from "apprt-core/Events";
 
-const _layerActionFactories = Symbol("layerActions");
+const actionFactories = Symbol("actionFactories");
+const actionHandlers = Symbol("actionHandlers");
+const eventBus = Symbol("eventBus");
 
 export default class LayerActionResolver extends Evented {
     constructor() {
         super();
-        this[_layerActionFactories] = new Map();
+        this[actionFactories] = new Map();
+        this[actionHandlers] = new Map();
     }
 
     getLayerActions() {
-        let factories = Array.from(this[_layerActionFactories].values());
+        let factories = Array.from(this[actionFactories].values());
         factories.sort((a, b) => {
             if (a._properties["priority"] < b._properties["priority"])
                 return 1;
@@ -37,11 +40,25 @@ export default class LayerActionResolver extends Evented {
 
     addLayerActionFactory(factory) {
         if (!factory.getComponent) {
-            console.warn("LayerActionResolver: Factory must provide a 'getComponent' function!");
+            console.warn("LayerActionResolver: Factory must provide a 'getComponent' function!", factory);
             return;
         }
         let name = factory.getComponent().name;
-        this[_layerActionFactories].set(name, factory);
+        this[actionFactories].set(name, factory);
+
+        if(!factory.getEventHandlers){
+            this.emit("layer-action-added", {
+                name, factory
+            });
+            return;
+        }
+        let factoryActionHandlers = factory.getEventHandlers();
+        Object.entries(factoryActionHandlers).forEach(handler => {
+            let eventName = handler[0];
+            let eventHandler = handler[1];
+            this._registerEventHandler(eventName, eventHandler);
+        });
+
         this.emit("layer-action-added", {
             name, factory
         });
@@ -49,9 +66,42 @@ export default class LayerActionResolver extends Evented {
 
     removeLayerActionFactory(factory) {
         let name = factory.getComponent().name;
-        this[_layerActionFactories].delete(name);
+        this[actionFactories].delete(name);
+
+        if(!factory.getEventHandlers){
+            this.emit("layer-action-removed", {
+                name, factory
+            });
+            return;
+        }
+        let factoryActionHandlers = factory.getEventHandlers();
+        Object.entries(factoryActionHandlers).forEach(handler => {
+            this._unregisterEventHandler(name);
+        });
+
         this.emit("layer-action-removed", {
             name, factory
+        });
+    }
+
+    _registerEventHandler(name, handler){
+        if(this[actionHandlers].get(name)){
+            console.warn(`LayerActionResolver: Event name ${name} already in reserved!`);
+            return;
+        }
+        this[actionHandlers].set(name, handler);
+        if(this[eventBus]) this[eventBus].$on(name, handler);
+    }
+
+    _unregisterEventHandler(name){
+        this[actionHandlers].delete(name);
+        if(this[eventBus]) this[eventBus].$off(name);
+    }
+
+    setEventBus(bus){
+        this[eventBus] = bus;
+        this[actionHandlers].forEach((handler, name) => {
+            bus.$on(name, handler);
         });
     }
 }
