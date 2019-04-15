@@ -38,9 +38,9 @@ export default function ShowSublayerActionFactory() {
                         this.$emit("display-changed", displayAction);
                         return displayAction;
                     },
-                    onClick(item) {
+                    onClick() {
                         this.item.setForAll("visible", true);
-                        this.$emit('close-menu');
+                        this.eventBus.$emit('close-menu');
                     }
                 }
             }

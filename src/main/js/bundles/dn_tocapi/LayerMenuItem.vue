@@ -5,7 +5,6 @@
             :is="action"
             :item="item"
             :event-bus="bus"
-            @close-menu="$emit('close-menu')"
             @display-changed="(displayAction)=>this.displayDivider=displayAction"/>
     </div>
 </template>
@@ -20,7 +19,7 @@
             }
         },
         beforeMount: function () {
-            this.$on("display-changed", displayAction => this.displayDivider = displayAction);
+            this.bus.$on("close-menu", () => this.$emit("close-menu"));
         },
         beforeDestroy: function () {
             this.$off("display-changed");

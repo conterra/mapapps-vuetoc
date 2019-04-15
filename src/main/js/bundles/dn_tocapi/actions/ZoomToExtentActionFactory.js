@@ -49,7 +49,7 @@ export default function ZoomToExtentActionFactory() {
                             return;
                         }
                         this.eventBus.$emit("zoom-to-extent", extent);
-                        this.$emit('close-menu');
+                        this.eventBus.$emit('close-menu');
                     }
                 }
             }

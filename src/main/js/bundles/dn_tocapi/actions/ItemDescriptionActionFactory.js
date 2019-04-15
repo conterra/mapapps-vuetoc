@@ -43,7 +43,7 @@ export default function LegendActionFactory() {
                     },
                     onClick(item) {
                         this.eventBus.$emit("show-description", item);
-                        this.$emit('close-menu');
+                        this.eventBus.$emit('close-menu');
                     }
                 }
             }

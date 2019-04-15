@@ -40,7 +40,7 @@ export default function HideSublayerActionFactory() {
                     },
                     onClick(item) {
                         this.item.setForAll("visible", false);
-                        this.$emit('close-menu');
+                        this.eventBus.$emit('close-menu');
                     }
                 }
             }
