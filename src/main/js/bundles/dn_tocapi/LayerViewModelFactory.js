@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import Binding from "apprt-binding/Binding"
-import Bindable from "apprt-vue/mixins/Bindable";
+import LayerViewModel from "./LayerViewModel";
 import {whenTrueOnce} from "esri/core/watchUtils";
 import Vue from "apprt-vue/Vue";
 
@@ -39,7 +39,7 @@ export default class LayerViewModelFactory {
 const initModel = (layer, parent) => {
     const model = new Vue(LayerViewModel);
     if (parent) model.parent = parent;
-    model.layerType = layer.type;
+    model.type = layer.type;
     model.initialOpacity = layer.opacity;
     model.initialVisible = layer.visible;
     whenTrueOnce(layer, "loaded", () => {
@@ -94,74 +94,6 @@ const setForAll = (key, value, model) => {
     if(children && children.length){
         for(let i = 0; i < children.length; i++){
             setForAll(key, value, children[i]);
-        }
-    }
-}
-
-const LayerViewModel = {
-    mixins: [Bindable],
-    props:{
-        id: {
-            type: String
-        },
-        title: {
-            type: String
-        },
-        type: {
-            type: String
-        },
-        open: {
-            type: Boolean,
-            default: false
-        },
-        updating: {
-            type: Boolean,
-            default: false
-        },
-        parent: {
-            type: Object
-        },
-        children: {
-            type: Object
-        },
-        extent: {
-            type: Object
-        },
-        minScale: {
-            type: Number,
-            default: 0
-        },
-        maxScale: {
-            type: Number,
-            default: 0
-        },
-        opacity: {
-            type: Number,
-            default: 1
-        },
-        initialOpacity: {
-            type: Number,
-            default: 1
-        },
-        copyright: {
-            type: String
-        },
-        description: {
-            type: String
-        },
-        initialVisible: {
-            type: Boolean
-        },
-        visible: {
-            type: Boolean,
-            default: true
-        },
-        visibleInContext: {
-            type: Boolean,
-            default: true
-        },
-        visibleInContextCause: {
-            type: String
         }
     }
 }
