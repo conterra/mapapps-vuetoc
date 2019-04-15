@@ -18,7 +18,7 @@ import Binding from "apprt-binding/Binding"
 
 const handles = Symbol("handles");
 
-export default class TableOfContentsModel {
+export default class TocModelSynchronizer {
 
     activate(){
         this[handles] = [];
