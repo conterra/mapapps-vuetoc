@@ -102,7 +102,7 @@ export default class LayerActionResolver extends Evented {
 
     _registerEventHandler(name, handler){
         if(this[actionHandlers].get(name)){
-            console.warn(`LayerActionResolver: Event name ${name} already in reserved!`);
+            console.warn(`LayerActionResolver: Event name ${name} is already reserved!`);
             return;
         }
         this[actionHandlers].set(name, handler);
