@@ -52,9 +52,11 @@ export default class TableOfContentsFactory {
         let bus = new Vue();
         vm.bus = bus;
         vm.i18n = this.i18n;
-        const actionResolver = this._layerActionResolver;
-        actionResolver.setEventBus(bus);
-        vm.customLayerActions = actionResolver.getLayerActions();
+        const resolver = this._layerActionResolver;
+        resolver.setEventBus(bus);
+        resolver.on("layer-action-added", () => vm.customLayerActions = resolver.getLayerActions());
+        resolver.on("layer-action-removed", () => vm.customLayerActions = resolver.getLayerActions());
+        vm.customLayerActions = resolver.getLayerActions();
 
         let properties = this._properties;
         vm.config = {
