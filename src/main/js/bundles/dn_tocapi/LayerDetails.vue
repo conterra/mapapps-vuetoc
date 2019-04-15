@@ -52,7 +52,7 @@
                 <layer-menu
                     :item="item"
                     :bus="bus"
-                    :custom-layer-actions="customLayerActions"
+                    :action-components="actionComponents"
                     @close-menu="menuOpen=false"
                 />
             </v-menu>
@@ -67,7 +67,7 @@
         components: {
             "layer-menu": LayerMenu
         },
-        props: ["item", "bus", "config", "customLayerActions"],
+        props: ["item", "bus", "config", "actionComponents"],
         data: () => { 
             return {
                 menuOpen: false,

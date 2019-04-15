@@ -54,9 +54,9 @@ export default class TableOfContentsFactory {
         vm.i18n = this.i18n;
         const resolver = this._layerActionResolver;
         resolver.setEventBus(bus);
-        resolver.on("layer-action-added", () => vm.customLayerActions = resolver.getLayerActions());
-        resolver.on("layer-action-removed", () => vm.customLayerActions = resolver.getLayerActions());
-        vm.customLayerActions = resolver.getLayerActions();
+        resolver.on("layer-action-added", () => vm.actionComponents = resolver.getLayerActions());
+        resolver.on("layer-action-removed", () => vm.actionComponents = resolver.getLayerActions());
+        vm.actionComponents = resolver.getLayerActions();
 
         let properties = this._properties;
         vm.config = {

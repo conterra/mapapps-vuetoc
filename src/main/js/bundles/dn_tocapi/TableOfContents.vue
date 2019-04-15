@@ -15,7 +15,7 @@
                     :i18n="i18n"
                     :operational-items="operationalItems"
                     :config="config"
-                    :custom-layer-actions="customLayerActions"
+                    :action-components="actionComponents"
                     class="dn-toc__layers"/>
             </v-container>
         </div>
@@ -90,7 +90,7 @@
             return {
                 basemaps: [],
                 operationalItems: [],
-                customLayerActions: []
+                actionComponents: []
             }
         },
         methods: {

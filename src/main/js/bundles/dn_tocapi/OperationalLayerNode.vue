@@ -67,7 +67,7 @@
             <layer-tree
                 :bus="bus"
                 :config="config"
-                :custom-layer-actions="customLayerActions"
+                :action-components="actionComponents"
                 :items="operationalItems.collection"/>
         </div>
     </v-card>
@@ -79,6 +79,6 @@
         components: {
             "layer-tree": LayerTree
         },
-        props: ["i18n", "bus", "config", "operationalItems", "customLayerActions"]
+        props: ["i18n", "bus", "config", "operationalItems", "actionComponents"]
     }
 </script>

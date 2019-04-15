@@ -8,14 +8,14 @@
                 :bus="bus"
                 :item="item"
                 :config="config"
-                :custom-layer-actions="customLayerActions">
+                :action-components="actionComponents">
                 <layer-tree
                     slot="sub"
                     slot-scope="itemProps"
                     :bus="bus"
                     :config="config"
                     :items="itemProps.children"
-                    :custom-layer-actions="customLayerActions"/>
+                    :action-components="actionComponents"/>
             </layer-item>
         </v-list>
     </div>
@@ -28,6 +28,6 @@
         components: {
             "layer-item": LayerItem
         },
-        props: ["items", "bus", "config", "customLayerActions"]
+        props: ["items", "bus", "config", "actionComponents"]
     };
 </script>

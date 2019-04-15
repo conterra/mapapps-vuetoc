@@ -18,7 +18,7 @@
                 :bus="bus"
                 :item="item"
                 :config="config"
-                :custom-layer-actions="customLayerActions"
+                :action-components="actionComponents"
             />
             <slot
                 :children="item.children"
@@ -30,7 +30,7 @@
             :item="item"
             :bus="bus"
             :config="config"
-            :custom-layer-actions="customLayerActions"
+            :action-components="actionComponents"
             class="dn-toc__layer-tree-item--no-childs"
         />
     </div>
@@ -42,6 +42,6 @@
         components: {
             "layer-details": LayerDetails
         },
-        props: ["item", "bus", "config", "customLayerActions"]
+        props: ["item", "bus", "config", "actionComponents"]
     }
 </script>
