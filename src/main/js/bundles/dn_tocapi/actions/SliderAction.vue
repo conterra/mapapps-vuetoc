@@ -36,6 +36,7 @@
         },
         data: function () {
             return {
+                icon: "opacity",
                 sliderValue: 1,
                 max: 1,
                 step: 0.01,

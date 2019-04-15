@@ -13,17 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import ItemDescriptionAction from "./ItemDescriptionAction.vue";
+import ButtonAction from "./ButtonAction.vue";
 
 export default function LegendActionFactory() {
     return {
         getAction() {
             let i18n = this._i18n.get().ui;
-            ItemDescriptionAction.props.titleLabel = {
-                type: String,
-                default: i18n.description
-            };
-            return ItemDescriptionAction;
+            return {
+                name: "item-description",
+                extends: ButtonAction,
+                props: {
+                    titleLabel: {
+                        type: String,
+                        default: i18n.description
+                    },
+                    icon: {
+                        type: String,
+                        default: "info"
+                    }
+                },
+                beforeDestroy: function () {
+                    this.eventBus.$emit("close-description");
+                },
+                methods: {
+                    displayActionForItem: function (item) {
+                        let displayAction = !!item.description;
+                        this.$emit("display-changed", displayAction);
+                        return displayAction;
+                    },
+                    onClick(item) {
+                        this.eventBus.$emit("show-description", item);
+                        this.$emit('close-menu');
+                    }
+                }
+            }
         },
         getEventHandlers() {
             let i18n = this._i18n.get().ui;

@@ -13,27 +13,63 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import OpacityAction from "./OpacityAction.vue";
+import SliderAction from "./SliderAction.vue";
 
 export default function OpacityActionFactory() {
     return {
         getAction() {
             let i18n = this._i18n.get().ui;
-            OpacityAction.props = {
-                fromLabel: {
-                    type: String,
-                    default: i18n.invisible
+            return {
+                name: "opacity",
+                extends: SliderAction,
+                props: {
+                    fromLabel: {
+                        type: String,
+                        default: i18n.invisible
+                    },
+                    toLabel: {
+                        type: String,
+                        default: i18n.visible
+                    },
+                    titleLabel: {
+                        type: String,
+                        default: i18n.opacity
+                    },
+                    icon: {
+                        type: String,
+                        default: "opacity"
+                    }
                 },
-                toLabel: {
-                    type: String,
-                    default: i18n.visible
+                data: function () {
+                    return {
+                        watchHandle: []
+                    }
                 },
-                titleLabel: {
-                    type: String,
-                    default: i18n.opacity
+                beforeMount: function () {
+                    this.sliderValue = this.item.opacity;
+                    this.watchHandle = this.item.watch("opacity", value => {
+                        this.sliderValue = value;
+                    });
+                    this.eventBus.$on("reset", this.onReset);
+                },
+                beforeDestroy: function () {
+                    this.watchHandle.remove();
+                    this.eventBus.$off("reset", this.onReset);
+                },
+                methods: {
+                    displayActionForItem(item) {
+                        let displayAction = item.opacity !== undefined && item.type !== "group";
+                        this.$emit("display-changed", displayAction);
+                        return displayAction;
+                    },
+                    onChange(value) {
+                        this.item.opacity = value;
+                    },
+                    onReset(){
+                        this.item.opacity = this.item.initialOpacity;
+                    }
                 }
             }
-            return OpacityAction;
         }
     }
 }

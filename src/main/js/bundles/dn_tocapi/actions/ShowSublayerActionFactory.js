@@ -13,17 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import ShowSublayerAction from "./ShowSublayerAction.vue";
+import ButtonAction from "./ButtonAction.vue";
 
 export default function ShowSublayerActionFactory() {
     return {
         getAction() {
             let i18n = this._i18n.get().ui;
-            ShowSublayerAction.props.titleLabel = {
-                type: String,
-                default: i18n.showAllSublayer
-            };
-            return ShowSublayerAction;
+            return {
+                name: "show-sublayer",
+                extends: ButtonAction,
+                props: {
+                    icon: {
+                        type: String,
+                        default: "visibility"
+                    },
+                    titleLabel: {
+                        type: String,
+                        default: i18n.showAllSublayer
+                    }
+                },
+                methods: {
+                    displayActionForItem(item) {
+                        let displayAction = !!item.children && !!item.children.length;
+                        this.$emit("display-changed", displayAction);
+                        return displayAction;
+                    },
+                    onClick(item) {
+                        this.item.setForAll("visible", true);
+                        this.$emit('close-menu');
+                    }
+                }
+            }
         }
     }
 }

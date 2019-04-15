@@ -13,17 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import HideSublayerAction from "./HideSublayerAction.vue";
+import ButtonAction from "./ButtonAction.vue";
 
 export default function HideSublayerActionFactory() {
     return {
         getAction() {
             let i18n = this._i18n.get().ui;
-            HideSublayerAction.props.titleLabel = {
-                type: String,
-                default: i18n.hideAllSublayer
-            };
-            return HideSublayerAction;
+            return {
+                name: "hide-sublayer",
+                extends: ButtonAction,
+                props: {
+                    icon: {
+                        type: String,
+                        default: "visibility_off"
+                    },
+                    titleLabel: {
+                        type: String,
+                        default: i18n.hideAllSublayer
+                    }
+                },
+                methods: {
+                    displayActionForItem(item) {
+                        let displayAction = !!item.children && !!item.children.length;
+                        this.$emit("display-changed", displayAction);
+                        return displayAction;
+                    },
+                    onClick(item) {
+                        this.item.setForAll("visible", false);
+                        this.$emit('close-menu');
+                    }
+                }
+            }
         }
     }
 }
