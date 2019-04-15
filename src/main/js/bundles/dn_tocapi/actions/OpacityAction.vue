@@ -6,18 +6,19 @@
         data: function () {
             return {
                 icon: "opacity",
-                watchHandles: []
+                watchHandle: []
             }
         },
         beforeMount: function () {
             this.sliderValue = this.item.opacity;
-            this.watchHandles.push(this.item.watch("opacity", value => {
+            this.watchHandle = this.item.watch("opacity", value => {
                 this.sliderValue = value;
-            }));
-            this.watchHandles.push(this.eventBus.$on("reset", this.onReset));
+            });
+            this.eventBus.$on("reset", this.onReset);
         },
         beforeDestroy: function () {
-            this.watchHandles.forEach(handle => handle.remove());
+            this.watchHandle.remove();
+            this.eventBus.$off("reset", this.onReset);
         },
         methods: {
             displayActionForItem(item) {

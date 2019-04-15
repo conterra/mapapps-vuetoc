@@ -20,10 +20,10 @@
             }
         },
         beforeMount: function () {
-            this.watchHandle.push(this.$on("display-changed", displayAction => this.displayDivider = displayAction));
+            this.$on("display-changed", displayAction => this.displayDivider = displayAction);
         },
         beforeDestroy: function () {
-            this.watchHandle.forEach(handle => handle.remove);
+            this.$off("display-changed");
         }
     };
 </script>
