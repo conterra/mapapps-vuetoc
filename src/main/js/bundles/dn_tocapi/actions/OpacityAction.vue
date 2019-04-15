@@ -22,7 +22,7 @@
         },
         methods: {
             displayActionForItem(item) {
-                let displayAction = item.opacity !== undefined;
+                let displayAction = item.opacity !== undefined && item.type !== "group";
                 this.$emit("display-changed", displayAction);
                 return displayAction;
             },
