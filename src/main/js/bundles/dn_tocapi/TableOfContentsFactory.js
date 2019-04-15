@@ -28,7 +28,7 @@ export default class TableOfContentsFactory {
 
     createInstance() {
         const vm = this._createVueModel();
-        this._syncModel(vm)
+        this._syncModel(vm);
         this._setModelProps(vm);
         this._registerModelEventWatchers(vm);
         return VueDijit(vm);
