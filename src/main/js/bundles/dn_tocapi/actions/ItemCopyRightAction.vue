@@ -16,7 +16,7 @@
         },
         methods: {
             displayActionForItem(item) {
-                let displayAction = !!item && !!item.copyright;
+                let displayAction = !!item.copyright;
                 this.$emit("display-changed", displayAction);
                 return displayAction;
             },

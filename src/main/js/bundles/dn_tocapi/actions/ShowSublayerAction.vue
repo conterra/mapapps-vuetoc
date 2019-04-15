@@ -13,7 +13,7 @@
         },
         methods: {
             displayActionForItem(item) {
-                let displayAction = item.children && item.children.length;
+                let displayAction = !!item.children && !!item.children.length;
                 this.$emit("display-changed", displayAction);
                 return displayAction;
             },

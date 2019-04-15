@@ -21,7 +21,7 @@
         },
         methods: {
             displayActionForItem(item) {
-                let displayAction = item && item.opacity !== undefined;
+                let displayAction = item.opacity !== undefined;
                 this.$emit("display-changed", displayAction);
                 return displayAction;
             },

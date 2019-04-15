@@ -17,7 +17,7 @@
         },
         methods: {
             displayActionForItem(item) {
-                let displayAction = item && item.fullExtent && !isDefaultExtent(item.fullExtent);
+                let displayAction = !!item.fullExtent && !isDefaultExtent(item.fullExtent);
                 this.$emit("display-changed", displayAction);
                 return displayAction;
             },

@@ -15,7 +15,7 @@
         },
         methods: {
             displayActionForItem: function (item) {
-                let displayAction = !!item && !!item.description;
+                let displayAction = !!item.description;
                 this.$emit("display-changed", displayAction);
                 return displayAction;
             },
