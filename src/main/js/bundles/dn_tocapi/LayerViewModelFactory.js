@@ -128,7 +128,7 @@ const LayerViewModel = {
             type: Object
         },
         minScale: {
-            type: Boolean,
+            type: Number,
             default: 0
         },
         maxScale: {
