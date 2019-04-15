@@ -20,10 +20,13 @@ const handles = Symbol("handles");
 
 export default class TableOfContentsModel {
 
+    activate(){
+        this[handles] = [];
+    }
+
     sync(model) {
         const layers = this._map.layers;
         model = LayerViewCollectionModelFactory.fromLayerCollection(layers, model);
-        this[handles] = [];
         this._registerViewWatcher(model);
         return model;
     }
@@ -33,6 +36,10 @@ export default class TableOfContentsModel {
         const mapWidgetModel = this._mapWidgetModel;
         if(mapWidgetModel.view){
             this._watchLayerViewsUpdating(mapWidgetModel.view, model);
+            mapWidgetModel.view.allLayerViews.forEach(layerView => {
+                const layerModel = getLayerModelById(model.collection, layerView.layer.id);
+                this._bindViewLoadingState(layerView, layerModel);
+            });
         }
         this[handles].push(mapWidgetModel.watch("view", ({value: view}) => {
             if (view) {
@@ -42,14 +49,19 @@ export default class TableOfContentsModel {
         }
 
     _watchLayerViewsUpdating(view, model) {
-        this[handles].push(view.on("layerview-create", ({layerView, layer}) => {
-            const layerModel = getLayerModelById(model.collection, layer.id);
-            if(!layerModel) return;
-            let binding = Binding.for(layerView, layerModel);
-            binding.syncToRight("updating", "updating");
-            binding.syncToRightNow();
-            binding.enable();
+        this[handles].push(view.on("layerview-create", ({layerView}) => {
+            const layerModel = getLayerModelById(model.collection, layerView.layer.id);
+            this._bindViewLoadingState(layerView, layerModel);
         }));
+    }
+
+    _bindViewLoadingState(layerView, layerModel){
+        if(!layerModel) return;
+        this[handles].push(Binding
+            .for(layerView, layerModel)
+            .syncToRight("updating", "updating")
+            .syncToRightNow()
+            .enable());
     }
 
     deactivate(){
@@ -58,6 +70,7 @@ export default class TableOfContentsModel {
             const remove = handle.remove || handle.unbind;
             remove();
         });
+        this[handles] = undefined;
     }
 }
 
