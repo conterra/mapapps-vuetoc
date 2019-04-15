@@ -17,7 +17,7 @@ import ShowSublayerAction from "./ShowSublayerAction.vue";
 
 export default function ShowSublayerActionFactory() {
     return {
-        getComponent() {
+        getAction() {
             let i18n = this._i18n.get().ui;
             ShowSublayerAction.props.titleLabel = {
                 type: String,

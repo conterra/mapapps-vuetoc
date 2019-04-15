@@ -19,7 +19,7 @@ import when from "apprt-core/when";
 
 export default function ZoomToExtentActionFactory() {
     return {
-        getComponent() {
+        getAction() {
             let i18n = this._i18n.get().ui;
             ZoomToExtentAction.props.titleLabel = {
                 type: String,

@@ -17,7 +17,7 @@ import ItemDescriptionAction from "./ItemDescriptionAction.vue";
 
 export default function LegendActionFactory() {
     return {
-        getComponent() {
+        getAction() {
             let i18n = this._i18n.get().ui;
             ItemDescriptionAction.props.titleLabel = {
                 type: String,

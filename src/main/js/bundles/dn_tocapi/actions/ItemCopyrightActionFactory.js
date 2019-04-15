@@ -16,7 +16,7 @@
 import ItemCopyrightAction from "./ItemCopyRightAction.vue";
 export default function ItemCopyrightActionFactory() {
     return {
-        getComponent() {
+        getAction() {
             let copyright = this._i18n.get().ui.copyright;
             ItemCopyrightAction.props.itemCopyRightLabel = {
                 type: String,

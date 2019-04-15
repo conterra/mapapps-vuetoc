@@ -17,7 +17,7 @@ import HideSublayerAction from "./HideSublayerAction.vue";
 
 export default function HideSublayerActionFactory() {
     return {
-        getComponent() {
+        getAction() {
             let i18n = this._i18n.get().ui;
             HideSublayerAction.props.titleLabel = {
                 type: String,

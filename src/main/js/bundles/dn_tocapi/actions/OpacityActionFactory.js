@@ -17,7 +17,7 @@ import OpacityAction from "./OpacityAction.vue";
 
 export default function OpacityActionFactory() {
     return {
-        getComponent() {
+        getAction() {
             let i18n = this._i18n.get().ui;
             OpacityAction.props = {
                 fromLabel: {
