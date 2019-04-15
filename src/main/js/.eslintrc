@@ -4,7 +4,7 @@
         "vue"
     ],
     "rules": {
-        "vue/require-prop-types": false,
+        "vue/require-prop-types": 0,
         "vue/require-default-prop": false,
         "vue/html-closing-bracket-spacing": false
     }
