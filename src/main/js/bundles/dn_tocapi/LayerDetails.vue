@@ -29,7 +29,7 @@
             </v-tooltip>
         </v-list-tile-action>
         <v-list-tile-action
-            v-if="item.loaded && config.showLayerMenu"
+            v-if="config.showLayerMenu"
             @click.prevent.stop>
             <v-menu
                 v-model="menuOpen"
