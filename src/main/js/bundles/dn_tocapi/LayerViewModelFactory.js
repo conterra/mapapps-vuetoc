@@ -39,6 +39,7 @@ export default class LayerViewModelFactory {
 const initModel = (layer, parent) => {
     const model = new Vue(LayerViewModel);
     if (parent) model.parent = parent;
+    model.layerType = layer.type;
     model.initialOpacity = layer.opacity;
     model.initialVisible = layer.visible;
     whenTrueOnce(layer, "loaded", () => {
@@ -106,15 +107,14 @@ const LayerViewModel = {
         title: {
             type: String
         },
+        type: {
+            type: String
+        },
         open: {
             type: Boolean,
             default: false
         },
         updating: {
-            type: Boolean,
-            default: false
-        },
-        loaded: {
             type: Boolean,
             default: false
         },
