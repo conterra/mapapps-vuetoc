@@ -46,8 +46,10 @@ export default function OpacityActionFactory() {
                     }
                 },
                 beforeMount: function () {
-                    this.sliderValue = this.item.opacity;
-                    this.watchHandle = this.item.watch("opacity", value => {
+                    const item = this.item;
+                    this.displayAction = item.opacity !== undefined && item.type !== "group";
+                    this.sliderValue = item.opacity;
+                    this.watchHandle = item.watch("opacity", value => {
                         this.sliderValue = value;
                     });
                     this.eventBus.$on("reset", this.onReset);
@@ -57,11 +59,6 @@ export default function OpacityActionFactory() {
                     this.eventBus.$off("reset", this.onReset);
                 },
                 methods: {
-                    displayActionForItem(item) {
-                        let displayAction = item.opacity !== undefined && item.type !== "group";
-                        this.$emit("display-changed", displayAction);
-                        return displayAction;
-                    },
                     onChange(value) {
                         this.item.opacity = value;
                     },

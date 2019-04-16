@@ -1,6 +1,5 @@
 <template>
     <v-list-tile
-        v-if="displayAction"
         :disabled="disableAction"
         @click="onClick(item)">
         <v-list-tile-action>
@@ -21,21 +20,19 @@
             icon: {
                 type: String,
                 default: "settings"
+            },
+            displayAction: {
+                type: Boolean,
+                default: true
             }
         },
         data: function () {
             return {
-                displayAction: this.displayActionForItem(this.item),
                 disableAction: this.disableActionForItem(this.item)
             }
         },
         methods: {
             onClick(item) {
-            },
-            displayActionForItem(item) {
-                let displayAction = true;
-                this.$emit("display-changed", displayAction);
-                return displayAction;
             },
             disableActionForItem(item) {
                 return false;

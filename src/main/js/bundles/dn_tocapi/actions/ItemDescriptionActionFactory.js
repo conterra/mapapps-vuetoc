@@ -32,15 +32,13 @@ export default function LegendActionFactory() {
                         default: "info"
                     }
                 },
+                beforeMount: function(){
+                    this.displayAction = !!this.item.description;
+                },
                 beforeDestroy: function () {
                     this.eventBus.$emit("close-description");
                 },
                 methods: {
-                    displayActionForItem: function (item) {
-                        let displayAction = !!item.description;
-                        this.$emit("display-changed", displayAction);
-                        return displayAction;
-                    },
                     onClick(item) {
                         this.eventBus.$emit("show-description", item);
                         this.eventBus.$emit('close-menu');

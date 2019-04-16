@@ -1,11 +1,12 @@
 <template>
     <div>
-        <v-divider v-if="displayDivider && !lastAction"></v-divider>
+        <v-divider v-if="displayAction && !lastAction"></v-divider>
         <component
+            v-show="displayAction"
             :is="action"
             :item="item"
             :event-bus="bus"
-            @display-changed="(displayAction)=>this.displayDivider=displayAction"/>
+            ref="actionInstance"/>
     </div>
 </template>
 
@@ -14,15 +15,14 @@
         props: ["action", "item", "bus", "lastAction"],
         data: function () {
             return {
-                displayDivider: true,
-                watchHandle: []
+                displayAction: false
             }
         },
         beforeMount: function () {
             this.bus.$on("close-menu", () => this.$emit("close-menu"));
         },
-        beforeDestroy: function () {
-            this.$off("display-changed");
+        mounted: function() {
+            this.displayAction = this.$refs.actionInstance.displayAction;
         }
     };
 </script>

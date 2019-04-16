@@ -1,6 +1,5 @@
 <template>
     <v-list-group
-        v-if="displayAction"
         :disabled="disableAction"
         no-action>
         <v-list-tile
@@ -32,7 +31,11 @@
             eventBus: Object,
             fromLabel: String,
             toLabel: String,
-            titleLabel: String
+            titleLabel: String,
+            displayAction: {
+                type: Boolean,
+                default: true
+            }
         },
         data: function () {
             return {
@@ -40,17 +43,11 @@
                 sliderValue: 1,
                 max: 1,
                 step: 0.01,
-                displayAction: this.displayActionForItem(this.item),
-                disableAction: this.disableActionForItem(this.item)
+                disableAction: false
             };
         },
         methods: {
             onChange(value) {
-            },
-            displayActionForItem(item) {
-                let displayAction = true;
-                this.$emit("display-changed", displayAction);
-                return displayAction;
             },
             disableActionForItem(item) {
                 return false;

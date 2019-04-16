@@ -32,12 +32,11 @@ export default function ShowSublayerActionFactory() {
                         default: i18n.showAllSublayer
                     }
                 },
+                beforeMount: function(){
+                    let item = this.item;
+                    this.displayAction = !!item.children && !!item.children.length;
+                },
                 methods: {
-                    displayActionForItem(item) {
-                        let displayAction = !!item.children && !!item.children.length;
-                        this.$emit("display-changed", displayAction);
-                        return displayAction;
-                    },
                     onClick() {
                         this.item.setForAll("visible", true);
                         this.eventBus.$emit('close-menu');
