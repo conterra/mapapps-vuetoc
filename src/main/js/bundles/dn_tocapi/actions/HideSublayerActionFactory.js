@@ -32,14 +32,16 @@ export default function HideSublayerActionFactory() {
                         default: i18n.hideAllSublayer
                     }
                 },
-                beforeMount: function(){
-                    let item = this.item;
-                    this.displayAction = !!item.children && !!item.children.length;
-                },
                 methods: {
                     onClick() {
                         this.item.setForAll("visible", false);
                         this.eventBus.$emit('close-menu');
+                    }
+                },
+                watch: {
+                    "item.children"(){
+                        const item = this.item;
+                        this.displayAction = !!item.children && !!item.children.length;
                     }
                 }
             }

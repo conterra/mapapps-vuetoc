@@ -32,9 +32,6 @@ export default function LegendActionFactory() {
                         default: "info"
                     }
                 },
-                beforeMount: function(){
-                    this.displayAction = !!this.item.description;
-                },
                 beforeDestroy: function () {
                     this.eventBus.$emit("close-description");
                 },
@@ -42,6 +39,11 @@ export default function LegendActionFactory() {
                     onClick() {
                         this.eventBus.$emit("show-description", this.item);
                         this.eventBus.$emit('close-menu');
+                    }
+                },
+                watch: {
+                    "item.description"(){
+                        this.displayAction = !!this.item.description;
                     }
                 }
             }

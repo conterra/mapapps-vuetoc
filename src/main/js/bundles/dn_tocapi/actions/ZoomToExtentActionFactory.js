@@ -37,10 +37,6 @@ export default function ZoomToExtentActionFactory() {
                         default: "search"
                     }
                 },
-                beforeMount: function(){
-                    let item = this.item;
-                    this.displayAction = !!item.fullExtent && !isDefaultExtent(item.fullExtent);
-                },
                 methods: {
                     onClick() {
                         let extent = this.item.fullExtent;
@@ -49,6 +45,12 @@ export default function ZoomToExtentActionFactory() {
                         }
                         this.eventBus.$emit("zoom-to-extent", extent);
                         this.eventBus.$emit('close-menu');
+                    }
+                },
+                watch: {
+                    "item.fullExtent"() {
+                        let item = this.item;
+                        this.displayAction = !!item.fullExtent && !isDefaultExtent(item.fullExtent);
                     }
                 }
             }

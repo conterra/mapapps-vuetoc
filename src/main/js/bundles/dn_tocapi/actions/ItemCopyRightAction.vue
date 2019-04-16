@@ -8,9 +8,11 @@
     export default {
         name: "item-copyright",
         props: ["item", "copyrightLabel"],
-        beforeMount: function(){
+        watch: {
+            "item.copyright"(){
             let item = this.item;
             this.displayAction = !!item.copyright && item.copyright.toLowerCase() !=='none';
+            }
         }
     }
 </script>
