@@ -24,7 +24,8 @@ module.exports = {
         hideAllSublayer: "Alle Inhalte deaktivieren",
         opacity: "Transparenz",
         visible: "sichtbar",
-        invisible: "unsichtbar"
+        invisible: "unsichtbar",
+        scaleErrorMsg: "Layer unterst\u00FCtzt den aktuellen Ma\u00DFstab nicht"
     },
     tool: {
         title: "Karteninhalt",

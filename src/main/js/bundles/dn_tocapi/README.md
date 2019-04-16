@@ -132,7 +132,7 @@ export default function MyCustomActionFactory() {
 
 ## The Event-Bus
 The __Event-Bus__ is a mechanism that allows your Action to communicate with its environment.
-THe preconfigured vue-components automatically provide the property `eventBus`.
+The preconfigured vue-components automatically provide the property `eventBus`.
 
 ### Closing the Menu
 Sometimes you want to automatically close the Actions-Menu after your action has been triggered.

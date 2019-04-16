@@ -25,7 +25,8 @@ module.exports = {
             hideAllSublayer: "Hide all sublayer",
             opacity: "Opacity",
             visible: "visible",
-            invisible: "invisible"
+            invisible: "invisible",
+            scaleErrorMsg: "Layer does not support current scale"
         },
         tool: {
             title: "Map Content",
