@@ -8,7 +8,7 @@ In order to use the widget you need to create a component instance and register 
 
 ## Implementing a Custom _Action_
 Developers can provide their own menu entries, called __Actions__.
-Therfore a factory-component must be provided via the `dn_tocapi.LayerActionFactory` interface:
+Therefore, a factory-component must be provided via the `dn_tocapi.LayerActionFactory` interface:
 ```json
 // manifest.json of your bundle
 {
@@ -26,38 +26,11 @@ Therfore a factory-component must be provided via the `dn_tocapi.LayerActionFact
 The `priority` defines the order of of all available actions.
 The highest priority is `1` and will be displayed at the top of the menu.
 
-The factory must provide a `getAction` method which returns a vue-component:
-```javascript
-import MyCustomActionFactory from "./MyCustomActionFactory";
-import ZoomToExtentAction from "./ZoomToExtentAction.vue";
-
-export default function MyCustomActionFactory() {
-    return {
-        getAction() {
-            return ZoomToExtentAction;
-        }
-    }
-}
-```
-The vue-component must include a unique `name`.
-Furthermore, it is recommended to return a `v-card-title` in order to get the same layout as native Actions:
-
-```html
-<template>
-    <v-card-title>My Action Title</v-card-title>
-</template>
-<script>
-    export default {
-        name: "my-action"
-    }
-</script>
-```
-
-## Using Action Templates
+The factory must provide a `getAction` method which has to return a vue-component.
 Frequently, Actions serve as simple input functionality with a similar layout.
 For example, many Actions represent buttons or sliders.
 If such functionality is required, you can extend one of the preconfigured vue-components in this bundle.
-Furthermore, this allows you to inline the vue-component in your factory because the template is already provided:
+It is important that your vue-component must include a unique `name` value:
 
 ### Button
 ```js
@@ -68,6 +41,7 @@ export default function HideSublayerActionFactory() {
         getAction() {
             let i18n = this._i18n.get().ui;
             return {
+                // unique name is required
                 name: "hide-sublayer",
                 extends: ButtonAction,
                 props: {
@@ -134,8 +108,10 @@ export default function OpacityActionFactory() {
 }
 ```
 
+As you can see, it is possible to override the default labels and instead inject i18n Strings.
+
 ## Hide Actions
-If the Action should not be displayed under certain circumstances you have to trigger the `display-changed` event with the corresponding value (`false` = hide your Action for this item):
+If the Action should not be displayed under certain circumstances you can set the `displayAction` property in your component (`false` = hide your Action for this item):
 ```js
 export default function MyCustomActionFactory() {
     return {
@@ -146,7 +122,7 @@ export default function MyCustomActionFactory() {
                     ...
                 },
                 beforeMount() {
-                    this.$emit("display-changed", this.item.visible);
+                    this.displayAction = !!this.item.description;
                 }
             }
         }
@@ -240,4 +216,40 @@ export default function MyCustomActionFactory() {
         }
     }
 }
+```
+
+### Providing Actions via Custom Vue-Components
+If none of the preconfigured vue-components suits your needs you can implement your own:
+
+```javascript
+import MyCustomActionFactory from "./MyCustomActionFactory";
+import ZoomToExtentAction from "./ZoomToExtentAction.vue";
+
+export default function MyCustomActionFactory() {
+    return {
+        getAction() {
+            return ZoomToExtentAction;
+        }
+    }
+}
+```
+
+__Please be careful when you override vue-properties in your factory and do not pass any large objects into your vue-components.__
+Vue will register watchers for all properties, which can become a performance issue.
+Instead, you should make use of the Event-Bus (see above).
+
+You can still use the `item`, `eventBus` and the `displayAction` properties in your component, just make sure that you list these as vue-properties.
+It is also recommended to return a `v-card-title` in order to get the same layout as native Actions:
+
+```html
+<template>
+    <v-card-title>Zoom To Extent</v-card-title>
+</template>
+<script>
+    export default {
+        name: "my-action",
+        properties: ["item", "eventBus", "displayAction"],
+        ...
+    }
+</script>
 ```
