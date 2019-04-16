@@ -1,7 +1,7 @@
 <template>
     <v-list-tile
         :disabled="disableAction"
-        @click="onClick(item)">
+        @click="onClick()">
         <v-list-tile-action>
             <v-icon primary>{{ icon }}</v-icon>
         </v-list-tile-action>
@@ -32,7 +32,7 @@
             }
         },
         methods: {
-            onClick(item) {
+            onClick() {
             },
             disableActionForItem(item) {
                 return false;

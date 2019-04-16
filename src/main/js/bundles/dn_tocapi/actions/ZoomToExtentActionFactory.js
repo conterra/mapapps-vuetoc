@@ -42,8 +42,8 @@ export default function ZoomToExtentActionFactory() {
                     this.displayAction = !!item.fullExtent && !isDefaultExtent(item.fullExtent);
                 },
                 methods: {
-                    onClick(item) {
-                        let extent = item.fullExtent;
+                    onClick() {
+                        let extent = this.item.fullExtent;
                         if (!extent) {
                             return;
                         }

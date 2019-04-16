@@ -39,8 +39,8 @@ export default function LegendActionFactory() {
                     this.eventBus.$emit("close-description");
                 },
                 methods: {
-                    onClick(item) {
-                        this.eventBus.$emit("show-description", item);
+                    onClick() {
+                        this.eventBus.$emit("show-description", this.item);
                         this.eventBus.$emit('close-menu');
                     }
                 }

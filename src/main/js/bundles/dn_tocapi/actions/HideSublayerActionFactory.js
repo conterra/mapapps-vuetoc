@@ -37,7 +37,7 @@ export default function HideSublayerActionFactory() {
                     this.displayAction = !!item.children && !!item.children.length;
                 },
                 methods: {
-                    onClick(item) {
+                    onClick() {
                         this.item.setForAll("visible", false);
                         this.eventBus.$emit('close-menu');
                     }
