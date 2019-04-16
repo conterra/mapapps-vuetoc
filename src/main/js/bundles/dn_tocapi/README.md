@@ -30,7 +30,9 @@ The factory must provide a `getAction` method which has to return a vue-componen
 Frequently, Actions serve as simple input functionality with a similar layout.
 For example, many Actions represent buttons or sliders.
 If such functionality is required, you can extend one of the preconfigured vue-components in this bundle.
-It is important that your vue-component must include a unique `name` value:
+
+Please make sure that you include a unique `name` value in your component.
+To get access to the layer's properties, every action get the [LayerViewModel](./API.md) of the corresponding as a property (`item`).
 
 ### Button
 ```js
@@ -58,8 +60,8 @@ export default function HideSublayerActionFactory() {
                 },
                 methods: {
                     // click-event handler
-                    onClick(item) {
-                        item.setForAll("visible", false);
+                    onClick() {
+                        this.item.setForAll("visible", false);
                     }
                 }
             }
@@ -150,7 +152,7 @@ export default function MyCustomActionFactory() {
                     ...
                 },
                 methods: {
-                    onClick(item) {
+                    onClick() {
                         // do something
                         this.eventBus.$emit('close-menu');
                     }
@@ -177,9 +179,9 @@ export default function MyCustomActionFactory() {
                     ...
                 },
                 methods: {
-                    onClick(item) {
+                    onClick() {
                         // do something
-                        this.eventBus.$emit('do-something', item);
+                        this.eventBus.$emit('do-something', this.item);
                     }
                 }
             }

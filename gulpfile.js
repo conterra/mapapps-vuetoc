@@ -23,6 +23,7 @@ mapapps.registerTasks({
     themes: [/*"sample-theme"*/],
     /* state that the custom theme will be dependant from map.apps everlasting theme that provides the base styles */
     hasBaseThemes: true,
+    createAPIDoc: true,
     /* state that we want to support vuetify components and therefore need the the vuetify core styles*/
     hasVuetify: true,
     /*themeChangeTargets: {
@@ -36,6 +37,6 @@ gulp.task("default", function (callback) {
     run_sequence(
         "copy-resources",
         "themes-copy",
-        ["js-transpile", "themes-compile"],
+        ["js-transpile", "themes-compile", "create-api-docs"],
         callback);
 });
