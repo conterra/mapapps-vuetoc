@@ -1,6 +1,6 @@
 {
     "name": "dn_tocapi",
-    "version": "2.0.3-SNAPSHOT",
+    "version": "2.1.0-SNAPSHOT",
     "title": "${bundleName}",
     "description": "${bundleDescription}",
     "vendor": "con terra GmbH",
@@ -10,7 +10,7 @@
         "apprt-vuetify": "^4.6.0",
         "apprt-binding": "^4.6.0",
         "apprt-core": "^4.6.0",
-        "esri": "^4.9.2"
+        "esri": "^4.10.0"
     },
     "CSS-Themes-Extension": [
         {

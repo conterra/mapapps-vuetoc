@@ -1,18 +1,18 @@
 {
     "name": "dn_vuetoc",
-    "version": "2.0.3-SNAPSHOT",
+    "version": "2.1.0-SNAPSHOT",
     "title": "${bundleName}",
     "description": "${bundleDescription}",
     "vendor": "con terra GmbH",
     "productName": "devnet-mapapps-vuetoc",
     "dependencies": {
         "ct": "^4.6.0",
-        "dn_tocapi": "^2.0.0",
-        "apprt-vue": "^4.2.0",
-        "apprt-vuetify": "^4.2.0",
-        "apprt-binding": "^4.2.0",
-        "apprt-core": "^4.2.0",
-        "esri": "^4.6.0"
+        "dn_tocapi": "^2.1.0",
+        "apprt-vue": "^4.6.0",
+        "apprt-vuetify": "^4.6.0",
+        "apprt-binding": "^4.6.0",
+        "apprt-core": "^4.6.0",
+        "esri": "^4.10.0"
     },
     "layout-widgets": [
         {
