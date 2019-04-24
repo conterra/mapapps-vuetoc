@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 import ".";
-import "./TableOfContentsFactory";
-import "./TocModelSynchronizer";
-import "./LayerActionResolver";
-import "./actions/ItemDescriptionActionFactory";
+import "./TocWidgetFactory";
+import "./TocModelFactory";
+import "./ActionFactoryResolver";
+import "./actions/DescriptionActionFactory";
 import "./actions/ZoomToExtentActionFactory";
 import "./actions/ShowSublayerActionFactory";
 import "./actions/HideSublayerActionFactory";
 import "./actions/OpacityActionFactory";
-import "./actions/ItemCopyrightActionFactory";
+import "./actions/CopyrightActionFactory";

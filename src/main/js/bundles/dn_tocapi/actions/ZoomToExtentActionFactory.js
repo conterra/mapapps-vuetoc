@@ -22,7 +22,7 @@ const isDefaultExtent = extent => JSON.stringify(extent) === defaultExtent
 
 export default function ZoomToExtentActionFactory() {
     return {
-        getAction() {
+        createAction() {
             let i18n = this._i18n.get().ui;
             return {
                 name: "zoom-to-extent",

@@ -17,7 +17,7 @@ import ButtonAction from "./ButtonAction.vue";
 
 export default function ShowSublayerActionFactory() {
     return {
-        getAction() {
+        createAction() {
             let i18n = this._i18n.get().ui;
             return {
                 name: "show-sublayer",

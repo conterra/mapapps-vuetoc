@@ -24,9 +24,9 @@ export default class TocModelSynchronizer {
         this[handles] = [];
     }
 
-    sync(model) {
+    createInstance() {
         const layers = this._map.layers;
-        model = LayerViewCollectionModelFactory.fromLayerCollection(layers, model);
+        const model = LayerViewCollectionModelFactory.fromLayerCollection(layers);
         this._registerViewWatcher(model);
         return model;
     }

@@ -22,7 +22,7 @@
     ],
     "components": [
         {
-            "name": "TableOfContentsFactory",
+            "name": "TocWidgetFactory",
             "provides": "dn_tocapi.TableOfContentsFactory",
             "componentFactory" : true,
             "instanceFactory" : true,
@@ -41,12 +41,12 @@
             },
             "references": [
                 {
-                    "name": "_tocModel",
-                    "providing": "dn_tocapi.TocModelSynchronizer"
+                    "name": "_tocModelFactory",
+                    "providing": "dn_tocapi.TocModelFactory"
                 },
                 {
-                    "name": "_tocVisibility",
-                    "providing": "dn_tocapi.TocVisibilitySynchronizer"
+                    "name": "_tocModelSync",
+                    "providing": "dn_tocapi.TocModelSync"
                 },
                 {
                     "name": "_basemapModel",
@@ -57,14 +57,14 @@
                     "providing": "dn_tocapi.ToggleTool"
                 },
                 {
-                    "name": "_layerActionResolver",
-                    "providing": "dn_tocapi.LayerActionResolver"
+                    "name": "_actionResolver",
+                    "providing": "dn_tocapi.ActionFactoryResolver"
                 }
             ]
         },
         {
-            "name": "TocModelSynchronizer",
-            "provides": "dn_tocapi.TocModelSynchronizer",
+            "name": "TocModelFactory",
+            "provides": "dn_tocapi.TocModelFactory",
             "references": [
                 {
                     "name": "_map",
@@ -77,8 +77,8 @@
             ]
         },
         {
-            "name": "LayerActionResolver",
-            "provides": "dn_tocapi.LayerActionResolver",
+            "name": "ActionFactoryResolver",
+            "provides": "dn_tocapi.ActionFactoryResolver",
             "references": [
                 {
                     "name": "layerActionFactory",

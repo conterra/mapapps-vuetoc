@@ -17,7 +17,7 @@ import SliderAction from "./SliderAction.vue";
 
 export default function OpacityActionFactory() {
     return {
-        getAction() {
+        createAction() {
             let i18n = this._i18n.get().ui;
             return {
                 name: "opacity",

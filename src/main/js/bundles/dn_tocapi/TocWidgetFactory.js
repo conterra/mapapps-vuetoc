@@ -39,8 +39,8 @@ export default class TableOfContentsFactory {
     }
 
     _syncModel(vm){
-        this._tocModel.sync(vm.operationalItems);
-        this._tocVisibility.sync(vm.operationalItems);
+        vm.operationalItems = this._tocModelFactory.createInstance();
+        this._tocModelSync.sync(vm.operationalItems);
         Binding.for(vm, this._basemapModel)
             .sync("selectedId")
             .sync("basemaps")
@@ -52,7 +52,7 @@ export default class TableOfContentsFactory {
         let bus = new Vue();
         vm.bus = bus;
         vm.i18n = this.i18n;
-        const resolver = this._layerActionResolver;
+        const resolver = this._actionResolver;
         resolver.setEventBus(bus);
         resolver.on("layer-action-added", () => vm.actionComponents = resolver.getLayerActions());
         resolver.on("layer-action-removed", () => vm.actionComponents = resolver.getLayerActions());
@@ -94,9 +94,9 @@ export default class TableOfContentsFactory {
     }
 }
 
-const setValueRecursive = (items, key, value) => {
-    for(let i = 0; i < items.length; i++){
-        items[i][key] = value;
-        items[i].children && setValueRecursive(key, value, items[i].children);
+const setValueRecursive = (layers, key, value) => {
+    for(let i = 0; i < layers.length; i++){
+        layers[i][key] = value;
+        layers[i].children && setValueRecursive(key, value, layers[i].children);
     }
 }

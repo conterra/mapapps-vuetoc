@@ -6,7 +6,7 @@
 </template>
 <script>
     export default {
-        name: "item-copyright",
+        name: "copyright",
         props: ["item", "copyrightLabel"],
         watch: {
             "item.copyright"(){

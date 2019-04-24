@@ -14,5 +14,5 @@
  * limitations under the License.
  */
 import ".";
-import "./ToCRegistration";
-import "./TocVisibilitySynchronizer";
+import "./TocRegistration";
+import "./TocModelSync";

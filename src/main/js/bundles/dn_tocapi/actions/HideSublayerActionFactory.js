@@ -17,7 +17,7 @@ import ButtonAction from "./ButtonAction.vue";
 
 export default function HideSublayerActionFactory() {
     return {
-        getAction() {
+        createAction() {
             let i18n = this._i18n.get().ui;
             return {
                 name: "hide-sublayer",

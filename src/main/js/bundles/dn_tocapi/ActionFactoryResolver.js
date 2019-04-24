@@ -37,15 +37,15 @@ export default class LayerActionResolver extends Evented {
                 return -1;
             return 0;
         });
-        return factories.map(factory => factory.getAction());
+        return factories.map(factory => factory.createAction());
     }
 
     addLayerActionFactory(factory) {
-        if (!factory.getAction) {
-            console.warn("LayerActionResolver: Factory must provide a 'getAction' function!", factory);
+        if (!factory.createAction) {
+            console.warn("LayerActionResolver: Factory must provide a 'createAction' function!", factory);
             return;
         }
-        let name = factory.getAction().name;
+        let name = factory.createAction().name;
         this[actionFactories].set(name, factory);
 
         if(!factory.getEventHandlers){
@@ -71,7 +71,7 @@ export default class LayerActionResolver extends Evented {
     }
 
     removeLayerActionFactory(factory) {
-        let name = factory.getAction().name;
+        let name = factory.createAction().name;
         this[actionFactories].delete(name);
 
         if(!factory.getEventHandlers){

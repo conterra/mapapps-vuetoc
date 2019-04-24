@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import ItemCopyrightAction from "./ItemCopyRightAction.vue";
+import CopyrightAction from "./CopyrightAction.vue";
 export default function ItemCopyrightActionFactory() {
     return {
-        getAction() {
+        createAction() {
             let copyright = this._i18n.get().ui.copyright;
-            ItemCopyrightAction.props.itemCopyRightLabel = {
+            CopyrightAction.props.copyrightLabel = {
                 type: String,
                 default: copyright
             }
-            return ItemCopyrightAction;
+            return CopyrightAction;
         }
     }
 }

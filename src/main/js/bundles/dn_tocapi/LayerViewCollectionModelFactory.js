@@ -17,8 +17,8 @@ import LayerViewModelFactory from "./LayerViewModelFactory";
 
 export default class LayerViewCollectionModelFactory {
 
-    static fromLayerCollection(layerCollection, initialModel = {}) {
-        const model = initialModel || {};
+    static fromLayerCollection(layerCollection) {
+        const model = {};
         model.collection = layerCollection
             .map(layer => LayerViewModelFactory.fromLayer({layer}))
             .reverse()
