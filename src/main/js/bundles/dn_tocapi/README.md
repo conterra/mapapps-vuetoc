@@ -23,8 +23,8 @@ Therefore, a factory-component must be provided via the `dn_tocapi.LayerActionFa
     ]
 }
 ```
-The `priority` defines the order of of all available actions.
-The highest priority is `1` and will be displayed at the top of the menu.
+The `priority`-property defines the order of all available actions.
+The highest priority is `1` meaning that the corresponding action will be displayed at the top of the menu.
 
 The factory must provide a `getAction` method which has to return a vue-component.
 Frequently, Actions serve as simple input functionality with a similar layout.
@@ -32,7 +32,7 @@ For example, many Actions represent buttons or sliders.
 If such functionality is required, you can extend one of the preconfigured vue-components in this bundle.
 
 Please make sure that you include a unique `name` value in your component.
-To get access to the layer's properties, every action get the [LayerViewModel](./API.md) of the corresponding as a property (`item`).
+To get access to the layer's properties, every action gets the [LayerViewModel](./API.md) of the corresponding as a property (`item`).
 
 ### Button
 ```js
@@ -113,7 +113,7 @@ export default function OpacityActionFactory() {
 As you can see, it is possible to override the default labels and instead inject i18n Strings.
 
 ## Hide Actions
-If the Action should not be displayed under certain circumstances you can set the `displayAction` property in your component (`false` = hide your Action for this item):
+If the Action should not be displayed under certain circumstances you can alter the `displayAction` Boolean-property in your component (`false` = hide your Action for this item):
 ```js
 export default function MyCustomActionFactory() {
     return {
