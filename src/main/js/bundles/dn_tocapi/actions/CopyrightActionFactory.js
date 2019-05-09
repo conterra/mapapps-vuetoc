@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import CopyrightAction from "./CopyrightAction.vue";
+
 export default function ItemCopyrightActionFactory() {
     return {
         createAction() {
@@ -21,7 +22,7 @@ export default function ItemCopyrightActionFactory() {
             CopyrightAction.props.copyrightLabel = {
                 type: String,
                 default: copyright
-            }
+            };
             return CopyrightAction;
         }
     }
