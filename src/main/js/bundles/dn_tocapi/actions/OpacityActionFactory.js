@@ -52,6 +52,7 @@ export default function OpacityActionFactory() {
                         this.sliderValue = value;
                     });
                     this.eventBus.$on("reset", this.onReset);
+                    this.displayAction = item.opacity !== undefined && item.type !== "group";
                 },
                 beforeDestroy: function () {
                     this.watchHandle.remove();

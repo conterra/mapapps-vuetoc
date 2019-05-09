@@ -27,22 +27,22 @@
 <script>
     export default {
         props: {
+            icon: {
+                type: String,
+                default: "opacity"
+            },
             item: Object,
             eventBus: Object,
             fromLabel: String,
             toLabel: String,
-            titleLabel: String,
-            displayAction: {
-                type: Boolean,
-                default: true
-            }
+            titleLabel: String
         },
         data: function () {
             return {
-                icon: "opacity",
                 sliderValue: 1,
                 max: 1,
                 step: 0.01,
+                displayAction: true,
                 disableAction: false
             };
         },
