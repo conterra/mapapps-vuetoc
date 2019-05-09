@@ -15,17 +15,23 @@
                     <v-icon
                         v-if="basemap.id === $root.selectedId"
                         primary
-                        medium>{{ basemap.icon }}
+                        medium>
+                        {{ basemap.icon }}
                     </v-icon>
-                    <v-icon v-else="basemap.id === $root.selectedId">{{ basemap.icon }}
+                    <v-icon v-else>
+                        {{ basemap.icon }}
                     </v-icon>
                 </v-list-tile-action>
                 <v-list-tile-action v-else>
                     <v-icon
                         v-if="basemap.id === $root.selectedId"
                         primary
-                        medium>video_label</v-icon>
-                    <v-icon v-else="basemap.id === $root.selectedId">video_label</v-icon>
+                        medium>
+                        video_label
+                    </v-icon>
+                    <v-icon v-else>
+                        video_label
+                    </v-icon>
                 </v-list-tile-action>
                 <v-list-tile-content v-if="basemap.id === $root.selectedId">
                     <v-list-tile-title
