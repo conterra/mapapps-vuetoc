@@ -40,8 +40,8 @@ export default class LayerViewModelFactory {
         model.setForAll = (key, value) => setForAll(key, value, model);
         model.dispose = () => {
             propWatcher.unbind();
-            childWatcher.remove();
-        }
+            childWatcher.remove && childWatcher.remove();
+        };
         return model;
     }
 }
