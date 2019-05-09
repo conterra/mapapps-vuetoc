@@ -2,11 +2,12 @@
     <div>
         <v-divider v-if="displayAction && !lastAction"></v-divider>
         <component
-            v-show="displayAction"
             :is="action"
+            v-show="displayAction"
+            ref="actionInstance"
             :item="item"
             :event-bus="bus"
-            ref="actionInstance"/>
+        />
     </div>
 </template>
 
@@ -21,7 +22,7 @@
         beforeMount: function () {
             this.bus.$on("close-menu", () => this.$emit("close-menu"));
         },
-        mounted: function() {
+        mounted: function () {
             this.displayAction = this.$refs.actionInstance.displayAction;
         }
     };
