@@ -18,6 +18,7 @@ module.exports = {
     bundleDescription: "Das TOC API Bundle bildet die Grundlage für den Vue TOC.",
     ui: {
         basemaps: "Hintergrundkarten",
+        ground: "Untergrund",
         layers: "Karteninhalte",
         operationalLayerOptions: "Optionen",
         showAllLayer: "Alle Inhalte aktivieren",
@@ -26,6 +27,8 @@ module.exports = {
         closeAllLayer: "Alle Inhalte zuklappen",
         close: "Schließen",
         backToMap: "Zur Karte",
-        reset: "Zurücksetzen"
+        reset: "Zurücksetzen",
+        visible: "sichtbar",
+        invisible: "unsichtbar"
     }
 };

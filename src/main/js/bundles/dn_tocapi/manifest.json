@@ -24,11 +24,12 @@
         {
             "name": "TocWidgetFactory",
             "provides": "dn_tocapi.TableOfContentsFactory",
-            "componentFactory" : true,
-            "instanceFactory" : true,
+            "componentFactory": true,
+            "instanceFactory": true,
             "properties": {
                 "widgetRole": "dnTocWidget",
                 "showBasemaps": true,
+                "showGroundOpacity": true,
                 "showOperationalLayer": true,
                 "showLoadingStatus": true,
                 "showOperationalLayerHeaderMenu": true,
@@ -51,6 +52,10 @@
                 {
                     "name": "_basemapModel",
                     "providing": "map-basemaps-api.BasemapsModel"
+                },
+                {
+                    "name": "_groundModel",
+                    "providing": "dn_tocapi.GroundModel"
                 },
                 {
                     "name": "_tool",
@@ -84,6 +89,20 @@
                     "name": "layerActionFactory",
                     "providing": "dn_tocapi.LayerActionFactory",
                     "cardinality": "0..n"
+                }
+            ]
+        },
+        {
+            "name": "GroundModel",
+            "provides": "dn_tocapi.GroundModel",
+            "references": [
+                {
+                    "name": "_map",
+                    "providing": "map-widget.Map"
+                },
+                {
+                    "name": "_mapWidgetModel",
+                    "providing": "map-widget.MapWidgetModel"
                 }
             ]
         }

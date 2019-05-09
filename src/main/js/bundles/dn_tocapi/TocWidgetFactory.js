@@ -46,6 +46,11 @@ export default class TableOfContentsFactory {
             .sync("basemaps")
             .enable()
             .syncToLeftNow();
+        Binding.for(vm, this._groundModel)
+            .sync("hasGround")
+            .sync("groundOpacity")
+            .enable()
+            .syncToLeftNow();
     }
 
     _setModelProps(vm) {
@@ -61,6 +66,7 @@ export default class TableOfContentsFactory {
         let properties = this._properties;
         vm.config = {
             showBasemaps: properties.showBasemaps,
+            showGroundOpacity: properties.showGroundOpacity,
             showOperationalLayer: properties.showOperationalLayer,
             showLoadingStatus: properties.showLoadingStatus,
             showOperationalLayerHeaderMenu: properties.showOperationalLayerHeaderMenu,

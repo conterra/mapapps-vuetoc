@@ -40,6 +40,7 @@
         "dn_vuetoc": {
             "Config": {
                 "showBasemaps": true,
+                "showGroundOpacity": false,
                 "showOperationalLayer": true,
                 "showLoadingStatus": true,
                 "showOperationalLayerHeaderMenu": true,

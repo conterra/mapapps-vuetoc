@@ -8,7 +8,14 @@
                     v-if="config.showBasemaps"
                     :i18n="i18n"
                     :basemaps="basemaps"
-                    class="dn-toc__basemaps"/>
+                    class="dn-toc__basemaps"
+                />
+                <ground-layer-node
+                    v-if="config.showGroundOpacity && hasGround"
+                    :i18n="i18n"
+                    :ground-opacity.sync="groundOpacity"
+                    class="dn-toc__ground"
+                />
                 <operational-layer-node
                     v-if="config.showOperationalLayer"
                     :bus="bus"
@@ -16,7 +23,8 @@
                     :operational-items="operationalItems"
                     :config="config"
                     :action-components="actionComponents"
-                    class="dn-toc__layers"/>
+                    class="dn-toc__layers"
+                />
             </v-container>
         </div>
         <div class="ct-flex-item ct-flex-item--no-grow ct-flex-item--no-shrink">
@@ -68,17 +76,21 @@
 <script>
     import Bindable from "apprt-vue/mixins/Bindable";
     import BaseLayerNode from "./BaseLayerNode.vue";
+    import GroundLayerNode from "./GroundLayerNode.vue";
     import OperationalLayerNode from './OperationalLayerNode.vue';
 
     export default {
         components: {
             "base-layer-node": BaseLayerNode,
+            "ground-layer-node": GroundLayerNode,
             "operational-layer-node": OperationalLayerNode
         },
         mixins: [Bindable],
         props: {
             config: Object,
             selectedId: String,
+            hasGround: Boolean,
+            groundOpacity: Number,
             legendArray: {
                 type: Array,
                 default: () => []

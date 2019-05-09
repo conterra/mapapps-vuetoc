@@ -89,6 +89,7 @@
             "properties": {
                 "widgetRole": "vueTocWidget",
                 "showBasemaps": true,
+                "showGroundOpacity": true,
                 "showOperationalLayer": true,
                 "showLoadingStatus": true,
                 "showOperationalLayerHeaderMenu": true,

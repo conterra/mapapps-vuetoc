@@ -17,6 +17,7 @@ Simply add the bundle "dn_vuetoc" to your map.apps 4 app.
 ```
 "Config": {
     "showBasemaps": true,
+    "showGroundOpacity": false,
     "showOperationalLayer": true,
     "showLoadingStatus": true,
     "showOperationalLayerHeaderMenu": true,
@@ -33,6 +34,7 @@ Simply add the bundle "dn_vuetoc" to your map.apps 4 app.
 | Property                       | Type    | Possible Values                 | Default                         | Description                          |
 |--------------------------------|---------|---------------------------------|---------------------------------|--------------------------------------|
 | showBasemaps                   | boolean | ```true``` &#124; ```false```   | ```true```                      | Show basemaps                        |
+| showGroundOpacity              | boolean | ```true``` &#124; ```false```   | ```false```                     | Show ground opacity slider           |
 | showOperationalLayer           | boolean | ```true``` &#124; ```false```   | ```true```                      | Show operational layers              |
 | showLoadingStatus              | boolean | ```true``` &#124; ```false```   | ```true```                      | Show current loading status of layer |
 | showOperationalLayerHeaderMenu | boolean | ```true``` &#124; ```false```   | ```true```                      | Show operational layer menu          |

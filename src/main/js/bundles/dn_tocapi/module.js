@@ -17,6 +17,7 @@ import ".";
 import "./TocWidgetFactory";
 import "./TocModelFactory";
 import "./ActionFactoryResolver";
+import "./GroundModel";
 import "./actions/DescriptionActionFactory";
 import "./actions/ZoomToExtentActionFactory";
 import "./actions/ShowSublayerActionFactory";

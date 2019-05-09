@@ -19,6 +19,7 @@ module.exports = {
         bundleDescription: "The TOC API Bundle forms the basis for the Vue TOC.",
         ui: {
             basemaps: "Basemaps",
+            ground: "Ground",
             layers: "Operational Layer",
             operationalLayerOptions: "Options",
             showAllLayer: "Activate all layer",
@@ -27,7 +28,9 @@ module.exports = {
             closeAllLayer: "Close all layer",
             close: "Close",
             backToMap: "Back to map",
-            reset: "Reset"
+            reset: "Reset",
+            visible: "visible",
+            invisible: "invisible"
         }
     }),
     "de": true
