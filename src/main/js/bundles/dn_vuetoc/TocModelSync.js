@@ -21,22 +21,22 @@ const _model = Symbol("model");
 
 export default class LayerVisibilitySynchronizer {
 
-    activate(){
+    activate() {
         this.i18n = this._i18n.get().ui;
         const DELAY = this._properties.delay || DEFAULT_DELAY;
         this.deferredCheckEffectiveLayers = AsyncTask(this.checkEffectiveLayers.bind(this)).delay.bind(this, DELAY);
     }
 
     sync(model) {
-        if(!model || !model.collection) return;
+        if (!model || !model.collection) return;
         this[_model] = model;
         this[watchHandle] = this._mapWidgetModel.watch("scale", () => this.deferredCheckEffectiveLayers());
     }
-    
-    checkEffectiveLayers(collection){
+
+    checkEffectiveLayers(collection) {
         collection = collection || this[_model].collection;
-        for(let i = 0; i < collection.length; i++){
-            layerModel = collection[i];
+        for (let i = 0; i < collection.length; i++) {
+            let layerModel = collection[i];
             this.checkLayerEffectivity(layerModel);
             const children = layerModel.children;
             children && children.length && this.checkEffectiveLayers(children);
@@ -49,15 +49,15 @@ export default class LayerVisibilitySynchronizer {
         layerModel.visibleInContextCause = layerModel.visibleInContext ? "" : this.i18n.scaleErrorMsg;
     }
 
-    deactivate(){
+    deactivate() {
         this[watchHandle] && this[watchHandle].remove();
         this[watchHandle] = undefined;
     }
 }
 
-const isVisibleAtScale = async function(layerModel, scale) {
+const isVisibleAtScale = async function (layerModel, scale) {
     let minScale = layerModel.minScale || 0;
     let maxScale = layerModel.maxScale || 0;
-    if(!scale || (minScale === 0 && maxScale === 0)) return true
+    if (!scale || (minScale === 0 && maxScale === 0)) return true
     return scale >= maxScale && (minScale !== 0 ? scale <= minScale : true);
-}
+};
