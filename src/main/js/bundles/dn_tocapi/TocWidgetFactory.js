@@ -34,11 +34,11 @@ export default class TableOfContentsFactory {
         return VueDijit(vm);
     }
 
-    _createVueModel(){
+    _createVueModel() {
         return new Vue(TableOfContents);
     }
 
-    _syncModel(vm){
+    _syncModel(vm) {
         vm.operationalItems = this._tocModelFactory.createInstance();
         this._tocModelSync.sync(vm.operationalItems);
         Binding.for(vm, this._basemapModel)
@@ -48,7 +48,7 @@ export default class TableOfContentsFactory {
             .syncToLeftNow();
     }
 
-    _setModelProps(vm){
+    _setModelProps(vm) {
         let bus = new Vue();
         vm.bus = bus;
         vm.i18n = this.i18n;
@@ -71,12 +71,12 @@ export default class TableOfContentsFactory {
             invisibleIconClass: properties.invisibleIconClass,
             isMobile: this._isMobile
         };
-        if(properties.expandInitially){
+        if (properties.expandInitially) {
             setValueRecursive(vm.operationalItems.collection, "open", true);
         }
     }
 
-    _registerModelEventWatchers(vm){
+    _registerModelEventWatchers(vm) {
         let tool = this._tool;
         const defaultSelectedId = this._basemapModel.selectedId;
         vm.$on('close', () => tool.set("active", false));
@@ -95,8 +95,8 @@ export default class TableOfContentsFactory {
 }
 
 const setValueRecursive = (layers, key, value) => {
-    for(let i = 0; i < layers.length; i++){
+    for (let i = 0; i < layers.length; i++) {
         layers[i][key] = value;
         layers[i].children && setValueRecursive(key, value, layers[i].children);
     }
-}
+};

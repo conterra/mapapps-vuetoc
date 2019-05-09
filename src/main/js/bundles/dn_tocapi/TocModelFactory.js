@@ -20,7 +20,7 @@ const handles = Symbol("handles");
 
 export default class TocModelSynchronizer {
 
-    activate(){
+    activate() {
         this[handles] = [];
     }
 
@@ -31,10 +31,10 @@ export default class TocModelSynchronizer {
         return model;
     }
 
-    _registerViewWatcher(model){
-        if(!model) return;
+    _registerViewWatcher(model) {
+        if (!model) return;
         const mapWidgetModel = this._mapWidgetModel;
-        if(mapWidgetModel.view){
+        if (mapWidgetModel.view) {
             this._watchLayerViewsUpdating(mapWidgetModel.view, model);
             mapWidgetModel.view.allLayerViews.forEach(layerView => {
                 const layerModel = getLayerModelById(model.collection, layerView.layer.id);
@@ -46,7 +46,7 @@ export default class TocModelSynchronizer {
                 this._watchLayerViewsUpdating(view, model);
             }
         }));
-        }
+    }
 
     _watchLayerViewsUpdating(view, model) {
         this[handles].push(view.on("layerview-create", ({layerView}) => {
@@ -55,8 +55,8 @@ export default class TocModelSynchronizer {
         }));
     }
 
-    _bindViewLoadingState(layerView, layerModel){
-        if(!layerModel) return;
+    _bindViewLoadingState(layerView, layerModel) {
+        if (!layerModel) return;
         this[handles].push(Binding
             .for(layerView, layerModel)
             .syncToRight("updating", "updating")
@@ -64,8 +64,8 @@ export default class TocModelSynchronizer {
             .enable());
     }
 
-    deactivate(){
-        if(!this[handles]) return;
+    deactivate() {
+        if (!this[handles]) return;
         this[handles].forEach(handle => {
             const remove = handle.remove || handle.unbind;
             remove();
@@ -75,12 +75,12 @@ export default class TocModelSynchronizer {
 }
 
 const getLayerModelById = (collection, id) => {
-    if(!collection) return;
-    for(let i = 0; i < collection.length; i++){
-        if(collection[i].id === id){
+    if (!collection) return;
+    for (let i = 0; i < collection.length; i++) {
+        if (collection[i].id === id) {
             return collection[i]
         }
         const matchingChild = getLayerModelById(collection.children);
-        if(matchingChild) return matchingChild;
+        if (matchingChild) return matchingChild;
     }
-}
+};
