@@ -18,12 +18,26 @@ import CopyrightAction from "./CopyrightAction.vue";
 export default function ItemCopyrightActionFactory() {
     return {
         createAction() {
-            let copyright = this._i18n.get().ui.copyright;
-            CopyrightAction.props.copyrightLabel = {
-                type: String,
-                default: copyright
-            };
-            return CopyrightAction;
+            let i18n = this._i18n.get().ui;
+            return {
+                extends: CopyrightAction,
+                props: {
+                    copyrightLabel: {
+                        type: String,
+                        default: i18n.copyright
+                    }
+                },
+                watch: {
+                    "item.copyright"() {
+                        let item = this.item;
+                        this.displayAction = !!item.copyright && item.copyright.toLowerCase() !== 'none';
+                    }
+                },
+                beforeMount: function () {
+                    let item = this.item;
+                    this.displayAction = !!item.copyright && item.copyright.toLowerCase() !== 'none';
+                }
+            }
         }
     }
 }

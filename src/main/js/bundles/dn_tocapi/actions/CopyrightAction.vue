@@ -1,22 +1,27 @@
 <template>
-    <v-card-title>
-        <div class="grey--text caption">
+    <div class="pa-3">
+        <div class="mb-1 grey--text caption">
             {{ copyrightLabel }}
         </div>
         <div class="grey--text caption">
             {{ item.copyright }}
         </div>
-    </v-card-title>
+    </div>
 </template>
 <script>
     export default {
         name: "copyright",
-        props: ["item", "copyrightLabel"],
-        watch: {
-            "item.copyright"() {
-                let item = this.item;
-                this.displayAction = !!item.copyright && item.copyright.toLowerCase() !== 'none';
+        props: {
+            item: Object,
+            copyrightLabel: {
+                type: String,
+                default: "Copyright Label"
             }
+        },
+        data: function () {
+            return {
+                displayAction: false
+            };
         }
     }
 </script>
