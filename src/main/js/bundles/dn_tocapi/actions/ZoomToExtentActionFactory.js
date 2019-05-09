@@ -37,6 +37,10 @@ export default function ZoomToExtentActionFactory() {
                         default: "search"
                     }
                 },
+                beforeMount: function () {
+                    let item = this.item;
+                    this.displayAction = !!item.fullExtent && !isDefaultExtent(item.fullExtent);
+                },
                 methods: {
                     onClick() {
                         let extent = this.item.fullExtent;

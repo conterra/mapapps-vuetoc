@@ -20,14 +20,11 @@
             icon: {
                 type: String,
                 default: "settings"
-            },
-            displayAction: {
-                type: Boolean,
-                default: true
             }
         },
         data: function () {
             return {
+                displayAction: true,
                 disableAction: this.disableActionForItem(this.item)
             }
         },

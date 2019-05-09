@@ -32,6 +32,10 @@ export default function ShowSublayerActionFactory() {
                         default: i18n.showAllSublayer
                     }
                 },
+                beforeMount: function () {
+                    let item = this.item;
+                    this.displayAction = !!item.children && !!item.children.length;
+                },
                 methods: {
                     onClick() {
                         this.item.setForAll("visible", true);

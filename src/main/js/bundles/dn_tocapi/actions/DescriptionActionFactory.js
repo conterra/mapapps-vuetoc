@@ -32,6 +32,10 @@ export default function LegendActionFactory() {
                         default: "info"
                     }
                 },
+                beforeMount: function () {
+                    let item = this.item;
+                    this.displayAction = !!item.description;
+                },
                 beforeDestroy: function () {
                     this.eventBus.$emit("close-description");
                 },
@@ -42,8 +46,9 @@ export default function LegendActionFactory() {
                     }
                 },
                 watch: {
-                    "item.description"(){
-                        this.displayAction = !!this.item.description;
+                    "item.description"() {
+                        let item = this.item;
+                        this.displayAction = !!item.description;
                     }
                 }
             }
@@ -57,7 +62,7 @@ export default function LegendActionFactory() {
             let descriptionWindow;
             return {
                 "close-description": () => {
-                    if(descriptionWindow){
+                    if (descriptionWindow) {
                         descriptionWindow.close();
                         descriptionWindow = undefined;
                     }
