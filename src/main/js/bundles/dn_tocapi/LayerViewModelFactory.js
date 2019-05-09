@@ -18,7 +18,17 @@ import LayerViewModel from "./LayerViewModel";
 import {whenTrueOnce} from "esri/core/watchUtils";
 import Vue from "apprt-vue/Vue";
 
-const propertyKeys = ["id", "title", "loaded", "minScale", "maxScale", "opacity", "copyright", "description", "visible"];
+const propertyKeys = [
+    "id",
+    "title",
+    "loaded",
+    "minScale",
+    "maxScale",
+    "opacity",
+    "copyright",
+    "description",
+    "visible"
+];
 
 export default class LayerViewModelFactory {
 
@@ -45,55 +55,54 @@ const initModel = (layer, parent) => {
     whenTrueOnce(layer, "loaded", () => {
         model.initialOpacity = model.initialOpacity === undefined ? layer.opacity : model.initialOpacity;
         model.initialVisible = model.initialVisible === undefined ? layer.visible : model.initialVisible;
-    })
+    });
     return model;
-}
+};
 
 const parseChildren = (layer, model) => {
     const sublayers = layer.layers || layer.sublayers;
-    if(!sublayers) return [];
+    if (!sublayers) return [];
     return sublayers
-        .map(sublayer => {
-            return LayerViewModelFactory.fromLayer({
-                layer: sublayer,
-                parent: model
-            })
-        })
+        .map(sublayer => LayerViewModelFactory.fromLayer({
+            layer: sublayer,
+            parent: model
+        }))
         .reverse()
         .toArray();
-}
+};
 
 const watchPropertyChanges = (layer, model) => {
     let binding = Binding.for(model, layer);
     binding.syncAll(...propertyKeys)
     binding.syncToLeft("fullExtent", "fullExtent", fullExtent => {
         return fullExtent && fullExtent.toJSON();
-    })
+    });
     binding.syncToLeftNow();
     binding.enable();
     return binding;
-}
+};
 
 const watchChildChanges = (layer, model) => {
     const children = layer.layers || layer.sublayers;
-    if(!children) {
+    if (!children) {
         whenTrueOnce(layer, "loaded", () => {
             model.children = parseChildren(layer, model);
-        })
-        return () => {};
-    };
+        });
+        return () => {
+        };
+    }
     return children.on("after-add", ({item}) => {
         const idx = children.length - 1 - children.indexOf(item);
         model.children.splice(idx, 0, LayerViewModelFactory.fromLayer({layer: item}));
     });
-}
+};
 
 const setForAll = (key, value, model) => {
     model[key] = value;
     const children = model.children;
-    if(children && children.length){
-        for(let i = 0; i < children.length; i++){
+    if (children && children.length) {
+        for (let i = 0; i < children.length; i++) {
             setForAll(key, value, children[i]);
         }
     }
-}
+};
