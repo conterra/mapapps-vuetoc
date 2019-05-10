@@ -30,6 +30,20 @@ Simply add the bundle "dn_vuetoc" to your map.apps 4 app.
 }
 ```
 
+You need to configure the ground in you app to use the property *showGroundOpacity*. The ground opacity slider is only available in the 3D view.
+
+```
+"map": {
+    "ground": {
+        "url": "https://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer",
+        "type": "ELEVATION"
+        "opacity": 1
+    },
+    "layers": [...],
+    ...
+}
+```
+
 ##### Properties
 | Property                       | Type    | Possible Values                 | Default                         | Description                          |
 |--------------------------------|---------|---------------------------------|---------------------------------|--------------------------------------|
