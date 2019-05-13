@@ -40,7 +40,8 @@ export default class LayerViewModelFactory {
         model.setForAll = (key, value) => setForAll(key, value, model);
         model.dispose = () => {
             propWatcher.unbind();
-            childWatcher.remove && childWatcher.remove();
+            childWatcher.remove();
+            model.children.forEach(child => child.dispose());
         };
         return model;
     }
@@ -86,8 +87,7 @@ const watchChildChanges = (layer, model) => {
         whenTrueOnce(layer, "loaded", () => {
             model.children = parseChildren(layer, model);
         });
-        return () => {
-        };
+        return {remove: () => {}};
     }
     return children.on("after-add", ({item}) => {
         const idx = children.length - 1 - children.indexOf(item);

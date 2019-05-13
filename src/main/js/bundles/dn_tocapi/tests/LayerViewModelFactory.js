@@ -148,7 +148,9 @@ registerSuite({
         const model = LayerViewModelFactory.fromLayer({layer});
         model.dispose();
         layer.title = "updated-title";
+        model.children[0].children[1].visible = false;
         return later(() => {
+            assert.equal(layer.layers.getItemAt(1).layers.getItemAt(0).visible, true);
             assert.equal(model.title, "Trees");
         });
     }
