@@ -74,9 +74,7 @@ const parseChildren = (layer, model) => {
 const watchPropertyChanges = (layer, model) => {
     let binding = Binding.for(model, layer);
     binding.syncAll(...propertyKeys)
-    binding.syncToLeft("fullExtent", "fullExtent", fullExtent => {
-        return fullExtent && fullExtent.toJSON();
-    });
+    binding.syncToLeft("fullExtent", "fullExtent", fullExtent => fullExtent && fullExtent.toJSON());
     binding.syncToLeftNow();
     binding.enable();
     return binding;
