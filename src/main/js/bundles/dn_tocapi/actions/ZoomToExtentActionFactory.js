@@ -74,7 +74,7 @@ export default function ZoomToExtentActionFactory() {
                                 "duration": 1000,
                                 "easing": "ease-in-out"
                             });
-                    });
+                        });
                 }
             }
         }

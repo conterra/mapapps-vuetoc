@@ -3,19 +3,22 @@
         <v-list
             v-for="item in items"
             :key="item.uid"
-            class="pa-0">
+            class="pa-0"
+        >
             <layer-item
                 :bus="bus"
                 :item="item"
                 :config="config"
-                :action-components="actionComponents">
+                :action-components="actionComponents"
+            >
                 <layer-tree
                     slot="sub"
                     slot-scope="itemProps"
                     :bus="bus"
                     :config="config"
                     :items="itemProps.children"
-                    :action-components="actionComponents"/>
+                    :action-components="actionComponents"
+                />
             </layer-item>
         </v-list>
     </div>
@@ -28,6 +31,31 @@
         components: {
             "layer-item": LayerItem
         },
-        props: ["items", "bus", "config", "actionComponents"]
+        props: {
+            items: {
+                type: Array,
+                default: function () {
+                    return [];
+                }
+            },
+            bus: {
+                type: Object,
+                default: function () {
+                    return {};
+                }
+            },
+            config: {
+                type: Object,
+                default: function () {
+                    return {};
+                }
+            },
+            actionComponents: {
+                type: Array,
+                default: function () {
+                    return [];
+                }
+            }
+        }
     };
 </script>

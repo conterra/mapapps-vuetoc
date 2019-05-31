@@ -3,7 +3,8 @@
         <div class="ct-flex-item dn-toc__scroll-container">
             <v-container
                 grid-list-sm
-                class="pa-1">
+                class="pa-1"
+            >
                 <base-layer-node
                     v-if="config.showBasemaps"
                     :i18n="i18n"
@@ -30,10 +31,12 @@
         <div class="ct-flex-item ct-flex-item--no-grow ct-flex-item--no-shrink">
             <v-container
                 grid-list-md
-                class="pa-1">
+                class="pa-1"
+            >
                 <v-layout
                     row
-                    wrap>
+                    wrap
+                >
                     <v-flex v-if="config.showCloseButton">
                         <v-card class="elevation-6">
                             <v-btn
@@ -41,8 +44,11 @@
                                 block
                                 color="primary"
                                 class="btn btn--block btn--raised theme--light"
-                                @click.native="$emit('close')">
-                                <v-icon left>arrow_back</v-icon>
+                                @click.native="$emit('close')"
+                            >
+                                <v-icon left>
+                                    arrow_back
+                                </v-icon>
                                 {{ i18n.backToMap }}
                             </v-btn>
                             <v-btn
@@ -50,8 +56,11 @@
                                 block
                                 color="primary"
                                 class="btn btn--block btn--raised theme--light"
-                                @click.native="$emit('close')">
-                                <v-icon left>arrow_back</v-icon>
+                                @click.native="$emit('close')"
+                            >
+                                <v-icon left>
+                                    arrow_back
+                                </v-icon>
                                 {{ i18n.close }}
                             </v-btn>
                         </v-card>
@@ -62,8 +71,11 @@
                                 block
                                 color="primary"
                                 class="btn btn--block btn--raised theme--light"
-                                @click.native="reset()">
-                                <v-icon left>settings_backup_restore</v-icon>
+                                @click.native="reset()"
+                            >
+                                <v-icon left>
+                                    settings_backup_restore
+                                </v-icon>
                                 {{ i18n.reset }}
                             </v-btn>
                         </v-card>
@@ -87,16 +99,54 @@
         },
         mixins: [Bindable],
         props: {
-            config: Object,
-            selectedId: String,
-            hasGround: Boolean,
-            groundOpacity: Number,
+            config: {
+                type: Object,
+                default: function () {
+                    return {};
+                }
+            },
+            selectedId: {
+                type: String,
+                default: ""
+            },
+            hasGround: {
+                type: Boolean,
+                default: false
+            },
+            groundOpacity: {
+                type: Number,
+                default: 1
+            },
             legendArray: {
                 type: Array,
                 default: () => []
             },
-            bus: Object,
-            i18n: Object
+            bus: {
+                type: Object,
+                default: function () {
+                    return {};
+                }
+            },
+            i18n: {
+                type: Object,
+                default: function () {
+                    return {
+                        basemaps: "Basemaps",
+                        ground: "Ground",
+                        layers: "Operational Layer",
+                        operationalLayerOptions: "Options",
+                        showAllLayer: "Activate all layer",
+                        hideAllLayer: "Deactivate all layer",
+                        openAllLayer: "Open all layer",
+                        closeAllLayer: "Close all layer",
+                        close: "Close",
+                        backToMap: "Back to map",
+                        reset: "Reset",
+                        visible: "visible",
+                        invisible: "invisible"
+                    };
+                }
+            }
         },
         data: function () {
             return {

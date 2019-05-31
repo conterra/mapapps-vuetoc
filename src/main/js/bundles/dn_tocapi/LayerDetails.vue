@@ -1,10 +1,12 @@
 <template>
     <v-list-tile
-        :class="{'layer-item__not-visible': !item.visibleInContext}">
+        :class="{'layer-item__not-visible': !item.visibleInContext}"
+    >
         <v-list-tile-action @click.prevent.stop>
             <v-btn
                 icon
-                @click="item.visible = !item.visible">
+                @click="item.visible = !item.visible"
+            >
                 <v-icon :class="{'success--text': item.visible}">
                     {{ item.visible ? config.visibleIconClass :
                         config.invisibleIconClass }}
@@ -13,9 +15,11 @@
         </v-list-tile-action>
         <v-list-tile-content
             @click.prevent.stop
-            @click="item.visible = !item.visible">
+            @click="item.visible = !item.visible"
+        >
             <v-list-tile-title
-                v-text="item.title"/>
+                v-text="item.title"
+            />
         </v-list-tile-content>
         <v-list-tile-action v-if="!item.visibleInContext">
             <v-tooltip right>
@@ -30,7 +34,8 @@
         </v-list-tile-action>
         <v-list-tile-action
             v-if="config.showLayerMenu"
-            @click.prevent.stop>
+            @click.prevent.stop
+        >
             <v-menu
                 v-model="menuOpen"
                 :close-on-content-click="false"
@@ -43,10 +48,12 @@
                 nudge-right="4"
                 offset-y
                 transition="slide-y-transition"
-                content-class="dn-toc__item-menu">
+                content-class="dn-toc__item-menu"
+            >
                 <v-btn
                     slot="activator"
-                    icon>
+                    icon
+                >
                     <v-icon>more_vert</v-icon>
                 </v-btn>
                 <layer-menu
@@ -67,21 +74,46 @@
         components: {
             "layer-menu": LayerMenu
         },
-        props: ["item", "bus", "config", "actionComponents"],
-        data: () => { 
+        props: {
+            item: {
+                type: Object,
+                default: function () {
+                    return {};
+                }
+            },
+            bus: {
+                type: Object,
+                default: function () {
+                    return {};
+                }
+            },
+            config: {
+                type: Object,
+                default: function () {
+                    return {};
+                }
+            },
+            actionComponents: {
+                type: Array,
+                default: function () {
+                    return [];
+                }
+            }
+        },
+        data: () => {
             return {
                 menuOpen: false,
                 watchHandle: undefined
             };
         },
-        beforeMount: function(){
+        beforeMount: function () {
             this.watchHandle = this.bus.$on("reset", this.resetVisibility);
         },
-        beforeDestroy: function(){
+        beforeDestroy: function () {
             this.bus.$off("reset", this.resetVisibility);
         },
         methods: {
-            resetVisibility: function(){
+            resetVisibility: function () {
                 this.item.visible = this.item.initialVisible;
             }
         }

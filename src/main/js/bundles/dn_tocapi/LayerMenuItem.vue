@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-divider v-if="displayAction && !lastAction"></v-divider>
+        <v-divider v-if="displayAction && !lastAction" />
         <component
             :is="action"
             v-show="displayAction"
@@ -13,7 +13,32 @@
 
 <script>
     export default {
-        props: ["action", "item", "bus", "lastAction"],
+        props: {
+            item: {
+                type: Object,
+                default: function () {
+                    return {};
+                }
+            },
+            action: {
+                type: Object,
+                default: function () {
+                    return {};
+                }
+            },
+            bus: {
+                type: Object,
+                default: function () {
+                    return {};
+                }
+            },
+            lastAction: {
+                type: Object,
+                default: function () {
+                    return {};
+                }
+            }
+        },
         data: function () {
             return {
                 displayAction: false

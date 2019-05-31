@@ -12,7 +12,12 @@
     export default {
         name: "copyright",
         props: {
-            item: Object,
+            item: {
+                type: Object,
+                default: function () {
+                    return {};
+                }
+            },
             copyrightLabel: {
                 type: String,
                 default: "Copyright Label"

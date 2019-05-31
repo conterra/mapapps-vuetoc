@@ -1,9 +1,12 @@
 <template>
     <v-list-tile
         :disabled="disableAction"
-        @click="onClick()">
+        @click="onClick()"
+    >
         <v-list-tile-action>
-            <v-icon primary>{{ icon }}</v-icon>
+            <v-icon primary>
+                {{ icon }}
+            </v-icon>
         </v-list-tile-action>
         <v-list-tile-title>{{ titleLabel }}</v-list-tile-title>
     </v-list-tile>
@@ -11,8 +14,18 @@
 <script>
     export default {
         props: {
-            item: Object,
-            eventBus: Object,
+            item: {
+                type: Object,
+                default: function () {
+                    return {};
+                }
+            },
+            eventBus: {
+                type: Object,
+                default: function () {
+                    return {};
+                }
+            },
             titleLabel: {
                 type: String,
                 default: "Action Title"

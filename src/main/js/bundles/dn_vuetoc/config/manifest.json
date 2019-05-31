@@ -1,0 +1,72 @@
+{
+    "Bundle-SymbolicName": "dn_vuetoc-config",
+    "Bundle-Version": "2.2.1-SNAPSHOT",
+    "Bundle-Name": "${bundleName}",
+    "Bundle-Description": "${bundleDescription}",
+    "Bundle-Vendor": "con terra GmbH",
+    "Require-Bundle": [
+        {
+            "name": "dataform"
+        },
+        {
+            "name": "wizard"
+        }
+    ],
+    "Components": [
+        {
+            "name": "BuilderEntry",
+            "impl": "ct/Stateful",
+            "provides": [
+                "wizard.MenuEntry"
+            ],
+            "propertiesConstructor": true,
+            "properties": {
+                "menuNode": {
+                    "priority": 0,
+                    "title": "${windowTitle}",
+                    "widget": "introBuilderWidget",
+                    "iconUrl": "resource('styles/images/bundleIcon.png')"
+                }
+            }
+        },
+        {
+            "name": "BuilderWidget",
+            "impl": "wizard/DataFormBuilderWidgetFactory",
+            "provides": [
+                "dijit.wizard.Widget"
+            ],
+            "immediate": true,
+            "instanceFactory": true,
+            "properties": {
+                "dataformFile": "resource('./DataForm.json')",
+                "bid": "dn_vuetoc",
+                "pid": "dn_vuetoc-Config",
+                "id": "vuetocBuilderWidget",
+                "defaultProperties": {
+                    "showBasemaps": true,
+                    "showGroundOpacity": true,
+                    "showOperationalLayer": true,
+                    "showLoadingStatus": true,
+                    "showOperationalLayerHeaderMenu": true,
+                    "showLayerMenu": true,
+                    "showResetButton": true,
+                    "showCloseButton": true,
+                    "expandInitially": true,
+                    "visibleIconClass": "check_box",
+                    "invisibleIconClass": "check_box_outline_blank"
+                },
+                "description": "${description}"
+            },
+            "references": [
+                {
+                    "name": "_configAdminService",
+                    "providing": "ct.framework.api.ConfigurationAdmin"
+                },
+                {
+                    "name": "_dataformService",
+                    "providing": "dataform.DataFormService"
+                }
+            ]
+        }
+    ]
+}

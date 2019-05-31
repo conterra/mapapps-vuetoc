@@ -2,7 +2,8 @@
     <v-card class="elevation-6">
         <v-toolbar
             class="primary title"
-            dense>
+            dense
+        >
             <v-toolbar-title>{{ i18n.basemaps }}</v-toolbar-title>
         </v-toolbar>
         <v-list>
@@ -10,12 +11,14 @@
                 v-for="basemap in basemaps"
                 :key="basemap.id"
                 :class="{'primary--text': basemap.id === $root.selectedId}"
-                @click.prevent.stop="$root.selectedId = basemap.id">
+                @click.prevent.stop="$root.selectedId = basemap.id"
+            >
                 <v-list-tile-action v-if="basemap.icon">
                     <v-icon
                         v-if="basemap.id === $root.selectedId"
                         primary
-                        medium>
+                        medium
+                    >
                         {{ basemap.icon }}
                     </v-icon>
                     <v-icon v-else>
@@ -26,7 +29,8 @@
                     <v-icon
                         v-if="basemap.id === $root.selectedId"
                         primary
-                        medium>
+                        medium
+                    >
                         video_label
                     </v-icon>
                     <v-icon v-else>
@@ -36,10 +40,11 @@
                 <v-list-tile-content v-if="basemap.id === $root.selectedId">
                     <v-list-tile-title
                         class="title"
-                        v-text="basemap.title"/>
+                        v-text="basemap.title"
+                    />
                 </v-list-tile-content>
                 <v-list-tile-content v-else>
-                    <v-list-tile-title v-text="basemap.title"/>
+                    <v-list-tile-title v-text="basemap.title" />
                 </v-list-tile-content>
             </v-list-tile>
         </v-list>
@@ -48,9 +53,21 @@
 
 <script>
     export default {
-        props: [
-            "i18n",
-            "basemaps"
-        ]
+        props: {
+            i18n: {
+                type: Object,
+                default: function () {
+                    return {
+                        basemaps: "Basemaps"
+                    };
+                }
+            },
+            basemaps: {
+                type: Array,
+                default: function () {
+                    return [];
+                }
+            }
+        }
     }
 </script>

@@ -1,12 +1,16 @@
 <template>
     <v-list-group
         :disabled="disableAction"
-        no-action>
+        no-action
+    >
         <v-list-tile
             slot="activator"
-            :disabled="disableAction">
+            :disabled="disableAction"
+        >
             <v-list-tile-action>
-                <v-icon primary>{{ icon }}</v-icon>
+                <v-icon primary>
+                    {{ icon }}
+                </v-icon>
             </v-list-tile-action>
             <v-list-tile-title>{{ titleLabel }}</v-list-tile-title>
         </v-list-tile>
@@ -18,7 +22,8 @@
                 :max="max"
                 :step="step"
                 hide-details
-                @input="onChange"/>
+                @input="onChange"
+            />
             {{ toLabel }}
             <v-icon>{{ toIcon }}</v-icon>
         </v-list-tile>
@@ -31,11 +36,30 @@
                 type: String,
                 default: "opacity"
             },
-            item: Object,
-            eventBus: Object,
-            fromLabel: String,
-            toLabel: String,
-            titleLabel: String
+            item: {
+                type: Object,
+                default: function () {
+                    return {};
+                }
+            },
+            eventBus: {
+                type: Object,
+                default: function () {
+                    return {};
+                }
+            },
+            fromLabel: {
+                type: String,
+                default: ""
+            },
+            toLabel: {
+                type: String,
+                default: ""
+            },
+            titleLabel: {
+                type: String,
+                default: ""
+            }
         },
         data: function () {
             return {

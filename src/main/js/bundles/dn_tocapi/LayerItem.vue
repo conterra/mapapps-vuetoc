@@ -5,14 +5,16 @@
             :active="!!item.updating"
             :height="2"
             indeterminate
-            class="ma-0"/>
+            class="ma-0"
+        />
         <v-list-group
             v-if="item.children.length"
             v-model="item.open"
             sub-group
             prepend-icon="chevron_right"
             active-class=""
-            no-action>
+            no-action
+        >
             <layer-details
                 slot="activator"
                 :bus="bus"
@@ -42,6 +44,31 @@
         components: {
             "layer-details": LayerDetails
         },
-        props: ["item", "bus", "config", "actionComponents"]
+        props: {
+            item: {
+                type: Object,
+                default: function () {
+                    return {};
+                }
+            },
+            bus: {
+                type: Object,
+                default: function () {
+                    return {};
+                }
+            },
+            config: {
+                type: Object,
+                default: function () {
+                    return {};
+                }
+            },
+            actionComponents: {
+                type: Array,
+                default: function () {
+                    return [];
+                }
+            }
+        }
     }
 </script>

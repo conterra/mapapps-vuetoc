@@ -13,4 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import "dojo/i18n!./nls/bundle";
+import ".";
+import "ct/Stateful";
+import "wizard/DataFormBuilderWidgetFactory";

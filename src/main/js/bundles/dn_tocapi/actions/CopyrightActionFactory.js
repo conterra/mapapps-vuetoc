@@ -20,6 +20,7 @@ export default function ItemCopyrightActionFactory() {
         createAction() {
             let i18n = this._i18n.get().ui;
             return {
+                name: "copyright",
                 extends: CopyrightAction,
                 props: {
                     copyrightLabel: {

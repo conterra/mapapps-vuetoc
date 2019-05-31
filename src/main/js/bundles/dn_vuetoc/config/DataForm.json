@@ -1,0 +1,14 @@
+{
+    "dataform-version": "1.0.0",
+    "type": "gridpanel",
+    "showLabels": true,
+    "children": [
+        {
+            "type": "checkbox",
+            "field": "showBasemaps",
+            "title": "${startIntroOnStartup.title}",
+            "tooltip": "${startIntroOnStartup.description}",
+            "required": true
+        }
+    ]
+}
