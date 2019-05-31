@@ -33,10 +33,8 @@
                 }
             },
             lastAction: {
-                type: Object,
-                default: function () {
-                    return {};
-                }
+                type: Boolean,
+                default: false
             }
         },
         data: function () {

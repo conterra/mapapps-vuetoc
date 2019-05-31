@@ -125,9 +125,9 @@
                 }
             },
             operationalItems: {
-                type: Array,
+                type: Object,
                 default: function () {
-                    return [];
+                    return {};
                 }
             },
             actionComponents: {
