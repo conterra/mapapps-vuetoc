@@ -1,5 +1,8 @@
+:warning:
+Beginning in version 4.7 map.apps contains a toc bundle in the core product. It is recommended to use the map.apps toc bundle instead of the VueTOC.
+
 # Vue TOC Bundle
-The Vue TOC is a new Widget that allows you to control the map content.
+The Vue TOC is a widget that allows you to control the map content.
 
 ![Screenshot App](https://github.com/conterra/mapapps-vuetoc/blob/master/screenshot.JPG)
 
